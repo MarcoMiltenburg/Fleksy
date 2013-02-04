@@ -34,18 +34,9 @@ typedef enum {
 }
 
 - (BOOL) fullVersion {
-#if !APP_STORE
+
+  // Fleksy for iOS is now FREE for all.
   return YES;
-#endif
-#ifndef RELEASE
-  return YES;
-#endif
-#if !RELEASE
-  return YES;
-#endif
-#if DEBUG
-  return YES;
-#endif
   
   if ([self isGrandfathered]) {
     return YES;

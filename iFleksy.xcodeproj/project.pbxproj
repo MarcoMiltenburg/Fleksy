@@ -50,6 +50,7 @@
 		2E63D06815F56CAD00837586 /* CircleUIView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2E63D06715F56CAD00837586 /* CircleUIView.mm */; };
 		2E63D07015F670A900837586 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E63D06F15F670A900837586 /* CoreText.framework */; };
 		2E68687E12026BA200AC7F4F /* libobjc.A.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E68687D12026BA200AC7F4F /* libobjc.A.dylib */; };
+		2E6965A816C07A010018ACA9 /* UITouchManagerHooks.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2E6965A716C07A010018ACA9 /* UITouchManagerHooks.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		2E7404FF165D9CCD00C8B2C9 /* FleksyClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E7404FE165D9CCD00C8B2C9 /* FleksyClient.cpp */; };
 		2E7C8FBD14F7253300E457AB /* SwipeFeedbackView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2E7C8FBC14F7253300E457AB /* SwipeFeedbackView.mm */; };
 		2E7CAA691594FD1E00F192BE /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E7CAA681594FD1E00F192BE /* StoreKit.framework */; };
@@ -203,6 +204,8 @@
 		2E63D06F15F670A900837586 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		2E662BAA1548DEF100643ECA /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		2E68687D12026BA200AC7F4F /* libobjc.A.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libobjc.A.dylib; path = usr/lib/libobjc.A.dylib; sourceTree = SDKROOT; };
+		2E6965A716C07A010018ACA9 /* UITouchManagerHooks.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = UITouchManagerHooks.mm; path = ../../GestureTestbed/GestureTest/Classes/UITouchManagerHooks.mm; sourceTree = "<group>"; };
+		2E6965A916C07A8D0018ACA9 /* UITouchManagerHooks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UITouchManagerHooks.h; path = ../../GestureTestbed/GestureTest/Classes/UITouchManagerHooks.h; sourceTree = "<group>"; };
 		2E7404FD165D9CCD00C8B2C9 /* FleksyClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FleksyClient.h; sourceTree = "<group>"; };
 		2E7404FE165D9CCD00C8B2C9 /* FleksyClient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FleksyClient.cpp; sourceTree = "<group>"; };
 		2E7C8FBB14F7253300E457AB /* SwipeFeedbackView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwipeFeedbackView.h; sourceTree = "<group>"; };
@@ -530,6 +533,8 @@
 				2EC4E84B166D3314009D3E39 /* UITapGestureRecognizer2.mm */,
 				2EC4E84C166D3314009D3E39 /* UITouchManager.h */,
 				2EC4E84D166D3314009D3E39 /* UITouchManager.mm */,
+				2E6965A916C07A8D0018ACA9 /* UITouchManagerHooks.h */,
+				2E6965A716C07A010018ACA9 /* UITouchManagerHooks.mm */,
 			);
 			name = GestureTestbed;
 			sourceTree = "<group>";
@@ -946,6 +951,7 @@
 				2E1C23C016B3813C005000D8 /* aescrypt.c in Sources */,
 				2E1C23C116B3813C005000D8 /* aeskey.c in Sources */,
 				2E1C23C216B3813C005000D8 /* aestab.c in Sources */,
+				2E6965A816C07A010018ACA9 /* UITouchManagerHooks.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -983,11 +989,10 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_OBJCPP_ARC_ABI = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				GCC_PREPROCESSOR_DEFINITIONS = "RELEASE=1";
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = NDEBUG;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = Fleksy;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
@@ -1024,10 +1029,9 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_OBJCPP_ARC_ABI = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Konstantinos Eleftheriou (Y58E6AJ88D)";
 				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = Fleksy;
 				PROVISIONING_PROFILE = "B25499A2-C64B-4A89-9FF6-B66A896640A6";
 				SDKROOT = iphoneos;
