@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PreferenceSpecifiers</key>
+	<array>
+		<dict>
+			<key>Title</key>
+			<string>Main</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Speaking rate</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSSliderSpecifier</string>
+			<key>Key</key>
+			<string>FLEKSY_APP_SETTING_SPEAKING_RATE</string>
+			<key>DefaultValue</key>
+			<real>1</real>
+			<key>MinimumValue</key>
+			<real>0.6</real>
+			<key>MaximumValue</key>
+			<real>2.2</real>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>Home button</string>
+			<key>Key</key>
+			<string>FLEKSY_APP_SETTING_HOME_BUTTON_STRING</string>
+			<key>DefaultValue</key>
+			<string></string>
+			<key>AutocapitalizationType</key>
+			<string>None</string>
+			<key>AutocorrectionType</key>
+			<string>Default</string>
+		</dict>
+		<dict>
+			<key>DefaultValue</key>
+			<true/>
+			<key>Key</key>
+			<string>FLEKSY_CORE_SETTING_USE_TX</string>
+			<key>Title</key>
+			<string>Use KB transformation</string>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+		</dict>
+		<dict>
+			<key>DefaultValue</key>
+			<true/>
+			<key>Key</key>
+			<string>FLEKSY_APP_SETTING_KEYBOARD_CLICKS</string>
+			<key>Title</key>
+			<string>Keyboard Clicks</string>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+		</dict>
+		<dict>
+			<key>DefaultValue</key>
+			<false/>
+			<key>Key</key>
+			<string>FLEKSY_APP_SETTING_SHOW_TRACES</string>
+			<key>Title</key>
+			<string>Traces</string>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+		</dict>
+		<dict>
+			<key>DefaultValue</key>
+			<false/>
+			<key>Key</key>
+			<string>FLEKSY_APP_SETTING_KEY_SNAP</string>
+			<key>Title</key>
+			<string>Key snap</string>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+		</dict>
+		<dict>
+			<key>DefaultValue</key>
+			<true/>
+			<key>Key</key>
+			<string>FLEKSY_CORE_SETTING_USE_WORD_FREQUENCY</string>
+			<key>Title</key>
+			<string>Frequency</string>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+		</dict>
+		<dict>
+			<key>DefaultValue</key>
+			<false/>
+			<key>Key</key>
+			<string>FLEKSY_APP_SETTING_TOUCH_HOME</string>
+			<key>Title</key>
+			<string>Touch home</string>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+		</dict>
+		<dict>
+			<key>DefaultValue</key>
+			<false/>
+			<key>Key</key>
+			<string>FLEKSY_APP_SETTING_USE_SYSTEM_AUTOCORRECTION</string>
+			<key>Title</key>
+			<string>Magic</string>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+		</dict>
+		<dict>
+			<key>DefaultValue</key>
+			<false/>
+			<key>Key</key>
+			<string>FLEKSY_APP_SETTING_DICTATE_MODE</string>
+			<key>Title</key>
+			<string>Dictate mode</string>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+		</dict>
+		<dict>
+			<key>DefaultValue</key>
+			<false/>
+			<key>Key</key>
+			<string>FLEKSY_CORE_SETTING_SEARCH_MINUS_EXTRA</string>
+			<key>Title</key>
+			<string>Search +/-</string>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+		</dict>
+		<dict>
+			<key>DefaultValue</key>
+			<false/>
+			<key>Key</key>
+			<string>FLEKSY_APP_SETTING_LIVE_SUGGESTIONS</string>
+			<key>Title</key>
+			<string>Suggest as you type</string>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+		</dict>
+		<dict>
+			<key>DefaultValue</key>
+			<false/>
+			<key>Key</key>
+			<string>FLEKSY_APP_SETTING_SPACE_BUTTON</string>
+			<key>Title</key>
+			<string>Space button</string>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+		</dict>
+	</array>
+	<key>StringsTable</key>
+	<string>Root</string>
+</dict>
+</plist>
