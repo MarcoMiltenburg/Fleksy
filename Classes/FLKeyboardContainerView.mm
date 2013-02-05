@@ -286,7 +286,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardContainerView);
 
 - (void) handleSwipe:(SWIPE_RECOGNIZER_CLASS*) recognizer {
   
-  UITouch* touch = recognizer.myTouch;
+  UITouch* touch = [recognizer.activeTouches anyObject];
   
   UISwipeGestureRecognizerDirection direction = recognizer.direction;
   BOOL invertUpDown = NO;
@@ -388,6 +388,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardContainerView);
 #endif
 }
 
+- (void) performNewLine {
+  char newLine = '\n';
+  [VariousUtilities playTock];
+  [typingController nonLetterCharInput:newLine autocorrectionType:kAutocorrectionChangeAndSuggest];
+  [VariousUtilities performAudioFeedbackFromString:[VariousUtilities descriptionForCharacter:newLine]];
+  [feedbackView swipeRecognized:UISwipeGestureRecognizerDirectionRight padding:![suggestionsView isHidden] || ![suggestionsViewSymbols isHidden]];
+}
+
 - (void) handleSwipeAndHold:(UISwipeAndHoldGestureRecognizer*) recognizer {
   
 //  if (recognizer.swipeDirection != UISwipeGestureRecognizerDirectionRight) {
@@ -412,14 +420,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardContainerView);
   
     if (recognizer.lastFiredSwipeRecognizer.direction == UISwipeGestureRecognizerDirectionRight) {
       
-      [VariousUtilities playTock];
-      //if (recognizer.timesFired == 1) {
-      //  [typingController backspace]; //backspace once since we *must* have added an extra space just before
-      //}
-      char newLine = '\n';
-      [typingController nonLetterCharInput:newLine autocorrectionType:kAutocorrectionChangeAndSuggest];
-      [VariousUtilities performAudioFeedbackFromString:[VariousUtilities descriptionForCharacter:newLine]];
-      [feedbackView swipeRecognized:recognizer.lastFiredSwipeRecognizer.direction padding:![suggestionsView isHidden] || ![suggestionsViewSymbols isHidden]];
+      [self performNewLine];
       
     } else if (recognizer.lastFiredSwipeRecognizer.direction == UISwipeGestureRecognizerDirectionLeft) {
       [VariousUtilities playTock];

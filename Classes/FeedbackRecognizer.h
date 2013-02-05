@@ -33,6 +33,8 @@
 - (void) startHover;
 - (void) stopHover;
 
+- (void) removePendingTouches;
+
 // when we detect a swipe, since this class only deals with taps, make sure we cancel this potentially pending touch
 // TODO: also long tap detection
 - (void) stopTrackingTouch:(UITouch*) touch;

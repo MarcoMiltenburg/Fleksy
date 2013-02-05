@@ -72,6 +72,7 @@
 // Accessor function for the instance
 + (FLKeyboardContainerView *) sharedFLKeyboardContainerView;
 
+- (void) performNewLine;
 - (void) handleSwipeDirection:(UISwipeGestureRecognizerDirection) direction fromTouch:(UITouch*) touch caller:(NSString*) caller;
 - (void) processTouchPoint:(CGPoint) point precise:(BOOL) precise character:(unichar) c;
 - (void) reset;

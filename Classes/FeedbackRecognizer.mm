@@ -228,7 +228,7 @@
 
 
 - (void) touchesBegan:(NSSet *) touches withEvent:(UIEvent *) event {
-  //NSLog(@"touches began feedback! %d", [touches count]);
+  //NSLog(@"touches began FeedbackRecognizer! %d", [touches count]);
   
   [[FLKeyboardContainerView sharedFLKeyboardContainerView].suggestionsView cancelAllSpellingRequests];
   
@@ -298,7 +298,7 @@
 }
 
 - (void) touchesMoved:(NSSet *) touches withEvent:(UIEvent *) event {
-  //NSLog(@"touches moved feedback! %d", [touches count]);
+  //NSLog(@"touches moved FeedbackRecognizer! %d", [touches count]);
   
   self.state = UIGestureRecognizerStateChanged;
   
@@ -345,7 +345,9 @@
 - (void) touchesEnded:(NSSet*) touches {
   
   for (UITouch* touch in touches) {
-    //NSLog(@" - ended %p", touch);
+    
+    //NSLog(@" - ended %p, cancelled: %d, recognizers: %@", touch, touch.phase == UITouchPhaseCancelled, touch.gestureRecognizers);
+    
     if (self.hoverMode) {
       [self updateHoverChar:touch];
       [self stopHover];
@@ -359,8 +361,6 @@
     
     if (touch.tag == UITouchTypePending) {
       [self checkTouchForSwipe:touch];
-    //}
-    //if (touch.tag == UITouchTypePending) {
       [self stopTrackingTouch:touch];
     }
     
@@ -374,9 +374,9 @@
       UISwipeGestureRecognizerDirection direction = [self getDirectionForTouch:touch];
       FLSwipeStatisticalAnalyzer* swipeAnalyzer = [swipeAnalyzers objectForKey:[NSNumber numberWithInteger:direction]];
       [swipeAnalyzer touchEndedWithSwipe:touch];
-    }
-  
-    if (touch.tag == UITouchTypeProcessedSwipe) {
+//    }
+//    
+//    if (touch.tag == UITouchTypeProcessedSwipe) {
       lastTouchUpTime = 0;
     } else {
       lastTouchUpTime = CFAbsoluteTimeGetCurrent(); //touch.timestamp;
@@ -385,7 +385,7 @@
 }
 
 - (void) touchesEnded:(NSSet *) touches withEvent:(UIEvent *) event {
-  //NSLog(@"touches ended feedback! %d", [touches count]);
+  //NSLog(@"touches ended FeedbackRecognizer! %d", [touches count]);
   
   for (UITouch* touch in touches) {
     [currentTouches removeObject:touch];
@@ -397,7 +397,7 @@
 }
 
 - (void) touchesCancelled:(NSSet *) touches withEvent:(UIEvent *) event {
-  NSLog(@"touches cancelled feedback! %d", [touches count]);
+  //NSLog(@"touches cancelled FeedbackRecognizer! %d", [touches count]);
   self.state = UIGestureRecognizerStateCancelled;
 
   //some gesture recognizer (eg. the scrollview pan) might catch the touch so 
@@ -411,6 +411,10 @@
   
   [self touchesEnded:touches];
   //[self.nextResponder touchesCancelled:touches withEvent:event];
+}
+
+- (void) removePendingTouches {
+  [currentTouches removeAllObjects];
 }
 
 - (void) startHover {

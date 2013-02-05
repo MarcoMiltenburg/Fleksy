@@ -761,6 +761,19 @@
   }
 }
 
+- (void) startButtonAnimation {
+  [UIView animateWithDuration:0.9 delay:0.0f
+                      options:UIViewAnimationCurveEaseInOut | UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse | UIViewAnimationOptionAllowUserInteraction
+                   animations:^{
+                     actionButton.alpha = 0.3;
+                     //actionButton.imageView.transform = CGAffineTransformMakeScale(0.1, 0.1);
+                   }
+                   completion:^(BOOL finished) {
+                     actionButton.alpha = 1.0;
+                     //actionButton.imageView.transform = CGAffineTransformIdentity;
+                   }];
+}
+
 
 - (void) voiceOverStatusChanged:(NSNotification*) notification {
   
@@ -782,12 +795,20 @@
       [blindAppAlert dismissWithClickedButtonIndex:-1 animated:YES];
       blindAppAlert = nil;
     }
-  }  
+  }
+
 }
 
 - (void) applicationFinishedLoading {
   //[self.view addSubview:actionButton];
   [self voiceOverStatusChanged:nil];
+  [self performSelector:@selector(startButtonAnimation) withObject:nil afterDelay:2];
+  
+  //NSLog(@"previousRuns: %d", purchaseManager.previousRuns);
+  
+  if (!purchaseManager.previousRuns && !UIAccessibilityIsVoiceOverRunning()) {
+    self->textView.text = @"Welcome to Fleksy: you no longer need to be accurate!\n\nSpace: flick right\nDelete: flick left\nChange word: flick down/up\nPunctuation: flick right again\n\nHappy Typing! ";
+  }
 }
 
 
@@ -895,11 +916,11 @@
   if (UIAccessibilityIsVoiceOverRunning()) {
     self->basicInstructions = [[UIAlertView alloc] initWithTitle:@"Basic instructions"
                                                          message:@"Single tap where you think each letter is.\nNo need to tap and hold or be accurate.\nSwipe right for space, left to delete a word.\nSwipe down for next suggestion.\nSwipe right after space for punctuation." delegate:self cancelButtonTitle:@"Cool, I got it!" otherButtonTitles:@"Instructions", nil];
+    [self->basicInstructions show];
   } else {
-    self->basicInstructions = [[UIAlertView alloc] initWithTitle:@"With Fleksy, you no longer need to be accurate!"
-                                                         message:@"It will correct most mistyped letters\n\nSwipe right for space, left to delete\nSwipe down for next suggestion\nSwipe right again for punctuation\n\nHappy Typing!" delegate:self cancelButtonTitle:@"Cool, I got it!" otherButtonTitles:@"Instructions", nil];
+//    self->basicInstructions = [[UIAlertView alloc] initWithTitle:@"With Fleksy, you no longer need to be accurate!"
+//                                                         message:@"It will correct most mistyped letters\n\nSwipe right for space, left to delete\nSwipe down for next suggestion\nSwipe right again for punctuation\n\nHappy Typing!" delegate:self cancelButtonTitle:@"Cool, I got it!" otherButtonTitles:@"Instructions", nil];
   }
-  [self->basicInstructions show];
 }
 
 - (void) showAlerts {
@@ -911,7 +932,7 @@
 #if !TARGET_IPHONE_SIMULATOR //&& !DEBUG
   if (purchaseManager.previousRuns < 5 && !UIAccessibilityIsVoiceOverRunning()) {
     blindAppAlert = [[UIAlertView alloc] initWithTitle:@"Did you know?"
-                                               message:@"\nThis technology was designed specifically for the blind. If you have normal vision you may find some features to be rather different to what you are used to. Please remember that if you write a review.\n\nBy all means, give it a try and let us know how you like Fleksy." delegate:nil cancelButtonTitle:@"OK, let me try!" otherButtonTitles:nil];
+                                               message:@"\nThis technology was initially designed for the blind. you may find some features to be rather different to what you are used to. Please remember that if you write a review.\n\nBy all means, give it a try and let us know how you like Fleksy." delegate:nil cancelButtonTitle:@"OK, let me try!" otherButtonTitles:nil];
     [blindAppAlert show];
   }
 #endif
@@ -952,7 +973,7 @@
       // we wouldn't need to do this if we used setBackgroundImage instead of setImage,
       // but then contentEdgeInsets wouldn't apply
       [actionButton.imageView.superview sendSubviewToBack:actionButton.imageView];
-
+      
       lastShowedInitMenu = 0;
       lastShowedActionMenu = 0;
       self->replyTo = nil;
@@ -1292,6 +1313,7 @@
 - (void) setTextView:(FleksyTextView*) _textView {
   NSLog(@"setTextView");
   self->textView = _textView;
+
 }
 
 @synthesize purchaseManager;

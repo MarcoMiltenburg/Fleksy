@@ -88,8 +88,10 @@ static FleksyKeyboard* instance = nil;
   UIButton* spacebarSeperator1;
   UIButton* spacebarSeperator2;
   
-  UITapGestureRecognizer* tripleTapRecognizer;
-  UILongPressGestureRecognizer* actionRecognizer;
+  //UITapGestureRecognizer* tripleTapRecognizer;
+  
+  MySwipeGestureRecognizer* actionRecognizer2Up;
+  MySwipeGestureRecognizer* actionRecognizer2Down;
   
   int focusedCount;
   
@@ -289,13 +291,19 @@ static FleksyKeyboard* instance = nil;
 //      tripleTapRecognizer.delaysTouchesBegan = YES;
 //      [self addGestureRecognizer:tripleTapRecognizer];
       
-      actionRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longTapAboveKeyboard:)];
-      actionRecognizer.numberOfTouchesRequired = 1;
-      actionRecognizer.minimumPressDuration = 0.3;
-      actionRecognizer.delaysTouchesBegan = YES;
-      actionRecognizer.delegate = self;
-      //[longTapRecognizer requireGestureRecognizerToFail:longPressRecognizer];
-      [self addGestureRecognizer:actionRecognizer];
+      actionRecognizer2Up = [[MySwipeGestureRecognizer alloc] initWithTarget:self action:@selector(twoFingerSwipeUp:)];
+      actionRecognizer2Up.numberOfTouchesRequired = 2;
+      actionRecognizer2Up.direction = UISwipeGestureRecognizerDirectionUp;
+     
+      actionRecognizer2Down = [[MySwipeGestureRecognizer alloc] initWithTarget:self action:@selector(twoFingerSwipeDown:)];
+      actionRecognizer2Down.numberOfTouchesRequired = 2;
+      actionRecognizer2Down.direction = UISwipeGestureRecognizerDirectionDown;
+      
+      [self addGestureRecognizer:actionRecognizer2Up];
+      [self addGestureRecognizer:actionRecognizer2Down];
+      
+      //[feedbackRecognizer requireGestureRecognizerToFail:actionRecognizer2Up];
+      //[feedbackRecognizer requireGestureRecognizerToFail:actionRecognizer2Down];
     }
     
     
@@ -406,13 +414,13 @@ static FleksyKeyboard* instance = nil;
 }
 
 - (BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
-  if (gestureRecognizer == actionRecognizer) {
-    CGPoint location = [touch locationInView:self];
-    int limit = self.bounds.size.height - self.activeHeight;
-    BOOL result = location.y < limit;
-    //NSLog(@"actionRecognizer shouldReceiveTouch %@, limit = %d, height = %.3f RESULT: %d", NSStringFromCGPoint(location), limit, self.height, result);
-    return result;
-  }
+//  if (gestureRecognizer == actionRecognizer) {
+//    CGPoint location = [touch locationInView:self];
+//    int limit = self.bounds.size.height - self.activeHeight;
+//    BOOL result = location.y < limit;
+//    //NSLog(@"actionRecognizer shouldReceiveTouch %@, limit = %d, height = %.3f RESULT: %d", NSStringFromCGPoint(location), limit, self.height, result);
+//    return result;
+//  }
   NSLog(@"WARNING shouldReceiveTouch !actionRecognizer");
   return NO;
 }
@@ -432,24 +440,30 @@ static FleksyKeyboard* instance = nil;
   [keyboardContainerView.typingController resetAndHideSuggestions];
 }
 
-- (void) tripleTapAboveKeyboard:(UIGestureRecognizer*) gestureRecognizer {
-  NSLog(@"tripleTapAboveKeyboard");
-  [[NSNotificationCenter defaultCenter] postNotificationName:FLEKSY_MENU_INVOKED_NOTIFICATION object:nil];
+//- (void) tripleTapAboveKeyboard:(UIGestureRecognizer*) gestureRecognizer {
+//  NSLog(@"tripleTapAboveKeyboard");
+//  [[NSNotificationCenter defaultCenter] postNotificationName:FLEKSY_MENU_INVOKED_NOTIFICATION object:nil];
+//}
+
+- (void) twoFingerSwipeUp:(MySwipeGestureRecognizer*) gestureRecognizer {
+  NSLog(@"twoFingerSwipeUp! %d, numberOfTouches: %d, location1: %@", gestureRecognizer.state, gestureRecognizer.numberOfTouches, NSStringFromCGPoint([gestureRecognizer locationInView:self]));
+  if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+    [[NSNotificationCenter defaultCenter] postNotificationName:FLEKSY_MENU_INVOKED_NOTIFICATION object:nil];
+    for (UITouch* touch in gestureRecognizer.activeTouches) {
+      touch.tag = UITouchTypeProcessedSwipe;
+    }
+    [feedbackRecognizer removePendingTouches];
+  }
 }
 
-- (void) longTapAboveKeyboard:(UILongPressGestureRecognizer*) gestureRecognizer {
-  
-  NSLog(@"longTapAboveKeyboard! %d, numberOfTouches: %d, location1: %@", gestureRecognizer.state, gestureRecognizer.numberOfTouches, NSStringFromCGPoint([gestureRecognizer locationInView:self]));
-  
-  if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
-    [[NSNotificationCenter defaultCenter] postNotificationName:FLEKSY_MENU_INVOKED_NOTIFICATION object:nil];
-//    [[FLKeyboardContainerView sharedFLKeyboardContainerView].suggestionsView cancelAllSpellingRequests];
-//    AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
-//    [appDelegate speakCurrentText];
-  }
-  
+- (void) twoFingerSwipeDown:(MySwipeGestureRecognizer*) gestureRecognizer {
+  NSLog(@"twoFingerSwipeDown! %d, numberOfTouches: %d, location1: %@", gestureRecognizer.state, gestureRecognizer.numberOfTouches, NSStringFromCGPoint([gestureRecognizer locationInView:self]));
   if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
-//    [VariousUtilities stopSpeaking];
+    [keyboardContainerView performNewLine];
+    for (UITouch* touch in gestureRecognizer.activeTouches) {
+      touch.tag = UITouchTypeProcessedSwipe;
+    }
+    [feedbackRecognizer removePendingTouches];
   }
 }
 
@@ -797,12 +811,12 @@ static FleksyKeyboard* instance = nil;
 
 - (void) touchesEnded:(NSSet *) touches withEvent:(UIEvent *) event {
   [super touchesEnded:touches withEvent:event];
-  //NSLog(@"touches ended FleksyKeyboard! %@", touches);
+  NSLog(@"touches ended FleksyKeyboard! %@", touches);
 }
 
 - (void) touchesCancelled:(NSSet *) touches withEvent:(UIEvent *) event {
   [super touchesCancelled:touches withEvent:event];
-  //NSLog(@"touches cancelled FleksyKeyboard! %@", touches);
+  NSLog(@"touches cancelled FleksyKeyboard! %@", touches);
 }
 
 
