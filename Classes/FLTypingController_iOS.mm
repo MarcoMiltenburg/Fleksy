@@ -1188,7 +1188,7 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
   
   if ([points count]) {
     
-    if (self.currentWordIsPrecise) {
+    if (self.currentWordIsPrecise || !UIAccessibilityIsVoiceOverRunning()) {
       [self singleBackspaceWithFeedback:YES];
       [self playBackspace];
       return;
@@ -1222,6 +1222,19 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
         endedWithPunctuationMark = YES;
         [self reshowAppropriateSuggestionView];
         break;
+      }
+    }
+    
+    if (!endedWithPunctuationMark) {
+      NSMutableArray* marksToUse = [NSMutableArray arrayWithObjects:@"→ ", @"← ", @"↓ ", @"↑ ", nil];
+      for (NSString* mark in marksToUse) {
+        if ([writtenText hasSuffix:mark]) {
+          NSLog(@"has mark! <%@>", mark);
+          [delegate handleDelete:mark.length];
+          NSString* description = [VariousUtilities getPhoneticStringFor:mark];
+          [VariousUtilities performAudioFeedbackFromString:[NSString stringWithFormat:@"Deleted %@", description]];
+          endedWithPunctuationMark = YES;
+        }
       }
     }
     

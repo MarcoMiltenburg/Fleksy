@@ -502,6 +502,8 @@ float distributionFunction(float x) {
     //NSLog(@"lastKnownVoiceOverState != UIAccessibilityIsVoiceOverRunning(), will force-call voiceOverStatusChanged:");
     [fleksyAppViewController voiceOverStatusChanged:nil];
   }
+  
+  [fleksyAppViewController startButtonAnimation];
 }
 
 

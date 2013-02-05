@@ -18,7 +18,8 @@
     
     textView = [[MyTextView alloc] initWithFrame:self.bounds];
     
-    textView.font = [UIFont fontWithName:@"Arial" size:22.0 * (deviceIsPad() ? 1.5 : 1)];
+    float fontSize = [VariousUtilities deviceCanHandleLargeFont] ? 22 : 20;
+    textView.font = [UIFont fontWithName:@"Arial" size:fontSize * (deviceIsPad() ? 1.5 : 1)];
     textView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     textView.text = @"Loading";
     textView.editable = NO;
@@ -86,7 +87,7 @@
 
 - (void) layoutSubviews {
   NSLog(@"FleksyTextView layoutSubviews, self.bounds: %@, self.frame: %@", NSStringFromCGRect(self.bounds), NSStringFromCGRect(self.frame));
-  float topPadding = deviceIsPad() ? 32 : 12;
+  float topPadding = deviceIsPad() ? 26 : 8;
   textView.frame = CGRectMake(0, topPadding, self.bounds.size.width, self.bounds.size.height - topPadding);
   cover.frame = textView.frame;
   //self.accessibilityActivationPoint = CGPointMake(8, 8);

@@ -49,6 +49,7 @@
 }
 
 - (void) applicationFinishedLoading;
+- (void) startButtonAnimation;
 - (void) showMenu;
 - (void) voiceOverStatusChanged:(NSNotification*) notification;
 - (void) reloadFavorites;

@@ -28,7 +28,14 @@ FLString _NSStringToString(NSString* str) {
     return FLStringMake("");
   }
   
+  if (str.length == 1) {
+    if ([str isEqualToString:@"→"] || [str isEqualToString:@"←"] || [str isEqualToString:@"↓"] || [str isEqualToString:@"↑"]) {
+      return FLStringMake(str.UTF8String);
+    }
+  }
+  
   long bufferSize = str.length+1;
+  //NSLog(@"_NSStringToString: <%@>, bufferSize: %d", str, bufferSize);
   char* buffer = (char*) malloc(bufferSize);
   NSUInteger usedLength = -1;
   [str getBytes:buffer maxLength:bufferSize usedLength:&usedLength encoding:NSISOLatin1StringEncoding options:0 range:NSMakeRange(0, str.length) remainingRange:nil];

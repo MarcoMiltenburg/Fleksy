@@ -317,6 +317,14 @@ BOOL isRingerMuted() {
   NSLog(@"getPhoneticStringFor <%@>", string);
   if ([string isEqualToString:@"."]) {
     return @"Dot";
+  } else if ([string isEqualToString:@"→ "]) {
+    return @"Right arrow";
+  } else if ([string isEqualToString:@"← "]) {
+    return @"Left arrow";
+  } else if ([string isEqualToString:@"↓ "]) {
+    return @"Down arrow";
+  } else if ([string isEqualToString:@"↑ "]) {
+    return @"Up arrow";
   } else if (string.length == 1 || (string.length == 2 && [string hasSuffix:@" "])) {
     string = [string stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" "]];
     FLString temp = NSStringToFLString(string);
@@ -1110,6 +1118,11 @@ int tcp_lat(int size, int count, BOOL parent)
 #endif
   NSString* machineName = [VariousUtilities getMachineName];
   return [machineName isEqualToString:@"iPad2,5"] || [machineName hasPrefix:@"iPhone5"];
+}
+
++ (BOOL) deviceCanHandleLargeFont {
+  NSString* machineName = [VariousUtilities getMachineName];
+  return [machineName hasPrefix:@"iPad"] || [machineName hasPrefix:@"iPhone5"];
 }
 
 

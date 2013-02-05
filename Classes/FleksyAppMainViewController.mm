@@ -377,6 +377,11 @@
   [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://fleksy.com/rate"]];
 }
 
+- (void) showSettings {
+  UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Settings" message:@"Press the home button, go to the Settings app and find Fleksy on the list for many configurable options!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+  [alert show];
+}
+
 - (void) showDetailedInstructions {
   // create the close button
   int padding = 3;
@@ -638,7 +643,7 @@
       
     } else if ([buttonTitle isEqualToString:@"Email"]) {
       [self sendInAppMailTo:nil useText:textView.text];
-          
+      
     } else if ([buttonTitle isEqualToString:@"Message"]) {
       [self sendInAppSMS:nil text:textView.text];
     
@@ -662,7 +667,10 @@
     } else if ([buttonTitle isEqualToString:@"Instructions"]) {
       [self showDetailedInstructions];
       
-    } else if ([buttonTitle isEqualToString:@"Feedback"]) {
+    } else if ([buttonTitle isEqualToString:@"Settings"]) {
+      [self showSettings];
+      
+    } else if ([buttonTitle isEqualToString:@"We love feedback!"]) {
       [TestFlight submitFeedback:textView.text];
       
       if (purchaseManager.fullVersion) {
@@ -683,10 +691,10 @@
       [self setReplyTo:nil];
       [self sendTo:recipient];
       
-    } else if ([buttonTitle isEqualToString:@"Fleksy on twitter"]) {
+    } else if ([buttonTitle isEqualToString:@"@fleksy"]) {
       [self menu_fleksy_twitter];
     
-    } else if ([buttonTitle isEqualToString:@"Fleksy on the web"]) {
+    } else if ([buttonTitle isEqualToString:@"fleksy.com"]) {
       [self menu_fleksy_web];
       
     } else if ([buttonTitle isEqualToString:@"Export dictionary"]) {
@@ -731,10 +739,13 @@
     } else if ([buttonTitle isEqualToString:@"Instructions"]) {
       [self showDetailedInstructions];
       
-    } else if ([buttonTitle isEqualToString:@"Fleksy on twitter"]) {
+    } else if ([buttonTitle isEqualToString:@"Settings"]) {
+      [self showSettings];
+      
+    } else if ([buttonTitle isEqualToString:@"@fleksy"]) {
       [self menu_fleksy_twitter];
       
-    } else if ([buttonTitle isEqualToString:@"Fleksy on the web"]) {
+    } else if ([buttonTitle isEqualToString:@"fleksy.com"]) {
       [self menu_fleksy_web];
     
     } else {
@@ -761,17 +772,23 @@
   }
 }
 
+
 - (void) startButtonAnimation {
-  [UIView animateWithDuration:0.9 delay:0.0f
+  
+  NSLog(@"startButtonAnimation");
+  
+  float scaleFactor = 1.0 / 0.75f;
+  
+  actionButton.alpha = 0.5;
+  actionButton.imageView.transform = CGAffineTransformIdentity;
+  
+  [UIView animateWithDuration:1.7 delay:0.0f
                       options:UIViewAnimationCurveEaseInOut | UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse | UIViewAnimationOptionAllowUserInteraction
                    animations:^{
-                     actionButton.alpha = 0.3;
-                     //actionButton.imageView.transform = CGAffineTransformMakeScale(0.1, 0.1);
+                     actionButton.alpha = 0.9;
+                     actionButton.imageView.transform = CGAffineTransformMakeScale(scaleFactor, scaleFactor);
                    }
-                   completion:^(BOOL finished) {
-                     actionButton.alpha = 1.0;
-                     //actionButton.imageView.transform = CGAffineTransformIdentity;
-                   }];
+                   completion:^(BOOL finished) {}];
 }
 
 
@@ -784,7 +801,7 @@
   //actionButton.hidden = voiceover;
   actionButton.userInteractionEnabled = !voiceover;
   actionButton.isAccessibilityElement = NO;
-  actionButton.alpha = voiceover ? 0.4 : 0.8;
+  //actionButton.alpha = voiceover ? 0.4 : 0.8;
   
   
   if (voiceover) {
@@ -802,12 +819,11 @@
 - (void) applicationFinishedLoading {
   //[self.view addSubview:actionButton];
   [self voiceOverStatusChanged:nil];
-  [self performSelector:@selector(startButtonAnimation) withObject:nil afterDelay:2];
   
   //NSLog(@"previousRuns: %d", purchaseManager.previousRuns);
   
   if (!purchaseManager.previousRuns && !UIAccessibilityIsVoiceOverRunning()) {
-    self->textView.text = @"Welcome to Fleksy: you no longer need to be accurate!\n\nSpace: flick right\nDelete: flick left\nChange word: flick down/up\nPunctuation: flick right again\n\nHappy Typing! ";
+    self->textView.text = @"Welcome to Fleksy: You no longer need to be accurate! \n\nSpace: flick right → \nDelete: flick left ← \nChange word: flick down ↓ \nPunctuation: → after Space \n\nHappy Typing! ";
   }
 }
 
@@ -881,12 +897,13 @@
     }
   }
   [actionMainMenuPlain addButtonWithTitle:@"Instructions"];
-  [actionMainMenuPlain addButtonWithTitle:@"Feedback"];
+  [actionMainMenuPlain addButtonWithTitle:@"Settings"];
   if (purchaseManager.fullVersion) {
     [actionMainMenuPlain addButtonWithTitle:@"Export dictionary"];
   }
-  [actionMainMenuPlain addButtonWithTitle:@"Fleksy on twitter"];
-  [actionMainMenuPlain addButtonWithTitle:@"Fleksy on the web"];
+  [actionMainMenuPlain addButtonWithTitle:@"We love feedback!"];
+  [actionMainMenuPlain addButtonWithTitle:@"@fleksy"];
+  [actionMainMenuPlain addButtonWithTitle:@"fleksy.com"];
   
   //http://stackoverflow.com/questions/5262428/uiactionsheet-buttonindex-values-faulty-when-using-more-than-6-custom-buttons
   actionMainMenuPlain.cancelButtonIndex = [actionMainMenuPlain addButtonWithTitle:@"Resume typing"];
@@ -903,8 +920,9 @@
     [initialMainMenu addButtonWithTitle:RESTORE_FULL_VERSION_TITLE];
   }
   [initialMainMenu addButtonWithTitle:@"Instructions"];
-  [initialMainMenu addButtonWithTitle:@"Fleksy on twitter"];
-  [initialMainMenu addButtonWithTitle:@"Fleksy on the web"];
+  [initialMainMenu addButtonWithTitle:@"Settings"];
+  [initialMainMenu addButtonWithTitle:@"@fleksy"];
+  [initialMainMenu addButtonWithTitle:@"fleksy.com"];
   //http://stackoverflow.com/questions/5262428/uiactionsheet-buttonindex-values-faulty-when-using-more-than-6-custom-buttons
   initialMainMenu.cancelButtonIndex = [initialMainMenu addButtonWithTitle:@"Start typing"];
   
@@ -929,10 +947,10 @@
     [self showBasicInstructions];
   }
   
-#if !TARGET_IPHONE_SIMULATOR //&& !DEBUG
-  if (purchaseManager.previousRuns < 5 && !UIAccessibilityIsVoiceOverRunning()) {
-    blindAppAlert = [[UIAlertView alloc] initWithTitle:@"Did you know?"
-                                               message:@"\nThis technology was initially designed for the blind. you may find some features to be rather different to what you are used to. Please remember that if you write a review.\n\nBy all means, give it a try and let us know how you like Fleksy." delegate:nil cancelButtonTitle:@"OK, let me try!" otherButtonTitles:nil];
+#if !TARGET_IPHONE_SIMULATOR
+  if (purchaseManager.previousRuns < 2 && !UIAccessibilityIsVoiceOverRunning()) {
+    blindAppAlert = [[UIAlertView alloc] initWithTitle:@"Happy Typing!"
+                                               message:@"\nThousands of sighted and blind users enjoy typing with Fleksy. If you like the typing experience, let us know with a review on the App Store!" delegate:nil cancelButtonTitle:@"Awesome!" otherButtonTitles:nil];
     [blindAppAlert show];
   }
 #endif
@@ -954,20 +972,25 @@
       //    [tripleClickView addGestureRecognizer:singleTapRecognizer];
 
       
-      UIImage* image = [UIImage imageNamed:@"Arrow.png"];
-      float scale = deviceIsPad() ? 1.2 : 0.6;
-      actionButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, image.size.width * scale, image.size.height * scale)];
-      float insetX = actionButton.frame.size.width * 0.35;
-      float insetY = actionButton.frame.size.height * 0.35;
+      UIImage* image = [UIImage imageNamed:@"menu_blue.png"];
+      float scale = deviceIsPad() ? 2 : 1;
+      float buttonSize = 80 * scale;
+      actionButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, buttonSize, buttonSize)]; //this will be the hit area
+      
+      float insetX = buttonSize * 0.3;
+      float insetY = insetX;
       actionButton.contentEdgeInsets = UIEdgeInsetsMake(insetY, insetX, insetY, insetX);
+      
       [actionButton setImage:image forState:UIControlStateNormal];
       actionButton.showsTouchWhenHighlighted = YES;
-      actionButton.alpha = 0.8;
-      //actionButton.backgroundColor = [UIColor blueColor];
-      actionButton.imageView.backgroundColor = FLEKSY_TEXTVIEW_COLOR;
+      //actionButton.backgroundColor = [UIColor redColor];
+      actionButton.imageView.backgroundColor = [UIColor clearColor]; //FLEKSY_TEXTVIEW_COLOR;
       actionButton.accessibilityLabel = @"Action";
       actionButton.accessibilityHint = @"Double tap for menu";
       [actionButton addTarget:self action:@selector(showMenu) forControlEvents:UIControlEventTouchUpInside];
+      
+      //actionButton.transform = CGAffineTransformMakeScale(2, 2);
+      
       
       // we need to do this to ensure glow effect can be on top of the imageView
       // we wouldn't need to do this if we used setBackgroundImage instead of setImage,
@@ -1053,6 +1076,7 @@
 //  [self.view bringSubviewToFront:tripleClickView];
   
   [textView.inputView.window addSubview:actionButton];
+  [self startButtonAnimation];
 }
 
 
@@ -1086,18 +1110,20 @@
 
 
 - (void) viewWillLayoutSubviews {
-  //NSLog(@"FleksyAppMainViewController viewWillLayoutSubviews self.view.frame %@", NSStringFromCGRect(self.view.frame));
-  int paddingRight = 1;//7;
-  int paddingTop = 1;//7;
-  actionButton.frame = CGRectMake(self.view.bounds.size.width - actionButton.frame.size.width + actionButton.contentEdgeInsets.right - paddingRight,
-                                  paddingTop - actionButton.contentEdgeInsets.top, actionButton.frame.size.width, actionButton.frame.size.height);
-  
-  //[actionButton.superview bringSubviewToFront:actionButton];
-  [self resizeAndScrollTextView];
+  NSLog(@"FleksyAppMainViewController viewWillLayoutSubviews self.view.frame %@", NSStringFromCGRect(self.view.frame));
 }
 
 - (void) viewDidLayoutSubviews {
-  //NSLog(@"viewDidLayoutSubviews self.view.frame %@", NSStringFromCGRect(self.view.frame));
+  NSLog(@"FleksyAppMainViewController viewDidLayoutSubviews self.view.frame %@", NSStringFromCGRect(self.view.frame));
+
+  int paddingRight = 3;
+  int paddingTop = 3;
+  
+  actionButton.center = CGPointMake(self.view.bounds.size.width - actionButton.bounds.size.width / 2 + actionButton.contentEdgeInsets.right - paddingRight,
+                                    paddingTop + actionButton.bounds.size.height / 2 - actionButton.contentEdgeInsets.top);
+
+  //[actionButton.superview bringSubviewToFront:actionButton];
+  [self resizeAndScrollTextView];
 }
 
 
