@@ -52,7 +52,6 @@
 		2E68687E12026BA200AC7F4F /* libobjc.A.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E68687D12026BA200AC7F4F /* libobjc.A.dylib */; };
 		2E6965A816C07A010018ACA9 /* UITouchManagerHooks.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2E6965A716C07A010018ACA9 /* UITouchManagerHooks.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		2E6965AC16C1967B0018ACA9 /* menu_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E6965AA16C1967B0018ACA9 /* menu_blue.png */; };
-		2E6965AD16C1967B0018ACA9 /* menu_grey.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E6965AB16C1967B0018ACA9 /* menu_grey.png */; };
 		2E7404FF165D9CCD00C8B2C9 /* FleksyClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E7404FE165D9CCD00C8B2C9 /* FleksyClient.cpp */; };
 		2E7C8FBD14F7253300E457AB /* SwipeFeedbackView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2E7C8FBC14F7253300E457AB /* SwipeFeedbackView.mm */; };
 		2E7CAA691594FD1E00F192BE /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E7CAA681594FD1E00F192BE /* StoreKit.framework */; };
@@ -208,7 +207,6 @@
 		2E6965A716C07A010018ACA9 /* UITouchManagerHooks.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = UITouchManagerHooks.mm; path = ../../GestureTestbed/GestureTest/Classes/UITouchManagerHooks.mm; sourceTree = "<group>"; };
 		2E6965A916C07A8D0018ACA9 /* UITouchManagerHooks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UITouchManagerHooks.h; path = ../../GestureTestbed/GestureTest/Classes/UITouchManagerHooks.h; sourceTree = "<group>"; };
 		2E6965AA16C1967B0018ACA9 /* menu_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_blue.png; sourceTree = "<group>"; };
-		2E6965AB16C1967B0018ACA9 /* menu_grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_grey.png; sourceTree = "<group>"; };
 		2E7404FD165D9CCD00C8B2C9 /* FleksyClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FleksyClient.h; sourceTree = "<group>"; };
 		2E7404FE165D9CCD00C8B2C9 /* FleksyClient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FleksyClient.cpp; sourceTree = "<group>"; };
 		2E7C8FBB14F7253300E457AB /* SwipeFeedbackView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwipeFeedbackView.h; sourceTree = "<group>"; };
@@ -740,7 +738,6 @@
 			isa = PBXGroup;
 			children = (
 				2E6965AA16C1967B0018ACA9 /* menu_blue.png */,
-				2E6965AB16C1967B0018ACA9 /* menu_grey.png */,
 				2E8A6C3F1681318B0007B0D0 /* language packs */,
 				2E8A6C39168131850007B0D0 /* sounds */,
 				2E8500DA15883CA200FF6A4B /* Graphics */,
@@ -864,7 +861,6 @@
 				2EC0B700168D1675005AD155 /* Icon-72@2x.png in Resources */,
 				2EC0B702168D1678005AD155 /* Icon-72.png in Resources */,
 				2E6965AC16C1967B0018ACA9 /* menu_blue.png in Resources */,
-				2E6965AD16C1967B0018ACA9 /* menu_grey.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
