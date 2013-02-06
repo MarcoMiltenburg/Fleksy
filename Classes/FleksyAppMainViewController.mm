@@ -39,6 +39,94 @@
 
 @implementation FleksyAppMainViewController
 
+////////////////////////////////////////////////////////////////////////////
+//http://code.shabz.co/post/36796928905/follow-a-username-on-twitter-ios-5
+////////////////////////////////////////////////////////////////////////////
+
+- (void) follow:(NSString *) username {
+  
+  BOOL twitterSupport = NO;
+  if (NSClassFromString(@"SLComposeViewController")) {
+      twitterSupport = YES;
+  } else if (NSClassFromString(@"TWTweetComposeViewController")) {
+    twitterSupport = YES;
+  }
+  
+  if (twitterSupport) {
+    // Create account store, followed by a twitter account identifier
+    ACAccountStore *accountStore = [[ACAccountStore alloc] init];
+    ACAccountType *type = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+    
+    [accountStore requestAccessToAccountsWithType:type options:nil completion:^(BOOL granted, NSError *error) {
+      if (granted) {
+        NSArray* tempAccountsArray = [accountStore accountsWithAccountType:type];
+        
+        //don't use a Fleksy twitter account, if present. (for easier internal testing)
+        NSMutableArray* accountsArray = [[NSMutableArray alloc] init];
+        for (ACAccount* account in tempAccountsArray) {
+          if (![[account.username uppercaseString] isEqualToString:@"FLEKSY"]) {
+            [accountsArray addObject:account];
+          }
+        }
+        // Sanity check
+        if ([accountsArray count] > 0) {
+          //Create dictionary to pass to followWithAccountInfo: method
+          NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+          [dict setObject:username forKey:@"usernameToFollow"];
+          //Follow the username with your first logged in account
+          ACAccount* account = [accountsArray objectAtIndex:0];
+          NSLog(@"using twitter account: %@", account);
+          [dict setObject:account forKey:@"account"];
+          [self performSelectorOnMainThread:@selector(followWithAccountInfo:) withObject:dict waitUntilDone:NO];
+        } else {
+          [self performSelectorOnMainThread:@selector(showTwitterSupportError:) withObject:@"No accounts available" waitUntilDone:NO];
+        }
+      } else {
+        [self performSelectorOnMainThread:@selector(showTwitterSupportError:) withObject:@"Could not access twitter account" waitUntilDone:NO];
+      }
+    }];
+  } else {
+    NSLog(@"No Twitter support!");
+  }
+}
+
+- (void) followWithAccountInfo:(NSDictionary *) dictionary {
+  ACAccount *acct = [dictionary objectForKey:@"account"];
+  NSString *username = [dictionary objectForKey:@"usernameToFollow"];
+  // Build a twitter request for following the username specified
+  TWRequest *postRequest = [[TWRequest alloc] initWithURL:
+                            [NSURL URLWithString:@"http://api.twitter.com/1.1/friendships/create.json"]
+                                               parameters:[NSDictionary dictionaryWithObjectsAndKeys:username, @"screen_name", @"true", @"follow", nil] requestMethod:SLRequestMethodPOST];
+  // Post the request
+  [postRequest setAccount:acct];
+  // Block handler to manage the response
+  [postRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error)
+   {
+     NSLog(@"followWithAccountInfo: %d", urlResponse.statusCode);
+     if (urlResponse.statusCode == 200) {
+       [self performSelectorOnMainThread:@selector(showFollowConfirmation) withObject:nil waitUntilDone:NO];
+     } else {
+       [self performSelectorOnMainThread:@selector(showFollowError:) withObject:[NSNumber numberWithInt:urlResponse.statusCode] waitUntilDone:NO];
+     }
+   }];
+}
+
+- (void) showTwitterSupportError:(NSString*) message {
+  [[[UIAlertView alloc] initWithTitle:@"Twitter error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+}
+
+- (void) showFollowConfirmation {
+  [[[UIAlertView alloc] initWithTitle:@"@Fleksy" message:@"Thanks for following us!\nWe promise to keep it interesting :)" delegate:nil cancelButtonTitle:@"Cool!" otherButtonTitles: nil] show];
+}
+
+- (void) showFollowError:(NSNumber*) statusCode {
+  [[[UIAlertView alloc] initWithTitle:@"Couldn't follow @Fleksy :(" message:[NSString stringWithFormat:@"Whoops! Some error occured, and it's called error #%d", statusCode.intValue] delegate:nil cancelButtonTitle:@"Not cool!" otherButtonTitles: nil] show];
+}
+
+////////////////////////////////////////////////////////////////////////////
+/////////////////////  END OF TWITTER FOLLOW  //////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+
 
 - (void) hideKeyboard {
   
@@ -365,7 +453,8 @@
 
 
 - (void) menu_fleksy_twitter {
-  [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://twitter.com/fleksy"]];  
+  [self follow:@"fleksy"];
+  //[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://twitter.com/fleksy"]];
 }
 
 - (void) menu_fleksy_web {
@@ -691,10 +780,10 @@
       [self setReplyTo:nil];
       [self sendTo:recipient];
       
-    } else if ([buttonTitle isEqualToString:@"@fleksy"]) {
+    } else if ([buttonTitle isEqualToString:@"Follow @fleksy"]) {
       [self menu_fleksy_twitter];
     
-    } else if ([buttonTitle isEqualToString:@"fleksy.com"]) {
+    } else if ([buttonTitle isEqualToString:@"Visit fleksy.com"]) {
       [self menu_fleksy_web];
       
     } else if ([buttonTitle isEqualToString:@"Export dictionary"]) {
@@ -742,10 +831,10 @@
     } else if ([buttonTitle isEqualToString:@"Settings"]) {
       [self showSettings];
       
-    } else if ([buttonTitle isEqualToString:@"@fleksy"]) {
+    } else if ([buttonTitle isEqualToString:@"Follow @fleksy"]) {
       [self menu_fleksy_twitter];
       
-    } else if ([buttonTitle isEqualToString:@"fleksy.com"]) {
+    } else if ([buttonTitle isEqualToString:@"Visit fleksy.com"]) {
       [self menu_fleksy_web];
     
     } else {
@@ -902,8 +991,8 @@
     [actionMainMenuPlain addButtonWithTitle:@"Export dictionary"];
   }
   [actionMainMenuPlain addButtonWithTitle:@"We love feedback!"];
-  [actionMainMenuPlain addButtonWithTitle:@"@fleksy"];
-  [actionMainMenuPlain addButtonWithTitle:@"fleksy.com"];
+  [actionMainMenuPlain addButtonWithTitle:@"Follow @fleksy"];
+  [actionMainMenuPlain addButtonWithTitle:@"Visit fleksy.com"];
   
   //http://stackoverflow.com/questions/5262428/uiactionsheet-buttonindex-values-faulty-when-using-more-than-6-custom-buttons
   actionMainMenuPlain.cancelButtonIndex = [actionMainMenuPlain addButtonWithTitle:@"Resume typing"];
@@ -921,8 +1010,8 @@
   }
   [initialMainMenu addButtonWithTitle:@"Instructions"];
   [initialMainMenu addButtonWithTitle:@"Settings"];
-  [initialMainMenu addButtonWithTitle:@"@fleksy"];
-  [initialMainMenu addButtonWithTitle:@"fleksy.com"];
+  [initialMainMenu addButtonWithTitle:@"Follow @fleksy"];
+  [initialMainMenu addButtonWithTitle:@"Visit fleksy.com"];
   //http://stackoverflow.com/questions/5262428/uiactionsheet-buttonindex-values-faulty-when-using-more-than-6-custom-buttons
   initialMainMenu.cancelButtonIndex = [initialMainMenu addButtonWithTitle:@"Start typing"];
   

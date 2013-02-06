@@ -52,6 +52,7 @@
 		2E68687E12026BA200AC7F4F /* libobjc.A.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E68687D12026BA200AC7F4F /* libobjc.A.dylib */; };
 		2E6965A816C07A010018ACA9 /* UITouchManagerHooks.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2E6965A716C07A010018ACA9 /* UITouchManagerHooks.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		2E6965AC16C1967B0018ACA9 /* menu_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E6965AA16C1967B0018ACA9 /* menu_blue.png */; };
+		2E6965AF16C1E7F50018ACA9 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E6965AE16C1E7F50018ACA9 /* Accounts.framework */; };
 		2E7404FF165D9CCD00C8B2C9 /* FleksyClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E7404FE165D9CCD00C8B2C9 /* FleksyClient.cpp */; };
 		2E7C8FBD14F7253300E457AB /* SwipeFeedbackView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2E7C8FBC14F7253300E457AB /* SwipeFeedbackView.mm */; };
 		2E7CAA691594FD1E00F192BE /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E7CAA681594FD1E00F192BE /* StoreKit.framework */; };
@@ -207,6 +208,7 @@
 		2E6965A716C07A010018ACA9 /* UITouchManagerHooks.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = UITouchManagerHooks.mm; path = ../../GestureTestbed/GestureTest/Classes/UITouchManagerHooks.mm; sourceTree = "<group>"; };
 		2E6965A916C07A8D0018ACA9 /* UITouchManagerHooks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UITouchManagerHooks.h; path = ../../GestureTestbed/GestureTest/Classes/UITouchManagerHooks.h; sourceTree = "<group>"; };
 		2E6965AA16C1967B0018ACA9 /* menu_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_blue.png; sourceTree = "<group>"; };
+		2E6965AE16C1E7F50018ACA9 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		2E7404FD165D9CCD00C8B2C9 /* FleksyClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FleksyClient.h; sourceTree = "<group>"; };
 		2E7404FE165D9CCD00C8B2C9 /* FleksyClient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FleksyClient.cpp; sourceTree = "<group>"; };
 		2E7C8FBB14F7253300E457AB /* SwipeFeedbackView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwipeFeedbackView.h; sourceTree = "<group>"; };
@@ -347,6 +349,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				183E9FBF168904360036D11F /* libTestFlight.a in Frameworks */,
+				2E6965AF16C1E7F50018ACA9 /* Accounts.framework in Frameworks */,
 				2ECA1F48162362B30070F437 /* Twitter.framework in Frameworks */,
 				2EE39C2E161279E600B88B2E /* Social.framework in Frameworks */,
 				2E63D07015F670A900837586 /* CoreText.framework in Frameworks */,
@@ -440,6 +443,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				2E6965AE16C1E7F50018ACA9 /* Accounts.framework */,
 				2EA3E84416964AA200BC54A4 /* MultipartSpeechSynthesizer.h */,
 				2EA3E84516964AA200BC54A4 /* MultipartSpeechSynthesizer.mm */,
 				183E9FBE168904360036D11F /* libTestFlight.a */,

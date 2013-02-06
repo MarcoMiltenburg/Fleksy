@@ -155,7 +155,7 @@ NSString* getAbsolutePath(NSString* filepath, NSString* languagePack) {
 #endif
   
   
-  filename = getAbsolutePath(@"context/md.binary.file.1", languagePack);
+  filename = getAbsolutePath(@"context/md2-8.binary.file.1", languagePack);
   systemsIntegrator->loadContextData(NSStringToString(filename), false);
   
   
