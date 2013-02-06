@@ -690,6 +690,22 @@
   }
 }
 
+- (void) showFleksyInOtherApps {
+  UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Revolutionary keyboard!"
+                                             message:@"Unfortunately, due to iOS limitations, it's not possible to replace the standard keyboard.\n\nHere's how you can let Apple know you really like Fleksy:" delegate:nil cancelButtonTitle:@"Later, I promise!" otherButtonTitles:@"App Store review", @"Sample email to Apple", nil];
+  [alert show];
+}
+
+- (void) sendFeedback {
+  [TestFlight submitFeedback:textView.text];
+  
+  if (purchaseManager.fullVersion) {
+    [self sendInAppMailTo:@"feedback@fleksy.com" useText:textView.text subjectPrefix:@"Feedback: "];
+  } else {
+    [VariousUtilities performAudioFeedbackFromString:@"Thank you. Your feedback has been submitted"];
+  }
+}
+
 //////////////////////////////////////////////////
 
 // Called when a button is clicked. The view will be automatically dismissed after this call returns
@@ -759,14 +775,11 @@
     } else if ([buttonTitle isEqualToString:@"Settings"]) {
       [self showSettings];
       
+    } else if ([buttonTitle isEqualToString:@"♥ Fleksy in other apps?"]) {
+      [self showFleksyInOtherApps];
+    
     } else if ([buttonTitle isEqualToString:@"We love feedback!"]) {
-      [TestFlight submitFeedback:textView.text];
-      
-      if (purchaseManager.fullVersion) {
-        [self sendInAppMailTo:@"feedback@fleksy.com" useText:textView.text subjectPrefix:@"Feedback: "];
-      } else {
-        [VariousUtilities performAudioFeedbackFromString:@"Thank you. Your feedback has been submitted"];
-      }
+      [self sendFeedback];
       
     } else if ([buttonTitle isEqualToString:@"Rate us"]) {
       [self menu_rate];
@@ -831,6 +844,12 @@
     } else if ([buttonTitle isEqualToString:@"Settings"]) {
       [self showSettings];
       
+    } else if ([buttonTitle isEqualToString:@"♥ Fleksy in other apps?"]) {
+      [self showFleksyInOtherApps];
+      
+    } else if ([buttonTitle isEqualToString:@"We love feedback!"]) {
+      [self sendFeedback];
+      
     } else if ([buttonTitle isEqualToString:@"Follow @fleksy"]) {
       [self menu_fleksy_twitter];
       
@@ -868,13 +887,13 @@
   
   float scaleFactor = 1.0 / 0.75f;
   
-  actionButton.alpha = 0.5;
+  actionButton.alpha = 0.6;
   actionButton.imageView.transform = CGAffineTransformIdentity;
   
   [UIView animateWithDuration:1.7 delay:0.0f
                       options:UIViewAnimationCurveEaseInOut | UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse | UIViewAnimationOptionAllowUserInteraction
                    animations:^{
-                     actionButton.alpha = 0.9;
+                     actionButton.alpha = 1.0;
                      actionButton.imageView.transform = CGAffineTransformMakeScale(scaleFactor, scaleFactor);
                    }
                    completion:^(BOOL finished) {}];
@@ -910,10 +929,6 @@
   [self voiceOverStatusChanged:nil];
   
   //NSLog(@"previousRuns: %d", purchaseManager.previousRuns);
-  
-  if (!purchaseManager.previousRuns && !UIAccessibilityIsVoiceOverRunning()) {
-    self->textView.text = @"Welcome to Fleksy: You no longer need to be accurate! \n\nSpace: flick right → \nDelete: flick left ← \nChange word: flick down ↓ \nPunctuation: → after Space \n\nHappy Typing! ";
-  }
 }
 
 
@@ -987,12 +1002,13 @@
   }
   [actionMainMenuPlain addButtonWithTitle:@"Instructions"];
   [actionMainMenuPlain addButtonWithTitle:@"Settings"];
-  if (purchaseManager.fullVersion) {
-    [actionMainMenuPlain addButtonWithTitle:@"Export dictionary"];
-  }
+  [actionMainMenuPlain addButtonWithTitle:@"♥ Fleksy in other apps?"];
   [actionMainMenuPlain addButtonWithTitle:@"We love feedback!"];
   [actionMainMenuPlain addButtonWithTitle:@"Follow @fleksy"];
   [actionMainMenuPlain addButtonWithTitle:@"Visit fleksy.com"];
+  if (purchaseManager.fullVersion) {
+    [actionMainMenuPlain addButtonWithTitle:@"Export dictionary"];
+  }
   
   //http://stackoverflow.com/questions/5262428/uiactionsheet-buttonindex-values-faulty-when-using-more-than-6-custom-buttons
   actionMainMenuPlain.cancelButtonIndex = [actionMainMenuPlain addButtonWithTitle:@"Resume typing"];
@@ -1010,6 +1026,8 @@
   }
   [initialMainMenu addButtonWithTitle:@"Instructions"];
   [initialMainMenu addButtonWithTitle:@"Settings"];
+  [initialMainMenu addButtonWithTitle:@"♥ Fleksy in other apps?"];
+  [initialMainMenu addButtonWithTitle:@"We love feedback!"];
   [initialMainMenu addButtonWithTitle:@"Follow @fleksy"];
   [initialMainMenu addButtonWithTitle:@"Visit fleksy.com"];
   //http://stackoverflow.com/questions/5262428/uiactionsheet-buttonindex-values-faulty-when-using-more-than-6-custom-buttons
@@ -1037,9 +1055,9 @@
   }
   
 #if !TARGET_IPHONE_SIMULATOR
-  if (purchaseManager.previousRuns < 2 && !UIAccessibilityIsVoiceOverRunning()) {
+  if (purchaseManager.previousRuns < 1 && !UIAccessibilityIsVoiceOverRunning()) {
     blindAppAlert = [[UIAlertView alloc] initWithTitle:@"Happy Typing!"
-                                               message:@"\nThousands of sighted and blind users enjoy typing with Fleksy. If you like the typing experience, let us know with a review on the App Store!" delegate:nil cancelButtonTitle:@"Awesome!" otherButtonTitles:nil];
+                                               message:@"\nThousands of sighted and blind users enjoy typing with Fleksy.\n\nIf you like the typing experience, let us know with an App Store review!" delegate:nil cancelButtonTitle:@"Awesome!" otherButtonTitles:nil];
     [blindAppAlert show];
   }
 #endif
@@ -1166,6 +1184,10 @@
   
   [textView.inputView.window addSubview:actionButton];
   [self startButtonAnimation];
+  
+  if (purchaseManager.previousRuns < 1 && !self->textView.text.length && !UIAccessibilityIsVoiceOverRunning()) {
+    self->textView.text = @"Welcome to Fleksy: You no longer need to be accurate! \n\nSpace: flick right → \nDelete: flick left ← \nChange word: flick down ↓ \nPunctuation: → after Space \n\nHappy Typing! ";
+  }
 }
 
 
