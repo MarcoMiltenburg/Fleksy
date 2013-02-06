@@ -84,9 +84,16 @@ NSString* getAbsolutePath(NSString* filepath, NSString* languagePack) {
   
   double startTime = CFAbsoluteTimeGetCurrent();
   
-  NSString* keyboardFilename = getAbsolutePath(@"keyboards/keyboard-iPhone-ASCII.txt.xxx", languagePack);
-  FLString keyboardText = VariousUtilities2::getStringFromFile(keyboardFilename.UTF8String, true);
-  systemsIntegrator->loadKeyboardData(keyboardText, false);
+  NSString* filename;
+  NSString* text;
+  
+  void* buffer;
+  size_t bufferSize;
+  
+  
+  filename = getAbsolutePath(@"keyboards/keyboard-iPhone-ASCII.txt.xxx", languagePack);
+  buffer = VariousUtilities2::readBinaryFile(filename.UTF8String, bufferSize);
+  systemsIntegrator->loadKeyboardData(buffer, bufferSize, true);
   
   string preprocessedFilepathFormat = NSStringToString(getAbsolutePath(@"preprocessed/preprocessed-%d.txt", languagePack));
   
@@ -111,13 +118,6 @@ NSString* getAbsolutePath(NSString* filepath, NSString* languagePack) {
   }
   
 #if !DEBUG_NO_WORDS
-  
-  NSString* filename;
-  NSString* text;
-  
-  
-  size_t bufferSize;
-  void* buffer;
   
   filename = getAbsolutePath(@"wordlists/wordlist-master-blacklist-capitalized.txt.xxx", languagePack);
   buffer = VariousUtilities2::readBinaryFile(filename.UTF8String, bufferSize);
