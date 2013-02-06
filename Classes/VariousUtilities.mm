@@ -1109,17 +1109,6 @@ int tcp_lat(int size, int count, BOOL parent)
   return [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
 }
 
-+ (BOOL) deviceCanHandleContext {
-  
-  return YES;
-  
-#if TARGET_IPHONE_SIMULATOR
-  return YES;
-#endif
-  NSString* machineName = [VariousUtilities getMachineName];
-  return [machineName isEqualToString:@"iPad2,5"] || [machineName hasPrefix:@"iPhone5"];
-}
-
 + (BOOL) deviceCanHandleLargeFont {
   NSString* machineName = [VariousUtilities getMachineName];
   return [machineName hasPrefix:@"iPad"] || [machineName hasPrefix:@"iPhone5"];

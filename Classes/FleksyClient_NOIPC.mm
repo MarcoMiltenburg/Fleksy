@@ -129,7 +129,7 @@ NSString* getAbsolutePath(NSString* filepath, NSString* languagePack) {
   systemsIntegrator->loadDictionary(NSStringToString(filename), buffer, bufferSize, FLStringMake(" "), kWordlistBlacklist, true);
   free(buffer);
   
-  filename = getAbsolutePath(@"wordlists/wordlist-master.txt.xxx", languagePack);
+  filename = getAbsolutePath(@"wordlists/wordlist-master-ASCII.txt.xxx", languagePack);
   buffer = VariousUtilities2::readBinaryFile(filename.UTF8String, bufferSize);
   systemsIntegrator->loadDictionary(NSStringToString(filename), buffer, bufferSize, FLStringMake("\t"), kWordlistStandard, true);
   free(buffer);
@@ -155,12 +155,8 @@ NSString* getAbsolutePath(NSString* filepath, NSString* languagePack) {
 #endif
   
   
-  NSLog(@"deviceCanHandleContext: %d", [VariousUtilities deviceCanHandleContext]);
-  if ([VariousUtilities deviceCanHandleContext]) {
-    //filename = getAbsolutePath(@"context/contextData.bin", languagePack);
-    filename = getAbsolutePath(@"context/test.binary.file", languagePack);
-    systemsIntegrator->loadContextData(NSStringToString(filename), false);
-  }
+  filename = getAbsolutePath(@"context/md.binary.file.1", languagePack);
+  systemsIntegrator->loadContextData(NSStringToString(filename), false);
   
   
   systemsIntegrator->postload();

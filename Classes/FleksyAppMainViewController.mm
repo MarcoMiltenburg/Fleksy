@@ -378,7 +378,7 @@
 }
 
 - (void) showSettings {
-  UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Settings" message:@"Press the home button, go to the Settings app and find Fleksy on the list for many configurable options!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+  UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Settings" message:@"Press the home button, go to the Settings app and find Fleksy on the list for many configurable options! (such as toggling voice feedback)" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
   [alert show];
 }
 

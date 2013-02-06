@@ -108,7 +108,6 @@ extern UInt32 _sounds[kNumSounds];
 
 
 + (NSString*) getMachineName;
-+ (BOOL) deviceCanHandleContext;
 + (BOOL) deviceCanHandleLargeFont;
 
 @end
