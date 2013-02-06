@@ -53,6 +53,7 @@
 		2E6965A816C07A010018ACA9 /* UITouchManagerHooks.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2E6965A716C07A010018ACA9 /* UITouchManagerHooks.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		2E6965AC16C1967B0018ACA9 /* menu_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E6965AA16C1967B0018ACA9 /* menu_blue.png */; };
 		2E6965AF16C1E7F50018ACA9 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E6965AE16C1E7F50018ACA9 /* Accounts.framework */; };
+		2E6965B216C2F0C30018ACA9 /* EncryptionUtilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E6965B016C2F0C30018ACA9 /* EncryptionUtilities.cpp */; };
 		2E7404FF165D9CCD00C8B2C9 /* FleksyClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E7404FE165D9CCD00C8B2C9 /* FleksyClient.cpp */; };
 		2E7C8FBD14F7253300E457AB /* SwipeFeedbackView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2E7C8FBC14F7253300E457AB /* SwipeFeedbackView.mm */; };
 		2E7CAA691594FD1E00F192BE /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E7CAA681594FD1E00F192BE /* StoreKit.framework */; };
@@ -179,7 +180,6 @@
 		2E146A9B1559EE7F00B4A734 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		2E1C23B116B3813C005000D8 /* aes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aes.h; sourceTree = "<group>"; };
 		2E1C23B216B3813C005000D8 /* aes_modes.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = aes_modes.c; sourceTree = "<group>"; };
-		2E1C23B416B3813C005000D8 /* aescpp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aescpp.h; sourceTree = "<group>"; };
 		2E1C23B516B3813C005000D8 /* aescrypt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = aescrypt.c; sourceTree = "<group>"; };
 		2E1C23B616B3813C005000D8 /* aeskey.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = aeskey.c; sourceTree = "<group>"; };
 		2E1C23B716B3813C005000D8 /* aesopt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aesopt.h; sourceTree = "<group>"; };
@@ -209,6 +209,8 @@
 		2E6965A916C07A8D0018ACA9 /* UITouchManagerHooks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UITouchManagerHooks.h; path = ../../GestureTestbed/GestureTest/Classes/UITouchManagerHooks.h; sourceTree = "<group>"; };
 		2E6965AA16C1967B0018ACA9 /* menu_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_blue.png; sourceTree = "<group>"; };
 		2E6965AE16C1E7F50018ACA9 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		2E6965B016C2F0C30018ACA9 /* EncryptionUtilities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EncryptionUtilities.cpp; sourceTree = "<group>"; };
+		2E6965B116C2F0C30018ACA9 /* EncryptionUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EncryptionUtilities.h; sourceTree = "<group>"; };
 		2E7404FD165D9CCD00C8B2C9 /* FleksyClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FleksyClient.h; sourceTree = "<group>"; };
 		2E7404FE165D9CCD00C8B2C9 /* FleksyClient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FleksyClient.cpp; sourceTree = "<group>"; };
 		2E7C8FBB14F7253300E457AB /* SwipeFeedbackView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwipeFeedbackView.h; sourceTree = "<group>"; };
@@ -425,8 +427,10 @@
 				1887E3941689013100A8A111 /* FLSocketsCommon.h */,
 				1887E3981689013100A8A111 /* SystemsIntegrator.h */,
 				1887E3971689013100A8A111 /* SystemsIntegrator.cpp */,
-				1887E3991689013100A8A111 /* VariousUtilities2.cpp */,
 				1887E39A1689013100A8A111 /* VariousUtilities2.h */,
+				1887E3991689013100A8A111 /* VariousUtilities2.cpp */,
+				2E6965B116C2F0C30018ACA9 /* EncryptionUtilities.h */,
+				2E6965B016C2F0C30018ACA9 /* EncryptionUtilities.cpp */,
 			);
 			name = FleksyServer;
 			path = ../FleksyEngine/FleksyServer/FleksyServer;
@@ -496,7 +500,6 @@
 			children = (
 				2E1C23B116B3813C005000D8 /* aes.h */,
 				2E1C23B216B3813C005000D8 /* aes_modes.c */,
-				2E1C23B416B3813C005000D8 /* aescpp.h */,
 				2E1C23B516B3813C005000D8 /* aescrypt.c */,
 				2E1C23B616B3813C005000D8 /* aeskey.c */,
 				2E1C23B716B3813C005000D8 /* aesopt.h */,
@@ -956,6 +959,7 @@
 				2E1C23C116B3813C005000D8 /* aeskey.c in Sources */,
 				2E1C23C216B3813C005000D8 /* aestab.c in Sources */,
 				2E6965A816C07A010018ACA9 /* UITouchManagerHooks.mm in Sources */,
+				2E6965B216C2F0C30018ACA9 /* EncryptionUtilities.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

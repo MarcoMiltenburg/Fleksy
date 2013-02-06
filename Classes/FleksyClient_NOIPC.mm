@@ -11,6 +11,7 @@
 #import "FileManager.h"
 #import "VariousUtilities.h"
 #import "VariousUtilities2.h"
+#import "EncryptionUtilities.h"
 
 #import <PatternRecognizer/CoreSettings.h>
 #import <PatternRecognizer/FLBlackBoxSerializer.h>
@@ -92,7 +93,7 @@ NSString* getAbsolutePath(NSString* filepath, NSString* languagePack) {
   
   
   filename = getAbsolutePath(@"keyboards/keyboard-iPhone-ASCII.txt.xxx", languagePack);
-  buffer = VariousUtilities2::readBinaryFile(filename.UTF8String, bufferSize);
+  buffer = EncryptionUtilities::readBinaryFile(filename.UTF8String, bufferSize);
   systemsIntegrator->loadKeyboardData(buffer, bufferSize, true);
   
   string preprocessedFilepathFormat = NSStringToString(getAbsolutePath(@"preprocessed/preprocessed-%d.txt", languagePack));
@@ -120,17 +121,17 @@ NSString* getAbsolutePath(NSString* filepath, NSString* languagePack) {
 #if !DEBUG_NO_WORDS
   
   filename = getAbsolutePath(@"wordlists/wordlist-master-blacklist-capitalized.txt.xxx", languagePack);
-  buffer = VariousUtilities2::readBinaryFile(filename.UTF8String, bufferSize);
+  buffer = EncryptionUtilities::readBinaryFile(filename.UTF8String, bufferSize);
   systemsIntegrator->loadDictionary(NSStringToString(filename), buffer, bufferSize, FLStringMake("\t"), kWordlistBlacklist, true);
   free(buffer);
   
   filename = getAbsolutePath(@"wordlists/wordlist-master-blacklist.txt.xxx", languagePack);
-  buffer = VariousUtilities2::readBinaryFile(filename.UTF8String, bufferSize);
+  buffer = EncryptionUtilities::readBinaryFile(filename.UTF8String, bufferSize);
   systemsIntegrator->loadDictionary(NSStringToString(filename), buffer, bufferSize, FLStringMake(" "), kWordlistBlacklist, true);
   free(buffer);
   
   filename = getAbsolutePath(@"wordlists/wordlist-master-ASCII.txt.xxx", languagePack);
-  buffer = VariousUtilities2::readBinaryFile(filename.UTF8String, bufferSize);
+  buffer = EncryptionUtilities::readBinaryFile(filename.UTF8String, bufferSize);
   systemsIntegrator->loadDictionary(NSStringToString(filename), buffer, bufferSize, FLStringMake("\t"), kWordlistStandard, true);
   free(buffer);
   
@@ -139,7 +140,7 @@ NSString* getAbsolutePath(NSString* filepath, NSString* languagePack) {
   //systemsIntegrator->writeTablesIfNeeded(NSStringToString(getWritablePathWithFilename(filename)));
   
   filename = getAbsolutePath(@"wordlists/wordlist-preloaded.txt.xxx", languagePack);
-  buffer = VariousUtilities2::readBinaryFile(filename.UTF8String, bufferSize);
+  buffer = EncryptionUtilities::readBinaryFile(filename.UTF8String, bufferSize);
   systemsIntegrator->loadDictionary(NSStringToString(filename), buffer, bufferSize, FLStringMake(" "), kWordlistPreloaded, true);
   free(buffer);
   
