@@ -85,7 +85,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardContainerView);
 }
 
 - (void) setAlpha:(CGFloat)alpha {
-  NSLog(@"FLKeyboardContainerView setAlpha: %.3f", alpha);
+  //NSLog(@"FLKeyboardContainerView setAlpha: %.3f", alpha);
   [super setAlpha:alpha];
   
   // we have to overide and do this since topShadowView is the only view with non-clear color apart from FLKeyboard
@@ -226,6 +226,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardContainerView);
 }
 
 - (void) space {
+  
+  if ([FLKeyboard sharedFLKeyboard].activeView != [FLKeyboard sharedFLKeyboard]->imageViewABC) {
+    [[FLKeyboard sharedFLKeyboard] resetWithActiveView:[FLKeyboard sharedFLKeyboard]->imageViewABC];
+  }
+  
   [typingController nonLetterCharInput:' ' autocorrectionType:keyboard.activeView.tag == KEYBOARD_IMAGE_TAG_ABC_UPPER ? kAutocorrectionChangeAndSuggest : kAutocorrectionNone];
   [feedbackView swipeRecognized:UISwipeGestureRecognizerDirectionRight padding:![suggestionsView isHidden] || ![suggestionsViewSymbols isHidden]];  
   //typingControllerGeneric->swipeRight();
@@ -420,7 +425,19 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardContainerView);
   
     if (recognizer.lastFiredSwipeRecognizer.direction == UISwipeGestureRecognizerDirectionRight) {
       
+      // old system for new line
       //[self performNewLine];
+      
+      // new idea for symbols KB
+      if (false) {
+        if ([FLKeyboard sharedFLKeyboard].activeView == [FLKeyboard sharedFLKeyboard]->imageViewABC) {
+          [[FLKeyboard sharedFLKeyboard] resetWithActiveView:[FLKeyboard sharedFLKeyboard]->imageViewSymbolsB];
+        } else if ([FLKeyboard sharedFLKeyboard].activeView == [FLKeyboard sharedFLKeyboard]->imageViewSymbolsB) {
+          [[FLKeyboard sharedFLKeyboard] resetWithActiveView:[FLKeyboard sharedFLKeyboard]->imageViewSymbolsA];
+        } else {
+          [[FLKeyboard sharedFLKeyboard] resetWithActiveView:[FLKeyboard sharedFLKeyboard]->imageViewABC];
+        }
+      }
       
     } else if (recognizer.lastFiredSwipeRecognizer.direction == UISwipeGestureRecognizerDirectionLeft) {
       [VariousUtilities playTock];

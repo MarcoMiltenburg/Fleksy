@@ -14,7 +14,7 @@
 #define DEBUG_NO_WORDS 0
 
 //if 0 also change bundle identifier to "com.syntellia.FleksyBETA" and product name to "Fleksy Beta"
-#define APP_STORE 0
+#define APP_STORE 1
 
 #define FLEKSY_EXPIRES !APP_STORE
 #if FLEKSY_EXPIRES

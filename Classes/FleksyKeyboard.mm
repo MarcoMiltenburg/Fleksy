@@ -128,7 +128,7 @@ static FleksyKeyboard* instance = nil;
 
 - (void) handleSettingsChanged:(NSNotification*) notification {
   
-  NSLog(@"handleSettingsChanged: %@, userInfo: %@, delay: %.6f", notification, [notification userInfo], [VariousUtilities getNotificationDelay:notification]);
+  //NSLog(@"handleSettingsChanged: %@, userInfo: %@, delay: %.6f", notification, [notification userInfo], [VariousUtilities getNotificationDelay:notification]);
   
   NSDictionary* settings = [FileManager settings];
   if (!settings) {
@@ -164,7 +164,7 @@ static FleksyKeyboard* instance = nil;
   FLEKSY_APP_SETTING_SPACE_BUTTON              = [[VariousUtilities getSettingNamed:@"FLEKSY_APP_SETTING_SPACE_BUTTON" fromSettings:settings] boolValue];
   FLEKSY_APP_SETTING_LANGUAGE_PACK             =  [VariousUtilities getSettingNamed:@"FLEKSY_APP_SETTING_LANGUAGE_PACK" fromSettings:settings];
   
-  NSLog(@"FleksyKeyboard handleSettingsChanged: %@", settings);
+  //NSLog(@"FleksyKeyboard handleSettingsChanged: %@", settings);
   
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //now apply individual settings as necessary  
@@ -232,7 +232,7 @@ static FleksyKeyboard* instance = nil;
     [self addSubview:keyboardContainerView];
     
     swipeAndHoldRecognizer = [[UISwipeAndHoldGestureRecognizer alloc] initWithView:self target:keyboardContainerView action:@selector(handleSwipeAndHold:)];
-    //[swipeAndHoldRecognizer setRepeatDelay:0.8 repeatInterval:1.0 forDirection:UISwipeGestureRecognizerDirectionRight];
+    [swipeAndHoldRecognizer setRepeatDelay:0.3 repeatInterval:1.0 forDirection:UISwipeGestureRecognizerDirectionRight];
     //[swipeAndHoldRecognizer setRepeatDelay:0.6 repeatInterval:0.08 forDirection:UISwipeGestureRecognizerDirectionLeft]; // was faster for video
     [self addGestureRecognizer:swipeAndHoldRecognizer];
     

@@ -20,7 +20,7 @@
 #define IOS_DEVICE_REVIEW_LINK @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=520337246"
 
 #define APPLE_EMAIL_SUBJECT @"Integration of Fleksy in iOS"
-#define APPLE_EMAIL_TEXT @"Dear Apple,\n\nI understand that due to current limitations on iOS, developers cannot change the standard keyboard.\n\nI have been using the new Fleksy keyboard on my iDevice and I wanted to voice my desire to have Fleksy as an available keyboard for system-wide usage.\n\nFleksy makes typing easy, fast and forgiving, without requiring the user to learn a new way of typing. I think it would make a great addition to iOS and would make using my device an even more fun, productive and satisfying experience. Here's the <a href=\"http://fleksy.com/?apple\">website</a>.\n\nI hope you will take this into consideration and bring Happy Typing to your devices!\n\nSincerely,\nHappy Fleksy user"
+#define APPLE_EMAIL_TEXT @"Dear Apple,\n\nI understand that due to current limitations on iOS, developers and users cannot change the standard keyboard.\n\nI have been using the new Fleksy keyboard on my iDevice and I wanted to voice my desire to have it as an available keyboard for system-wide usage.\n\nFleksy makes typing easy, fast and forgiving, without requiring the user to learn a new way of typing. I think it would make a great addition to iOS and would make using my device an even more fun, productive and satisfying experience. Here's the <a href=\"http://fleksy.com/?apple\">website</a>.\n\nI hope you will take this into consideration and bring Happy Typing to your devices!\n\nSincerely,\nHappy Fleksy user"
 
 #define APP_STORE_LINK_TWITTER  @""
 #define APP_STORE_LINK_SMS      @""
@@ -147,7 +147,7 @@
 
 - (void) showKeyboard {
   
-  //NSLog(@"controller showKeyboard, textView was responder: %d", textView.isFirstResponder);
+  NSLog(@"controller showKeyboard, textView was responder: %d", textView.isFirstResponder);
   //return;
   
   if (!textView.isFirstResponder) {
@@ -407,10 +407,6 @@
 }
 
 
-- (void) sendInAppMailTo:(NSString*) recipient text:(NSString*) text subject:(NSString*) subject signature:(BOOL) signature {
-  [self sendInAppMailTo:[NSArray arrayWithObject:recipient] cc:nil text:text subject:subject signature:signature];
-}
-
 - (void) sendInAppMailTo:(NSArray*) recipients cc:(NSArray*) cc text:(NSString*) text subject:(NSString*) subject signature:(BOOL) signature {
   
   //[[FLKeyboardContainerView sharedFLKeyboardContainerView].typingController.diagnostics sendWithComment:@"ACTION_MAIL"];
@@ -458,6 +454,10 @@
     text = [text stringByReplacingOccurrencesOfString:commonPrefix withString:@""];
   }
   [self sendInAppMailTo:recipient text:text subject:[NSString stringWithFormat:@"%@%@", subjectPrefix, subject] signature:YES];
+}
+
+- (void) sendInAppMailTo:(NSString*) recipient text:(NSString*) text subject:(NSString*) subject signature:(BOOL) signature {
+  [self sendInAppMailTo:[NSArray arrayWithObjects:recipient, nil] cc:nil text:text subject:subject signature:signature];
 }
 
 - (void) sendInAppMailTo:(NSString*) recipient useText:(NSString*) useText {
@@ -542,7 +542,8 @@
   
   //create and load the web request, that will eventually trigger webViewDidFinishLoad
   NSString* filename = UIAccessibilityIsVoiceOverRunning() ? @"index-voiceover" : @"index-sighted";
-  NSURL* url = [[VariousUtilities theBundle] URLForResource:filename withExtension:@".htm" subdirectory:@"instructions"];
+  NSURL* url = [[NSBundle mainBundle] URLForResource:filename withExtension:@"html" subdirectory:@"instructions"];
+  assert(url);
   NSURLRequest* requestObj = [NSURLRequest requestWithURL:url];
   [instructionsWebView loadRequest:requestObj];
 }
@@ -725,8 +726,12 @@
   } else {
     recipients = [NSArray arrayWithObjects:@"tcook@apple.com", @"accessibility@apple.com", nil];
   }
-  NSArray* cc = [NSArray arrayWithObject:@"feedback@fleksy.com"];
-  [self sendInAppMailTo:recipients cc:cc text:[self makeFleksyLinksForText:APPLE_EMAIL_TEXT evenLowercase:NO] subject:APPLE_EMAIL_SUBJECT signature:NO];
+  NSArray* cc = [NSArray arrayWithObject:@"integrate@fleksy.com"];
+  
+  NSString* text = [self makeFleksyLinksForText:APPLE_EMAIL_TEXT evenLowercase:NO];
+  text = [text stringByReplacingOccurrencesOfString:@"iDevice" withString:[UIDevice currentDevice].model];
+  
+  [self sendInAppMailTo:recipients cc:cc text:text subject:APPLE_EMAIL_SUBJECT signature:NO];
 }
 
 - (void) writeAppStoreReview {
@@ -966,7 +971,9 @@
   
   if (voiceover) {
     
-    textView.inputView.alpha = 1;
+    if (!FLEKSY_APP_SETTING_INVISIBLE_KEYBOARD) {
+      textView.inputView.alpha = 1;
+    }
     
     if (blindAppAlert) {
       [blindAppAlert dismissWithClickedButtonIndex:-1 animated:YES];
@@ -1106,7 +1113,7 @@
 #if !TARGET_IPHONE_SIMULATOR
   if (purchaseManager.previousRuns < 1 && !UIAccessibilityIsVoiceOverRunning()) {
     blindAppAlert = [[UIAlertView alloc] initWithTitle:@"Happy Typing!"
-                                               message:@"\nThousands of sighted and blind users enjoy typing with Fleksy.\n\nIf you like the typing experience, let us know with an App Store review!" delegate:nil cancelButtonTitle:@"Awesome!" otherButtonTitles:nil];
+                                               message:@"\nThousands of sighted and blind users enjoy typing with Fleksy.\n\nClose your eyes and try typing! :)" delegate:nil cancelButtonTitle:@"Cool!" otherButtonTitles:nil];
     [blindAppAlert show];
   }
 #endif

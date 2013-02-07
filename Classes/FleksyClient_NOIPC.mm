@@ -39,7 +39,7 @@
   self.systemsIntegrator->setSettingUseTx([[VariousUtilities getSettingNamed:@"FLEKSY_CORE_SETTING_USE_TX" fromSettings:settings] boolValue]);
   self.systemsIntegrator->setSettingUseWordFrequency([[VariousUtilities getSettingNamed:@"FLEKSY_CORE_SETTING_USE_WORD_FREQUENCY" fromSettings:settings] boolValue]);
   
-  NSLog(@"FleksyClient_NOIPC handleSettingsChanged: %@", settings);
+  //NSLog(@"FleksyClient_NOIPC handleSettingsChanged: %@", settings);
 }
 
 
@@ -159,8 +159,9 @@ NSString* getAbsolutePath(NSString* filepath, NSString* languagePack) {
   
   
   filename = getAbsolutePath(@"context/md2-8.binary.file.1", languagePack);
-  systemsIntegrator->loadContextData(NSStringToString(filename), false);
-  
+  if ([[NSFileManager defaultManager] fileExistsAtPath:filename]) {
+    systemsIntegrator->loadContextData(NSStringToString(filename), false);
+  }
   
   systemsIntegrator->postload();
   

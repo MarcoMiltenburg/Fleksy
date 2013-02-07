@@ -41,6 +41,7 @@
 		2E1E745415C871BB0029E761 /* MyTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E1E745315C871BB0029E761 /* MyTextView.m */; };
 		2E24C0D01473ED010056B137 /* FleksyKeyboard.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2E24C0CF1473ED010056B137 /* FleksyKeyboard.mm */; };
 		2E24C0D314740D0F0056B137 /* HookingUtilities.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2E24C0D214740D0E0056B137 /* HookingUtilities.mm */; };
+		2E2EBE1816C447F7000090BF /* instructions in Resources */ = {isa = PBXBuildFile; fileRef = 2E2EBE1716C447F7000090BF /* instructions */; };
 		2E3F6E90155A214B001BE187 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E0BC2EB1559B39500BFF935 /* Default.png */; };
 		2E3F6E91155A214E001BE187 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E0BC2E31559AFE300BFF935 /* Default@2x.png */; };
 		2E42CBE611D5456900409C5E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E42CBE511D5456800409C5E /* CoreGraphics.framework */; };
@@ -120,7 +121,6 @@
 		2EE7C89015BDE30700307235 /* FLPurchaseManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2EE7C88F15BDE30700307235 /* FLPurchaseManager.mm */; };
 		2EF467971698B9C800E3150F /* FLContextCommon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EF467931698B9C800E3150F /* FLContextCommon.cpp */; };
 		2EF467981698B9C800E3150F /* FLTokenPredictor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EF467951698B9C800E3150F /* FLTokenPredictor.cpp */; };
-		2EFB3E3F15E5B2C300A4D5D6 /* instructions in Resources */ = {isa = PBXBuildFile; fileRef = 2EFB3E3E15E5B2C300A4D5D6 /* instructions */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -167,7 +167,7 @@
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
-		1D6058910D05DD3D006BFB54 /* Fleksy Beta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fleksy Beta.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D6058910D05DD3D006BFB54 /* Fleksy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fleksy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		28FD15070DC6FC5B0079059D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		29B97316FDCFA39411CA2CEA /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
@@ -192,6 +192,7 @@
 		2E24C0CF1473ED010056B137 /* FleksyKeyboard.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FleksyKeyboard.mm; sourceTree = "<group>"; };
 		2E24C0D114740D0E0056B137 /* HookingUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HookingUtilities.h; sourceTree = "<group>"; };
 		2E24C0D214740D0E0056B137 /* HookingUtilities.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HookingUtilities.mm; sourceTree = "<group>"; };
+		2E2EBE1716C447F7000090BF /* instructions */ = {isa = PBXFileReference; lastKnownFileType = folder; name = instructions; path = ../../../../../Dropbox/Fleksy/instructions; sourceTree = "<group>"; };
 		2E42CBE511D5456800409C5E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		2E4727AD14F8A78E00416BF4 /* CustomSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomSegmentedControl.h; sourceTree = "<group>"; };
 		2E4727AE14F8A78E00416BF4 /* CustomSegmentedControl.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CustomSegmentedControl.mm; sourceTree = "<group>"; };
@@ -342,7 +343,6 @@
 		2EF467941698B9C800E3150F /* FLContextCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FLContextCommon.h; path = ../../../FleksyContext/FLContextCommon.h; sourceTree = "<group>"; };
 		2EF467951698B9C800E3150F /* FLTokenPredictor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FLTokenPredictor.cpp; path = ../../../FleksyContext/FLTokenPredictor.cpp; sourceTree = "<group>"; };
 		2EF467961698B9C800E3150F /* FLTokenPredictor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FLTokenPredictor.h; path = ../../../FleksyContext/FLTokenPredictor.h; sourceTree = "<group>"; };
-		2EFB3E3E15E5B2C300A4D5D6 /* instructions */ = {isa = PBXFileReference; lastKnownFileType = folder; path = instructions; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -439,7 +439,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1D6058910D05DD3D006BFB54 /* Fleksy Beta.app */,
+				1D6058910D05DD3D006BFB54 /* Fleksy.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -744,11 +744,11 @@
 		2EC2A5F9146E7BFB00F56549 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2E2EBE1716C447F7000090BF /* instructions */,
 				2E6965AA16C1967B0018ACA9 /* menu_blue.png */,
 				2E8A6C3F1681318B0007B0D0 /* language packs */,
 				2E8A6C39168131850007B0D0 /* sounds */,
 				2E8500DA15883CA200FF6A4B /* Graphics */,
-				2EFB3E3E15E5B2C300A4D5D6 /* instructions */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -817,7 +817,7 @@
 			);
 			name = iFleksy;
 			productName = OpenGL1;
-			productReference = 1D6058910D05DD3D006BFB54 /* Fleksy Beta.app */;
+			productReference = 1D6058910D05DD3D006BFB54 /* Fleksy.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -854,7 +854,6 @@
 				2E961B20154E24C80061C37D /* Settings_HIDDEN.bundle in Resources */,
 				2E3F6E90155A214B001BE187 /* Default.png in Resources */,
 				2E3F6E91155A214E001BE187 /* Default@2x.png in Resources */,
-				2EFB3E3F15E5B2C300A4D5D6 /* instructions in Resources */,
 				2EA8917F16126A4700B4E62A /* Default-568h@2x.png in Resources */,
 				2E859EB816485DC4007AFCB3 /* Default-Portrait~ipad.png in Resources */,
 				2E859EBC16485DCC007AFCB3 /* Default-Portrait@2x~ipad.png in Resources */,
@@ -868,6 +867,7 @@
 				2EC0B700168D1675005AD155 /* Icon-72@2x.png in Resources */,
 				2EC0B702168D1678005AD155 /* Icon-72.png in Resources */,
 				2E6965AC16C1967B0018ACA9 /* menu_blue.png in Resources */,
+				2E2EBE1816C447F7000090BF /* instructions in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -970,7 +970,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Fleksy.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Syntellia, Inc";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Konstantinos Eleftheriou (Y58E6AJ88D)";
 				DEPLOYMENT_POSTPROCESSING = NO;
 				GCC_PREFIX_HEADER = iFleksy_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
@@ -983,8 +983,8 @@
 					"\"$(SRCROOT)/../../TestFlightSDK1\"",
 				);
 				OTHER_LDFLAGS = "\"-all_load\"";
-				PRODUCT_NAME = "Fleksy Beta";
-				PROVISIONING_PROFILE = "00FBE598-F4C5-4B9E-8BCF-FED770920C0F";
+				PRODUCT_NAME = Fleksy;
+				PROVISIONING_PROFILE = "B25499A2-C64B-4A89-9FF6-B66A896640A6";
 				SEPARATE_STRIP = YES;
 				STRIP_INSTALLED_PRODUCT = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1011,7 +1011,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Fleksy.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Syntellia, Inc";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Konstantinos Eleftheriou (Y58E6AJ88D)";
 				DEPLOYMENT_POSTPROCESSING = YES;
 				GCC_PREFIX_HEADER = iFleksy_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -1023,8 +1023,8 @@
 					"\"$(SRCROOT)/../../TestFlightSDK1\"",
 				);
 				OTHER_LDFLAGS = "\"-all_load\"";
-				PRODUCT_NAME = "Fleksy Beta";
-				PROVISIONING_PROFILE = "00FBE598-F4C5-4B9E-8BCF-FED770920C0F";
+				PRODUCT_NAME = Fleksy;
+				PROVISIONING_PROFILE = "B25499A2-C64B-4A89-9FF6-B66A896640A6";
 				SEPARATE_STRIP = YES;
 				STRIP_INSTALLED_PRODUCT = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
