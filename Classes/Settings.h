@@ -12,13 +12,15 @@
 ///////////////////////////////////////////
 
 #define DEBUG_NO_WORDS 0
-#define APP_STORE 1
+
+//if 0 also change bundle identifier to "com.syntellia.FleksyBETA" and product name to "Fleksy Beta"
+#define APP_STORE 0
 
 #define FLEKSY_EXPIRES !APP_STORE
 #if FLEKSY_EXPIRES
 #define FLEKSY_EXPIRES_YEAR 2013
-#define FLEKSY_EXPIRES_MONTH 2
-#define FLEKSY_EXPIRES_DAY 16
+#define FLEKSY_EXPIRES_MONTH 3
+#define FLEKSY_EXPIRES_DAY 1
 #define FLEKSY_EXPIRES_HOUR 12
 #define FLEKSY_EXPIRES_MINUTE 0
 #endif

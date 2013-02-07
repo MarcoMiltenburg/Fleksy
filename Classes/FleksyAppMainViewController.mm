@@ -17,6 +17,10 @@
 #import <AudioToolbox/AudioToolbox.h>
 
 //#define APP_STORE_LINK @"http://itunes.apple.com/us/app/fleksy/id520337246?mt=8&uo=4"
+#define IOS_DEVICE_REVIEW_LINK @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=520337246"
+
+#define APPLE_EMAIL_SUBJECT @"Integration of Fleksy in iOS"
+#define APPLE_EMAIL_TEXT @"Dear Apple,\n\nI understand that due to current limitations on iOS, developers cannot change the standard keyboard.\n\nI have been using the new Fleksy keyboard on my iDevice and I wanted to voice my desire to have Fleksy as an available keyboard for system-wide usage.\n\nFleksy makes typing easy, fast and forgiving, without requiring the user to learn a new way of typing. I think it would make a great addition to iOS and would make using my device an even more fun, productive and satisfying experience. Here's the <a href=\"http://fleksy.com/?apple\">website</a>.\n\nI hope you will take this into consideration and bring Happy Typing to your devices!\n\nSincerely,\nHappy Fleksy user"
 
 #define APP_STORE_LINK_TWITTER  @""
 #define APP_STORE_LINK_SMS      @""
@@ -162,15 +166,25 @@
   }
 }
 
+- (NSString*) fleksyAppLink {
+  return [NSString stringWithFormat:@"<a href=\"%@\">Fleksy</a>", @"http://fleksy.com/app"];
+}
+
+- (NSString*) makeFleksyLinksForText:(NSString*) text evenLowercase:(BOOL) evenLowercase {
+  NSString* result = text;
+  if (evenLowercase) {
+    result = [result stringByReplacingOccurrencesOfString:@"fleksy" withString:@"Fleksy"];
+  }
+  result = [result stringByReplacingOccurrencesOfString:@"Fleksy" withString:[self fleksyAppLink]];
+  return result;
+}
+
 - (NSString*) emailSignature {
   NSString* result = FLEKSY_APP_SETTING_EMAIL_SIGNATURE;
   if (!result) {
     result = @"";
   }
-  NSString* fleksyLink = [NSString stringWithFormat:@"<a href=\"%@\">Fleksy</a>", @"http://fleksy.com/app"];
-  result = [result stringByReplacingOccurrencesOfString:@"fleksy" withString:@"Fleksy"];
-  result = [result stringByReplacingOccurrencesOfString:@"Fleksy" withString:fleksyLink];
-  return result;
+ return [self makeFleksyLinksForText:result evenLowercase:YES];
 }
 
 - (NSString*) getEmailFooter {
@@ -393,7 +407,11 @@
 }
 
 
-- (void) sendInAppMailTo:(NSString*) recipient text:(NSString*) text subject:(NSString*) subject {
+- (void) sendInAppMailTo:(NSString*) recipient text:(NSString*) text subject:(NSString*) subject signature:(BOOL) signature {
+  [self sendInAppMailTo:[NSArray arrayWithObject:recipient] cc:nil text:text subject:subject signature:signature];
+}
+
+- (void) sendInAppMailTo:(NSArray*) recipients cc:(NSArray*) cc text:(NSString*) text subject:(NSString*) subject signature:(BOOL) signature {
   
   //[[FLKeyboardContainerView sharedFLKeyboardContainerView].typingController.diagnostics sendWithComment:@"ACTION_MAIL"];
   
@@ -414,14 +432,19 @@
   NSLog(@"mailController.modalPresentationStyle: %d", mailController.modalPresentationStyle);
   mailController.mailComposeDelegate = self;
   [mailController setSubject:subject];
-  [mailController setToRecipients:[NSArray arrayWithObjects:recipient, nil]];
+  [mailController setToRecipients:recipients];
+  [mailController setCcRecipients:cc];
   
   BOOL html = YES;
   if (html) {
     text = [text stringByReplacingOccurrencesOfString:@"\n" withString:@"</br>"];
   }
   
-  [mailController setMessageBody:[NSString stringWithFormat:@"%@</br></br>%@", text, [self getEmailFooter]] isHTML:html];
+  if (signature) {
+    text = [NSString stringWithFormat:@"%@</br></br>%@", text, [self getEmailFooter]];
+  }
+  
+  [mailController setMessageBody:text isHTML:html];
   [self presentViewController:mailController animated:YES completion:nil];
 }
 
@@ -434,7 +457,7 @@
     NSLog(@"commonPrefix: %@", commonPrefix);
     text = [text stringByReplacingOccurrencesOfString:commonPrefix withString:@""];
   }
-  [self sendInAppMailTo:recipient text:text subject:[NSString stringWithFormat:@"%@%@", subjectPrefix, subject]];
+  [self sendInAppMailTo:recipient text:text subject:[NSString stringWithFormat:@"%@%@", subjectPrefix, subject] signature:YES];
 }
 
 - (void) sendInAppMailTo:(NSString*) recipient useText:(NSString*) useText {
@@ -471,7 +494,7 @@
   [alert show];
 }
 
-- (void) showDetailedInstructions {
+- (void) showDetailedInstructions:(BOOL) fromAlert {
   // create the close button
   int padding = 3;
   int width = 70;
@@ -513,7 +536,10 @@
   [instructionsController.view addSubview:titleButton];
   [instructionsController.view addSubview:closeButton];
   [instructionsController.view addSubview:topButton];
-
+  
+  // mark so that if from alert, on dismissal we will show the basic popup again
+  instructionsController.view.tag = fromAlert ? 10 : 20;
+  
   //create and load the web request, that will eventually trigger webViewDidFinishLoad
   NSString* filename = UIAccessibilityIsVoiceOverRunning() ? @"index-voiceover" : @"index-sighted";
   NSURL* url = [[VariousUtilities theBundle] URLForResource:filename withExtension:@".htm" subdirectory:@"instructions"];
@@ -554,6 +580,8 @@
   purchaseManager.fullVersion = NO;
   // this will actually switch to whatever state purchase.fullVersion is
   [self switchToFullVersion];
+  
+  [purchaseManager resetRuns];
 }
 
 - (void) askClearDefaults {
@@ -596,7 +624,12 @@
 }
 
 - (void) dismissInstructions {
-  [self dismissViewControllerAnimated:YES completion:nil];
+  BOOL showBaseicAlert = instructionsController.view.tag == 10;
+  [self dismissViewControllerAnimated:YES completion:^{
+    if (showBaseicAlert) {
+      [self showBasicInstructions];
+    }
+  }];
   instructionsController = nil;
 }
 
@@ -647,17 +680,21 @@
   
   if (alertView == self->basicInstructions) {
     if (buttonIndex == 1) {
-      [self showDetailedInstructions];
+      [self showDetailedInstructions:YES];
     }
-    return;
-  }
-  
-  if (alertView == self->askClearDefaultsAlert) {
+  } else if (alertView == self->askClearDefaultsAlert) {
     if (buttonIndex == 1) {
       [self clearDefaultsAndCloud];
     }
+  } else if (alertView == self->fleksyInOtherApps) {
+    if (buttonIndex == 1) {
+      [self sendEmailToApple];
+    } else if (buttonIndex == 2) {
+      [self writeAppStoreReview];
+    } else {
+      NSLog(@"button %u", buttonIndex);
+    }
   }
-  
 }
 
 // Called when we cancel a view (eg. the user clicks the Home button). This is not called when the user clicks the cancel button.
@@ -681,6 +718,20 @@
   }
 }
 
+- (void) sendEmailToApple {
+  NSArray* recipients;
+  if (UIAccessibilityIsVoiceOverRunning()) {
+    recipients = [NSArray arrayWithObjects:@"accessibility@apple.com", @"tcook@apple.com", nil];
+  } else {
+    recipients = [NSArray arrayWithObjects:@"tcook@apple.com", @"accessibility@apple.com", nil];
+  }
+  NSArray* cc = [NSArray arrayWithObject:@"feedback@fleksy.com"];
+  [self sendInAppMailTo:recipients cc:cc text:[self makeFleksyLinksForText:APPLE_EMAIL_TEXT evenLowercase:NO] subject:APPLE_EMAIL_SUBJECT signature:NO];
+}
+
+- (void) writeAppStoreReview {
+  [[UIApplication sharedApplication] openURL:[NSURL URLWithString:IOS_DEVICE_REVIEW_LINK]];
+}
 
 - (void) sendTo:(NSString*) recipient {
   if ([recipient rangeOfString:@"@"].location != NSNotFound) {
@@ -691,9 +742,10 @@
 }
 
 - (void) showFleksyInOtherApps {
-  UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Revolutionary keyboard!"
-                                             message:@"Unfortunately, due to iOS limitations, it's not possible to replace the standard keyboard.\n\nHere's how you can let Apple know you really like Fleksy:" delegate:nil cancelButtonTitle:@"Later, I promise!" otherButtonTitles:@"App Store review", @"Sample email to Apple", nil];
-  [alert show];
+  
+  fleksyInOtherApps = [[UIAlertView alloc] initWithTitle:@"Revolutionary keyboard!"
+                                             message:@"Unfortunately, due to iOS limitations, it's not possible to replace the standard keyboard.\n\nHere's how you can let Apple\nknow you really like Fleksy:" delegate:self cancelButtonTitle:@"Later, I promise!" otherButtonTitles:@"Sample email to Apple", @"App Store review", nil];
+  [fleksyInOtherApps show];
 }
 
 - (void) sendFeedback {
@@ -770,7 +822,7 @@
       [self resetState];
       
     } else if ([buttonTitle isEqualToString:@"Instructions"]) {
-      [self showDetailedInstructions];
+      [self showDetailedInstructions:NO];
       
     } else if ([buttonTitle isEqualToString:@"Settings"]) {
       [self showSettings];
@@ -812,7 +864,7 @@
         NSString* contents2 = [[contents stringByReplacingOccurrencesOfString:@"\n" withString:@":"] stringByReplacingOccurrencesOfString:@"\t" withString:@"_"];
         NSString* link = [NSString stringWithFormat:@"<a href=\"fleksy://_ADD_WORDS:%@\">Link</a>", [contents2 substringToIndex:contents2.length-1]];
         TestFlightLog(@"custom_dictionary:\n%@", contents);
-        [self sendInAppMailTo:nil text:[NSString stringWithFormat:@"Click this link from a device that is running Fleksy to automatically add all these words: %@\n\n%@", link, contents] subject:@"My Fleksy dictionary backup"];
+        [self sendInAppMailTo:nil text:[NSString stringWithFormat:@"Click this link from a device that is running Fleksy to automatically add all these words: %@\n\n%@", link, contents] subject:@"My Fleksy dictionary backup" signature:NO];
       }
       
     } else if ([buttonTitle isEqualToString:@"Clear NSUserDefaults"]) {
@@ -839,7 +891,7 @@
       [purchaseManager checkRestoreToFullVersion];
     
     } else if ([buttonTitle isEqualToString:@"Instructions"]) {
-      [self showDetailedInstructions];
+      [self showDetailedInstructions:NO];
       
     } else if ([buttonTitle isEqualToString:@"Settings"]) {
       [self showSettings];
@@ -906,8 +958,8 @@
   
   //NSLog(@"voiceOverStatusChanged: %d", voiceover);
   
-  //actionButton.hidden = voiceover;
-  actionButton.userInteractionEnabled = !voiceover;
+  actionButton.hidden = voiceover;
+  //actionButton.userInteractionEnabled = !voiceover;
   actionButton.isAccessibilityElement = NO;
   //actionButton.alpha = voiceover ? 0.4 : 0.8;
   
@@ -1040,11 +1092,8 @@
 - (void) showBasicInstructions {
   if (UIAccessibilityIsVoiceOverRunning()) {
     self->basicInstructions = [[UIAlertView alloc] initWithTitle:@"Basic instructions"
-                                                         message:@"Single tap where you think each letter is.\nNo need to tap and hold or be accurate.\nSwipe right for space, left to delete a word.\nSwipe down for next suggestion.\nSwipe right after space for punctuation." delegate:self cancelButtonTitle:@"Cool, I got it!" otherButtonTitles:@"Instructions", nil];
+                                                         message:@"Single tap where you think each letter is. No need to tap and hold or be accurate. Flick right for space, left to delete a word. Flick down for next suggestion. Flick right after space for punctuation. For menu, flick up with 2 fingers." delegate:self cancelButtonTitle:@"Cool, I got it!" otherButtonTitles:@"Instructions", nil];
     [self->basicInstructions show];
-  } else {
-//    self->basicInstructions = [[UIAlertView alloc] initWithTitle:@"With Fleksy, you no longer need to be accurate!"
-//                                                         message:@"It will correct most mistyped letters\n\nSwipe right for space, left to delete\nSwipe down for next suggestion\nSwipe right again for punctuation\n\nHappy Typing!" delegate:self cancelButtonTitle:@"Cool, I got it!" otherButtonTitles:@"Instructions", nil];
   }
 }
 
@@ -1116,6 +1165,8 @@
       
       //self.wantsFullScreenLayout = YES;
       
+      shownTutorial = NO;
+      
       NSLog(@"self.disablesAutomaticKeyboardDismissal: %d", self.disablesAutomaticKeyboardDismissal);
       
       [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
@@ -1137,15 +1188,6 @@
   //[self showMenu];
 }
 
-- (void) tripleTap:(UIGestureRecognizer*) gestureRecognizer {
-  
-  if (gestureRecognizer.state == UIGestureRecognizerStateRecognized) {
-    //NSLog(@"tripleTap!");
-    [self showMenu];
-    //UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"title" message:@"message" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:@"button2", nil];
-    //[alert show];
-  }
-}
 
 - (void) reloadFavorites {
   [favorites removeAllObjects];
@@ -1185,7 +1227,8 @@
   [textView.inputView.window addSubview:actionButton];
   [self startButtonAnimation];
   
-  if (purchaseManager.previousRuns < 1 && !self->textView.text.length && !UIAccessibilityIsVoiceOverRunning()) {
+  if (!shownTutorial && purchaseManager.previousRuns < 1 && !self->textView.text.length && !UIAccessibilityIsVoiceOverRunning()) {
+    shownTutorial = YES;
     self->textView.text = @"Welcome to Fleksy: You no longer need to be accurate! \n\nSpace: flick right → \nDelete: flick left ← \nChange word: flick down ↓ \nPunctuation: → after Space \n\nHappy Typing! ";
   }
 }

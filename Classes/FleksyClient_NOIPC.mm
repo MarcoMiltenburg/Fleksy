@@ -95,6 +95,7 @@ NSString* getAbsolutePath(NSString* filepath, NSString* languagePack) {
   filename = getAbsolutePath(@"keyboards/keyboard-iPhone-ASCII.txt.xxx", languagePack);
   buffer = EncryptionUtilities::readBinaryFile(filename.UTF8String, bufferSize);
   systemsIntegrator->loadKeyboardData(buffer, bufferSize, true);
+  free(buffer);
   
   string preprocessedFilepathFormat = NSStringToString(getAbsolutePath(@"preprocessed/preprocessed-%d.txt", languagePack));
   
@@ -112,6 +113,7 @@ NSString* getAbsolutePath(NSString* filepath, NSString* languagePack) {
       } else {
         [[NSException exceptionWithName:@"LoadingException" reason:[NSString stringWithFormat:@"preprocessed file %s not found!", filepath->c_str()] userInfo:nil] raise];
       }
+      delete filepath;
     }
     NSLog(@"> loadTables took %.6f", CFAbsoluteTimeGetCurrent() - startTimePreload);
   } else {

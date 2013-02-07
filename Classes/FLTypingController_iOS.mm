@@ -1160,12 +1160,19 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
   //[Keyboard sharedKeyboard].shiftIsOn = [self needsCapital];
 }
 
-- (BOOL) stringEndsWithLetterOrSpace:(NSString*) string {
+- (BOOL) stringEndsWithLetter:(NSString*) string {
   if (!string || !string.length) {
     return NO;
   }
   char c = [string characterAtIndex:string.length-1];
-  return [[VariousUtilities strictlyLettersSet] characterIsMember:c] || c == ' ';
+  return [[VariousUtilities strictlyLettersSet] characterIsMember:c];
+}
+
+- (BOOL) stringEndsWithSpace:(NSString*) string {
+  if (!string || !string.length) {
+    return NO;
+  }
+  return [string hasSuffix:@" "];
 }
 
 
@@ -1243,12 +1250,14 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
     } else if (!endedWithPunctuationMark) {
       
       //we want to delete individual letters if its a symbol or number from non-abc keyboard
-      BOOL endsWithLetterOrSpace = [self stringEndsWithLetterOrSpace:writtenText];
+      BOOL endsWithLetterOrSpace = [self stringEndsWithLetter:writtenText] || [self stringEndsWithSpace:writtenText];
       //NSLog(@"endsWithLetterOrSpace: %d", endsWithLetterOrSpace);
       if (!endsWithLetterOrSpace) {
         [self singleBackspaceWithFeedback:YES];
       } else {
-        [self singleBackspaceWithFeedback:NO];
+        if ([self stringEndsWithSpace:writtenText]) {
+          [self singleBackspaceWithFeedback:NO];
+        }
         [self deleteLastWordWithFeedback:YES];
         [self reshowAppropriateSuggestionView];
       }

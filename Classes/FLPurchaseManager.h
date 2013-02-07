@@ -28,6 +28,7 @@
 - (void) checkRestoreToFullVersion;
 - (void) askUpgradeToFullVersion;
 - (void) incrementRuns;
+- (void) resetRuns;
 
 @property (readwrite) BOOL fullVersion;
 @property (readonly) int previousRuns;

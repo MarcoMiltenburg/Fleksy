@@ -420,7 +420,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardContainerView);
   
     if (recognizer.lastFiredSwipeRecognizer.direction == UISwipeGestureRecognizerDirectionRight) {
       
-      [self performNewLine];
+      //[self performNewLine];
       
     } else if (recognizer.lastFiredSwipeRecognizer.direction == UISwipeGestureRecognizerDirectionLeft) {
       [VariousUtilities playTock];

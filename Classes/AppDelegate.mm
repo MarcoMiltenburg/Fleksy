@@ -182,7 +182,7 @@ float distributionFunction(float x) {
   [[NSUserDefaults standardUserDefaults] synchronize];
   
   NSString* version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
-  [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"iOS build %@ (4.20/2.20)", version] forKey:@"FLEKSY_APP_SETTING_VERSION"];
+  [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"iOS build %@ (4.21/2.21)", version] forKey:@"FLEKSY_APP_SETTING_VERSION"];
 
   RANDOM_SEED();
   

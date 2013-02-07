@@ -347,6 +347,8 @@ BOOL isRingerMuted() {
     return;
   }
   
+  [self stopSpeaking];
+  
   string = [VariousUtilities getPhoneticStringFor:string];
   
   if (UIAccessibilityIsVoiceOverRunning()) {

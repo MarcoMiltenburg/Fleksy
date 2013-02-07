@@ -77,6 +77,12 @@ typedef enum {
   [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+- (void) resetRuns {
+  previousRuns = 0;
+  [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:FLEKSY_PREVIOUS_RUNS];
+  [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 - (BOOL) isGrandfathered {
   return [[NSUbiquitousKeyValueStore defaultStore] boolForKey:FLEKSY_GRANDFATHERED];
 }

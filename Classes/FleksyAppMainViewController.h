@@ -33,6 +33,7 @@
   
   UIAlertView* blindAppAlert;
   UIAlertView* basicInstructions;
+  UIAlertView* fleksyInOtherApps;
   
   NSString* replyTo;
   
@@ -46,6 +47,8 @@
   UIAlertView* askClearDefaultsAlert;
   
   UIButton* testView;
+  
+  BOOL shownTutorial;
 }
 
 - (void) applicationFinishedLoading;
