@@ -92,6 +92,7 @@
 		2EA3E84616964AA200BC54A4 /* MultipartSpeechSynthesizer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2EA3E84516964AA200BC54A4 /* MultipartSpeechSynthesizer.mm */; };
 		2EA8917F16126A4700B4E62A /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EA8917E16126A4700B4E62A /* Default-568h@2x.png */; };
 		2EAC83B316D59F6500D44A29 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EAC83B216D59F6500D44A29 /* libTestFlight.a */; };
+		2EAC83B716D6C73400D44A29 /* UILongPressGestureRecognizer2.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2EAC83B616D6C73400D44A29 /* UILongPressGestureRecognizer2.mm */; };
 		2EBE811811D3038500397176 /* FLKeyboard.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2EBE811711D3038500397176 /* FLKeyboard.mm */; };
 		2EBF199011EAF9AC00C7B0F1 /* FLSuggestionsView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF198F11EAF9AC00C7B0F1 /* FLSuggestionsView.mm */; };
 		2EC0B6D5168CE0B1005AD155 /* StringConversion.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2EC0B6D4168CE0B1005AD155 /* StringConversion.mm */; };
@@ -282,6 +283,8 @@
 		2EA8917E16126A4700B4E62A /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		2EAC83B216D59F6500D44A29 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTestFlight.a; path = ../../TestFlightSDK1.2.3b/libTestFlight.a; sourceTree = "<group>"; };
 		2EAC83B416D59F7E00D44A29 /* TestFlight.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TestFlight.h; path = ../../../../TestFlightSDK1.2.3b/TestFlight.h; sourceTree = "<group>"; };
+		2EAC83B516D6C73400D44A29 /* UILongPressGestureRecognizer2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UILongPressGestureRecognizer2.h; path = ../../GestureTestbed/GestureTest/Classes/UILongPressGestureRecognizer2.h; sourceTree = "<group>"; };
+		2EAC83B616D6C73400D44A29 /* UILongPressGestureRecognizer2.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = UILongPressGestureRecognizer2.mm; path = ../../GestureTestbed/GestureTest/Classes/UILongPressGestureRecognizer2.mm; sourceTree = "<group>"; };
 		2EBE811611D3038500397176 /* FLKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLKeyboard.h; sourceTree = "<group>"; };
 		2EBE811711D3038500397176 /* FLKeyboard.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = FLKeyboard.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		2EBF198E11EAF9AC00C7B0F1 /* FLSuggestionsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLSuggestionsView.h; sourceTree = "<group>"; };
@@ -541,6 +544,8 @@
 				2EC4E849166D3314009D3E39 /* UISwipeAndHoldGestureRecognizer.mm */,
 				2EC4E84A166D3314009D3E39 /* UITapGestureRecognizer2.h */,
 				2EC4E84B166D3314009D3E39 /* UITapGestureRecognizer2.mm */,
+				2EAC83B516D6C73400D44A29 /* UILongPressGestureRecognizer2.h */,
+				2EAC83B616D6C73400D44A29 /* UILongPressGestureRecognizer2.mm */,
 				2EC4E84C166D3314009D3E39 /* UITouchManager.h */,
 				2EC4E84D166D3314009D3E39 /* UITouchManager.mm */,
 				2E6965A916C07A8D0018ACA9 /* UITouchManagerHooks.h */,
@@ -966,6 +971,7 @@
 				2E6965B216C2F0C30018ACA9 /* EncryptionUtilities.cpp in Sources */,
 				2EC8994C16CAE72800B51B27 /* FLSingleLevelTokenPredictor.cpp in Sources */,
 				2EC8994D16CAE72800B51B27 /* FLSingleLevelTokenPredictorAsync.cpp in Sources */,
+				2EAC83B716D6C73400D44A29 /* UILongPressGestureRecognizer2.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

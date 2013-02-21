@@ -13,6 +13,7 @@
 #import "AppDelegate.h"
 #import "UIRotorRecognizer.h"
 #import "UITapGestureRecognizer2.h"
+#import "UILongPressGestureRecognizer2.h"
 #import "Settings.h"
 #import "FLKeyboardContainerView.h"
 #import "VariousUtilities.h"
@@ -251,7 +252,7 @@ static FleksyKeyboard* instance = nil;
     keyboardContainerView.feedbackRecognizer = feedbackRecognizer;
     
     if (!DEBUG_GESTURES) {
-      UILongPressGestureRecognizer* longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressFrom:)];
+      UILongPressGestureRecognizer2* longPressRecognizer = [[UILongPressGestureRecognizer2 alloc] initWithTarget:self action:@selector(handleLongPressFrom:)];
       longPressRecognizer.numberOfTouchesRequired = 1;
       longPressRecognizer.minimumPressDuration = 0.35;
       if (deviceIsPad()) {
@@ -718,7 +719,7 @@ static FleksyKeyboard* instance = nil;
   [[NSNotificationCenter defaultCenter] postNotificationName:UIKeyboardDidChangeFrameNotification object:self];
 }
 
-- (void) handleLongPressFrom:(UILongPressGestureRecognizer*) recognizer {
+- (void) handleLongPressFrom:(UILongPressGestureRecognizer2*) recognizer {
   
   //NSLog(@"handleLongPressFrom, state = %d, allowableMovement: %.1f, minimumPressDuration: %.3f", recognizer.state, recognizer.allowableMovement, recognizer.minimumPressDuration);
   
@@ -734,6 +735,8 @@ static FleksyKeyboard* instance = nil;
     [[FLKeyboardContainerView sharedFLKeyboardContainerView].suggestionsViewSymbols hide];
     
     //[self temporarilyEnlargeKeyboard];
+    
+    recognizer.myTag = [FLKeyboard sharedFLKeyboard].activeView.tag;
   }
   
   if (recognizer.state == UIGestureRecognizerStateChanged) {
@@ -741,32 +744,34 @@ static FleksyKeyboard* instance = nil;
   }
   
   if (recognizer.state == UIGestureRecognizerStateEnded) {
-    //NSLog(@"handleLongPressFrom, state = %d", recognizer.state);
-    FLChar c = feedbackRecognizer.lastChar;
-    assert(c);
-    //CGPoint point = [recognizer locationInView:[FLKeyboard sharedFLKeyboard]];
-    CGPoint point = [((KeyboardImageView*) [FLKeyboard sharedFLKeyboard].activeView) getKeyboardPointForChar:c];
     
-    
-//    NSLog(@"f.lastChar: %d @ %@", c, NSStringFromCGPoint(point));
-//    FLChar c2 = [((KeyboardImageView*) [FLKeyboard sharedFLKeyboard].activeView) getNearestCharForPoint:point];
-//    NSLog(@"c: %C, c2: %C, point: %@, activeView: %@", c, c2, NSStringFromCGPoint(point), [FLKeyboard sharedFLKeyboard].activeView);
-    assert(c == [((KeyboardImageView*) [FLKeyboard sharedFLKeyboard].activeView) getNearestCharForPoint:point]);
-    //assert([self testZZZ]);
-    
-    [VariousUtilities playTock];
-    [[FLKeyboard sharedFLKeyboard] disableQWERTYextraKeys];
-    
-    [keyboardContainerView processTouchPoint:point precise:YES character:c];
-    
-    //[self restoreKeyboardSize];
-  }
-  
-  if (recognizer.state == UIGestureRecognizerStateCancelled) {
-    [[FLKeyboard sharedFLKeyboard] disableQWERTYextraKeys];
+    if ([FLKeyboard sharedFLKeyboard].activeView.tag != recognizer.myTag) {
+      NSLog(@"Long tap release on different keyboard than it started. Ignoring");
+    } else {
+      
+      //NSLog(@"handleLongPressFrom, state = %d", recognizer.state);
+      FLChar c = feedbackRecognizer.lastChar;
+      assert(c);
+      //CGPoint point = [recognizer locationInView:[FLKeyboard sharedFLKeyboard]];
+      CGPoint point = [((KeyboardImageView*) [FLKeyboard sharedFLKeyboard].activeView) getKeyboardPointForChar:c];
+      
+      
+      //    NSLog(@"f.lastChar: %d @ %@", c, NSStringFromCGPoint(point));
+      //    FLChar c2 = [((KeyboardImageView*) [FLKeyboard sharedFLKeyboard].activeView) getNearestCharForPoint:point];
+      //    NSLog(@"c: %C, c2: %C, point: %@, activeView: %@", c, c2, NSStringFromCGPoint(point), [FLKeyboard sharedFLKeyboard].activeView);
+      assert(c == [((KeyboardImageView*) [FLKeyboard sharedFLKeyboard].activeView) getNearestCharForPoint:point]);
+      //assert([self testZZZ]);
+      
+      [VariousUtilities playTock];
+      
+      [keyboardContainerView processTouchPoint:point precise:YES character:c];
+      
+      //[self restoreKeyboardSize];
+    }
   }
   
   if (recognizer.state == UIGestureRecognizerStateEnded || recognizer.state == UIGestureRecognizerStateCancelled) {
+    [[FLKeyboard sharedFLKeyboard] disableQWERTYextraKeys];
     [actionRecognizer2Up clearTouches];
     [actionRecognizer2Down clearTouches];
   }
