@@ -1384,7 +1384,7 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
       [self addCharacter:newChar];
       
       //TODO: do this as suggestions instead, so sighted users know how to use it
-      NSString* speakString = [NSString stringWithFormat:@"%@%c", FleksyUtilities::isupper(newChar) ? @"Capital " : @"", FleksyUtilities::toupper(newChar)];
+      NSString* speakString = [NSString stringWithFormat:@"%@%c", FleksyUtilities::isupper(newChar) ? @"Capital " : @"", FleksyUtilities::tolower(newChar)];
       [VariousUtilities performAudioFeedbackFromString:speakString];
     }
   }
