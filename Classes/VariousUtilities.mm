@@ -343,6 +343,10 @@ BOOL isRingerMuted() {
   // Include /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/PrivateFrameworks/VoiceServices.framework/VoiceServices. Only works on device, not simulator
   //NSLog(@"performAudioFeedbackFromString: %@", string);
   
+#if TARGET_IPHONE_SIMULATOR
+  return;
+#endif
+  
   if (!FLEKSY_APP_SETTING_SPEAK) {
     return;
   }

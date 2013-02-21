@@ -141,19 +141,18 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLTypingController_iOS);
   NSLog(@"warming up, client: %@, userDictionary: %@", self.fleksyClient, self.fleksyClient.userDictionary);
   NSString* preferredLanguage = [[NSLocale preferredLanguages] objectAtIndex:0];
   [FleksyClient_NOIPC loadData:self.fleksyClient.systemsIntegrator userDictionary:self.fleksyClient.userDictionary languagePack:FLEKSY_APP_SETTING_LANGUAGE_PACK];
-  FLString s = FLStringMake("the");
-  [self updatePreviousToken:FLStringToNSString(s)];
-  FLRequest* request = FLRequest::FLRequestMake(4, &s);
+  [self pushPreviousToken:@"the"];
+  FLRequest* request = [self createRequest:4];
   request->points[0] = FLPointMake(0, 0);
   request->points[1] = FLPointMake(0, 0);
   request->points[2] = FLPointMake(0, 0);
   request->points[3] = FLPointMake(0, 0);
   FLResponse* response = [self.fleksyClient getCandidatesForRequest:request];
+  [self popPreviousToken];
   free(request);
   free(response);
 #endif
 
-  [self updatePreviousToken:nil];
 }
 
 //TODO: refactor!
@@ -236,6 +235,8 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
     
     //diagnostics = [[DiagnosticsManager alloc] init];
     diagnostics = nil;
+    
+    previousTokensStack = [[NSMutableArray alloc] init];
     
     [self reset];
   }
@@ -509,17 +510,77 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
   //NSLog(@"_showSuggestions took %.3f ms", 1000 * (CFAbsoluteTimeGetCurrent() - dt));
 }
 
-- (void) updatePreviousToken:(NSString*) token {
-  NSLog(@"setting previousToken to <%@> (from %@)", token, previousToken);
-  previousToken = token;
+
+- (FLRequest*) createRequest:(int) nPoints {
   
-  FLString s = NSStringToFLString(previousToken);
-  FLWord* previousWord = self.fleksyClient.systemsIntegrator->getUtils()->getWordByString(s, true);
-  
-  if (previousToken.length && previousWord) {
-    word_id previousTokenID = previousWord->getUniqueID();
-    self.fleksyClient.systemsIntegrator->sendPrepareNextCandidatesList(previousTokenID);
+  FLString previousToken1;
+  FLString previousToken2;
+
+  if (previousTokensStack.count > 1) {
+    previousToken1 = NSStringToFLString([previousTokensStack objectAtIndex:previousTokensStack.count-2]);
   }
+  if (previousTokensStack.count > 0) {
+    previousToken2 = NSStringToFLString([previousTokensStack objectAtIndex:previousTokensStack.count-1]);
+  }
+  
+  return FLRequest::FLRequestMake(nPoints, &previousToken1, &previousToken2);
+}
+
+// TODO: maybe push this into the engine, and all tokens are passed in as strings, or client calls this method from the engine to get tokenIDs?
+- (token_ids) getPreviousTokens {
+  
+  token_ids result;
+  result.data[0] = 0;
+  result.data[1] = 0;
+  
+  for (int z = 0; z < MAX_WORD_DEPTH && z < previousTokensStack.count; z++) {
+    FLString s = NSStringToFLString(previousTokensStack[previousTokensStack.count-1-z]);
+    FLWord* word = self.fleksyClient.systemsIntegrator->getUtils()->getWordByString(s, true);
+    if (word) {
+      result.data[MAX_WORD_DEPTH-1-z] = word->getUniqueID();
+    }
+  }
+  return result;
+}
+
+- (NSString*) changePreviousToken:(NSString*) newToken {
+  NSString* oldToken = [self popPreviousToken];
+  [self pushPreviousToken:newToken];
+  [self sendPrepareNextCandidates];
+  return oldToken;
+}
+
+- (NSString*) peekPreviousToken {
+  NSString* result = nil;
+  //NSLog(@"peek, %@", previousTokensStack);
+  if (previousTokensStack.count) {
+    result = [previousTokensStack lastObject];
+  }
+  return result;
+}
+
+- (NSString*) popPreviousToken {
+  NSString* result = nil;
+  if (previousTokensStack.count) {
+    result = [previousTokensStack lastObject];
+    [previousTokensStack removeLastObject];
+  }
+  [self sendPrepareNextCandidates];
+  return result;
+}
+
+- (void) pushPreviousToken:(NSString*) newToken {
+  //NSLog(@"adding previousToken <%@>", newToken);
+  [previousTokensStack addObject:newToken];
+  while (previousTokensStack.count > 10) {
+    [previousTokensStack removeObjectAtIndex:0];
+  }
+  [self sendPrepareNextCandidates];
+}
+
+- (void) sendPrepareNextCandidates {
+  token_ids tokens = [self getPreviousTokens];
+  self.fleksyClient.systemsIntegrator->sendPrepareNextCandidatesList(tokens);
 }
 
 - (void) replaceText:(NSString*) replaceText newText:(NSString *) newText capitalization:(NSString*) capitalization {
@@ -553,8 +614,6 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
       [delegate handleStringInput:newText];
       [delegate handleStringInput:remaining];
       
-      [self updatePreviousToken:newText];
-    
       // highlight keyboard
       if (NO) {
         KeyboardImageView* kbImageView = (KeyboardImageView*) [FLKeyboard sharedFLKeyboard].activeView;
@@ -600,8 +659,10 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
 //    }
 //  }
   
-  FLString s = NSStringToFLString(previousToken);
-  FLRequest* request = FLRequest::FLRequestMake(points.count, &s);
+  
+  
+  
+  FLRequest* request = [self createRequest:points.count];
   request->debug = FLEKSY_LOG;
   int i = 0;
   for (NSValue* value in points) {
@@ -695,7 +756,11 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
     if (!self.currentWordIsPrecise) {
       //NSLog(@"replaceText: %@, newText: %@, capitalization: %@", lastWord, lettersToUse, lastWord);
       [self replaceText:lastWord newText:lettersToUse capitalization:lastWord];
+      [self pushPreviousToken:lettersToUse];
+    } else {
+      [self pushPreviousToken:lastWord];
     }
+  
     
     //double averageProcessing = totalProcessingTime / (double) wordsProcessed;
     //maxProcessingTime = fmax(maxProcessingTime, 888);
@@ -811,7 +876,7 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
   //lastCharIsLetter = [[VariousUtilities strictlyLettersSet] characterIsMember:[c characterAtIndex:0]];
   
   if (punctuationShortcut && FLEKSY_APP_SETTING_SHOW_SUGGESTIONS) {
-    [self updatePreviousToken:@"."];
+    [self pushPreviousToken:@"."];
     [[FLKeyboardContainerView sharedFLKeyboardContainerView].suggestionsViewSymbols showSuggestions:shortcutPunctuationMarks selectedSuggestionIndex:0 capitalization:@""];
     [[FLKeyboardContainerView sharedFLKeyboardContainerView].suggestionsView hide];
   }
@@ -913,6 +978,7 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
   NSString* suggestion = [items objectAtIndex:1];
   NSString* capitalization = [items objectAtIndex:2];
   [self replaceText:replace newText:suggestion capitalization:capitalization];
+  [self changePreviousToken:suggestion];
 }
 
 
@@ -1263,7 +1329,13 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
       }
     }
     
-    [self updatePreviousToken:[self lastWord]];
+    [self popPreviousToken];
+    
+    NSString* lastWord = [[self lastWord] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSString* compare = [self peekPreviousToken];
+    
+    NSLog(@"lastWord: %@, compare: %@", lastWord, compare);
+    //assert((!lastWord.length && !compare) || [lastWord isEqualToString:compare]);
   }
   
   [self playBackspace];

@@ -73,7 +73,8 @@ typedef enum {
   
   MultipartSpeechSynthesizer* speech;
   
-  NSString* previousToken;
+  
+  NSMutableArray* previousTokensStack;
 }
 
 //- (void) refillDictatedWords;

@@ -19,6 +19,8 @@
 //#define APP_STORE_LINK @"http://itunes.apple.com/us/app/fleksy/id520337246?mt=8&uo=4"
 #define IOS_DEVICE_REVIEW_LINK @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=520337246"
 
+#define IOS_LIMITATIONS_LINK @"http://fleksy.com/iOS-integration"
+
 #define APPLE_EMAIL_SUBJECT @"Integration of Fleksy in iOS"
 #define APPLE_EMAIL_TEXT @"Dear Apple,\n\nI understand that due to current limitations on iOS, developers and users cannot change the standard keyboard.\n\nI have been using the new Fleksy keyboard on my iDevice and I wanted to voice my desire to have it as an available keyboard for system-wide usage.\n\nFleksy makes typing easy, fast and forgiving, without requiring the user to learn a new way of typing. I think it would make a great addition to iOS and would make using my device an even more fun, productive and satisfying experience. Here's the <a href=\"http://fleksy.com/?apple\">website</a>.\n\nI hope you will take this into consideration and bring Happy Typing to your devices!\n\nSincerely,\nHappy Fleksy user"
 
@@ -288,8 +290,11 @@
 }
 
 - (void) postToSocialService:(NSString*) serviceType text:(NSString*) text {
-  
-  NSLog(@"postToSocialService: %@", serviceType);
+
+  [TestFlight passCheckpoint:[NSString stringWithFormat:@"ACTION_%@", serviceType]];
+  //[[FLKeyboardContainerView sharedFLKeyboardContainerView].typingController.diagnostics sendWithComment:];
+
+  //NSLog(@"postToSocialService: %@", serviceType);
   
   if (!purchaseManager.fullVersion) {
     NSLog(@"%@ unavailable in trial version", serviceType);
@@ -306,9 +311,6 @@
       return;
     }
   }
-  
-  [[FLKeyboardContainerView sharedFLKeyboardContainerView].typingController.diagnostics sendWithComment:[NSString stringWithFormat:@"ACTION_%@", serviceType]];
-  
   
   UIViewController* viewController;
   
@@ -353,7 +355,9 @@
 
 -(void) sendInAppSMS:(NSString*) recipient text:(NSString*) text {
   
-  [[FLKeyboardContainerView sharedFLKeyboardContainerView].typingController.diagnostics sendWithComment:@"ACTION_SMS"];
+  [TestFlight passCheckpoint:@"sendInAppSMS"];
+  
+  //[[FLKeyboardContainerView sharedFLKeyboardContainerView].typingController.diagnostics sendWithComment:@"ACTION_SMS"];
   
   //Note: no sim card installed popup is visually "under" our menu (bug)
   
@@ -409,6 +413,7 @@
 
 - (void) sendInAppMailTo:(NSArray*) recipients cc:(NSArray*) cc text:(NSString*) text subject:(NSString*) subject signature:(BOOL) signature {
   
+  [TestFlight passCheckpoint:@"sendInAppMail"];
   //[[FLKeyboardContainerView sharedFLKeyboardContainerView].typingController.diagnostics sendWithComment:@"ACTION_MAIL"];
   
 	if (![MFMailComposeViewController canSendMail]) {
@@ -484,17 +489,18 @@
   [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://fleksy.com"]];  
 }
 
-- (void) menu_rate {
-  //NSLog(@"Rate us");
-  [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://fleksy.com/rate"]];
-}
-
 - (void) showSettings {
+  
+  [TestFlight passCheckpoint:@"showSettings"];
+  
   UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Settings" message:@"Press the home button, go to the Settings app and find Fleksy on the list for many configurable options! (such as toggling voice feedback)" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
   [alert show];
 }
 
 - (void) showDetailedInstructions:(BOOL) fromAlert {
+  
+  [TestFlight passCheckpoint:[NSString stringWithFormat:@"showDetailedInstructions.%@", UIAccessibilityIsVoiceOverRunning() ? @"VO" : @"non-VO"]];
+
   // create the close button
   int padding = 3;
   int width = 70;
@@ -544,6 +550,17 @@
   NSString* filename = UIAccessibilityIsVoiceOverRunning() ? @"index-voiceover" : @"index-sighted";
   NSURL* url = [[NSBundle mainBundle] URLForResource:filename withExtension:@"html" subdirectory:@"instructions"];
   assert(url);
+  
+//  if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
+//    if ([[UIDevice currentDevice].model isEqualToString:@"iPod Touch"]) {
+//      url = [NSURL URLWithString:@"http://www.apple.com/feedback/ipodtouch.html"];
+//    } else {
+//      url = [NSURL URLWithString:@"http://www.apple.com/feedback/iphone.html"];
+//    }
+//  } else {
+//    url = [NSURL URLWithString:@"http://www.apple.com/feedback/ipad.html"];
+//  }
+  
   NSURLRequest* requestObj = [NSURLRequest requestWithURL:url];
   [instructionsWebView loadRequest:requestObj];
 }
@@ -612,7 +629,7 @@
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-  NSLog(@"didFailLoadWithError %@", error);  
+  NSLog(@"didFailLoadWithError %@", error);
 }
 
 - (void) webViewDidFinishLoad:(UIWebView *)webView {
@@ -624,10 +641,65 @@
   }
 }
 
+/*
+- (void) alterFeedbackForm {
+  
+  //document.getElementsByName(\"machine_config\")[0].parentElement.parentElement.removeChild(document.getElementsByName(\"machine_config\")[0].parentElement);\
+  
+  NSString* _js = @"\
+  document.getElementById(\"subject\").value='test subject';\
+  document.getElementById(\"feedback_comment\").rows=20;\
+  document.getElementById(\"feedback_comment\").parentElement.style.cssText+='margin-bottom: 0px';\
+  document.getElementById(\"feedback_comment\").style.cssText+='height: 99%% !important; width: 95%% !important; font-size: 12pt';\
+  document.getElementById(\"feedback_comment\").value=\"%@\";\
+  document.getElementById(\"anonymous_element_1\").selectedIndex=1;\
+  document.getElementById(\"customer_name\").value='Happy Fleksy user';\
+  document.getElementById(\"customer_email\").value='%@';\
+  document.getElementsByName(\"os_version\")[0].parentElement.parentElement.removeChild(document.getElementsByName(\"os_version\")[0].parentElement);\
+  document.getElementsByName(\"submit\")[0].style.float=\"none\";\
+  document.getElementsByClassName(\"inputs\")[0].style.cssText+='margin-bottom: 5px; padding-bottom: 0px;';\
+  document.getElementsByClassName(\"formwrap\")[0].setAttribute('class', '');\
+  document.getElementsByClassName(\"formwrap\")[0].setAttribute('class', '');\
+  document.getElementsByClassName(\"formwrap\")[0].setAttribute('class', '');\
+  document.getElementsByClassName(\"formwrap\")[0].setAttribute('class', '');\
+  document.getElementsByClassName(\"dropdown\")[0].setAttribute('class', '');";
+
+  NSString* feedback_comment = [NSString stringWithFormat:APPLE_EMAIL_TEXT, APPLE_EMAIL_FLEKSY_LINK_NON_HTML];
+  feedback_comment = [feedback_comment stringByReplacingOccurrencesOfString:@"\n" withString:@"\" + \"\\n\" + \""];
+  feedback_comment = [feedback_comment stringByReplacingOccurrencesOfString:@"iDevice" withString:[UIDevice currentDevice].model];
+  
+  NSString* js = [NSString stringWithFormat:_js, feedback_comment, FLEKSY_APP_SETTING_EMAIL_REPLY_TO ? FLEKSY_APP_SETTING_EMAIL_REPLY_TO : @"integrate@fleksy.com"];
+  
+  NSString* output = [instructionsWebView stringByEvaluatingJavaScriptFromString:js];
+  NSLog(@"run %@\ngot %@", js, output);
+  
+  //keyboardDisplayRequiresUserAction
+  //scalesPageToFit
+
+  //instructionsWebView.scrollView.maximumZoomScale = 0.2;
+  //instructionsWebView.scrollView.minimumZoomScale = 1.5;
+  
+  //instructionsWebView.scrollView.zoomScale = 10;
+  //[instructionsWebView.scrollView zoomToRect:CGRectMake(20, 120, 140, 240) animated:YES];
+
+  if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
+    instructionsWebView.scrollView.transform = CGAffineTransformMakeScale(0.7, 0.7);
+    [instructionsWebView.scrollView setContentOffset:CGPointMake(80, 230) animated:YES];
+  }
+  
+  NSLog(@"contentSize: %@", NSStringFromCGSize(instructionsWebView.scrollView.contentSize));
+  NSLog(@"contentOffset: %@", NSStringFromCGPoint(instructionsWebView.scrollView.contentOffset));
+  
+  NSLog(@"scalesPageToFit: %d", instructionsWebView.scalesPageToFit);
+  NSLog(@"keyboardDisplayRequiresUserAction: %d", instructionsWebView.keyboardDisplayRequiresUserAction);
+  
+  //instructionsWebView.scrollView.scrollEnabled = NO;
+}*/
+
 - (void) dismissInstructions {
-  BOOL showBaseicAlert = instructionsController.view.tag == 10;
+  BOOL showBasicAlert = instructionsController.view.tag == 10;
   [self dismissViewControllerAnimated:YES completion:^{
-    if (showBaseicAlert) {
+    if (showBasicAlert) {
       [self showBasicInstructions];
     }
   }];
@@ -689,9 +761,10 @@
     }
   } else if (alertView == self->fleksyInOtherApps) {
     if (buttonIndex == 1) {
-      [self sendEmailToApple];
-    } else if (buttonIndex == 2) {
       [self writeAppStoreReview];
+    } else if (buttonIndex == 2) {
+      //[self sendEmailToApple];
+      [self readMoreAboutLimitations];
     } else {
       NSLog(@"button %u", buttonIndex);
     }
@@ -719,6 +792,13 @@
   }
 }
 
+- (void) readMoreAboutLimitations {
+  
+  [TestFlight passCheckpoint:@"readMoreAboutLimitations"];
+  
+  [[UIApplication sharedApplication] openURL:[NSURL URLWithString:IOS_LIMITATIONS_LINK]];
+}
+
 - (void) sendEmailToApple {
   NSArray* recipients;
   if (UIAccessibilityIsVoiceOverRunning()) {
@@ -735,6 +815,9 @@
 }
 
 - (void) writeAppStoreReview {
+  
+  [TestFlight passCheckpoint:@"writeAppStoreReview"];
+  
   [[UIApplication sharedApplication] openURL:[NSURL URLWithString:IOS_DEVICE_REVIEW_LINK]];
 }
 
@@ -748,8 +831,11 @@
 
 - (void) showFleksyInOtherApps {
   
+  [TestFlight passCheckpoint:@"showFleksyInOtherApps"];
+  
   fleksyInOtherApps = [[UIAlertView alloc] initWithTitle:@"Revolutionary keyboard!"
-                                             message:@"Unfortunately, due to iOS limitations, it's not possible to replace the standard keyboard.\n\nHere's how you can let Apple\nknow you really like Fleksy:" delegate:self cancelButtonTitle:@"Later, I promise!" otherButtonTitles:@"Sample email to Apple", @"App Store review", nil];
+                                                 message:@"Unfortunately, due to iOS limitations, it's not possible to replace the standard keyboard.\n\nHere's how you can support us:" delegate:self cancelButtonTitle:@"Later, I promise!"
+                                       otherButtonTitles:@"App Store review", @"Read more...", nil];
   [fleksyInOtherApps show];
 }
 
@@ -838,9 +924,6 @@
     } else if ([buttonTitle isEqualToString:@"We love feedback!"]) {
       [self sendFeedback];
       
-    } else if ([buttonTitle isEqualToString:@"Rate us"]) {
-      [self menu_rate];
-      
     } else if ([buttonTitle hasPrefix:@"Send to"]) {
       NSString* recipient = [[buttonTitle componentsSeparatedByString:@"Send to "] objectAtIndex:1];
       [self sendTo:recipient];
@@ -865,6 +948,8 @@
         [alert show];
       
       } else {
+        
+        [TestFlight passCheckpoint:@"ExportDictionary"];
         
         NSString* contents2 = [[contents stringByReplacingOccurrencesOfString:@"\n" withString:@":"] stringByReplacingOccurrencesOfString:@"\t" withString:@"_"];
         NSString* link = [NSString stringWithFormat:@"<a href=\"fleksy://_ADD_WORDS:%@\">Link</a>", [contents2 substringToIndex:contents2.length-1]];
@@ -929,6 +1014,8 @@
 
 
 - (void) showMenu {
+  
+  [TestFlight passCheckpoint:@"showMenu"];
   
   if ([textView.text length] > 0) {
     [self showActionMainMenu];
