@@ -216,12 +216,13 @@ BOOL isRingerMuted() {
     case BACK_TO_LETTERS:
       return @"Letters";
     default:
-      FLString temp(&c, 1);
-      NSString* result = FLStringToNSString(temp);
+      //NSString* s = [[NSString alloc] initWithBytes:&c length:1 encoding:NSISOLatin1StringEncoding];
+      NSString* s = [[NSString alloc] initWithBytes:&c length:1 encoding:NSWindowsCP1252StringEncoding];
+      //NSLog(@"\naaa: <%@>\nbbb: <%@>", aaa, bbb);
       if (!FleksyUtilities::isalpha(c)) {
-        NSLog(@"Warning: getCharacterDescription for character <%@> <%d>", result, c);
+        NSLog(@"Warning: getCharacterDescription for character <%@> <%d>", s, c);
       }
-      return result;
+      return s;
   }
 }
 
@@ -341,7 +342,7 @@ BOOL isRingerMuted() {
   
   //https://github.com/nst/iOS-Runtime-Headers/blob/master/PrivateFrameworks/VoiceServices.framework/VSSpeechSynthesizer.h
   // Include /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/PrivateFrameworks/VoiceServices.framework/VoiceServices. Only works on device, not simulator
-  //NSLog(@"performAudioFeedbackFromString: %@", string);
+  //NSLog(@"performAudioFeedbackFromString: <%@>", string);
   
 #if TARGET_IPHONE_SIMULATOR
   return;
