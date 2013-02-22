@@ -237,7 +237,9 @@
 
 - (void) _showActionMainMenu {
   //[self hideKeyboard];
-  actionMainMenu.title = [NSString stringWithFormat:@"%@", textView.text];
+  if (UIAccessibilityIsVoiceOverRunning()) {
+    actionMainMenu.title = [NSString stringWithFormat:@"%@", textView.text];
+  }
   
   if (deviceIsPad()) {
     // on the iPad, if title.length > X we get menuception bug. Recreate to solve
