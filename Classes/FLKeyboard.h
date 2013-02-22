@@ -24,7 +24,7 @@
   BOOL loadedKeyboardFile;
 }
 
-- (void) setLowercaseKeys:(FLPoint[KEY_MAX_VALUE]) lowercase uppercaseKeys:(FLPoint[KEY_MAX_VALUE]) uppercase symbolsKeys1:(FLPoint[KEY_MAX_VALUE]) symbols1 symbolsKeys2:(FLPoint[KEY_MAX_VALUE]) symbols2;
+- (void) setKeymaps:(FLPoint[4][KEY_MAX_VALUE]) keymap;
 
 // Singleton class accessor
 + (FLKeyboard*) sharedFLKeyboard;

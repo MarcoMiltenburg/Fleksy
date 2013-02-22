@@ -19,13 +19,14 @@
 
 SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboard);
 
-- (void) setLowercaseKeys:(FLPoint[KEY_MAX_VALUE]) lowercase uppercaseKeys:(FLPoint[KEY_MAX_VALUE]) uppercase symbolsKeys1:(FLPoint[KEY_MAX_VALUE]) symbols1 symbolsKeys2:(FLPoint[KEY_MAX_VALUE]) symbols2 {
-  
-  [imageViewABC      setKeys:uppercase];
-  [imageViewSymbolsA setKeys:symbols1];
-  [imageViewSymbolsB setKeys:symbols2];
+- (void) setKeymaps:(FLPoint[4][KEY_MAX_VALUE]) keymap {
+
+  [imageViewABC      setKeys:keymap[KEYBOARD_TAG_ABC_UPPER]];
+  [imageViewSymbolsA setKeys:keymap[KEYBOARD_TAG_SYMBOLS1]];
+  [imageViewSymbolsB setKeys:keymap[KEYBOARD_TAG_SYMBOLS2]];
   
   [self disableQWERTYextraKeys];
+  [self reset];
   
   loadedKeyboardFile = YES;
 }
@@ -64,8 +65,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboard);
     
     shortcutKeysLetters = @"@.#$(:/5";
     shortcutKeysNumbers = @"@.#$(:/,";
-    
-    [self reset];
   }
   return self;
 }
