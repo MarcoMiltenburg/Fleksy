@@ -1499,6 +1499,9 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
         break;
     }
   }
+  
+  // we need to re-send this, as the token IDs might have changed
+  [self sendPrepareNextCandidates];
 }
 
 @synthesize traceCentroid, debugText, diagnostics, currentWordIsPrecise, fleksyClient;
