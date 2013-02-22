@@ -284,7 +284,7 @@
   [centroids addObject:buttonCentroid];
 }
 
-- (void) setKeys:(CGPoint[]) _keys {
+- (void) setKeys:(FLPoint[]) _keys {
   
   for (int i = 0; i < KEY_MAX_VALUE; i++) {
     keyPoints[i] = _keys[i];
@@ -296,7 +296,7 @@
   for (int c = 0; c < KEY_MAX_VALUE; c++) {
     
     NSNumber* key = [NSNumber numberWithChar:c];
-    CGPoint point = keyPoints[c];
+    CGPoint point = CGPointMake(keyPoints[c].x, keyPoints[c].y);
     if (point.x != -1 || point.y != -1) {
       
       FLChar existing = [self getNearestCharForPoint:point];

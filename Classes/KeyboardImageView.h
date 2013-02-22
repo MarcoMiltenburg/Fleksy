@@ -34,7 +34,7 @@
 }
 
 //@property (readonly) UITapGestureRecognizer* tapRecognizer;
-- (void) setKeys:(CGPoint[]) _keys;
+- (void) setKeys:(FLPoint[]) _keys;
 - (FLChar) getNearestCharForPoint:(CGPoint) target;
 - (CGPoint) getKeyboardPointForChar:(FLChar) c;
 - (void) doPopupForTouch:(UITouch*) touch;

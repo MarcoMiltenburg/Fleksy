@@ -184,7 +184,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardContainerView);
 }
 
 - (void) toggleLettersNumbers {
-  BOOL isLetters = keyboard.activeView.tag == KEYBOARD_IMAGE_TAG_ABC_UPPER;
+  BOOL isLetters = keyboard.activeView.tag == KEYBOARD_TAG_ABC_UPPER;
   if (isLetters) {
     [VariousUtilities performAudioFeedbackFromString:@"Numbers"];
     [[FLKeyboard sharedFLKeyboard] resetWithActiveView:[FLKeyboard sharedFLKeyboard]->imageViewSymbolsA];
@@ -231,7 +231,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardContainerView);
     [[FLKeyboard sharedFLKeyboard] resetWithActiveView:[FLKeyboard sharedFLKeyboard]->imageViewABC];
   }
   
-  [typingController nonLetterCharInput:' ' autocorrectionType:keyboard.activeView.tag == KEYBOARD_IMAGE_TAG_ABC_UPPER ? kAutocorrectionChangeAndSuggest : kAutocorrectionNone];
+  [typingController nonLetterCharInput:' ' autocorrectionType:keyboard.activeView.tag == KEYBOARD_TAG_ABC_UPPER ? kAutocorrectionChangeAndSuggest : kAutocorrectionNone];
   [feedbackView swipeRecognized:UISwipeGestureRecognizerDirectionRight padding:![suggestionsView isHidden] || ![suggestionsViewSymbols isHidden]];  
   //typingControllerGeneric->swipeRight();
 }

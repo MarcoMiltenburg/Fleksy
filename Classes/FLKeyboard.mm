@@ -19,56 +19,15 @@
 
 SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboard);
 
-- (void) loadDataFromFile:(NSString*) filename {
+- (void) setLowercaseKeys:(FLPoint[KEY_MAX_VALUE]) lowercase uppercaseKeys:(FLPoint[KEY_MAX_VALUE]) uppercase symbolsKeys1:(FLPoint[KEY_MAX_VALUE]) symbols1 symbolsKeys2:(FLPoint[KEY_MAX_VALUE]) symbols2 {
   
-  NSString* myText = FLStringToNSString(VariousUtilities2::getStringFromFile(filename.UTF8String, true));
-  NSArray* lines = [myText componentsSeparatedByString:@"\n"];
+  [imageViewABC      setKeys:uppercase];
+  [imageViewSymbolsA setKeys:symbols1];
+  [imageViewSymbolsB setKeys:symbols2];
   
-  CGPoint letterCoords[KEY_MAX_VALUE];  INIT_POINTS(letterCoords);
-  CGPoint symbolCoordsA[KEY_MAX_VALUE]; INIT_POINTS(symbolCoordsA);
-  CGPoint symbolCoordsB[KEY_MAX_VALUE]; INIT_POINTS(symbolCoordsB);
+  [self disableQWERTYextraKeys];
   
-  imageViewABC      = [[KeyboardImageView alloc] initWithImage:nil];
-  imageViewSymbolsA = [[KeyboardImageView alloc] initWithImage:nil];
-  imageViewSymbolsB = [[KeyboardImageView alloc] initWithImage:nil];
-  
-  imageViewABC.tag      = KEYBOARD_IMAGE_TAG_ABC_UPPER;
-  imageViewSymbolsA.tag = KEYBOARD_IMAGE_TAG_SYMBOLS1;
-  imageViewSymbolsB.tag = KEYBOARD_IMAGE_TAG_SYMBOLS2;
-
-  int nLine = 0;
-  for (__strong NSString* line in lines) {
-    
-    line = [line stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    if ([line hasPrefix:@"//"] || [line length] == 0) {
-      continue;
-    }
-    
-    if (nLine == 0) {
-
-      NSArray* fields = [line componentsSeparatedByString:@" "];
-      width  = [((NSString*)[fields objectAtIndex:0]) floatValue];
-      height = [((NSString*)[fields objectAtIndex:1]) floatValue];
-      //NSLog(@"keyboard WIDTH: %.1f, HEIGHT: %.1f", width, height);
-      
-    } else {
-      int type = VariousUtilities2::getCharacterLineType(NSStringToFLString(line));
-      if (type == KEYBOARD_IMAGE_TAG_ABC_UPPER) {
-        VariousUtilities2::readCharacterLine(NSStringToFLString(line), letterCoords, NULL);
-      }
-      if (type == KEYBOARD_IMAGE_TAG_SYMBOLS1) {
-        VariousUtilities2::readCharacterLine(NSStringToFLString(line), symbolCoordsA, NULL);
-      }
-      if (type == KEYBOARD_IMAGE_TAG_SYMBOLS2) {
-        VariousUtilities2::readCharacterLine(NSStringToFLString(line), symbolCoordsB, NULL);
-      }
-    }
-    nLine++;
-  }
-  
-  [imageViewABC      setKeys:letterCoords];
-  [imageViewSymbolsA setKeys:symbolCoordsA];
-  [imageViewSymbolsB setKeys:symbolCoordsB];
+  loadedKeyboardFile = YES;
 }
 
 
@@ -79,10 +38,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboard);
   [imageViewSymbolsB hidePopupWithDuration:0 delay:0];
 }
 
-- (id) initWithFrame:(CGRect)frame keyboardFile:(NSString*) keyboardFile {
+- (id) initWithFrame:(CGRect)frame {
 
-  [self loadDataFromFile:keyboardFile];
-  loadedKeyboardFile = YES;
+  imageViewABC      = [[KeyboardImageView alloc] initWithImage:nil];
+  imageViewSymbolsA = [[KeyboardImageView alloc] initWithImage:nil];
+  imageViewSymbolsB = [[KeyboardImageView alloc] initWithImage:nil];
+  
+  imageViewABC.tag      = KEYBOARD_TAG_ABC_UPPER;
+  imageViewSymbolsA.tag = KEYBOARD_TAG_SYMBOLS1;
+  imageViewSymbolsB.tag = KEYBOARD_TAG_SYMBOLS2;
   
   if (self = [super initWithFrame:frame view1:imageViewABC view2A:imageViewSymbolsA view2B:imageViewSymbolsB]) {
     
@@ -101,7 +65,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboard);
     shortcutKeysLetters = @"@.#$(:/5";
     shortcutKeysNumbers = @"@.#$(:/,";
     
-    [self disableQWERTYextraKeys];
     [self reset];
   }
   return self;

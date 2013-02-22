@@ -8,12 +8,6 @@
 #import "CustomScrollView.h"
 #import "KeyboardImageView.h"
 
-#define KEYBOARD_IMAGE_TAG_ABC_LOWER 0
-#define KEYBOARD_IMAGE_TAG_ABC_UPPER 1
-#define KEYBOARD_IMAGE_TAG_SYMBOLS1  2
-#define KEYBOARD_IMAGE_TAG_SYMBOLS2  3
-
-
 @interface FLKeyboard : CustomScrollView {
   
 @public
@@ -30,7 +24,7 @@
   BOOL loadedKeyboardFile;
 }
 
-- (id) initWithFrame:(CGRect)frame keyboardFile:(NSString*) keyboardFile;
+- (void) setLowercaseKeys:(FLPoint[KEY_MAX_VALUE]) lowercase uppercaseKeys:(FLPoint[KEY_MAX_VALUE]) uppercase symbolsKeys1:(FLPoint[KEY_MAX_VALUE]) symbols1 symbolsKeys2:(FLPoint[KEY_MAX_VALUE]) symbols2;
 
 // Singleton class accessor
 + (FLKeyboard*) sharedFLKeyboard;

@@ -141,6 +141,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLTypingController_iOS);
   NSLog(@"warming up, client: %@, userDictionary: %@", self.fleksyClient, self.fleksyClient.userDictionary);
   NSString* preferredLanguage = [[NSLocale preferredLanguages] objectAtIndex:0];
   [FleksyClient_NOIPC loadData:self.fleksyClient.systemsIntegrator userDictionary:self.fleksyClient.userDictionary languagePack:FLEKSY_APP_SETTING_LANGUAGE_PACK];
+  
+  FleksyUtilities* utils = self.fleksyClient.systemsIntegrator->getUtils();
+  [[FLKeyboard sharedFLKeyboard] setLowercaseKeys:utils->letterCoords uppercaseKeys:utils->letterCoords symbolsKeys1:utils->symbolsCoords1 symbolsKeys2:utils->symbolsCoords2];
+  
   [self pushPreviousToken:@"the"];
   FLRequest* request = [self createRequest:4];
   request->points[0] = FLPointMake(0, 0);
@@ -193,9 +197,8 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
 //      flcout << e.what() << endl;
 //    }
 
-    [[FLKeyboard sharedFLKeyboard] initWithFrame:CGRectMake(0, 0, 1, 1) keyboardFile:keyboardFilename];
-    
-    
+    [[FLKeyboard sharedFLKeyboard] initWithFrame:CGRectMake(0, 0, 1, 1)];
+  
     points = [[NSMutableArray alloc] init];
     pointTraces = [[NSMutableArray alloc] init];
     
