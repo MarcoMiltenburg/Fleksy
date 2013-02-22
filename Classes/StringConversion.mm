@@ -35,10 +35,15 @@ FLString _NSStringToString(NSString* str) {
   }
   
   long bufferSize = str.length+1;
-  //NSLog(@"_NSStringToString: <%@>, bufferSize: %d", str, bufferSize);
   char* buffer = (char*) malloc(bufferSize);
   NSUInteger usedLength = -1;
-  [str getBytes:buffer maxLength:bufferSize usedLength:&usedLength encoding:NSISOLatin1StringEncoding options:0 range:NSMakeRange(0, str.length) remainingRange:nil];
+  BOOL ok = [str getBytes:buffer maxLength:bufferSize usedLength:&usedLength encoding:NSISOLatin1StringEncoding options:0 range:NSMakeRange(0, str.length) remainingRange:nil];
+  if (!ok) {
+    NSLog(@"_NSStringToString: NSISOLatin1StringEncoding !ok for <%@>, trying NSWindowsCP1252StringEncoding", str);
+    ok = [str getBytes:buffer maxLength:bufferSize usedLength:&usedLength encoding:NSWindowsCP1252StringEncoding options:0 range:NSMakeRange(0, str.length) remainingRange:nil];
+  }
+  //NSLog(@"_NSStringToString: <%@>, bufferSize: %lu, usedLength: %d, ok: %d", str, bufferSize, usedLength, ok);
+  assert(ok);
   assert(usedLength == bufferSize-1);
   //NSLog(@"buffer[bufferSize-1]: %d", buffer[bufferSize-1]);
   //ensure NULL-terminated
