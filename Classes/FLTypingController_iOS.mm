@@ -141,7 +141,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLTypingController_iOS);
   NSLog(@"warming up, client: %@, userDictionary: %@", self.fleksyClient, self.fleksyClient.userDictionary);
   NSString* preferredLanguage = [[NSLocale preferredLanguages] objectAtIndex:0];
   [FleksyClient_NOIPC loadData:self.fleksyClient.systemsIntegrator userDictionary:self.fleksyClient.userDictionary languagePack:FLEKSY_APP_SETTING_LANGUAGE_PACK];
-  [[FLKeyboard sharedFLKeyboard] setKeymaps:self.fleksyClient.systemsIntegrator->getUtils()->keymaps];
+  FLPoint keymaps[4][KEY_MAX_VALUE];
+  memcpy(keymaps, self.fleksyClient.systemsIntegrator->getKeymaps(), sizeof(keymaps));
+  [[FLKeyboard sharedFLKeyboard] setKeymaps:keymaps];
   
   [self pushPreviousToken:@"the"];
   FLRequest* request = [self createRequest:4];
@@ -536,7 +538,7 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
   
   for (int z = 0; z < MAX_WORD_DEPTH && z < previousTokensStack.count; z++) {
     FLString s = NSStringToFLString(previousTokensStack[previousTokensStack.count-1-z]);
-    FLWord* word = self.fleksyClient.systemsIntegrator->getUtils()->getWordByString(s, true);
+    FLWord* word = self.fleksyClient.systemsIntegrator->getWordByString(s, true);
     if (word) {
       result.data[MAX_WORD_DEPTH-1-z] = word->getUniqueID();
     }
