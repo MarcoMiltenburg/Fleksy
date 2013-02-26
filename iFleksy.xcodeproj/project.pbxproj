@@ -88,6 +88,7 @@
 		2E8A6C46168139520007B0D0 /* es-ES in Resources */ = {isa = PBXBuildFile; fileRef = 2E8A6C42168139520007B0D0 /* es-ES */; };
 		2E9138C114A543B200186EB6 /* CustomScrollView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2E9138C014A543B200186EB6 /* CustomScrollView.mm */; };
 		2E961B20154E24C80061C37D /* Settings_HIDDEN.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2E961B1F154E24C80061C37D /* Settings_HIDDEN.bundle */; };
+		2E9A140A16DC36F200E9726B /* MyTextChecker.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2E9A140916DC36F200E9726B /* MyTextChecker.mm */; };
 		2EA0B72B15C1CB6E0000E724 /* FleksyTextView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2EA0B72A15C1CB6E0000E724 /* FleksyTextView.mm */; };
 		2EA3E84616964AA200BC54A4 /* MultipartSpeechSynthesizer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2EA3E84516964AA200BC54A4 /* MultipartSpeechSynthesizer.mm */; };
 		2EA8917F16126A4700B4E62A /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EA8917E16126A4700B4E62A /* Default-568h@2x.png */; };
@@ -276,6 +277,8 @@
 		2E9138BF14A543B200186EB6 /* CustomScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomScrollView.h; sourceTree = "<group>"; };
 		2E9138C014A543B200186EB6 /* CustomScrollView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CustomScrollView.mm; sourceTree = "<group>"; };
 		2E961B1F154E24C80061C37D /* Settings_HIDDEN.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings_HIDDEN.bundle; sourceTree = "<group>"; };
+		2E9A140816DC36F200E9726B /* MyTextChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTextChecker.h; sourceTree = "<group>"; };
+		2E9A140916DC36F200E9726B /* MyTextChecker.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MyTextChecker.mm; sourceTree = "<group>"; };
 		2EA0B72915C1CB6E0000E724 /* FleksyTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FleksyTextView.h; sourceTree = "<group>"; };
 		2EA0B72A15C1CB6E0000E724 /* FleksyTextView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FleksyTextView.mm; sourceTree = "<group>"; };
 		2EA3E84416964AA200BC54A4 /* MultipartSpeechSynthesizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MultipartSpeechSynthesizer.h; path = Classes/MultipartSpeechSynthesizer.h; sourceTree = "<group>"; };
@@ -663,6 +666,8 @@
 				2E4A72CF15AC98EC002CAA72 /* MyTextField.h */,
 				2EDB2DC111CBE7A200489CA8 /* FLKeyboardContainerView.h */,
 				2EDB2DC211CBE7A200489CA8 /* FLKeyboardContainerView.mm */,
+				2E9A140816DC36F200E9726B /* MyTextChecker.h */,
+				2E9A140916DC36F200E9726B /* MyTextChecker.mm */,
 				2EBE811611D3038500397176 /* FLKeyboard.h */,
 				2EBE811711D3038500397176 /* FLKeyboard.mm */,
 				2EDB468E11DA95B40057E60D /* FLTypingController_iOS.h */,
@@ -972,6 +977,7 @@
 				2EC8994C16CAE72800B51B27 /* FLSingleLevelTokenPredictor.cpp in Sources */,
 				2EC8994D16CAE72800B51B27 /* FLSingleLevelTokenPredictorAsync.cpp in Sources */,
 				2EAC83B716D6C73400D44A29 /* UILongPressGestureRecognizer2.mm in Sources */,
+				2E9A140A16DC36F200E9726B /* MyTextChecker.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

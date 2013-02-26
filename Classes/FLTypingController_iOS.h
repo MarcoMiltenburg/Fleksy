@@ -12,7 +12,7 @@
 #import "DiagnosticsManager.h"
 #import "MyTextField.h"
 #import "MultipartSpeechSynthesizer.h"
-
+#import "MyTextChecker.h"
 
 #define TAG_TRACE 123
 
@@ -75,6 +75,8 @@ typedef enum {
   
   
   NSMutableArray* previousTokensStack;
+  
+  MyTextChecker* checker;
 }
 
 //- (void) refillDictatedWords;

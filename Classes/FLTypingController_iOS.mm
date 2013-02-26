@@ -142,7 +142,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLTypingController_iOS);
   NSString* preferredLanguage = [[NSLocale preferredLanguages] objectAtIndex:0];
   [FleksyClient_NOIPC loadData:self.fleksyClient.systemsIntegrator userDictionary:self.fleksyClient.userDictionary languagePack:FLEKSY_APP_SETTING_LANGUAGE_PACK];
   FLPoint keymaps[4][KEY_MAX_VALUE];
-  memcpy(keymaps, self.fleksyClient.systemsIntegrator->getKeymaps(), sizeof(keymaps));
+  // hack. Should loop through the n (4) keyboards and copy individually, dont rely on internal represenation being contiguous.
+  memcpy(keymaps, self.fleksyClient.systemsIntegrator->getKeymap(0), sizeof(keymaps));
   [[FLKeyboard sharedFLKeyboard] setKeymaps:keymaps];
   
   [self pushPreviousToken:@"the"];
@@ -240,6 +241,8 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
     diagnostics = nil;
     
     previousTokensStack = [[NSMutableArray alloc] init];
+    
+    checker = new MyTextChecker();
     
     [self reset];
   }
@@ -662,8 +665,17 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
 //    }
 //  }
   
+  FLString s = NSStringToFLString(lastWord);
+  vector<FLString> platfromResults;
+  double startTime1 = fl_get_time();
+  checker->peekResults(platfromResults, s);
+  printf("got %lu platform results in %.6f\n", platfromResults.size(), fl_get_time() - startTime1);
+  for (FLString z : platfromResults) {
+    printf("platform result: %s\n", z.c_str());
+  }
+  printf("\n");
   
-  
+  //TODO: feed platform results into request
   
   FLRequest* request = [self createRequest:points.count];
   request->debug = FLEKSY_LOG;
@@ -965,6 +977,12 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
     //NSLog(@"tapOccured KB: (%.0f, %.0f)", kbPoint.x, kbPoint.y);
     [self addCharacter:rawChar];
     [points addObject:[NSValue valueWithCGPoint:point1]];
+    
+    //////
+    NSString* lastWord = [self lastWord];
+    FLString s = NSStringToFLString(lastWord);
+    checker->prepareResultsAsync(s);
+    //////
     
     if (FLEKSY_APP_SETTING_SHOW_TRACES) {
       UIColor* color = [pointTraces count] % 2 ? [UIColor redColor] : [UIColor blueColor];

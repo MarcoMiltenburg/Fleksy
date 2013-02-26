@@ -16,9 +16,6 @@
   NSTimer* loadingTimer;
   
   BOOL lastKnownVoiceOverState;
-  
-  //@public
-  //FleksyServer* server;
 }
 
 - (void) setProximityMonitoringEnabled:(BOOL) b;

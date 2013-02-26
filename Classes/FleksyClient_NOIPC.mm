@@ -102,7 +102,7 @@ NSString* getAbsolutePath(NSString* filepath, NSString* languagePack) {
   BOOL usePreprocessedFiles = YES;
   if (usePreprocessedFiles) {
     double startTimePreload = CFAbsoluteTimeGetCurrent();
-    for (int i = 1; i < FLEKSY_MAX_WORD_SIZE; i++) {
+    for (int i = 1; i <= FLEKSY_MAX_WORD_SIZE; i++) {
       string* filepath = _resolveFilepath(preprocessedFilepathFormat, i);
       printf("_resolveFilepath %d: %s\n", i, filepath->c_str());
       size_t length;
