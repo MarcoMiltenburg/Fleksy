@@ -147,7 +147,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLTypingController_iOS);
   [[FLKeyboard sharedFLKeyboard] setKeymaps:keymaps];
   
   [self pushPreviousToken:@"the"];
-  FLRequest* request = [self createRequest:4];
+  FLRequest* request = [self createRequest:4 platformSuggestions:NULL];
   request->points[0] = FLPointMake(0, 0);
   request->points[1] = FLPointMake(0, 0);
   request->points[2] = FLPointMake(0, 0);
@@ -517,7 +517,7 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
 }
 
 
-- (FLRequest*) createRequest:(int) nPoints {
+- (FLRequest*) createRequest:(int) nPoints platformSuggestions:(vector<FLString>*) platformSuggestions {
   
   FLString previousToken1;
   FLString previousToken2;
@@ -529,24 +529,32 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
     previousToken2 = NSStringToFLString([previousTokensStack objectAtIndex:previousTokensStack.count-1]);
   }
   
-  return FLRequest::FLRequestMake(nPoints, &previousToken1, &previousToken2);
+  FLRequest* result = FLRequest::FLRequestMake(nPoints, &previousToken1, &previousToken2);
+  
+  if (platformSuggestions && platformSuggestions->size()) {
+    NSMutableString* temp = [[NSMutableString alloc] init];
+    for (FLString platformSuggestion : *platformSuggestions) {
+      [temp appendFormat:@"%s,", platformSuggestion.c_str()];
+    }
+    FLString s = NSStringToFLString(temp);
+    result->setPlatformSuggestions(&s);
+  }
+  
+  return result;
 }
 
-// TODO: maybe push this into the engine, and all tokens are passed in as strings, or client calls this method from the engine to get tokenIDs?
-- (token_ids) getPreviousTokens {
+// returns TWO NSStrings
+- (NSArray*) getPreviousTokens {
   
-  token_ids result;
-  result.data[0] = 0;
-  result.data[1] = 0;
-  
-  for (int z = 0; z < MAX_WORD_DEPTH && z < previousTokensStack.count; z++) {
-    FLString s = NSStringToFLString(previousTokensStack[previousTokensStack.count-1-z]);
-    FLWord* word = self.fleksyClient.systemsIntegrator->getWordByString(s, true);
-    if (word) {
-      result.data[MAX_WORD_DEPTH-1-z] = word->getUniqueID();
-    }
+  if (previousTokensStack.count >= MAX_WORD_DEPTH) {
+    return [previousTokensStack subarrayWithRange:NSMakeRange(previousTokensStack.count-MAX_WORD_DEPTH, MAX_WORD_DEPTH)];
   }
-  return result;
+  
+  if (previousTokensStack.count == 1) {
+    return [NSArray arrayWithObjects:@"", [previousTokensStack lastObject], nil];
+  }
+
+  return [NSArray arrayWithObjects:@"", @"", nil];
 }
 
 - (NSString*) changePreviousToken:(NSString*) newToken {
@@ -585,8 +593,10 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
 }
 
 - (void) sendPrepareNextCandidates {
-  token_ids tokens = [self getPreviousTokens];
-  self.fleksyClient.systemsIntegrator->sendPrepareNextCandidatesList(tokens);
+  NSArray* previousTokens = [self getPreviousTokens];
+  FLString previousToken1 = NSStringToFLString([previousTokens objectAtIndex:0]);
+  FLString previousToken2 = NSStringToFLString([previousTokens objectAtIndex:1]);
+  self.fleksyClient.systemsIntegrator->prepareContextResults(&previousToken1, &previousToken2);
 }
 
 - (void) replaceText:(NSString*) replaceText newText:(NSString *) newText capitalization:(NSString*) capitalization {
@@ -675,9 +685,7 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
   }
   printf("\n");
   
-  //TODO: feed platform results into request
-  
-  FLRequest* request = [self createRequest:points.count];
+  FLRequest* request = [self createRequest:points.count platformSuggestions:&platfromResults];
   request->debug = FLEKSY_LOG;
   int i = 0;
   for (NSValue* value in points) {
