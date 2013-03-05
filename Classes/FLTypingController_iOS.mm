@@ -986,11 +986,7 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
     [self addCharacter:rawChar];
     [points addObject:[NSValue valueWithCGPoint:point1]];
     
-    //////
-    NSString* lastWord = [self lastWord];
-    FLString s = NSStringToFLString(lastWord);
-    checker->prepareResultsAsync(s);
-    //////
+    [self prepareSpellChecker];
     
     if (FLEKSY_APP_SETTING_SHOW_TRACES) {
       UIColor* color = [pointTraces count] % 2 ? [UIColor redColor] : [UIColor blueColor];
@@ -1001,6 +997,13 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
   return nil;      // [self tryWord:offline hint:hintIsSpace];
 }
 
+- (void) prepareSpellChecker {
+  //////
+  NSString* lastWord = [self lastWord];
+  FLString s = NSStringToFLString(lastWord);
+  checker->prepareResultsAsync(s);
+  //////
+}
 
 - (void) replaceTextWithSuggestion:(NSArray*) items {
   NSString* replace = [items objectAtIndex:0];
@@ -1190,7 +1193,10 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
   UIView* lastTrace = [pointTraces lastObject];
   [lastTrace removeFromSuperview];
   if ([points count]) {
+    
     [points removeLastObject];
+    [self prepareSpellChecker];
+    
     if (![points count]) {
       //was the last point from current word
       //[self showLastInteractedSuggestionView];

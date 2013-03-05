@@ -425,7 +425,7 @@
   if (needToAddRaw) {
     FLString s = NSStringToFLString(rawText);
     rawEntry = FLResponseEntry::FLResponseEntryMake(&s);
-    rawEntry->apple = NO;
+    rawEntry->platform = NO;
     rawEntry->fleksy = NO;
     [suggestions insertObject:[NSValue valueWithPointer:rawEntry] atIndex:0];
     

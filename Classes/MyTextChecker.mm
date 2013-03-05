@@ -16,10 +16,10 @@ void MyTextChecker::log(const char* format, ...) {
   pthread_mutex_lock(&print_mutex);
   va_list args;
   va_start( args, format );
-  char buffer[1024];
-  vsprintf(buffer, format, args );
+  char mybuffer[1024];
+  vsprintf(mybuffer, format, args );
   va_end( args );
-  LOGI("MyTextChecker::%s\n", buffer);
+  LOGI("MyTextChecker::%s\n", mybuffer);
   pthread_mutex_unlock(&print_mutex);
 }
 

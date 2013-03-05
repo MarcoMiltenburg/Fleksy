@@ -304,8 +304,8 @@
       UILabel* existingLabel = [keyLabels objectForKey:[NSNumber numberWithChar:existing]];
       
       if (existingLabel) {
-        NSString* temp = [[NSString alloc] initWithBytes:&c length:1 encoding:NSISOLatin1StringEncoding];
-        NSLog(@"will not create new label %@, we already have %c (%d)", temp, existing, existing);
+        //NSString* temp = [[NSString alloc] initWithBytes:&c length:1 encoding:NSISOLatin1StringEncoding];
+        //NSLog(@"will not create new label %@, we already have %c (%d)", temp, existing, existing);
       } else {
       
         UILabel* label = [self createLabelForChar:c atPoint:point popup:NO];
