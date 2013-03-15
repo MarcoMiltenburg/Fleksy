@@ -783,7 +783,7 @@
 				GCC_PREFIX_HEADER = iFleksy_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				HEADER_SEARCH_PATHS = "\"$SRCROOT/../FleksyEngine/PatternRecognizer\"/**";
+				HEADER_SEARCH_PATHS = "\"$SRCROOT/../FleksyHeaders\"/**";
 				INFOPLIST_FILE = "$(SRCROOT)/iFleksyInfo.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (
@@ -825,7 +825,7 @@
 				DEPLOYMENT_POSTPROCESSING = YES;
 				GCC_PREFIX_HEADER = iFleksy_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				HEADER_SEARCH_PATHS = "\"$SRCROOT/../FleksyEngine/PatternRecognizer\"/**";
+				HEADER_SEARCH_PATHS = "\"$SRCROOT/../FleksyHeaders\"/**";
 				INFOPLIST_FILE = "$(SRCROOT)/iFleksyInfo.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (
