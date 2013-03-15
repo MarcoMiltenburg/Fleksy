@@ -7,23 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1887E3791689012100A8A111 /* FLBlackBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1887E34F1689012100A8A111 /* FLBlackBox.cpp */; };
-		1887E37A1689012100A8A111 /* FLBlackBoxSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1887E3511689012100A8A111 /* FLBlackBoxSerializer.cpp */; };
-		1887E37B1689012100A8A111 /* FLInternalSuggestionsContainer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1887E3531689012100A8A111 /* FLInternalSuggestionsContainer.cpp */; };
-		1887E37C1689012100A8A111 /* FLVotesHolder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1887E3561689012100A8A111 /* FLVotesHolder.cpp */; };
-		1887E37D1689012100A8A111 /* FLWord.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1887E3581689012100A8A111 /* FLWord.cpp */; };
-		1887E37E1689012100A8A111 /* FLWordDatabase+DebugMethods.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1887E35A1689012100A8A111 /* FLWordDatabase+DebugMethods.cpp */; };
-		1887E37F1689012100A8A111 /* FLWordDatabase+LoadingMethods.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1887E35B1689012100A8A111 /* FLWordDatabase+LoadingMethods.cpp */; };
-		1887E3801689012100A8A111 /* FLWordDatabase+QueryingMethods.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1887E35C1689012100A8A111 /* FLWordDatabase+QueryingMethods.cpp */; };
-		1887E3811689012100A8A111 /* FLWordDatabase+Settings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1887E35D1689012100A8A111 /* FLWordDatabase+Settings.cpp */; };
-		1887E3821689012100A8A111 /* FLWordDatabase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1887E35E1689012100A8A111 /* FLWordDatabase.cpp */; };
-		1887E3831689012100A8A111 /* GenericCalculatorCPP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1887E3601689012100A8A111 /* GenericCalculatorCPP.cpp */; };
-		1887E3841689012100A8A111 /* MathFunctions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1887E3621689012100A8A111 /* MathFunctions.cpp */; };
-		1887E3851689012100A8A111 /* OnlineCircularCorrelatorCPP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1887E3641689012100A8A111 /* OnlineCircularCorrelatorCPP.cpp */; };
-		1887E39C1689013100A8A111 /* FleksyUtilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1887E3911689013100A8A111 /* FleksyUtilities.cpp */; };
-		1887E39D1689013100A8A111 /* FLSocketsCommon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1887E3931689013100A8A111 /* FLSocketsCommon.cpp */; };
-		1887E39F1689013100A8A111 /* SystemsIntegrator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1887E3971689013100A8A111 /* SystemsIntegrator.cpp */; };
-		1887E3A01689013100A8A111 /* VariousUtilities2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1887E3991689013100A8A111 /* VariousUtilities2.cpp */; };
 		1887E3A3168901B400A8A111 /* KSLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1887E3A2168901B400A8A111 /* KSLabel.m */; };
 		1D3623260D0F684500981E51 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* AppDelegate.mm */; };
 		1D60589B0D05DD56006BFB54 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.mm */; };
@@ -33,13 +16,10 @@
 		2E076672159AFF5400FC4E01 /* FleksyClient_NOIPC.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2E076671159AFF5400FC4E01 /* FleksyClient_NOIPC.mm */; };
 		2E0F11E011D943B50045EC67 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E0F11DF11D943B50045EC67 /* MessageUI.framework */; };
 		2E146A9C1559EE7F00B4A734 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E146A9B1559EE7F00B4A734 /* AudioToolbox.framework */; };
-		2E1C23BF16B3813C005000D8 /* aes_modes.c in Sources */ = {isa = PBXBuildFile; fileRef = 2E1C23B216B3813C005000D8 /* aes_modes.c */; };
-		2E1C23C016B3813C005000D8 /* aescrypt.c in Sources */ = {isa = PBXBuildFile; fileRef = 2E1C23B516B3813C005000D8 /* aescrypt.c */; };
-		2E1C23C116B3813C005000D8 /* aeskey.c in Sources */ = {isa = PBXBuildFile; fileRef = 2E1C23B616B3813C005000D8 /* aeskey.c */; };
-		2E1C23C216B3813C005000D8 /* aestab.c in Sources */ = {isa = PBXBuildFile; fileRef = 2E1C23B816B3813C005000D8 /* aestab.c */; };
 		2E1E745415C871BB0029E761 /* MyTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E1E745315C871BB0029E761 /* MyTextView.m */; };
 		2E24C0D01473ED010056B137 /* FleksyKeyboard.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2E24C0CF1473ED010056B137 /* FleksyKeyboard.mm */; };
 		2E24C0D314740D0F0056B137 /* HookingUtilities.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2E24C0D214740D0E0056B137 /* HookingUtilities.mm */; };
+		2E25A43D16F3878E00005482 /* libFleksyStatic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E25A43C16F3878E00005482 /* libFleksyStatic.a */; };
 		2E2EBE1816C447F7000090BF /* instructions in Resources */ = {isa = PBXBuildFile; fileRef = 2E2EBE1716C447F7000090BF /* instructions */; };
 		2E3F6E90155A214B001BE187 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E0BC2EB1559B39500BFF935 /* Default.png */; };
 		2E3F6E91155A214E001BE187 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E0BC2E31559AFE300BFF935 /* Default@2x.png */; };
@@ -53,7 +33,6 @@
 		2E6965A816C07A010018ACA9 /* UITouchManagerHooks.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2E6965A716C07A010018ACA9 /* UITouchManagerHooks.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		2E6965AC16C1967B0018ACA9 /* menu_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E6965AA16C1967B0018ACA9 /* menu_blue.png */; };
 		2E6965AF16C1E7F50018ACA9 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E6965AE16C1E7F50018ACA9 /* Accounts.framework */; };
-		2E6965B216C2F0C30018ACA9 /* EncryptionUtilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E6965B016C2F0C30018ACA9 /* EncryptionUtilities.cpp */; };
 		2E7404FF165D9CCD00C8B2C9 /* FleksyClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E7404FE165D9CCD00C8B2C9 /* FleksyClient.cpp */; };
 		2E7C8FBD14F7253300E457AB /* SwipeFeedbackView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2E7C8FBC14F7253300E457AB /* SwipeFeedbackView.mm */; };
 		2E7CAA691594FD1E00F192BE /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E7CAA681594FD1E00F192BE /* StoreKit.framework */; };
@@ -113,8 +92,6 @@
 		2EC4E858166D3314009D3E39 /* UISwipeAndHoldGestureRecognizer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2EC4E849166D3314009D3E39 /* UISwipeAndHoldGestureRecognizer.mm */; };
 		2EC4E859166D3314009D3E39 /* UITapGestureRecognizer2.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2EC4E84B166D3314009D3E39 /* UITapGestureRecognizer2.mm */; };
 		2EC4E85A166D3314009D3E39 /* UITouchManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2EC4E84D166D3314009D3E39 /* UITouchManager.mm */; };
-		2EC8994C16CAE72800B51B27 /* FLSingleLevelTokenPredictor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EC8994816CAE72800B51B27 /* FLSingleLevelTokenPredictor.cpp */; };
-		2EC8994D16CAE72800B51B27 /* FLSingleLevelTokenPredictorAsync.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EC8994A16CAE72800B51B27 /* FLSingleLevelTokenPredictorAsync.cpp */; };
 		2EC91B321587E72B0021990E /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EC91B311587E72B0021990E /* libz.dylib */; };
 		2ECA1F48162362B30070F437 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E662BAA1548DEF100643ECA /* Twitter.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		2ECB37C714BBBC05008EBA10 /* KeyboardImageView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2ECB37C614BBBC05008EBA10 /* KeyboardImageView.mm */; };
@@ -122,48 +99,9 @@
 		2EDB469011DA95B40057E60D /* FLTypingController_iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2EDB468F11DA95B40057E60D /* FLTypingController_iOS.mm */; };
 		2EE39C2E161279E600B88B2E /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EE39C2D161279E600B88B2E /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		2EE7C89015BDE30700307235 /* FLPurchaseManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2EE7C88F15BDE30700307235 /* FLPurchaseManager.mm */; };
-		2EF467971698B9C800E3150F /* FLContextCommon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EF467931698B9C800E3150F /* FLContextCommon.cpp */; };
-		2EF467981698B9C800E3150F /* FLTokenPredictor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EF467951698B9C800E3150F /* FLTokenPredictor.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1887E34E1689012100A8A111 /* CoreSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreSettings.h; path = ../FleksyEngine/PatternRecognizer/PatternRecognizer/CoreSettings.h; sourceTree = SOURCE_ROOT; };
-		1887E34F1689012100A8A111 /* FLBlackBox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FLBlackBox.cpp; path = ../FleksyEngine/PatternRecognizer/PatternRecognizer/FLBlackBox.cpp; sourceTree = SOURCE_ROOT; };
-		1887E3501689012100A8A111 /* FLBlackBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FLBlackBox.h; path = ../FleksyEngine/PatternRecognizer/PatternRecognizer/FLBlackBox.h; sourceTree = SOURCE_ROOT; };
-		1887E3511689012100A8A111 /* FLBlackBoxSerializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FLBlackBoxSerializer.cpp; path = ../FleksyEngine/PatternRecognizer/PatternRecognizer/FLBlackBoxSerializer.cpp; sourceTree = SOURCE_ROOT; };
-		1887E3521689012100A8A111 /* FLBlackBoxSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FLBlackBoxSerializer.h; path = ../FleksyEngine/PatternRecognizer/PatternRecognizer/FLBlackBoxSerializer.h; sourceTree = SOURCE_ROOT; };
-		1887E3531689012100A8A111 /* FLInternalSuggestionsContainer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FLInternalSuggestionsContainer.cpp; path = ../FleksyEngine/PatternRecognizer/PatternRecognizer/FLInternalSuggestionsContainer.cpp; sourceTree = SOURCE_ROOT; };
-		1887E3541689012100A8A111 /* FLInternalSuggestionsContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FLInternalSuggestionsContainer.h; path = ../FleksyEngine/PatternRecognizer/PatternRecognizer/FLInternalSuggestionsContainer.h; sourceTree = SOURCE_ROOT; };
-		1887E3551689012100A8A111 /* FLPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FLPoint.h; path = ../FleksyEngine/PatternRecognizer/PatternRecognizer/FLPoint.h; sourceTree = SOURCE_ROOT; };
-		1887E3561689012100A8A111 /* FLVotesHolder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FLVotesHolder.cpp; path = ../FleksyEngine/PatternRecognizer/PatternRecognizer/FLVotesHolder.cpp; sourceTree = SOURCE_ROOT; };
-		1887E3571689012100A8A111 /* FLVotesHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FLVotesHolder.h; path = ../FleksyEngine/PatternRecognizer/PatternRecognizer/FLVotesHolder.h; sourceTree = SOURCE_ROOT; };
-		1887E3581689012100A8A111 /* FLWord.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FLWord.cpp; path = ../FleksyEngine/PatternRecognizer/PatternRecognizer/FLWord.cpp; sourceTree = SOURCE_ROOT; };
-		1887E3591689012100A8A111 /* FLWord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FLWord.h; path = ../FleksyEngine/PatternRecognizer/PatternRecognizer/FLWord.h; sourceTree = SOURCE_ROOT; };
-		1887E35A1689012100A8A111 /* FLWordDatabase+DebugMethods.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "FLWordDatabase+DebugMethods.cpp"; path = "../FleksyEngine/PatternRecognizer/PatternRecognizer/FLWordDatabase+DebugMethods.cpp"; sourceTree = SOURCE_ROOT; };
-		1887E35B1689012100A8A111 /* FLWordDatabase+LoadingMethods.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "FLWordDatabase+LoadingMethods.cpp"; path = "../FleksyEngine/PatternRecognizer/PatternRecognizer/FLWordDatabase+LoadingMethods.cpp"; sourceTree = SOURCE_ROOT; };
-		1887E35C1689012100A8A111 /* FLWordDatabase+QueryingMethods.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "FLWordDatabase+QueryingMethods.cpp"; path = "../FleksyEngine/PatternRecognizer/PatternRecognizer/FLWordDatabase+QueryingMethods.cpp"; sourceTree = SOURCE_ROOT; };
-		1887E35D1689012100A8A111 /* FLWordDatabase+Settings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "FLWordDatabase+Settings.cpp"; path = "../FleksyEngine/PatternRecognizer/PatternRecognizer/FLWordDatabase+Settings.cpp"; sourceTree = SOURCE_ROOT; };
-		1887E35E1689012100A8A111 /* FLWordDatabase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FLWordDatabase.cpp; path = ../FleksyEngine/PatternRecognizer/PatternRecognizer/FLWordDatabase.cpp; sourceTree = SOURCE_ROOT; };
-		1887E35F1689012100A8A111 /* FLWordDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FLWordDatabase.h; path = ../FleksyEngine/PatternRecognizer/PatternRecognizer/FLWordDatabase.h; sourceTree = SOURCE_ROOT; };
-		1887E3601689012100A8A111 /* GenericCalculatorCPP.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GenericCalculatorCPP.cpp; path = ../FleksyEngine/PatternRecognizer/PatternRecognizer/GenericCalculatorCPP.cpp; sourceTree = SOURCE_ROOT; };
-		1887E3611689012100A8A111 /* GenericCalculatorCPP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GenericCalculatorCPP.h; path = ../FleksyEngine/PatternRecognizer/PatternRecognizer/GenericCalculatorCPP.h; sourceTree = SOURCE_ROOT; };
-		1887E3621689012100A8A111 /* MathFunctions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MathFunctions.cpp; path = ../FleksyEngine/PatternRecognizer/PatternRecognizer/MathFunctions.cpp; sourceTree = SOURCE_ROOT; };
-		1887E3631689012100A8A111 /* MathFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MathFunctions.h; path = ../FleksyEngine/PatternRecognizer/PatternRecognizer/MathFunctions.h; sourceTree = SOURCE_ROOT; };
-		1887E3641689012100A8A111 /* OnlineCircularCorrelatorCPP.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OnlineCircularCorrelatorCPP.cpp; path = ../FleksyEngine/PatternRecognizer/PatternRecognizer/OnlineCircularCorrelatorCPP.cpp; sourceTree = SOURCE_ROOT; };
-		1887E3651689012100A8A111 /* OnlineCircularCorrelatorCPP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OnlineCircularCorrelatorCPP.h; path = ../FleksyEngine/PatternRecognizer/PatternRecognizer/OnlineCircularCorrelatorCPP.h; sourceTree = SOURCE_ROOT; };
-		1887E3661689012100A8A111 /* PatternRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PatternRecognizer.h; path = ../FleksyEngine/PatternRecognizer/PatternRecognizer/PatternRecognizer.h; sourceTree = SOURCE_ROOT; };
-		1887E3671689012100A8A111 /* Platform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Platform.h; path = ../FleksyEngine/PatternRecognizer/PatternRecognizer/Platform.h; sourceTree = SOURCE_ROOT; };
-		1887E3681689012100A8A111 /* PrivateStructures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrivateStructures.h; path = ../FleksyEngine/PatternRecognizer/PatternRecognizer/PrivateStructures.h; sourceTree = SOURCE_ROOT; };
-		1887E3691689012100A8A111 /* Structures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Structures.h; path = ../FleksyEngine/PatternRecognizer/PatternRecognizer/Structures.h; sourceTree = SOURCE_ROOT; };
-		1887E38E1689013100A8A111 /* FleksyDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FleksyDefines.h; path = ../FleksyEngine/FleksyServer/FleksyServer/FleksyDefines.h; sourceTree = SOURCE_ROOT; };
-		1887E3911689013100A8A111 /* FleksyUtilities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FleksyUtilities.cpp; path = ../FleksyEngine/FleksyServer/FleksyServer/FleksyUtilities.cpp; sourceTree = SOURCE_ROOT; };
-		1887E3921689013100A8A111 /* FleksyUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FleksyUtilities.h; path = ../FleksyEngine/FleksyServer/FleksyServer/FleksyUtilities.h; sourceTree = SOURCE_ROOT; };
-		1887E3931689013100A8A111 /* FLSocketsCommon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FLSocketsCommon.cpp; path = ../FleksyEngine/FleksyServer/FleksyServer/FLSocketsCommon.cpp; sourceTree = SOURCE_ROOT; };
-		1887E3941689013100A8A111 /* FLSocketsCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FLSocketsCommon.h; path = ../FleksyEngine/FleksyServer/FleksyServer/FLSocketsCommon.h; sourceTree = SOURCE_ROOT; };
-		1887E3971689013100A8A111 /* SystemsIntegrator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SystemsIntegrator.cpp; path = ../FleksyEngine/FleksyServer/FleksyServer/SystemsIntegrator.cpp; sourceTree = SOURCE_ROOT; };
-		1887E3981689013100A8A111 /* SystemsIntegrator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SystemsIntegrator.h; path = ../FleksyEngine/FleksyServer/FleksyServer/SystemsIntegrator.h; sourceTree = SOURCE_ROOT; };
-		1887E3991689013100A8A111 /* VariousUtilities2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VariousUtilities2.cpp; path = ../FleksyEngine/FleksyServer/FleksyServer/VariousUtilities2.cpp; sourceTree = SOURCE_ROOT; };
-		1887E39A1689013100A8A111 /* VariousUtilities2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VariousUtilities2.h; path = ../FleksyEngine/FleksyServer/FleksyServer/VariousUtilities2.h; sourceTree = SOURCE_ROOT; };
 		1887E3A1168901B400A8A111 /* KSLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSLabel.h; sourceTree = "<group>"; };
 		1887E3A2168901B400A8A111 /* KSLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSLabel.m; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -180,20 +118,12 @@
 		2E0F11DF11D943B50045EC67 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		2E1138E10FAB3F3000E6815C /* iFleksy_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iFleksy_Prefix.pch; sourceTree = "<group>"; };
 		2E146A9B1559EE7F00B4A734 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		2E1C23B116B3813C005000D8 /* aes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aes.h; sourceTree = "<group>"; };
-		2E1C23B216B3813C005000D8 /* aes_modes.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = aes_modes.c; sourceTree = "<group>"; };
-		2E1C23B516B3813C005000D8 /* aescrypt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = aescrypt.c; sourceTree = "<group>"; };
-		2E1C23B616B3813C005000D8 /* aeskey.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = aeskey.c; sourceTree = "<group>"; };
-		2E1C23B716B3813C005000D8 /* aesopt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aesopt.h; sourceTree = "<group>"; };
-		2E1C23B816B3813C005000D8 /* aestab.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = aestab.c; sourceTree = "<group>"; };
-		2E1C23B916B3813C005000D8 /* aestab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aestab.h; sourceTree = "<group>"; };
-		2E1C23BB16B3813C005000D8 /* brg_endian.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = brg_endian.h; sourceTree = "<group>"; };
-		2E1C23BC16B3813C005000D8 /* brg_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = brg_types.h; sourceTree = "<group>"; };
 		2E1E745215C871BA0029E761 /* MyTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTextView.h; sourceTree = "<group>"; };
 		2E1E745315C871BB0029E761 /* MyTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTextView.m; sourceTree = "<group>"; };
 		2E24C0CF1473ED010056B137 /* FleksyKeyboard.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FleksyKeyboard.mm; sourceTree = "<group>"; };
 		2E24C0D114740D0E0056B137 /* HookingUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HookingUtilities.h; sourceTree = "<group>"; };
 		2E24C0D214740D0E0056B137 /* HookingUtilities.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HookingUtilities.mm; sourceTree = "<group>"; };
+		2E25A43C16F3878E00005482 /* libFleksyStatic.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFleksyStatic.a; path = "../../../../Library/Developer/Xcode/DerivedData/FleksyLib-hfrdrjkcsectbshailtmnlaeduke/Build/Products/Debug-iphonesimulator/libFleksyStatic.a"; sourceTree = "<group>"; };
 		2E2EBE1716C447F7000090BF /* instructions */ = {isa = PBXFileReference; lastKnownFileType = folder; name = instructions; path = ../../../../../Dropbox/Fleksy/instructions; sourceTree = "<group>"; };
 		2E42CBE511D5456800409C5E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		2E4727AD14F8A78E00416BF4 /* CustomSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomSegmentedControl.h; sourceTree = "<group>"; };
@@ -212,8 +142,6 @@
 		2E6965A916C07A8D0018ACA9 /* UITouchManagerHooks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UITouchManagerHooks.h; path = ../../GestureTestbed/GestureTest/Classes/UITouchManagerHooks.h; sourceTree = "<group>"; };
 		2E6965AA16C1967B0018ACA9 /* menu_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_blue.png; sourceTree = "<group>"; };
 		2E6965AE16C1E7F50018ACA9 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
-		2E6965B016C2F0C30018ACA9 /* EncryptionUtilities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EncryptionUtilities.cpp; sourceTree = "<group>"; };
-		2E6965B116C2F0C30018ACA9 /* EncryptionUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EncryptionUtilities.h; sourceTree = "<group>"; };
 		2E7404FD165D9CCD00C8B2C9 /* FleksyClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FleksyClient.h; sourceTree = "<group>"; };
 		2E7404FE165D9CCD00C8B2C9 /* FleksyClient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FleksyClient.cpp; sourceTree = "<group>"; };
 		2E7C8FBB14F7253300E457AB /* SwipeFeedbackView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwipeFeedbackView.h; sourceTree = "<group>"; };
@@ -327,19 +255,11 @@
 		2EC4E84B166D3314009D3E39 /* UITapGestureRecognizer2.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = UITapGestureRecognizer2.mm; path = ../GestureTestbed/GestureTest/Classes/UITapGestureRecognizer2.mm; sourceTree = SOURCE_ROOT; };
 		2EC4E84C166D3314009D3E39 /* UITouchManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UITouchManager.h; path = ../GestureTestbed/GestureTest/Classes/UITouchManager.h; sourceTree = SOURCE_ROOT; };
 		2EC4E84D166D3314009D3E39 /* UITouchManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = UITouchManager.mm; path = ../GestureTestbed/GestureTest/Classes/UITouchManager.mm; sourceTree = SOURCE_ROOT; };
-		2EC8994816CAE72800B51B27 /* FLSingleLevelTokenPredictor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FLSingleLevelTokenPredictor.cpp; path = ../../../FleksyContext/FLSingleLevelTokenPredictor.cpp; sourceTree = "<group>"; };
-		2EC8994916CAE72800B51B27 /* FLSingleLevelTokenPredictor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FLSingleLevelTokenPredictor.h; path = ../../../FleksyContext/FLSingleLevelTokenPredictor.h; sourceTree = "<group>"; };
-		2EC8994A16CAE72800B51B27 /* FLSingleLevelTokenPredictorAsync.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FLSingleLevelTokenPredictorAsync.cpp; path = ../../../FleksyContext/FLSingleLevelTokenPredictorAsync.cpp; sourceTree = "<group>"; };
-		2EC8994B16CAE72800B51B27 /* FLSingleLevelTokenPredictorAsync.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FLSingleLevelTokenPredictorAsync.h; path = ../../../FleksyContext/FLSingleLevelTokenPredictorAsync.h; sourceTree = "<group>"; };
 		2EC8F8E716372EBC0088B5F8 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		2EC8F8E916372EC80088B5F8 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		2EC91B311587E72B0021990E /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		2ECB37C514BBBC05008EBA10 /* KeyboardImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = KeyboardImageView.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		2ECB37C614BBBC05008EBA10 /* KeyboardImageView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = KeyboardImageView.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		2ED74CA416AF58B500FB02D8 /* FLContextProducer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = FLContextProducer.cpp; path = ../../../FleksyContext/FLContextProducer.cpp; sourceTree = "<group>"; };
-		2ED74CA516AF58B500FB02D8 /* FLContextProducer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FLContextProducer.h; path = ../../../FleksyContext/FLContextProducer.h; sourceTree = "<group>"; };
-		2ED74CA616AF5B0B00FB02D8 /* TimeFunctions.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = TimeFunctions.cpp; path = ../../../FleksyContext/TimeFunctions.cpp; sourceTree = "<group>"; };
-		2ED74CA716AF5B0B00FB02D8 /* TimeFunctions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TimeFunctions.h; path = ../../../FleksyContext/TimeFunctions.h; sourceTree = "<group>"; };
 		2EDB2DC111CBE7A200489CA8 /* FLKeyboardContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLKeyboardContainerView.h; sourceTree = "<group>"; };
 		2EDB2DC211CBE7A200489CA8 /* FLKeyboardContainerView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FLKeyboardContainerView.mm; sourceTree = "<group>"; };
 		2EDB468E11DA95B40057E60D /* FLTypingController_iOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLTypingController_iOS.h; sourceTree = "<group>"; };
@@ -348,10 +268,6 @@
 		2EE7C88E15BDE30700307235 /* FLPurchaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPurchaseManager.h; sourceTree = "<group>"; };
 		2EE7C88F15BDE30700307235 /* FLPurchaseManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FLPurchaseManager.mm; sourceTree = "<group>"; };
 		2EEA161A15BE124900C04187 /* Fleksy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Fleksy.entitlements; sourceTree = "<group>"; };
-		2EF467931698B9C800E3150F /* FLContextCommon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FLContextCommon.cpp; path = ../../../FleksyContext/FLContextCommon.cpp; sourceTree = "<group>"; };
-		2EF467941698B9C800E3150F /* FLContextCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FLContextCommon.h; path = ../../../FleksyContext/FLContextCommon.h; sourceTree = "<group>"; };
-		2EF467951698B9C800E3150F /* FLTokenPredictor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FLTokenPredictor.cpp; path = ../../../FleksyContext/FLTokenPredictor.cpp; sourceTree = "<group>"; };
-		2EF467961698B9C800E3150F /* FLTokenPredictor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FLTokenPredictor.h; path = ../../../FleksyContext/FLTokenPredictor.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -373,6 +289,7 @@
 				2E68687E12026BA200AC7F4F /* libobjc.A.dylib in Frameworks */,
 				2EC91B321587E72B0021990E /* libz.dylib in Frameworks */,
 				2EAC83B316D59F6500D44A29 /* libTestFlight.a in Frameworks */,
+				2E25A43D16F3878E00005482 /* libFleksyStatic.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -386,63 +303,6 @@
 				2E896DC914BAC9F60098FD4F /* Client */,
 			);
 			path = Classes;
-			sourceTree = "<group>";
-		};
-		1887E34D1689012100A8A111 /* PatternRecognizer */ = {
-			isa = PBXGroup;
-			children = (
-				1887E34E1689012100A8A111 /* CoreSettings.h */,
-				1887E34F1689012100A8A111 /* FLBlackBox.cpp */,
-				1887E3501689012100A8A111 /* FLBlackBox.h */,
-				1887E3511689012100A8A111 /* FLBlackBoxSerializer.cpp */,
-				1887E3521689012100A8A111 /* FLBlackBoxSerializer.h */,
-				1887E3531689012100A8A111 /* FLInternalSuggestionsContainer.cpp */,
-				1887E3541689012100A8A111 /* FLInternalSuggestionsContainer.h */,
-				1887E3551689012100A8A111 /* FLPoint.h */,
-				1887E3561689012100A8A111 /* FLVotesHolder.cpp */,
-				1887E3571689012100A8A111 /* FLVotesHolder.h */,
-				1887E3581689012100A8A111 /* FLWord.cpp */,
-				1887E3591689012100A8A111 /* FLWord.h */,
-				1887E35A1689012100A8A111 /* FLWordDatabase+DebugMethods.cpp */,
-				1887E35B1689012100A8A111 /* FLWordDatabase+LoadingMethods.cpp */,
-				1887E35C1689012100A8A111 /* FLWordDatabase+QueryingMethods.cpp */,
-				1887E35D1689012100A8A111 /* FLWordDatabase+Settings.cpp */,
-				1887E35E1689012100A8A111 /* FLWordDatabase.cpp */,
-				1887E35F1689012100A8A111 /* FLWordDatabase.h */,
-				1887E3601689012100A8A111 /* GenericCalculatorCPP.cpp */,
-				1887E3611689012100A8A111 /* GenericCalculatorCPP.h */,
-				1887E3621689012100A8A111 /* MathFunctions.cpp */,
-				1887E3631689012100A8A111 /* MathFunctions.h */,
-				1887E3641689012100A8A111 /* OnlineCircularCorrelatorCPP.cpp */,
-				1887E3651689012100A8A111 /* OnlineCircularCorrelatorCPP.h */,
-				1887E3661689012100A8A111 /* PatternRecognizer.h */,
-				1887E3671689012100A8A111 /* Platform.h */,
-				1887E3681689012100A8A111 /* PrivateStructures.h */,
-				1887E3691689012100A8A111 /* Structures.h */,
-			);
-			name = PatternRecognizer;
-			path = ../FleksyEngine/PatternRecognizer/PatternRecognizer;
-			sourceTree = SOURCE_ROOT;
-		};
-		1887E38D1689013100A8A111 /* FleksyServer */ = {
-			isa = PBXGroup;
-			children = (
-				2E1C23B016B3813C005000D8 /* aes-src-12-09-11 */,
-				2EF4679A1698B9CB00E3150F /* FleksyContext */,
-				1887E38E1689013100A8A111 /* FleksyDefines.h */,
-				1887E3911689013100A8A111 /* FleksyUtilities.cpp */,
-				1887E3921689013100A8A111 /* FleksyUtilities.h */,
-				1887E3931689013100A8A111 /* FLSocketsCommon.cpp */,
-				1887E3941689013100A8A111 /* FLSocketsCommon.h */,
-				1887E3981689013100A8A111 /* SystemsIntegrator.h */,
-				1887E3971689013100A8A111 /* SystemsIntegrator.cpp */,
-				1887E39A1689013100A8A111 /* VariousUtilities2.h */,
-				1887E3991689013100A8A111 /* VariousUtilities2.cpp */,
-				2E6965B116C2F0C30018ACA9 /* EncryptionUtilities.h */,
-				2E6965B016C2F0C30018ACA9 /* EncryptionUtilities.cpp */,
-			);
-			name = FleksyServer;
-			path = ../FleksyEngine/FleksyServer/FleksyServer;
 			sourceTree = "<group>";
 		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
@@ -461,8 +321,7 @@
 				2EA3E84516964AA200BC54A4 /* MultipartSpeechSynthesizer.mm */,
 				2E7EBFDC1676BDB500DAB9BB /* SynthesizeSingleton.h */,
 				2EAC83B216D59F6500D44A29 /* libTestFlight.a */,
-				1887E34D1689012100A8A111 /* PatternRecognizer */,
-				1887E38D1689013100A8A111 /* FleksyServer */,
+				2E25A43C16F3878E00005482 /* libFleksyStatic.a */,
 				2EEA161A15BE124900C04187 /* Fleksy.entitlements */,
 				2E7EBFB41676BBA900DAB9BB /* iFleksyInfo.plist */,
 				080E96DDFE201D6D7F000001 /* Classes */,
@@ -502,22 +361,6 @@
 				2E4A72D615ACA094002CAA72 /* CoreFoundation.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		2E1C23B016B3813C005000D8 /* aes-src-12-09-11 */ = {
-			isa = PBXGroup;
-			children = (
-				2E1C23B116B3813C005000D8 /* aes.h */,
-				2E1C23B216B3813C005000D8 /* aes_modes.c */,
-				2E1C23B516B3813C005000D8 /* aescrypt.c */,
-				2E1C23B616B3813C005000D8 /* aeskey.c */,
-				2E1C23B716B3813C005000D8 /* aesopt.h */,
-				2E1C23B816B3813C005000D8 /* aestab.c */,
-				2E1C23B916B3813C005000D8 /* aestab.h */,
-				2E1C23BB16B3813C005000D8 /* brg_endian.h */,
-				2E1C23BC16B3813C005000D8 /* brg_types.h */,
-			);
-			path = "aes-src-12-09-11";
 			sourceTree = "<group>";
 		};
 		2E1EA2231656E27800B5177E /* GestureTestbed */ = {
@@ -658,7 +501,6 @@
 			isa = PBXGroup;
 			children = (
 				2E1EA2231656E27800B5177E /* GestureTestbed */,
-				2EF36C2E1654A63800B803D5 /* C++ */,
 				2EDC76A714BC337500B248AF /* App */,
 				2E896DCA14BACA350098FD4F /* IPC */,
 				2E9F282D11EFF42F00AD3EEB /* UI */,
@@ -787,32 +629,6 @@
 			);
 			name = GestureRecognizers;
 			path = ..;
-			sourceTree = "<group>";
-		};
-		2EF36C2E1654A63800B803D5 /* C++ */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "C++";
-			sourceTree = "<group>";
-		};
-		2EF4679A1698B9CB00E3150F /* FleksyContext */ = {
-			isa = PBXGroup;
-			children = (
-				2ED74CA716AF5B0B00FB02D8 /* TimeFunctions.h */,
-				2ED74CA616AF5B0B00FB02D8 /* TimeFunctions.cpp */,
-				2EF467941698B9C800E3150F /* FLContextCommon.h */,
-				2EF467931698B9C800E3150F /* FLContextCommon.cpp */,
-				2ED74CA516AF58B500FB02D8 /* FLContextProducer.h */,
-				2ED74CA416AF58B500FB02D8 /* FLContextProducer.cpp */,
-				2EC8994816CAE72800B51B27 /* FLSingleLevelTokenPredictor.cpp */,
-				2EC8994916CAE72800B51B27 /* FLSingleLevelTokenPredictor.h */,
-				2EC8994A16CAE72800B51B27 /* FLSingleLevelTokenPredictorAsync.cpp */,
-				2EC8994B16CAE72800B51B27 /* FLSingleLevelTokenPredictorAsync.h */,
-				2EF467961698B9C800E3150F /* FLTokenPredictor.h */,
-				2EF467951698B9C800E3150F /* FLTokenPredictor.cpp */,
-			);
-			name = FleksyContext;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -945,37 +761,11 @@
 				2E7EBFE01676BEF400DAB9BB /* VariousUtilities.mm in Sources */,
 				2E7EBFE51676BF2800DAB9BB /* FileManager.mm in Sources */,
 				2E7EBFE61676BF2800DAB9BB /* FLUserDictionary.mm in Sources */,
-				1887E3791689012100A8A111 /* FLBlackBox.cpp in Sources */,
-				1887E37A1689012100A8A111 /* FLBlackBoxSerializer.cpp in Sources */,
-				1887E37B1689012100A8A111 /* FLInternalSuggestionsContainer.cpp in Sources */,
-				1887E37C1689012100A8A111 /* FLVotesHolder.cpp in Sources */,
-				1887E37D1689012100A8A111 /* FLWord.cpp in Sources */,
-				1887E37E1689012100A8A111 /* FLWordDatabase+DebugMethods.cpp in Sources */,
-				1887E37F1689012100A8A111 /* FLWordDatabase+LoadingMethods.cpp in Sources */,
-				1887E3801689012100A8A111 /* FLWordDatabase+QueryingMethods.cpp in Sources */,
-				1887E3811689012100A8A111 /* FLWordDatabase+Settings.cpp in Sources */,
-				1887E3821689012100A8A111 /* FLWordDatabase.cpp in Sources */,
-				1887E3831689012100A8A111 /* GenericCalculatorCPP.cpp in Sources */,
-				1887E3841689012100A8A111 /* MathFunctions.cpp in Sources */,
-				1887E3851689012100A8A111 /* OnlineCircularCorrelatorCPP.cpp in Sources */,
-				1887E39C1689013100A8A111 /* FleksyUtilities.cpp in Sources */,
-				1887E39D1689013100A8A111 /* FLSocketsCommon.cpp in Sources */,
-				1887E39F1689013100A8A111 /* SystemsIntegrator.cpp in Sources */,
-				1887E3A01689013100A8A111 /* VariousUtilities2.cpp in Sources */,
 				1887E3A3168901B400A8A111 /* KSLabel.m in Sources */,
 				2EC0B6D5168CE0B1005AD155 /* StringConversion.mm in Sources */,
 				2EC0B6DD168CECAF005AD155 /* FleksyEngineTestCase.mm in Sources */,
 				2EA3E84616964AA200BC54A4 /* MultipartSpeechSynthesizer.mm in Sources */,
-				2EF467971698B9C800E3150F /* FLContextCommon.cpp in Sources */,
-				2EF467981698B9C800E3150F /* FLTokenPredictor.cpp in Sources */,
-				2E1C23BF16B3813C005000D8 /* aes_modes.c in Sources */,
-				2E1C23C016B3813C005000D8 /* aescrypt.c in Sources */,
-				2E1C23C116B3813C005000D8 /* aeskey.c in Sources */,
-				2E1C23C216B3813C005000D8 /* aestab.c in Sources */,
 				2E6965A816C07A010018ACA9 /* UITouchManagerHooks.mm in Sources */,
-				2E6965B216C2F0C30018ACA9 /* EncryptionUtilities.cpp in Sources */,
-				2EC8994C16CAE72800B51B27 /* FLSingleLevelTokenPredictor.cpp in Sources */,
-				2EC8994D16CAE72800B51B27 /* FLSingleLevelTokenPredictorAsync.cpp in Sources */,
 				2EAC83B716D6C73400D44A29 /* UILongPressGestureRecognizer2.mm in Sources */,
 				2E9A140A16DC36F200E9726B /* MyTextChecker.mm in Sources */,
 			);
@@ -1000,6 +790,8 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/../../TestFlightSDK1\"",
 					"\"$(SRCROOT)/../../TestFlightSDK1.2.3b\"",
+					"\"$(SRCROOT)/../FleksySDK/compiled\"",
+					"\"$(SRCROOT)/../../../../Library/Developer/Xcode/DerivedData/FleksyLib-hfrdrjkcsectbshailtmnlaeduke/Build/Products/Debug-iphonesimulator\"",
 				);
 				OTHER_LDFLAGS = "\"-all_load\"";
 				PROVISIONING_PROFILE = "B25499A2-C64B-4A89-9FF6-B66A896640A6";
@@ -1040,6 +832,8 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/../../TestFlightSDK1\"",
 					"\"$(SRCROOT)/../../TestFlightSDK1.2.3b\"",
+					"\"$(SRCROOT)/../FleksySDK/compiled\"",
+					"\"$(SRCROOT)/../../../../Library/Developer/Xcode/DerivedData/FleksyLib-hfrdrjkcsectbshailtmnlaeduke/Build/Products/Debug-iphonesimulator\"",
 				);
 				OTHER_LDFLAGS = "\"-all_load\"";
 				PROVISIONING_PROFILE = "00FBE598-F4C5-4B9E-8BCF-FED770920C0F";

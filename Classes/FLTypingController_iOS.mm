@@ -147,13 +147,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLTypingController_iOS);
   [[FLKeyboard sharedFLKeyboard] setKeymaps:keymaps];
   
   [self pushPreviousToken:@"the"];
-  FLRequest* request = [self createRequest:4 platformSuggestions:NULL];
-  request->points[0] = FLPointMake(0, 0);
-  request->points[1] = FLPointMake(0, 0);
-  request->points[2] = FLPointMake(0, 0);
-  request->points[3] = FLPointMake(0, 0);
+  FLRequest* request = [self createRequest:3 platformSuggestions:NULL];
+  // word "say"
+  request->points[0] = FLPointMake(58.475685, 112.231873);
+  request->points[1] = FLPointMake(16.655285, 109.025909);
+  request->points[2] = FLPointMake(171.190826, 41.109081);
   FLResponse* response = [self.fleksyClient getCandidatesForRequest:request];
-  [self popPreviousToken];
+  while ([self popPreviousToken]) {}
   free(request);
   free(response);
 #endif
