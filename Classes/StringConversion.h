@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <PatternRecognizer/Structures.h>
+#import "FLString.h"
 
 extern std::wstring _NSStringToStringW ( NSString* Str );
 extern NSString* _StringWToNSString ( const std::wstring& Str );

@@ -10,7 +10,7 @@
 #import "Settings.h"
 #import "FleksyDefines.h"
 //#import "AUIAnimatableLabel.h"
-#import <PatternRecognizer/Structures.h>
+#import "FLString.h"
 #import "KSLabel.h"
 
 @interface KeyboardImageView : UIImageView {

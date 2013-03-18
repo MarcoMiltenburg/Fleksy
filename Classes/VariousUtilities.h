@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <PatternRecognizer/Structures.h>
 #import "StringConversion.h"
 
 #define FLEKSY_LOADING_NOTIFICATION @"FLEKSY_LOADING_NOTIFICATION"
