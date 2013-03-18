@@ -133,7 +133,7 @@ float distributionFunction(float x) {
   
 #ifdef RELEASE
   printf("Fleksy RELEASE\n");
-  [TestFlight takeOff:@"5c5d948af992dfdf9945d188ad91e8df_OTc5NjAyMDEyLTA2LTA3IDE4OjA1OjU1LjMyNTcxNQ"];
+  [TestFlight takeOff:@"91f69c10-d1a3-4e7a-905d-dea51af78a82"];
 #if !APP_STORE
   [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
 #endif
