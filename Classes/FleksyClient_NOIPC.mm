@@ -24,6 +24,7 @@
 #import "FleksyEngineTestCase.h"
 #endif
 
+#include "FleksyAPIpImpl.h"
 
 @implementation FleksyClient_NOIPC
 
@@ -46,7 +47,9 @@
 - (id) init {
   
   if (self = [super init]) {
-    self->_systemsIntegrator = new SystemsIntegrator();
+    EmptyOutputInterface e = EmptyOutputInterface();
+    fleksyAPI = new FleksyAPI(e);
+    self.systemsIntegrator = fleksyAPI->pImpl->fleksy;
     self->_userDictionary = [[FLUserDictionary alloc] initWithChangeListener:self];
     [VariousUtilities loadSettingsAndListen:self action:@selector(handleSettingsChanged:)];
   }
@@ -79,9 +82,9 @@ NSString* getAbsolutePath(NSString* filepath, NSString* languagePack) {
   return [NSString stringWithFormat:@"%@/%@/%@", [[VariousUtilities theBundle] bundlePath], languagePack, filepath];
 }
 
-+ (void) loadData:(SystemsIntegrator*) systemsIntegrator userDictionary:(FLUserDictionary*) userDictionary languagePack:(NSString*) languagePack {
+- (void) loadDataWithLanguagePack:(NSString*) languagePack {
 
-  NSLog(@"FleksyClient_NOIPC LOADING, languagePack: %@, userDictionary: %@", languagePack, userDictionary);
+  NSLog(@"FleksyClient_NOIPC LOADING, languagePack: %@", languagePack);
   
   double startTime = CFAbsoluteTimeGetCurrent();
   
@@ -94,7 +97,7 @@ NSString* getAbsolutePath(NSString* filepath, NSString* languagePack) {
   
   filename = getAbsolutePath(@"keyboards/keyboard-iPhone-ASCII.txt.xxx", languagePack);
   buffer = EncryptionUtilities::readBinaryFile(filename.UTF8String, bufferSize);
-  systemsIntegrator->loadKeyboardData(buffer, bufferSize, true);
+  self.systemsIntegrator->loadKeyboardData(buffer, bufferSize, true);
   free(buffer);
   
   string preprocessedFilepathFormat = NSStringToString(getAbsolutePath(@"preprocessed/preprocessed-%d.txt", languagePack));
@@ -108,7 +111,7 @@ NSString* getAbsolutePath(NSString* filepath, NSString* languagePack) {
       size_t length;
       char* contents = FLBlackBoxSerializer::memoryMapFile(filepath->c_str(), &length);
       if (contents && length) {
-        systemsIntegrator->preloadWithContents(i, contents, length);
+        self.systemsIntegrator->preloadWithContents(i, contents, length);
         FLBlackBoxSerializer::unmapMemoryMapFile(contents, length);
       } else {
         [[NSException exceptionWithName:@"LoadingException" reason:[NSString stringWithFormat:@"preprocessed file %s not found!", filepath->c_str()] userInfo:nil] raise];
@@ -124,17 +127,17 @@ NSString* getAbsolutePath(NSString* filepath, NSString* languagePack) {
   
   filename = getAbsolutePath(@"wordlists/wordlist-master-blacklist-capitalized.txt.xxx", languagePack);
   buffer = EncryptionUtilities::readBinaryFile(filename.UTF8String, bufferSize);
-  systemsIntegrator->loadDictionary(NSStringToString(filename), buffer, bufferSize, FLStringMake("\t"), kWordlistBlacklist, true);
+  self.systemsIntegrator->loadDictionary(NSStringToString(filename), buffer, bufferSize, FLStringMake("\t"), kWordlistBlacklist, true);
   free(buffer);
   
   filename = getAbsolutePath(@"wordlists/wordlist-master-blacklist.txt.xxx", languagePack);
   buffer = EncryptionUtilities::readBinaryFile(filename.UTF8String, bufferSize);
-  systemsIntegrator->loadDictionary(NSStringToString(filename), buffer, bufferSize, FLStringMake(" "), kWordlistBlacklist, true);
+  self.systemsIntegrator->loadDictionary(NSStringToString(filename), buffer, bufferSize, FLStringMake(" "), kWordlistBlacklist, true);
   free(buffer);
   
   filename = getAbsolutePath(@"wordlists/wordlist-master-ASCII.txt.xxx", languagePack);
   buffer = EncryptionUtilities::readBinaryFile(filename.UTF8String, bufferSize);
-  systemsIntegrator->loadDictionary(NSStringToString(filename), buffer, bufferSize, FLStringMake("\t"), kWordlistStandard, true);
+  self.systemsIntegrator->loadDictionary(NSStringToString(filename), buffer, bufferSize, FLStringMake("\t"), kWordlistStandard, true);
   free(buffer);
   
   // we want to write before we load "dynamic" dictionaries (preloaded and user dictionaries have their BB values calculated on the fly)
@@ -143,28 +146,29 @@ NSString* getAbsolutePath(NSString* filepath, NSString* languagePack) {
   
   filename = getAbsolutePath(@"wordlists/wordlist-preloaded.txt.xxx", languagePack);
   buffer = EncryptionUtilities::readBinaryFile(filename.UTF8String, bufferSize);
-  systemsIntegrator->loadDictionary(NSStringToString(filename), buffer, bufferSize, FLStringMake(" "), kWordlistPreloaded, true);
+  self.systemsIntegrator->loadDictionary(NSStringToString(filename), buffer, bufferSize, FLStringMake(" "), kWordlistPreloaded, true);
   free(buffer);
   
-  if (userDictionary && !RUN_FLEKSY_TESTS) {
+  if (self.userDictionary && !RUN_FLEKSY_TESTS) {
     // TODO: what do we do for words that are remotely added (eg. iCloud) AFTER postload is called?
     // need to update ranks?
-    [userDictionary load];
+    [self.userDictionary load];
     filename = @"NSDEFAULTS_USER_DICTIONARY";
-    text = [userDictionary stringContent];
+    text = [self.userDictionary stringContent];
     FLString myText = NSStringToFLString(text); 
-    systemsIntegrator->loadDictionary(NSStringToString(filename), (void*)myText.c_str(), myText.length(), FLStringMake("\t"), kWordlistUser, false);
+    self.systemsIntegrator->loadDictionary(NSStringToString(filename), (void*)myText.c_str(), myText.length(), FLStringMake("\t"), kWordlistUser, false);
   }
 #endif
   
   
-  filename = getAbsolutePath(@"context/mdlb1.1-7.binary.file.1", languagePack);
-  NSString* filename2 = getAbsolutePath(@"context/md.1-7.binary.file.2", languagePack);
-  if ([[NSFileManager defaultManager] fileExistsAtPath:filename]) {
-    systemsIntegrator->loadContextData(NSStringToString(filename), NSStringToString(filename2), false);
-  }
+  //if ([[NSFileManager defaultManager] fileExistsAtPath:filename]) {
+    self.systemsIntegrator->loadContextData(NSStringToString(getAbsolutePath(@"context/unigram.file", languagePack)),
+                                       NSStringToString(getAbsolutePath(@"context/bigram.file", languagePack)),
+                                       NSStringToString(getAbsolutePath(@"context/trigram.file", languagePack)),
+                                       "", "", "", false);
+  //}
   
-  systemsIntegrator->postload();
+  self.systemsIntegrator->postload();
   
   NSLog(@"loadData took %.6f", CFAbsoluteTimeGetCurrent() - startTime);
   

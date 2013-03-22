@@ -140,7 +140,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLTypingController_iOS);
 #else
   NSLog(@"warming up, client: %@, userDictionary: %@", self.fleksyClient, self.fleksyClient.userDictionary);
   NSString* preferredLanguage = [[NSLocale preferredLanguages] objectAtIndex:0];
-  [FleksyClient_NOIPC loadData:self.fleksyClient.systemsIntegrator userDictionary:self.fleksyClient.userDictionary languagePack:FLEKSY_APP_SETTING_LANGUAGE_PACK];
+  [self.fleksyClient loadDataWithLanguagePack:FLEKSY_APP_SETTING_LANGUAGE_PACK];
+  //[FleksyClient_NOIPC loadData:self.fleksyClient.systemsIntegrator userDictionary:self.fleksyClient.userDictionary languagePack:FLEKSY_APP_SETTING_LANGUAGE_PACK];
   FLPoint keymaps[4][KEY_MAX_VALUE];
   // hack. Should loop through the n (4) keyboards and copy individually, dont rely on internal represenation being contiguous.
   memcpy(keymaps, self.fleksyClient.systemsIntegrator->getKeymap(0), sizeof(keymaps));
