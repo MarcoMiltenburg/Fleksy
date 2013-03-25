@@ -11,39 +11,26 @@
 #import "FLUserDictionary.h"
 #import "FleksyAPI.h"
 
-class EmptyOutputInterface : public FLOutputInterface {
+class EmptyOutputInterface : public FleksyListenerInterface {
 public:
   ~EmptyOutputInterface() {};
-	virtual string getCurrentText() {return "";};
-	virtual string getTextUpToCursor() {return "";};
-  virtual string getTextAfterCursor(int numOfChars) {return "";}; //used only in one place and for testing, don't need it here?? Used in FLTextBlockCursor line: 253
-	
-  virtual void speak(const char* text) {};
-  virtual void moveCursorToPosition(int position) {};
-  virtual void beginBatchEdit() {};
-  virtual void endBatchEdit() {};
   
-  virtual void commitText(const char* text, int newCursorPosition) {};
-  virtual void setComposingRegion(int start, int end) {};
-  virtual void finishComposingText() {};
-  virtual int getCursorPosition() {return 0;};
-  virtual void setShift(bool shiftState) {};
-  
-  //For debugging
-  virtual void sendErrorReport(const char *report) {}; // crazy check is using it, prob don't want it here.
-  
-  virtual void exit() {}; //closes fleksy application
-  virtual void showToast(string message) {};
-  virtual bool addRemoveWordFromDictionary(string word, bool add) {return false;};//split into two, add/remove?
-  
-  virtual void backSpace() {};//send backspace command to the editor
-  
-  virtual void endOfSuggestions() {};
-  
-  virtual void preparePlatformSuggestions(const char* word) {};
-  
-  virtual void setCandidates(vector<string> &candidates, int currCandidateIndex) {};
-  virtual void setCandidateIndex(int currCandidateIndex) {};
+	virtual void onSetComposingText(const FLString text) {};
+  /*
+   * Mark a certain region of text as composing text
+   */
+  virtual void onSetComposingRegion(int start, int end) {};
+  /*
+   * Request text editor to move cursor to some position in the text
+   */
+  virtual void onChangeSelection(int selectionStart, int selectionEnd) {};
+  /*
+   * Request editor state which includes full text that is currentely in the editor and
+   * selection of region. if selectionStart = selectionEnd, indicates cursor position
+   * This is used to determine intital editor state
+   */
+  virtual FLExternalEditorState onRequestEditorState() { FLExternalEditorState s; return s;};
+
 
 };
 

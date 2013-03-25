@@ -24,7 +24,7 @@
 #import "FleksyEngineTestCase.h"
 #endif
 
-#include "FleksyAPIpImpl.h"
+#include "FleksyPrivateAPI.h"
 
 @implementation FleksyClient_NOIPC
 
