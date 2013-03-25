@@ -72,8 +72,9 @@ bool preprocessedFilesExist(NSString* filepathFormat) {
 }
 
 static string* _resolveFilepath(string& filepathFormat, int i) {
-  char buff[filepathFormat.length() + 10];
-  sprintf(buff, filepathFormat.c_str(), i);
+  size_t buffSize = filepathFormat.length() + 10;
+  char buff[buffSize];
+  snprintf(buff, buffSize, filepathFormat.c_str(), i);
   string* result = new string(buff);
   return result;
 }

@@ -17,7 +17,7 @@ void MyTextChecker::log(const char* format, ...) {
   va_list args;
   va_start( args, format );
   char mybuffer[1024];
-  vsprintf(mybuffer, format, args );
+  vsnprintf(mybuffer, sizeof(mybuffer), format, args );
   va_end( args );
   LOGI("MyTextChecker::%s\n", mybuffer);
   pthread_mutex_unlock(&print_mutex);
