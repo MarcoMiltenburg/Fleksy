@@ -112,10 +112,8 @@
 		61BAB67F170100F800498DA9 /* instructions in Resources */ = {isa = PBXBuildFile; fileRef = 61BAB67E170100F800498DA9 /* instructions */; };
 		61DA863E17011C4000EE52C5 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61DA863D17011C4000EE52C5 /* libTestFlight.a */; };
 		61DA86411701229E00EE52C5 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61DA86401701229E00EE52C5 /* Crashlytics.framework */; };
-		61DA864417012E1B00EE52C5 /* UIImage+DBMaskedImageAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 61DA864317012E1B00EE52C5 /* UIImage+DBMaskedImageAdditions.m */; };
-		61DA864A17012EDD00EE52C5 /* IconMask.png in Resources */ = {isa = PBXBuildFile; fileRef = 61DA864617012EDD00EE52C5 /* IconMask.png */; };
 		61DA864F1701316E00EE52C5 /* libFleksyStatic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61DA864E1701316D00EE52C5 /* libFleksyStatic.a */; };
-		61DA86531701382900EE52C5 /* IconForSettings.png in Resources */ = {isa = PBXBuildFile; fileRef = 61DA86521701382900EE52C5 /* IconForSettings.png */; };
+		61DA86551701F24500EE52C5 /* IconRounded.png in Resources */ = {isa = PBXBuildFile; fileRef = 61DA86541701F24500EE52C5 /* IconRounded.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -314,11 +312,8 @@
 		61DA863C17011B7500EE52C5 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		61DA863D17011C4000EE52C5 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTestFlight.a; path = Classes/vendor/libTestFlight.a; sourceTree = "<group>"; };
 		61DA86401701229E00EE52C5 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
-		61DA864217012E1B00EE52C5 /* UIImage+DBMaskedImageAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+DBMaskedImageAdditions.h"; sourceTree = "<group>"; };
-		61DA864317012E1B00EE52C5 /* UIImage+DBMaskedImageAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+DBMaskedImageAdditions.m"; sourceTree = "<group>"; };
-		61DA864617012EDD00EE52C5 /* IconMask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IconMask.png; sourceTree = "<group>"; };
 		61DA864E1701316D00EE52C5 /* libFleksyStatic.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFleksyStatic.a; path = "../FleksySDK/compiled/iOS-static/Debug-iphonesimulator/libFleksyStatic.a"; sourceTree = "<group>"; };
-		61DA86521701382900EE52C5 /* IconForSettings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IconForSettings.png; sourceTree = "<group>"; };
+		61DA86541701F24500EE52C5 /* IconRounded.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IconRounded.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -458,7 +453,6 @@
 		2E85008B158836B100FF6A4B /* vendor */ = {
 			isa = PBXGroup;
 			children = (
-				61DA864517012E2600EE52C5 /* UIImage+DBMaskedImage */,
 				61BAB64B1701001E00498DA9 /* InAppSettingsKit */,
 				2E8500D515883C2B00FF6A4B /* TestFlight */,
 				2E85008C158836B100FF6A4B /* AFNetworking */,
@@ -643,8 +637,7 @@
 		2EC0B703168D1A4E005AD155 /* icons */ = {
 			isa = PBXGroup;
 			children = (
-				61DA86521701382900EE52C5 /* IconForSettings.png */,
-				61DA864617012EDD00EE52C5 /* IconMask.png */,
+				61DA86541701F24500EE52C5 /* IconRounded.png */,
 				2EC0B701168D1678005AD155 /* Icon-72.png */,
 				2EC0B6FF168D1675005AD155 /* Icon-72@2x.png */,
 				2EC0B6FD168D166F005AD155 /* Icon.png */,
@@ -748,15 +741,6 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		61DA864517012E2600EE52C5 /* UIImage+DBMaskedImage */ = {
-			isa = PBXGroup;
-			children = (
-				61DA864217012E1B00EE52C5 /* UIImage+DBMaskedImageAdditions.h */,
-				61DA864317012E1B00EE52C5 /* UIImage+DBMaskedImageAdditions.m */,
-			);
-			name = "UIImage+DBMaskedImage";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -826,8 +810,7 @@
 				2EC0B702168D1678005AD155 /* Icon-72.png in Resources */,
 				2E6965AC16C1967B0018ACA9 /* menu_blue.png in Resources */,
 				61BAB67F170100F800498DA9 /* instructions in Resources */,
-				61DA864A17012EDD00EE52C5 /* IconMask.png in Resources */,
-				61DA86531701382900EE52C5 /* IconForSettings.png in Resources */,
+				61DA86551701F24500EE52C5 /* IconRounded.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -926,7 +909,6 @@
 				61BAB6771701001E00498DA9 /* IASKSlider.m in Sources */,
 				61BAB6781701001E00498DA9 /* IASKSwitch.m in Sources */,
 				61BAB6791701001E00498DA9 /* IASKTextField.m in Sources */,
-				61DA864417012E1B00EE52C5 /* UIImage+DBMaskedImageAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

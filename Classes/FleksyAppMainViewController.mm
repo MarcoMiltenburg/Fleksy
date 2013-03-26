@@ -17,7 +17,6 @@
 #import <AudioToolbox/AudioToolbox.h>
 #import "IASKAppSettingsViewController.h"
 #import "IASKSettingsReader.h"
-#import "UIImage+DBMaskedImageAdditions.h"
 
 //#define APP_STORE_LINK @"http://itunes.apple.com/us/app/fleksy/id520337246?mt=8&uo=4"
 #define IOS_DEVICE_REVIEW_LINK @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=520337246"
@@ -91,12 +90,7 @@
         heightForHeaderForSection:(NSInteger)section {
     NSString* key = [settingsViewController.settingsReader keyForSection:section];
 	if ([key isEqualToString:@"FleksyLogo"]) {
-        
-        UIImage *iconImage = [UIImage imageNamed:@"IconForSettings.png"];
-        UIImage *maskImage = [UIImage imageNamed:@"IconMask.png"];
-        iconImage = [iconImage maskedImageWithMask:maskImage];
-        
-		return iconImage.size.height + 25;
+		return [UIImage imageNamed:@"IconRounded.png"].size.height + 25;
 	}
 	return 0;
 }
@@ -106,12 +100,7 @@
            viewForHeaderForSection:(NSInteger)section {
     NSString* key = [settingsViewController.settingsReader keyForSection:section];
 	if ([key isEqualToString:@"FleksyLogo"]) {
-        
-        UIImage *iconImage = [UIImage imageNamed:@"IconForSettings.png"];
-        UIImage *maskImage = [UIImage imageNamed:@"IconMask.png"];
-        iconImage = [iconImage maskedImageWithMask:maskImage];
-        
-		UIImageView *imageView = [[UIImageView alloc] initWithImage:iconImage];
+		UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"IconRounded.png"]];
 		imageView.contentMode = UIViewContentModeCenter;
 		return imageView;
 	}
