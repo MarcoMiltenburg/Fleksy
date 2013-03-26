@@ -82,6 +82,8 @@ float distributionFunction(float x) {
       [fleksyAppViewController setReplyTo:string];
     }
     [fleksyAppViewController resetState];
+      
+      return YES;
     
   } else if ([url.scheme hasPrefix:@"fleksy"]) {
     
@@ -98,7 +100,10 @@ float distributionFunction(float x) {
       }
       [VariousUtilities performAudioFeedbackFromString:[NSString stringWithFormat:@"Added %d new words", wordsAdded]];
     }
+      
+    return YES;
   }
+  return NO;
 }
 
 - (void) startLoadingProgressTimer {

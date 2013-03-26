@@ -110,6 +110,7 @@
 
 - (BOOL)accessibilityPerformEscape {
   NSLog(@"FleksyTextView accessibilityPerformEscape");
+  return YES;
 }
 
 - (void)accessibilityIncrement {
@@ -174,7 +175,7 @@
 - (BOOL)accessibilityScroll:(UIAccessibilityScrollDirection)direction {
   NSLog(@"FleksyTextView accessibilityScroll: %d", direction);
   // not used for now, beginning and end of document is done with double tap
-  return;
+  return YES;
   
   //UIAccessibilityPageScrolledNotification doesn't work when UITextView is in container view and not focused?
   switch (direction) {
