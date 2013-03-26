@@ -131,7 +131,7 @@
     NSLog(@"END of finishLoadingUI, took %.6f", CFAbsoluteTimeGetCurrent() - startTime);
 }
 
-- (void) handleOpenURL:(NSURL *)url
+- (BOOL) handleOpenURL:(NSURL *)url
 {
     if ([url.scheme hasPrefix:@"reply"]) {
         
@@ -142,11 +142,14 @@
             [fleksyAppViewController setReplyTo:string];
         }
         [fleksyAppViewController resetState];
+        return YES;
         
     } else if ([url.scheme hasPrefix:@"fleksy"]) {
         
         [self addWordsForURL:url];
+        return YES;
     }
+    return NO;
 }
 
 - (void) addWordsForURL:(NSURL *)url

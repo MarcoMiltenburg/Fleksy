@@ -30,7 +30,10 @@ float distributionFunction(float x) {
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
   NSLog(@"openURL: %@, scheme: %@, sourceApplication: %@, annotation: %@", url, url.scheme, sourceApplication, annotation);
   
-    [[FleksyPack sharedFleksyPack] handleOpenURL:url];
+    if ([[FleksyPack sharedFleksyPack] handleOpenURL:url]) {
+        return YES;
+    }
+    return NO;
 }
 
 - (void) applicationDidFinishLaunching:(UIApplication *) application loadServer:(BOOL) loadServer {

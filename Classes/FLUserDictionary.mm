@@ -206,7 +206,7 @@
 }
 
 
-- (BOOL) addWordFromLine:(NSString*) line notifyListener:(BOOL) notifyListener {
+- (void) addWordFromLine:(NSString*) line notifyListener:(BOOL) notifyListener {
   NSArray* components = [line componentsSeparatedByString:@"\t"];
   NSString* word = [components objectAtIndex:0];
   float frequency = components.count > 1 ? [[components objectAtIndex:1] floatValue] : FLEKSY_USER_WORD_FREQUENCY;

@@ -29,8 +29,8 @@
 + (id) sharedFleksyPack;
 - (void) setupViewController:(FleksyAppMainViewController *)fleksyAppViewController inWindow:(UIWindow *)aWindow;
 + (void) setProximityMonitoringEnabled:(BOOL) b;
-+ (void) speakCurrentText;
-- (void) handleOpenURL:(NSURL *)url;
+- (void) speakCurrentText;
+- (BOOL) handleOpenURL:(NSURL *)url;
 
 - (void)applicationWillResignActive;
 - (void)applicationWillEnterForeground;
