@@ -63,9 +63,7 @@ float distributionFunction(float x) {
   printf("Fleksy NOT app_store\n");
 #endif
   
-  fleksyAppViewController = [[FleksyAppMainViewController alloc] initWithNibName:nil bundle:nil];
-  [[FleksyPack sharedFleksyPack] setupViewController:fleksyAppViewController inWindow:window];
-      
+  fleksyAppViewController = [[FleksyAppMainViewController alloc] initWithNibName:nil bundle:nil];      
   
   //we use bounds here and not application frame, since the view controller inside will adjust accordingly for the status bar
   window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -73,6 +71,8 @@ float distributionFunction(float x) {
   window.rootViewController = fleksyAppViewController;
   // Show the window
   [window makeKeyAndVisible];
+    
+  [[FleksyPack sharedFleksyPack] setupViewController:fleksyAppViewController inWindow:window];
     
   NSLog(@"END of applicationDidFinishLaunching, took %.6f", CFAbsoluteTimeGetCurrent() - startTime);
 }
