@@ -95,6 +95,7 @@
 		2EDB469011DA95B40057E60D /* FLTypingController_iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2EDB468F11DA95B40057E60D /* FLTypingController_iOS.mm */; };
 		2EE39C2E161279E600B88B2E /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EE39C2D161279E600B88B2E /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		2EE7C89015BDE30700307235 /* FLPurchaseManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2EE7C88F15BDE30700307235 /* FLPurchaseManager.mm */; };
+		611646471702387D0093E29F /* libFleksyStatic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 611646461702387D0093E29F /* libFleksyStatic.a */; };
 		61BAB66C1701001E00498DA9 /* IASKAppSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 61BAB64E1701001E00498DA9 /* IASKAppSettingsViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		61BAB66D1701001E00498DA9 /* IASKAppSettingsWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 61BAB6501701001E00498DA9 /* IASKAppSettingsWebViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		61BAB66E1701001E00498DA9 /* IASKSpecifierValuesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 61BAB6521701001E00498DA9 /* IASKSpecifierValuesViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -112,7 +113,6 @@
 		61BAB67F170100F800498DA9 /* instructions in Resources */ = {isa = PBXBuildFile; fileRef = 61BAB67E170100F800498DA9 /* instructions */; };
 		61DA863E17011C4000EE52C5 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61DA863D17011C4000EE52C5 /* libTestFlight.a */; };
 		61DA86411701229E00EE52C5 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61DA86401701229E00EE52C5 /* Crashlytics.framework */; };
-		61DA864F1701316E00EE52C5 /* libFleksyStatic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61DA864E1701316D00EE52C5 /* libFleksyStatic.a */; };
 		61DA86551701F24500EE52C5 /* IconRounded.png in Resources */ = {isa = PBXBuildFile; fileRef = 61DA86541701F24500EE52C5 /* IconRounded.png */; };
 		61DA86591702067600EE52C5 /* FleksyPack.mm in Sources */ = {isa = PBXBuildFile; fileRef = 61DA86581702067600EE52C5 /* FleksyPack.mm */; };
 /* End PBXBuildFile section */
@@ -278,6 +278,7 @@
 		2EE7C88E15BDE30700307235 /* FLPurchaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPurchaseManager.h; sourceTree = "<group>"; };
 		2EE7C88F15BDE30700307235 /* FLPurchaseManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FLPurchaseManager.mm; sourceTree = "<group>"; };
 		2EEA161A15BE124900C04187 /* Fleksy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Fleksy.entitlements; sourceTree = "<group>"; };
+		611646461702387D0093E29F /* libFleksyStatic.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFleksyStatic.a; path = "../FleksySDK/compiled/iOS-static/libFleksyStatic.a"; sourceTree = "<group>"; };
 		61BAB64D1701001E00498DA9 /* IASKAppSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IASKAppSettingsViewController.h; sourceTree = "<group>"; };
 		61BAB64E1701001E00498DA9 /* IASKAppSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IASKAppSettingsViewController.m; sourceTree = "<group>"; };
 		61BAB64F1701001E00498DA9 /* IASKAppSettingsWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IASKAppSettingsWebViewController.h; sourceTree = "<group>"; };
@@ -313,7 +314,6 @@
 		61DA863C17011B7500EE52C5 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		61DA863D17011C4000EE52C5 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTestFlight.a; path = Classes/vendor/libTestFlight.a; sourceTree = "<group>"; };
 		61DA86401701229E00EE52C5 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
-		61DA864E1701316D00EE52C5 /* libFleksyStatic.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFleksyStatic.a; path = "../FleksySDK/compiled/iOS-static/Debug-iphonesimulator/libFleksyStatic.a"; sourceTree = "<group>"; };
 		61DA86541701F24500EE52C5 /* IconRounded.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IconRounded.png; sourceTree = "<group>"; };
 		61DA86571702067600EE52C5 /* FleksyPack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FleksyPack.h; sourceTree = "<group>"; };
 		61DA86581702067600EE52C5 /* FleksyPack.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FleksyPack.mm; sourceTree = "<group>"; };
@@ -339,7 +339,7 @@
 				2EC91B321587E72B0021990E /* libz.dylib in Frameworks */,
 				61DA863E17011C4000EE52C5 /* libTestFlight.a in Frameworks */,
 				61DA86411701229E00EE52C5 /* Crashlytics.framework in Frameworks */,
-				61DA864F1701316E00EE52C5 /* libFleksyStatic.a in Frameworks */,
+				611646471702387D0093E29F /* libFleksyStatic.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -374,7 +374,7 @@
 				2EA3E84516964AA200BC54A4 /* MultipartSpeechSynthesizer.mm */,
 				2E7EBFDC1676BDB500DAB9BB /* SynthesizeSingleton.h */,
 				61DA863D17011C4000EE52C5 /* libTestFlight.a */,
-				61DA864E1701316D00EE52C5 /* libFleksyStatic.a */,
+				611646461702387D0093E29F /* libFleksyStatic.a */,
 				2EEA161A15BE124900C04187 /* Fleksy.entitlements */,
 				2E7EBFB41676BBA900DAB9BB /* iFleksyInfo.plist */,
 				080E96DDFE201D6D7F000001 /* Classes */,
@@ -945,7 +945,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(SRCROOT)/../FleksySDK/compiled/include\"/**",
 					"\"$(SRCROOT)/Classes/vendor\"",
-					"\"$(SRCROOT)/../FleksySDK/compiled/iOS-static/Debug-iphonesimulator\"",
+					"\"$(SRCROOT)/../FleksySDK/compiled/iOS-static\"",
 				);
 				OTHER_LDFLAGS = "\"-all_load\"";
 				PROVISIONING_PROFILE = "";
@@ -986,7 +986,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(SRCROOT)/../FleksySDK/compiled/include\"/**",
 					"\"$(SRCROOT)/Classes/vendor\"",
-					"\"$(SRCROOT)/../FleksySDK/compiled/iOS-static/Debug-iphonesimulator\"",
+					"\"$(SRCROOT)/../FleksySDK/compiled/iOS-static\"",
 				);
 				OTHER_LDFLAGS = "\"-all_load\"";
 				PROVISIONING_PROFILE = "00FBE598-F4C5-4B9E-8BCF-FED770920C0F";
