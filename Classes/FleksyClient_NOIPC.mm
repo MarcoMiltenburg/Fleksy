@@ -163,9 +163,9 @@ NSString* getAbsolutePath(NSString* filepath, NSString* languagePack) {
   
   
   //if ([[NSFileManager defaultManager] fileExistsAtPath:filename]) {
-    self.systemsIntegrator->loadContextData(NSStringToString(getAbsolutePath(@"context/unigram.file", languagePack)),
-                                       NSStringToString(getAbsolutePath(@"context/bigram.file", languagePack)),
-                                       NSStringToString(getAbsolutePath(@"context/trigram.file", languagePack)),
+    self.systemsIntegrator->loadContextData(NSStringToString(getAbsolutePath(@"context/file1", languagePack)),
+                                       NSStringToString(getAbsolutePath(@"context/file2", languagePack)),
+                                       NSStringToString(getAbsolutePath(@"context/file3", languagePack)),
                                        "", "", "", false);
   //}
   

@@ -19,8 +19,6 @@
 		2E1E745415C871BB0029E761 /* MyTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E1E745315C871BB0029E761 /* MyTextView.m */; };
 		2E24C0D01473ED010056B137 /* FleksyKeyboard.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2E24C0CF1473ED010056B137 /* FleksyKeyboard.mm */; };
 		2E24C0D314740D0F0056B137 /* HookingUtilities.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2E24C0D214740D0E0056B137 /* HookingUtilities.mm */; };
-		2E25A43D16F3878E00005482 /* libFleksyStatic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E25A43C16F3878E00005482 /* libFleksyStatic.a */; };
-		2E2EBE1816C447F7000090BF /* instructions in Resources */ = {isa = PBXBuildFile; fileRef = 2E2EBE1716C447F7000090BF /* instructions */; };
 		2E3F6E90155A214B001BE187 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E0BC2EB1559B39500BFF935 /* Default.png */; };
 		2E3F6E91155A214E001BE187 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E0BC2E31559AFE300BFF935 /* Default@2x.png */; };
 		2E42CBE611D5456900409C5E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E42CBE511D5456800409C5E /* CoreGraphics.framework */; };
@@ -71,12 +69,10 @@
 		2EA0B72B15C1CB6E0000E724 /* FleksyTextView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2EA0B72A15C1CB6E0000E724 /* FleksyTextView.mm */; };
 		2EA3E84616964AA200BC54A4 /* MultipartSpeechSynthesizer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2EA3E84516964AA200BC54A4 /* MultipartSpeechSynthesizer.mm */; };
 		2EA8917F16126A4700B4E62A /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EA8917E16126A4700B4E62A /* Default-568h@2x.png */; };
-		2EAC83B316D59F6500D44A29 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EAC83B216D59F6500D44A29 /* libTestFlight.a */; };
 		2EAC83B716D6C73400D44A29 /* UILongPressGestureRecognizer2.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2EAC83B616D6C73400D44A29 /* UILongPressGestureRecognizer2.mm */; };
 		2EBE811811D3038500397176 /* FLKeyboard.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2EBE811711D3038500397176 /* FLKeyboard.mm */; };
 		2EBF199011EAF9AC00C7B0F1 /* FLSuggestionsView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF198F11EAF9AC00C7B0F1 /* FLSuggestionsView.mm */; };
 		2EC0B6D5168CE0B1005AD155 /* StringConversion.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2EC0B6D4168CE0B1005AD155 /* StringConversion.mm */; };
-		2EC0B6DD168CECAF005AD155 /* FleksyEngineTestCase.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2EC0B6DC168CECAF005AD155 /* FleksyEngineTestCase.mm */; };
 		2EC0B6FC168D1668005AD155 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EC0B6FA168D1641005AD155 /* Icon@2x.png */; };
 		2EC0B6FE168D1670005AD155 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EC0B6FD168D166F005AD155 /* Icon.png */; };
 		2EC0B700168D1675005AD155 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EC0B6FF168D1675005AD155 /* Icon-72@2x.png */; };
@@ -99,6 +95,23 @@
 		2EDB469011DA95B40057E60D /* FLTypingController_iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2EDB468F11DA95B40057E60D /* FLTypingController_iOS.mm */; };
 		2EE39C2E161279E600B88B2E /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EE39C2D161279E600B88B2E /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		2EE7C89015BDE30700307235 /* FLPurchaseManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2EE7C88F15BDE30700307235 /* FLPurchaseManager.mm */; };
+		61BAB66C1701001E00498DA9 /* IASKAppSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 61BAB64E1701001E00498DA9 /* IASKAppSettingsViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		61BAB66D1701001E00498DA9 /* IASKAppSettingsWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 61BAB6501701001E00498DA9 /* IASKAppSettingsWebViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		61BAB66E1701001E00498DA9 /* IASKSpecifierValuesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 61BAB6521701001E00498DA9 /* IASKSpecifierValuesViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		61BAB66F1701001E00498DA9 /* IASKSettingsReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 61BAB6561701001E00498DA9 /* IASKSettingsReader.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		61BAB6701701001E00498DA9 /* IASKSettingsStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 61BAB6581701001E00498DA9 /* IASKSettingsStore.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		61BAB6711701001E00498DA9 /* IASKSettingsStoreFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 61BAB65A1701001E00498DA9 /* IASKSettingsStoreFile.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		61BAB6721701001E00498DA9 /* IASKSettingsStoreUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 61BAB65C1701001E00498DA9 /* IASKSettingsStoreUserDefaults.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		61BAB6731701001E00498DA9 /* IASKSpecifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 61BAB65E1701001E00498DA9 /* IASKSpecifier.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		61BAB6741701001E00498DA9 /* IASKPSSliderSpecifierViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 61BAB6611701001E00498DA9 /* IASKPSSliderSpecifierViewCell.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		61BAB6751701001E00498DA9 /* IASKPSTextFieldSpecifierViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 61BAB6631701001E00498DA9 /* IASKPSTextFieldSpecifierViewCell.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		61BAB6761701001E00498DA9 /* IASKPSTitleValueSpecifierViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 61BAB6651701001E00498DA9 /* IASKPSTitleValueSpecifierViewCell.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		61BAB6771701001E00498DA9 /* IASKSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 61BAB6671701001E00498DA9 /* IASKSlider.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		61BAB6781701001E00498DA9 /* IASKSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 61BAB6691701001E00498DA9 /* IASKSwitch.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		61BAB6791701001E00498DA9 /* IASKTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 61BAB66B1701001E00498DA9 /* IASKTextField.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		61BAB67F170100F800498DA9 /* instructions in Resources */ = {isa = PBXBuildFile; fileRef = 61BAB67E170100F800498DA9 /* instructions */; };
+		61DA863E17011C4000EE52C5 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61DA863D17011C4000EE52C5 /* libTestFlight.a */; };
+		61DA863F17011C8D00EE52C5 /* libFleksyStatic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61BAB67C170100AC00498DA9 /* libFleksyStatic.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -123,8 +136,6 @@
 		2E24C0CF1473ED010056B137 /* FleksyKeyboard.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FleksyKeyboard.mm; sourceTree = "<group>"; };
 		2E24C0D114740D0E0056B137 /* HookingUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HookingUtilities.h; sourceTree = "<group>"; };
 		2E24C0D214740D0E0056B137 /* HookingUtilities.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HookingUtilities.mm; sourceTree = "<group>"; };
-		2E25A43C16F3878E00005482 /* libFleksyStatic.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFleksyStatic.a; path = "../../../../Library/Developer/Xcode/DerivedData/FleksyLib-hfrdrjkcsectbshailtmnlaeduke/Build/Products/Debug-iphonesimulator/libFleksyStatic.a"; sourceTree = "<group>"; };
-		2E2EBE1716C447F7000090BF /* instructions */ = {isa = PBXFileReference; lastKnownFileType = folder; name = instructions; path = ../../../../../Dropbox/Fleksy/instructions; sourceTree = "<group>"; };
 		2E42CBE511D5456800409C5E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		2E4727AD14F8A78E00416BF4 /* CustomSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomSegmentedControl.h; sourceTree = "<group>"; };
 		2E4727AE14F8A78E00416BF4 /* CustomSegmentedControl.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CustomSegmentedControl.mm; sourceTree = "<group>"; };
@@ -212,8 +223,6 @@
 		2EA3E84416964AA200BC54A4 /* MultipartSpeechSynthesizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MultipartSpeechSynthesizer.h; path = Classes/MultipartSpeechSynthesizer.h; sourceTree = "<group>"; };
 		2EA3E84516964AA200BC54A4 /* MultipartSpeechSynthesizer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MultipartSpeechSynthesizer.mm; path = Classes/MultipartSpeechSynthesizer.mm; sourceTree = "<group>"; };
 		2EA8917E16126A4700B4E62A /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		2EAC83B216D59F6500D44A29 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTestFlight.a; path = ../../TestFlightSDK1.2.3b/libTestFlight.a; sourceTree = "<group>"; };
-		2EAC83B416D59F7E00D44A29 /* TestFlight.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TestFlight.h; path = ../../../../TestFlightSDK1.2.3b/TestFlight.h; sourceTree = "<group>"; };
 		2EAC83B516D6C73400D44A29 /* UILongPressGestureRecognizer2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UILongPressGestureRecognizer2.h; path = ../../GestureTestbed/GestureTest/Classes/UILongPressGestureRecognizer2.h; sourceTree = "<group>"; };
 		2EAC83B616D6C73400D44A29 /* UILongPressGestureRecognizer2.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = UILongPressGestureRecognizer2.mm; path = ../../GestureTestbed/GestureTest/Classes/UILongPressGestureRecognizer2.mm; sourceTree = "<group>"; };
 		2EBE811611D3038500397176 /* FLKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLKeyboard.h; sourceTree = "<group>"; };
@@ -222,8 +231,6 @@
 		2EBF198F11EAF9AC00C7B0F1 /* FLSuggestionsView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FLSuggestionsView.mm; sourceTree = "<group>"; };
 		2EC0B6D3168CE0B1005AD155 /* StringConversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringConversion.h; sourceTree = "<group>"; };
 		2EC0B6D4168CE0B1005AD155 /* StringConversion.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = StringConversion.mm; sourceTree = "<group>"; };
-		2EC0B6DB168CECAF005AD155 /* FleksyEngineTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FleksyEngineTestCase.h; path = ../../FleksyX/FleksyX/FleksyEngineTestCase.h; sourceTree = "<group>"; };
-		2EC0B6DC168CECAF005AD155 /* FleksyEngineTestCase.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = FleksyEngineTestCase.mm; path = ../../FleksyX/FleksyX/FleksyEngineTestCase.mm; sourceTree = "<group>"; };
 		2EC0B6FA168D1641005AD155 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		2EC0B6FD168D166F005AD155 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		2EC0B6FF168D1675005AD155 /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72@2x.png"; sourceTree = "<group>"; };
@@ -268,6 +275,41 @@
 		2EE7C88E15BDE30700307235 /* FLPurchaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPurchaseManager.h; sourceTree = "<group>"; };
 		2EE7C88F15BDE30700307235 /* FLPurchaseManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FLPurchaseManager.mm; sourceTree = "<group>"; };
 		2EEA161A15BE124900C04187 /* Fleksy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Fleksy.entitlements; sourceTree = "<group>"; };
+		61BAB64D1701001E00498DA9 /* IASKAppSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IASKAppSettingsViewController.h; sourceTree = "<group>"; };
+		61BAB64E1701001E00498DA9 /* IASKAppSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IASKAppSettingsViewController.m; sourceTree = "<group>"; };
+		61BAB64F1701001E00498DA9 /* IASKAppSettingsWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IASKAppSettingsWebViewController.h; sourceTree = "<group>"; };
+		61BAB6501701001E00498DA9 /* IASKAppSettingsWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IASKAppSettingsWebViewController.m; sourceTree = "<group>"; };
+		61BAB6511701001E00498DA9 /* IASKSpecifierValuesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IASKSpecifierValuesViewController.h; sourceTree = "<group>"; };
+		61BAB6521701001E00498DA9 /* IASKSpecifierValuesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IASKSpecifierValuesViewController.m; sourceTree = "<group>"; };
+		61BAB6531701001E00498DA9 /* IASKViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IASKViewController.h; sourceTree = "<group>"; };
+		61BAB6551701001E00498DA9 /* IASKSettingsReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IASKSettingsReader.h; sourceTree = "<group>"; };
+		61BAB6561701001E00498DA9 /* IASKSettingsReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IASKSettingsReader.m; sourceTree = "<group>"; };
+		61BAB6571701001E00498DA9 /* IASKSettingsStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IASKSettingsStore.h; sourceTree = "<group>"; };
+		61BAB6581701001E00498DA9 /* IASKSettingsStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IASKSettingsStore.m; sourceTree = "<group>"; };
+		61BAB6591701001E00498DA9 /* IASKSettingsStoreFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IASKSettingsStoreFile.h; sourceTree = "<group>"; };
+		61BAB65A1701001E00498DA9 /* IASKSettingsStoreFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IASKSettingsStoreFile.m; sourceTree = "<group>"; };
+		61BAB65B1701001E00498DA9 /* IASKSettingsStoreUserDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IASKSettingsStoreUserDefaults.h; sourceTree = "<group>"; };
+		61BAB65C1701001E00498DA9 /* IASKSettingsStoreUserDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IASKSettingsStoreUserDefaults.m; sourceTree = "<group>"; };
+		61BAB65D1701001E00498DA9 /* IASKSpecifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IASKSpecifier.h; sourceTree = "<group>"; };
+		61BAB65E1701001E00498DA9 /* IASKSpecifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IASKSpecifier.m; sourceTree = "<group>"; };
+		61BAB6601701001E00498DA9 /* IASKPSSliderSpecifierViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IASKPSSliderSpecifierViewCell.h; sourceTree = "<group>"; };
+		61BAB6611701001E00498DA9 /* IASKPSSliderSpecifierViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IASKPSSliderSpecifierViewCell.m; sourceTree = "<group>"; };
+		61BAB6621701001E00498DA9 /* IASKPSTextFieldSpecifierViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IASKPSTextFieldSpecifierViewCell.h; sourceTree = "<group>"; };
+		61BAB6631701001E00498DA9 /* IASKPSTextFieldSpecifierViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IASKPSTextFieldSpecifierViewCell.m; sourceTree = "<group>"; };
+		61BAB6641701001E00498DA9 /* IASKPSTitleValueSpecifierViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IASKPSTitleValueSpecifierViewCell.h; sourceTree = "<group>"; };
+		61BAB6651701001E00498DA9 /* IASKPSTitleValueSpecifierViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IASKPSTitleValueSpecifierViewCell.m; sourceTree = "<group>"; };
+		61BAB6661701001E00498DA9 /* IASKSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IASKSlider.h; sourceTree = "<group>"; };
+		61BAB6671701001E00498DA9 /* IASKSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IASKSlider.m; sourceTree = "<group>"; };
+		61BAB6681701001E00498DA9 /* IASKSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IASKSwitch.h; sourceTree = "<group>"; };
+		61BAB6691701001E00498DA9 /* IASKSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IASKSwitch.m; sourceTree = "<group>"; };
+		61BAB66A1701001E00498DA9 /* IASKTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IASKTextField.h; sourceTree = "<group>"; };
+		61BAB66B1701001E00498DA9 /* IASKTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IASKTextField.m; sourceTree = "<group>"; };
+		61BAB67C170100AC00498DA9 /* libFleksyStatic.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFleksyStatic.a; path = "../FleksySDK/compiled/iOS-static/Debug-iphonesimulator/libFleksyStatic.a"; sourceTree = "<group>"; };
+		61BAB67E170100F800498DA9 /* instructions */ = {isa = PBXFileReference; lastKnownFileType = folder; name = instructions; path = ../../instructions; sourceTree = "<group>"; };
+		61DA863A17011ACD00EE52C5 /* FleksyAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FleksyAPI.h; path = ../FleksySDK/compiled/include/FleksyAPI.h; sourceTree = "<group>"; };
+		61DA863B17011B0900EE52C5 /* FleksyPrivateAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FleksyPrivateAPI.h; path = ../FleksySDK/compiled/include/FleksyPrivateAPI.h; sourceTree = "<group>"; };
+		61DA863C17011B7500EE52C5 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
+		61DA863D17011C4000EE52C5 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTestFlight.a; path = Classes/vendor/libTestFlight.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -275,6 +317,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61DA863F17011C8D00EE52C5 /* libFleksyStatic.a in Frameworks */,
 				2E6965AF16C1E7F50018ACA9 /* Accounts.framework in Frameworks */,
 				2ECA1F48162362B30070F437 /* Twitter.framework in Frameworks */,
 				2EE39C2E161279E600B88B2E /* Social.framework in Frameworks */,
@@ -288,8 +331,7 @@
 				2E146A9C1559EE7F00B4A734 /* AudioToolbox.framework in Frameworks */,
 				2E68687E12026BA200AC7F4F /* libobjc.A.dylib in Frameworks */,
 				2EC91B321587E72B0021990E /* libz.dylib in Frameworks */,
-				2EAC83B316D59F6500D44A29 /* libTestFlight.a in Frameworks */,
-				2E25A43D16F3878E00005482 /* libFleksyStatic.a in Frameworks */,
+				61DA863E17011C4000EE52C5 /* libTestFlight.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,12 +358,14 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				61DA863B17011B0900EE52C5 /* FleksyPrivateAPI.h */,
+				61DA863A17011ACD00EE52C5 /* FleksyAPI.h */,
 				2E6965AE16C1E7F50018ACA9 /* Accounts.framework */,
 				2EA3E84416964AA200BC54A4 /* MultipartSpeechSynthesizer.h */,
 				2EA3E84516964AA200BC54A4 /* MultipartSpeechSynthesizer.mm */,
 				2E7EBFDC1676BDB500DAB9BB /* SynthesizeSingleton.h */,
-				2EAC83B216D59F6500D44A29 /* libTestFlight.a */,
-				2E25A43C16F3878E00005482 /* libFleksyStatic.a */,
+				61DA863D17011C4000EE52C5 /* libTestFlight.a */,
+				61BAB67C170100AC00498DA9 /* libFleksyStatic.a */,
 				2EEA161A15BE124900C04187 /* Fleksy.entitlements */,
 				2E7EBFB41676BBA900DAB9BB /* iFleksyInfo.plist */,
 				080E96DDFE201D6D7F000001 /* Classes */,
@@ -403,6 +447,7 @@
 		2E85008B158836B100FF6A4B /* vendor */ = {
 			isa = PBXGroup;
 			children = (
+				61BAB64B1701001E00498DA9 /* InAppSettingsKit */,
 				2E8500D515883C2B00FF6A4B /* TestFlight */,
 				2E85008C158836B100FF6A4B /* AFNetworking */,
 				2E8500BE158836FC00FF6A4B /* zip */,
@@ -468,7 +513,7 @@
 		2E8500D515883C2B00FF6A4B /* TestFlight */ = {
 			isa = PBXGroup;
 			children = (
-				2EAC83B416D59F7E00D44A29 /* TestFlight.h */,
+				61DA863C17011B7500EE52C5 /* TestFlight.h */,
 			);
 			name = TestFlight;
 			sourceTree = "<group>";
@@ -530,8 +575,6 @@
 				2E7EBFE21676BF2800DAB9BB /* FileManager.mm */,
 				2E7EBFE31676BF2800DAB9BB /* FLUserDictionary.h */,
 				2E7EBFE41676BF2800DAB9BB /* FLUserDictionary.mm */,
-				2EC0B6DB168CECAF005AD155 /* FleksyEngineTestCase.h */,
-				2EC0B6DC168CECAF005AD155 /* FleksyEngineTestCase.mm */,
 				2E961B1F154E24C80061C37D /* Settings_HIDDEN.bundle */,
 				2E5D0C0B13A1AAD3009E2361 /* Settings.bundle */,
 			);
@@ -599,7 +642,7 @@
 		2EC2A5F9146E7BFB00F56549 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				2E2EBE1716C447F7000090BF /* instructions */,
+				61BAB67E170100F800498DA9 /* instructions */,
 				2E6965AA16C1967B0018ACA9 /* menu_blue.png */,
 				2E8A6C3F1681318B0007B0D0 /* language packs */,
 				2E8A6C39168131850007B0D0 /* sounds */,
@@ -631,6 +674,66 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
+		61BAB64B1701001E00498DA9 /* InAppSettingsKit */ = {
+			isa = PBXGroup;
+			children = (
+				61BAB64C1701001E00498DA9 /* Controllers */,
+				61BAB6541701001E00498DA9 /* Models */,
+				61BAB65F1701001E00498DA9 /* Views */,
+			);
+			path = InAppSettingsKit;
+			sourceTree = "<group>";
+		};
+		61BAB64C1701001E00498DA9 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				61BAB64D1701001E00498DA9 /* IASKAppSettingsViewController.h */,
+				61BAB64E1701001E00498DA9 /* IASKAppSettingsViewController.m */,
+				61BAB64F1701001E00498DA9 /* IASKAppSettingsWebViewController.h */,
+				61BAB6501701001E00498DA9 /* IASKAppSettingsWebViewController.m */,
+				61BAB6511701001E00498DA9 /* IASKSpecifierValuesViewController.h */,
+				61BAB6521701001E00498DA9 /* IASKSpecifierValuesViewController.m */,
+				61BAB6531701001E00498DA9 /* IASKViewController.h */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		61BAB6541701001E00498DA9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				61BAB6551701001E00498DA9 /* IASKSettingsReader.h */,
+				61BAB6561701001E00498DA9 /* IASKSettingsReader.m */,
+				61BAB6571701001E00498DA9 /* IASKSettingsStore.h */,
+				61BAB6581701001E00498DA9 /* IASKSettingsStore.m */,
+				61BAB6591701001E00498DA9 /* IASKSettingsStoreFile.h */,
+				61BAB65A1701001E00498DA9 /* IASKSettingsStoreFile.m */,
+				61BAB65B1701001E00498DA9 /* IASKSettingsStoreUserDefaults.h */,
+				61BAB65C1701001E00498DA9 /* IASKSettingsStoreUserDefaults.m */,
+				61BAB65D1701001E00498DA9 /* IASKSpecifier.h */,
+				61BAB65E1701001E00498DA9 /* IASKSpecifier.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		61BAB65F1701001E00498DA9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				61BAB6601701001E00498DA9 /* IASKPSSliderSpecifierViewCell.h */,
+				61BAB6611701001E00498DA9 /* IASKPSSliderSpecifierViewCell.m */,
+				61BAB6621701001E00498DA9 /* IASKPSTextFieldSpecifierViewCell.h */,
+				61BAB6631701001E00498DA9 /* IASKPSTextFieldSpecifierViewCell.m */,
+				61BAB6641701001E00498DA9 /* IASKPSTitleValueSpecifierViewCell.h */,
+				61BAB6651701001E00498DA9 /* IASKPSTitleValueSpecifierViewCell.m */,
+				61BAB6661701001E00498DA9 /* IASKSlider.h */,
+				61BAB6671701001E00498DA9 /* IASKSlider.m */,
+				61BAB6681701001E00498DA9 /* IASKSwitch.h */,
+				61BAB6691701001E00498DA9 /* IASKSwitch.m */,
+				61BAB66A1701001E00498DA9 /* IASKTextField.h */,
+				61BAB66B1701001E00498DA9 /* IASKTextField.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -641,6 +744,7 @@
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
 				1D60588F0D05DD3D006BFB54 /* Frameworks */,
+				61BAB64A1700FF4300498DA9 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -698,11 +802,27 @@
 				2EC0B700168D1675005AD155 /* Icon-72@2x.png in Resources */,
 				2EC0B702168D1678005AD155 /* Icon-72.png in Resources */,
 				2E6965AC16C1967B0018ACA9 /* menu_blue.png in Resources */,
-				2E2EBE1816C447F7000090BF /* instructions in Resources */,
+				61BAB67F170100F800498DA9 /* instructions in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		61BAB64A1700FF4300498DA9 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Crashlytics.framework/run 8437e63c5dcbeca15784fa67dd5fab1275a867a5";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1D60588E0D05DD3D006BFB54 /* Sources */ = {
@@ -763,11 +883,24 @@
 				2E7EBFE61676BF2800DAB9BB /* FLUserDictionary.mm in Sources */,
 				1887E3A3168901B400A8A111 /* KSLabel.m in Sources */,
 				2EC0B6D5168CE0B1005AD155 /* StringConversion.mm in Sources */,
-				2EC0B6DD168CECAF005AD155 /* FleksyEngineTestCase.mm in Sources */,
 				2EA3E84616964AA200BC54A4 /* MultipartSpeechSynthesizer.mm in Sources */,
 				2E6965A816C07A010018ACA9 /* UITouchManagerHooks.mm in Sources */,
 				2EAC83B716D6C73400D44A29 /* UILongPressGestureRecognizer2.mm in Sources */,
 				2E9A140A16DC36F200E9726B /* MyTextChecker.mm in Sources */,
+				61BAB66C1701001E00498DA9 /* IASKAppSettingsViewController.m in Sources */,
+				61BAB66D1701001E00498DA9 /* IASKAppSettingsWebViewController.m in Sources */,
+				61BAB66E1701001E00498DA9 /* IASKSpecifierValuesViewController.m in Sources */,
+				61BAB66F1701001E00498DA9 /* IASKSettingsReader.m in Sources */,
+				61BAB6701701001E00498DA9 /* IASKSettingsStore.m in Sources */,
+				61BAB6711701001E00498DA9 /* IASKSettingsStoreFile.m in Sources */,
+				61BAB6721701001E00498DA9 /* IASKSettingsStoreUserDefaults.m in Sources */,
+				61BAB6731701001E00498DA9 /* IASKSpecifier.m in Sources */,
+				61BAB6741701001E00498DA9 /* IASKPSSliderSpecifierViewCell.m in Sources */,
+				61BAB6751701001E00498DA9 /* IASKPSTextFieldSpecifierViewCell.m in Sources */,
+				61BAB6761701001E00498DA9 /* IASKPSTitleValueSpecifierViewCell.m in Sources */,
+				61BAB6771701001E00498DA9 /* IASKSlider.m in Sources */,
+				61BAB6781701001E00498DA9 /* IASKSwitch.m in Sources */,
+				61BAB6791701001E00498DA9 /* IASKTextField.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -780,6 +913,7 @@
 				CODE_SIGN_ENTITLEMENTS = Fleksy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Konstantinos Eleftheriou (Y58E6AJ88D)";
 				DEPLOYMENT_POSTPROCESSING = NO;
+				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)\"";
 				GCC_PREFIX_HEADER = iFleksy_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -787,11 +921,9 @@
 				INFOPLIST_FILE = "$(SRCROOT)/iFleksyInfo.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../../TestFlightSDK1\"",
-					"\"$(SRCROOT)/../../TestFlightSDK1.2.3b\"",
-					"\"$(SRCROOT)/../FleksySDK/compiled\"",
-					"\"$(SRCROOT)/../../../../Library/Developer/Xcode/DerivedData/FleksyLib-hfrdrjkcsectbshailtmnlaeduke/Build/Products/Debug-iphonesimulator\"",
+					"\"$(SRCROOT)/../FleksySDK/compiled/include\"/**",
+					"\"$(SRCROOT)/Classes/vendor\"",
+					"\"$(SRCROOT)/../FleksySDK/compiled/iOS-static/Debug-iphonesimulator\"",
 				);
 				OTHER_LDFLAGS = "\"-all_load\"";
 				PROVISIONING_PROFILE = "B25499A2-C64B-4A89-9FF6-B66A896640A6";
@@ -823,17 +955,16 @@
 				CODE_SIGN_ENTITLEMENTS = Fleksy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Syntellia, Inc";
 				DEPLOYMENT_POSTPROCESSING = YES;
+				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)\"";
 				GCC_PREFIX_HEADER = iFleksy_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = "\"$SRCROOT/../FleksyHeaders\"/**";
 				INFOPLIST_FILE = "$(SRCROOT)/iFleksyInfo.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../../TestFlightSDK1\"",
-					"\"$(SRCROOT)/../../TestFlightSDK1.2.3b\"",
-					"\"$(SRCROOT)/../FleksySDK/compiled\"",
-					"\"$(SRCROOT)/../../../../Library/Developer/Xcode/DerivedData/FleksyLib-hfrdrjkcsectbshailtmnlaeduke/Build/Products/Debug-iphonesimulator\"",
+					"\"$(SRCROOT)/../FleksySDK/compiled/include\"/**",
+					"\"$(SRCROOT)/Classes/vendor\"",
+					"\"$(SRCROOT)/../FleksySDK/compiled/iOS-static/Debug-iphonesimulator\"",
 				);
 				OTHER_LDFLAGS = "\"-all_load\"";
 				PROVISIONING_PROFILE = "00FBE598-F4C5-4B9E-8BCF-FED770920C0F";
