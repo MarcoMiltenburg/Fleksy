@@ -1,28 +1,12 @@
 #import <UIKit/UIKit.h>
 #import "FleksyAppMainViewController.h"
-#import "FleksyKeyboard.h"
-#import "FleksyTextView.h"
-#import "FLUserDictionary.h"
 
-#define LOAD_SERVER YES
-
-@interface AppDelegate : NSObject<UIApplicationDelegate, FleksyKeyboardListener> {
+@interface AppDelegate : NSObject<UIApplicationDelegate> {
   @private
   UIWindow* window;
   FleksyAppMainViewController* fleksyAppViewController;
-  FleksyTextView* textView;
-  FleksyKeyboard* customInputView;
-  
-  NSTimer* loadingTimer;
-  
-  BOOL lastKnownVoiceOverState;
 }
 
-- (void) setProximityMonitoringEnabled:(BOOL) b;
-- (void) speakCurrentText;
-
 @property (readonly) FleksyAppMainViewController* fleksyAppViewController;
-//@property (readonly) BOOL loading;
-
 
 @end

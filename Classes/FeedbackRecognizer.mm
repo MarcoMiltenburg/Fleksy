@@ -14,6 +14,7 @@
 #import "AppDelegate.h"
 #import "VariousUtilities.h"
 #import <Foundation/NSProcessInfo.h>
+#import "FleksyPack.h"
 
 #define POPUP_DELAY    0.060
 #define TAP_DELAY      0.100
@@ -419,8 +420,8 @@
 
 - (void) startHover {
 #if !FLEKSY_SDK
-  AppDelegate* appDelegate = (AppDelegate*) [UIApplication sharedApplication].delegate;
-  [appDelegate setProximityMonitoringEnabled:NO];
+  //AppDelegate* appDelegate = (AppDelegate*) [UIApplication sharedApplication].delegate;
+  [FleksyPack setProximityMonitoringEnabled:NO];
 #endif
   hoverMode = YES;
   lastChar = 0;
@@ -437,8 +438,9 @@
   [NSObject cancelPreviousPerformRequestsWithTarget:self];
   [NSObject cancelPreviousPerformRequestsWithTarget:nato];
 #if !FLEKSY_SDK
-  AppDelegate* appDelegate = (AppDelegate*) [UIApplication sharedApplication].delegate;
-  [appDelegate setProximityMonitoringEnabled:YES];
+  //AppDelegate* appDelegate = (AppDelegate*) [UIApplication sharedApplication].delegate;
+  [FleksyPack setProximityMonitoringEnabled:NO];
+
 #endif
 }
 

@@ -114,6 +114,7 @@
 		61DA86411701229E00EE52C5 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61DA86401701229E00EE52C5 /* Crashlytics.framework */; };
 		61DA864F1701316E00EE52C5 /* libFleksyStatic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61DA864E1701316D00EE52C5 /* libFleksyStatic.a */; };
 		61DA86551701F24500EE52C5 /* IconRounded.png in Resources */ = {isa = PBXBuildFile; fileRef = 61DA86541701F24500EE52C5 /* IconRounded.png */; };
+		61DA86591702067600EE52C5 /* FleksyPack.mm in Sources */ = {isa = PBXBuildFile; fileRef = 61DA86581702067600EE52C5 /* FleksyPack.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -314,6 +315,8 @@
 		61DA86401701229E00EE52C5 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		61DA864E1701316D00EE52C5 /* libFleksyStatic.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFleksyStatic.a; path = "../FleksySDK/compiled/iOS-static/Debug-iphonesimulator/libFleksyStatic.a"; sourceTree = "<group>"; };
 		61DA86541701F24500EE52C5 /* IconRounded.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IconRounded.png; sourceTree = "<group>"; };
+		61DA86571702067600EE52C5 /* FleksyPack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FleksyPack.h; sourceTree = "<group>"; };
+		61DA86581702067600EE52C5 /* FleksyPack.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FleksyPack.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -346,6 +349,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				61DA8656170203A500EE52C5 /* SDK */,
 				2E85008B158836B100FF6A4B /* vendor */,
 				2E896DC914BAC9F60098FD4F /* Client */,
 			);
@@ -741,6 +745,15 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		61DA8656170203A500EE52C5 /* SDK */ = {
+			isa = PBXGroup;
+			children = (
+				61DA86571702067600EE52C5 /* FleksyPack.h */,
+				61DA86581702067600EE52C5 /* FleksyPack.mm */,
+			);
+			name = SDK;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -909,6 +922,7 @@
 				61BAB6771701001E00498DA9 /* IASKSlider.m in Sources */,
 				61BAB6781701001E00498DA9 /* IASKSwitch.m in Sources */,
 				61BAB6791701001E00498DA9 /* IASKTextField.m in Sources */,
+				61DA86591702067600EE52C5 /* FleksyPack.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -17,6 +17,7 @@
 #import <AudioToolbox/AudioToolbox.h>
 #import "IASKAppSettingsViewController.h"
 #import "IASKSettingsReader.h"
+#import "FleksyPack.h"
 
 //#define APP_STORE_LINK @"http://itunes.apple.com/us/app/fleksy/id520337246?mt=8&uo=4"
 #define IOS_DEVICE_REVIEW_LINK @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=520337246"
@@ -1614,10 +1615,10 @@
     }
   }
   
-  AppDelegate* appDelegate = (AppDelegate*) [UIApplication sharedApplication].delegate;
-  [appDelegate setProximityMonitoringEnabled:!UIInterfaceOrientationIsLandscape(toInterfaceOrientation)];
+//  AppDelegate* appDelegate = (AppDelegate*) [UIApplication sharedApplication].delegate;
+  [FleksyPack setProximityMonitoringEnabled:!UIInterfaceOrientationIsLandscape(toInterfaceOrientation)];
   
-  
+
   if ([self isUIActionSheetVisible:initialMainMenu]) {
     [self dismissInitialMainMenu];
     initialMainMenu.tag = TAG_RESHOW_AFTER_ROTATION;

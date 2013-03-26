@@ -18,6 +18,7 @@
 #import "FLKeyboardContainerView.h"
 #import "VariousUtilities.h"
 #import <QuartzCore/QuartzCore.h>
+#import "FleksyPack.h"
 
 //#import "/usr/include/objc/objc-runtime.h"
 
@@ -197,7 +198,7 @@ static FleksyKeyboard* instance = nil;
   } else {
     //NSLog(@"favorites didn't change");
   }
-  [appDelegate setProximityMonitoringEnabled:FLEKSY_APP_SETTING_RAISE_TO_SPEAK];
+  [FleksyPack setProximityMonitoringEnabled:FLEKSY_APP_SETTING_RAISE_TO_SPEAK];
 #endif
   
   //  if (FLEKSY_APP_SETTING_TOUCH_HOME) {
