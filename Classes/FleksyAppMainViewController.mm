@@ -15,6 +15,8 @@
 #import "VariousUtilities.h"
 #import <QuartzCore/QuartzCore.h>
 #import <AudioToolbox/AudioToolbox.h>
+#import "IASKAppSettingsViewController.h"
+#import "IASKSettingsReader.h"
 
 //#define APP_STORE_LINK @"http://itunes.apple.com/us/app/fleksy/id520337246?mt=8&uo=4"
 #define IOS_DEVICE_REVIEW_LINK @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=520337246"
@@ -43,7 +45,114 @@
 
 #define TAG_RESHOW_AFTER_ROTATION 1
 
+@interface FleksyAppMainViewController () <IASKSettingsDelegate, UIPopoverControllerDelegate>
+{
+    IASKAppSettingsViewController *appSettingsViewController;
+}
+
+@property (nonatomic, retain) IASKAppSettingsViewController *appSettingsViewController;
+@property (nonatomic) UIPopoverController* currentPopoverController;
+
+@end
+
 @implementation FleksyAppMainViewController
+
+@synthesize appSettingsViewController;
+
+#pragma mark - Settings
+
+- (IASKAppSettingsViewController*)appSettingsViewController {
+	if (!appSettingsViewController) {
+		appSettingsViewController = [[IASKAppSettingsViewController alloc] init];
+		appSettingsViewController.delegate = self;
+//		BOOL enabled = [[NSUserDefaults standardUserDefaults] boolForKey:@"AutoConnect"];
+//		appSettingsViewController.hiddenKeys = enabled ? nil : [NSSet setWithObjects:@"AutoConnectLogin", @"AutoConnectPassword", nil];
+	}
+	return appSettingsViewController;
+}
+
+#pragma mark IASKAppSettingsViewControllerDelegate protocol
+
+- (void)settingsViewControllerDidEnd:(IASKAppSettingsViewController*)sender {
+    [self dismissModalViewControllerAnimated:YES];
+	
+	// your code here to reconfigure the app for changed settings
+    
+    NSLog(@"%s: sender = %@", __PRETTY_FUNCTION__, sender);
+    
+    [textView.inputView performSelector:@selector(handleSettingsChanged:) withObject:nil];
+}
+
+//optional
+
+- (CGFloat)settingsViewController:(id<IASKViewController>)settingsViewController
+                        tableView:(UITableView *)tableView
+        heightForHeaderForSection:(NSInteger)section {
+    NSString* key = [settingsViewController.settingsReader keyForSection:section];
+	if ([key isEqualToString:@"FleksyLogo"]) {
+		return [UIImage imageNamed:@"Icon.png"].size.height + 25;
+	}
+	return 0;
+}
+
+- (UIView *)settingsViewController:(id<IASKViewController>)settingsViewController
+                         tableView:(UITableView *)tableView
+           viewForHeaderForSection:(NSInteger)section {
+    NSString* key = [settingsViewController.settingsReader keyForSection:section];
+	if ([key isEqualToString:@"FleksyLogo"]) {
+		UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Icon.png"]];
+		imageView.contentMode = UIViewContentModeCenter;
+		//return [imageView autorelease];
+		return imageView;
+	}
+	return nil;
+}
+
+
+#pragma mark - Settings Handling
+
+- (void) showSettings {
+    
+    [TestFlight passCheckpoint:@"showSettings"];
+    
+    [self showSettingsModal:nil];
+}
+
+- (void)showSettingsPush:(id)sender {
+	[self.appSettingsViewController setShowCreditsFooter:NO];   // Uncomment to not display InAppSettingsKit credits for creators.
+	self.appSettingsViewController.showDoneButton = NO;
+	[self.navigationController pushViewController:self.appSettingsViewController animated:YES];
+}
+
+- (void)showSettingsModal:(id)sender {
+    UINavigationController *aNavController = [[UINavigationController alloc] initWithRootViewController:self.appSettingsViewController];
+    [self.appSettingsViewController setShowCreditsFooter:NO];   // Uncomment to not display InAppSettingsKit credits for creators.
+    self.appSettingsViewController.showDoneButton = YES;
+    [self presentModalViewController:aNavController animated:YES];
+}
+
+- (void)showSettingsPopover:(id)sender {
+    
+    // Popovers cannot be presented from a view which does not have a window.
+	if(self.currentPopoverController) {
+        [self dismissCurrentPopover];
+		return;
+	}
+    
+	self.appSettingsViewController.showDoneButton = NO;
+	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:self.appSettingsViewController] ;
+	UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:navController];
+	popover.delegate = self;
+	[popover presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionUp animated:NO];
+	self.currentPopoverController = popover;
+}
+
+- (void) dismissCurrentPopover {
+	[self.currentPopoverController dismissPopoverAnimated:YES];
+	self.currentPopoverController = nil;
+}
+
+#pragma mark - Twitter Support
 
 ////////////////////////////////////////////////////////////////////////////
 //http://code.shabz.co/post/36796928905/follow-a-username-on-twitter-ios-5
@@ -491,14 +600,6 @@
   [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://fleksy.com"]];  
 }
 
-- (void) showSettings {
-  
-  [TestFlight passCheckpoint:@"showSettings"];
-  
-  UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Settings" message:@"Press the home button, go to the Settings app and find Fleksy on the list for many configurable options! (such as toggling voice feedback)" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-  [alert show];
-}
-
 - (void) showDetailedInstructions:(BOOL) fromAlert {
   
   [TestFlight passCheckpoint:[NSString stringWithFormat:@"showDetailedInstructions.%@", UIAccessibilityIsVoiceOverRunning() ? @"VO" : @"non-VO"]];
@@ -602,6 +703,9 @@
   [self switchToFullVersion];
   
   [purchaseManager resetRuns];
+    
+    // Clear the inApp setting view so it will agree with defaults
+    self.appSettingsViewController = nil;
 }
 
 - (void) askClearDefaults {
@@ -1356,6 +1460,7 @@
   NSLog(@"FleksyAppMainViewController didReceiveMemoryWarning");
   [super didReceiveMemoryWarning];
   // Release any cached data, images, etc that aren't in use.
+    self.appSettingsViewController = nil;
 }
 
 

@@ -192,6 +192,24 @@
 			<key>Key</key>
 			<string>FLEKSY_APP_SETTING_VERSION</string>
 		</dict>
+		<dict>
+			<key>Key</key>
+			<string>FleksyLogo</string>
+			<key>Title</key>
+			<string></string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>FooterText</key>
+			<string>Fleksy - Happy Typing!</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string></string>
+			<key>FooterText</key>
+			<string>Patents Pending (#531200, 724192, 747200, 758744, 7627000, &amp; 804124). </string>
+		</dict>
 	</array>
 	<key>StringsTable</key>
 	<string>Root</string>
