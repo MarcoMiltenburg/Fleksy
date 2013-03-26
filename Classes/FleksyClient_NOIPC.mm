@@ -57,14 +57,14 @@
 }
 
 
-NSString* getWritablePathWithFilename(NSString* filename) {
-  NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-  NSString* documentsDirectory = [paths objectAtIndex:0];
-  NSString* result = [documentsDirectory stringByAppendingPathComponent:filename];
-  //NSURL* url = [NSURL URLWithString:result];
-  [[NSFileManager defaultManager] createDirectoryAtPath:[result stringByDeletingLastPathComponent] withIntermediateDirectories:YES attributes:nil error:nil];
-  return result;
-}
+//NSString* getWritablePathWithFilename(NSString* filename) {
+//  NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//  NSString* documentsDirectory = [paths objectAtIndex:0];
+//  NSString* result = [documentsDirectory stringByAppendingPathComponent:filename];
+//  //NSURL* url = [NSURL URLWithString:result];
+//  [[NSFileManager defaultManager] createDirectoryAtPath:[result stringByDeletingLastPathComponent] withIntermediateDirectories:YES attributes:nil error:nil];
+//  return result;
+//}
 
 
 bool preprocessedFilesExist(NSString* filepathFormat) {
@@ -87,91 +87,19 @@ NSString* getAbsolutePath(NSString* filepath, NSString* languagePack) {
 
   NSLog(@"FleksyClient_NOIPC LOADING, languagePack: %@", languagePack);
   
-  double startTime = CFAbsoluteTimeGetCurrent();
+  fleksyAPI->setResourcePath(getAbsolutePath(@"", languagePack).UTF8String);
+  fleksyAPI->loadResources();  
   
-  NSString* filename;
-  NSString* text;
-  
-  void* buffer;
-  size_t bufferSize;
-  
-  
-  filename = getAbsolutePath(@"keyboards/keyboard-iPhone-ASCII.txt.xxx", languagePack);
-  buffer = EncryptionUtilities::readBinaryFile(filename.UTF8String, bufferSize);
-  self.systemsIntegrator->loadKeyboardData(buffer, bufferSize, true);
-  free(buffer);
-  
-  string preprocessedFilepathFormat = NSStringToString(getAbsolutePath(@"preprocessed/preprocessed-%d.txt", languagePack));
-  
-  BOOL usePreprocessedFiles = YES;
-  if (usePreprocessedFiles) {
-    double startTimePreload = CFAbsoluteTimeGetCurrent();
-    for (int i = 1; i <= FLEKSY_MAX_WORD_SIZE; i++) {
-      string* filepath = _resolveFilepath(preprocessedFilepathFormat, i);
-      printf("_resolveFilepath %d: %s\n", i, filepath->c_str());
-      size_t length;
-      char* contents = FLBlackBoxSerializer::memoryMapFile(filepath->c_str(), &length);
-      if (contents && length) {
-        self.systemsIntegrator->preloadWithContents(i, contents, length);
-        FLBlackBoxSerializer::unmapMemoryMapFile(contents, length);
-      } else {
-        [[NSException exceptionWithName:@"LoadingException" reason:[NSString stringWithFormat:@"preprocessed file %s not found!", filepath->c_str()] userInfo:nil] raise];
-      }
-      delete filepath;
-    }
-    NSLog(@"> loadTables took %.6f", CFAbsoluteTimeGetCurrent() - startTimePreload);
-  } else {
-    NSLog(@"not using preprocessed files");
-  }
-  
-#if !DEBUG_NO_WORDS
-  
-  filename = getAbsolutePath(@"wordlists/wordlist-master-blacklist-capitalized.txt.xxx", languagePack);
-  buffer = EncryptionUtilities::readBinaryFile(filename.UTF8String, bufferSize);
-  self.systemsIntegrator->loadDictionary(NSStringToString(filename), buffer, bufferSize, FLStringMake("\t"), kWordlistBlacklist, true);
-  free(buffer);
-  
-  filename = getAbsolutePath(@"wordlists/wordlist-master-blacklist.txt.xxx", languagePack);
-  buffer = EncryptionUtilities::readBinaryFile(filename.UTF8String, bufferSize);
-  self.systemsIntegrator->loadDictionary(NSStringToString(filename), buffer, bufferSize, FLStringMake(" "), kWordlistBlacklist, true);
-  free(buffer);
-  
-  filename = getAbsolutePath(@"wordlists/wordlist-master-ASCII.txt.xxx", languagePack);
-  buffer = EncryptionUtilities::readBinaryFile(filename.UTF8String, bufferSize);
-  self.systemsIntegrator->loadDictionary(NSStringToString(filename), buffer, bufferSize, FLStringMake("\t"), kWordlistStandard, true);
-  free(buffer);
-  
-  // we want to write before we load "dynamic" dictionaries (preloaded and user dictionaries have their BB values calculated on the fly)
-  //filename = [NSString stringWithFormat:@"%@/preprocessed/preprocessed-%%d.txt", languagePack];
-  //systemsIntegrator->writeTablesIfNeeded(NSStringToString(getWritablePathWithFilename(filename)));
-  
-  filename = getAbsolutePath(@"wordlists/wordlist-preloaded.txt.xxx", languagePack);
-  buffer = EncryptionUtilities::readBinaryFile(filename.UTF8String, bufferSize);
-  self.systemsIntegrator->loadDictionary(NSStringToString(filename), buffer, bufferSize, FLStringMake(" "), kWordlistPreloaded, true);
-  free(buffer);
   
   if (self.userDictionary && !RUN_FLEKSY_TESTS) {
     // TODO: what do we do for words that are remotely added (eg. iCloud) AFTER postload is called?
     // need to update ranks?
     [self.userDictionary load];
-    filename = @"NSDEFAULTS_USER_DICTIONARY";
-    text = [self.userDictionary stringContent];
-    FLString myText = NSStringToFLString(text); 
+    NSString* filename = @"NSDEFAULTS_USER_DICTIONARY";
+    NSString* text = [self.userDictionary stringContent];
+    FLString myText = NSStringToFLString(text);
     self.systemsIntegrator->loadDictionary(NSStringToString(filename), (void*)myText.c_str(), myText.length(), FLStringMake("\t"), kWordlistUser, false);
   }
-#endif
-  
-  
-  //if ([[NSFileManager defaultManager] fileExistsAtPath:filename]) {
-    self.systemsIntegrator->loadContextData(NSStringToString(getAbsolutePath(@"context/file1", languagePack)),
-                                       NSStringToString(getAbsolutePath(@"context/file2", languagePack)),
-                                       NSStringToString(getAbsolutePath(@"context/file3", languagePack)),
-                                       "", "", "", false);
-  //}
-  
-  self.systemsIntegrator->postload();
-  
-  NSLog(@"loadData took %.6f", CFAbsoluteTimeGetCurrent() - startTime);
   
 #if RUN_FLEKSY_TESTS
     filename = getAbsolutePath(@"tests/0000.txt", languagePack);
