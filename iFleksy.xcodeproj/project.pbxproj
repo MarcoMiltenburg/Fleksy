@@ -112,6 +112,7 @@
 		61BAB67F170100F800498DA9 /* instructions in Resources */ = {isa = PBXBuildFile; fileRef = 61BAB67E170100F800498DA9 /* instructions */; };
 		61DA863E17011C4000EE52C5 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61DA863D17011C4000EE52C5 /* libTestFlight.a */; };
 		61DA863F17011C8D00EE52C5 /* libFleksyStatic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61BAB67C170100AC00498DA9 /* libFleksyStatic.a */; };
+		61DA86411701229E00EE52C5 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61DA86401701229E00EE52C5 /* Crashlytics.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -310,6 +311,7 @@
 		61DA863B17011B0900EE52C5 /* FleksyPrivateAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FleksyPrivateAPI.h; path = ../FleksySDK/compiled/include/FleksyPrivateAPI.h; sourceTree = "<group>"; };
 		61DA863C17011B7500EE52C5 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		61DA863D17011C4000EE52C5 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTestFlight.a; path = Classes/vendor/libTestFlight.a; sourceTree = "<group>"; };
+		61DA86401701229E00EE52C5 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -332,6 +334,7 @@
 				2E68687E12026BA200AC7F4F /* libobjc.A.dylib in Frameworks */,
 				2EC91B321587E72B0021990E /* libz.dylib in Frameworks */,
 				61DA863E17011C4000EE52C5 /* libTestFlight.a in Frameworks */,
+				61DA86411701229E00EE52C5 /* Crashlytics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -389,6 +392,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				61DA86401701229E00EE52C5 /* Crashlytics.framework */,
 				2E68687D12026BA200AC7F4F /* libobjc.A.dylib */,
 				2EC8F8E716372EBC0088B5F8 /* libsqlite3.dylib */,
 				2EC8F8E916372EC80088B5F8 /* CFNetwork.framework */,

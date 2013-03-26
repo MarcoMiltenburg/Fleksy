@@ -13,6 +13,9 @@
 
 #define DEBUG_NO_WORDS 0
 
+//Installing Crashlytics = 1
+#define CRASHLYTICS 1
+
 //if 0 also change bundle identifier to "com.syntellia.FleksyBETA" and product name to "Fleksy Beta"
 #define APP_STORE 1
 

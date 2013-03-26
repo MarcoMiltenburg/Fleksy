@@ -17,6 +17,7 @@
 
 #import "UIRotorRecognizer.h"
 #import <QuartzCore/QuartzCore.h>
+#include "Crashlytics/Crashlytics.h"
 
 #include <string>
 
@@ -139,6 +140,10 @@ float distributionFunction(float x) {
 #endif
 #endif
 
+#ifdef CRASHLYTICS
+    printf("Fleksy CRASHLYTICS\n");
+    [Crashlytics startWithAPIKey:@"8437e63c5dcbeca15784fa67dd5fab1275a867a5"];
+#endif
 
 #ifdef DEBUG
   printf("Fleksy DEBUG\n");
