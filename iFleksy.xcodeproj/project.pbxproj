@@ -96,6 +96,7 @@
 		2EE39C2E161279E600B88B2E /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EE39C2D161279E600B88B2E /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		2EE7C89015BDE30700307235 /* FLPurchaseManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2EE7C88F15BDE30700307235 /* FLPurchaseManager.mm */; };
 		6116464B17023C650093E29F /* libFleksyStatic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6116464A17023C650093E29F /* libFleksyStatic.a */; };
+		6116464F170259100093E29F /* instructions in Resources */ = {isa = PBXBuildFile; fileRef = 6116464E170259100093E29F /* instructions */; };
 		61BAB66C1701001E00498DA9 /* IASKAppSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 61BAB64E1701001E00498DA9 /* IASKAppSettingsViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		61BAB66D1701001E00498DA9 /* IASKAppSettingsWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 61BAB6501701001E00498DA9 /* IASKAppSettingsWebViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		61BAB66E1701001E00498DA9 /* IASKSpecifierValuesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 61BAB6521701001E00498DA9 /* IASKSpecifierValuesViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -110,7 +111,6 @@
 		61BAB6771701001E00498DA9 /* IASKSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 61BAB6671701001E00498DA9 /* IASKSlider.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		61BAB6781701001E00498DA9 /* IASKSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 61BAB6691701001E00498DA9 /* IASKSwitch.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		61BAB6791701001E00498DA9 /* IASKTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 61BAB66B1701001E00498DA9 /* IASKTextField.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		61BAB67F170100F800498DA9 /* instructions in Resources */ = {isa = PBXBuildFile; fileRef = 61BAB67E170100F800498DA9 /* instructions */; };
 		61DA863E17011C4000EE52C5 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61DA863D17011C4000EE52C5 /* libTestFlight.a */; };
 		61DA86411701229E00EE52C5 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61DA86401701229E00EE52C5 /* Crashlytics.framework */; };
 		61DA86551701F24500EE52C5 /* IconRounded.png in Resources */ = {isa = PBXBuildFile; fileRef = 61DA86541701F24500EE52C5 /* IconRounded.png */; };
@@ -278,6 +278,7 @@
 		2EE7C88F15BDE30700307235 /* FLPurchaseManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FLPurchaseManager.mm; sourceTree = "<group>"; };
 		2EEA161A15BE124900C04187 /* Fleksy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Fleksy.entitlements; sourceTree = "<group>"; };
 		6116464A17023C650093E29F /* libFleksyStatic.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFleksyStatic.a; path = "../FleksySDK/compiled/iOS-static/Release/libFleksyStatic.a"; sourceTree = "<group>"; };
+		6116464E170259100093E29F /* instructions */ = {isa = PBXFileReference; lastKnownFileType = folder; path = instructions; sourceTree = "<group>"; };
 		61BAB64D1701001E00498DA9 /* IASKAppSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IASKAppSettingsViewController.h; sourceTree = "<group>"; };
 		61BAB64E1701001E00498DA9 /* IASKAppSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IASKAppSettingsViewController.m; sourceTree = "<group>"; };
 		61BAB64F1701001E00498DA9 /* IASKAppSettingsWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IASKAppSettingsWebViewController.h; sourceTree = "<group>"; };
@@ -307,7 +308,6 @@
 		61BAB6691701001E00498DA9 /* IASKSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IASKSwitch.m; sourceTree = "<group>"; };
 		61BAB66A1701001E00498DA9 /* IASKTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IASKTextField.h; sourceTree = "<group>"; };
 		61BAB66B1701001E00498DA9 /* IASKTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IASKTextField.m; sourceTree = "<group>"; };
-		61BAB67E170100F800498DA9 /* instructions */ = {isa = PBXFileReference; lastKnownFileType = folder; name = instructions; path = ../../instructions; sourceTree = "<group>"; };
 		61DA863A17011ACD00EE52C5 /* FleksyAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FleksyAPI.h; path = ../FleksySDK/compiled/include/FleksyAPI.h; sourceTree = "<group>"; };
 		61DA863B17011B0900EE52C5 /* FleksyPrivateAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FleksyPrivateAPI.h; path = ../FleksySDK/compiled/include/FleksyPrivateAPI.h; sourceTree = "<group>"; };
 		61DA863C17011B7500EE52C5 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
@@ -649,7 +649,7 @@
 		2EC2A5F9146E7BFB00F56549 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				61BAB67E170100F800498DA9 /* instructions */,
+				6116464E170259100093E29F /* instructions */,
 				2E6965AA16C1967B0018ACA9 /* menu_blue.png */,
 				2E8A6C3F1681318B0007B0D0 /* language packs */,
 				2E8A6C39168131850007B0D0 /* sounds */,
@@ -809,8 +809,8 @@
 				2EC0B700168D1675005AD155 /* Icon-72@2x.png in Resources */,
 				2EC0B702168D1678005AD155 /* Icon-72.png in Resources */,
 				2E6965AC16C1967B0018ACA9 /* menu_blue.png in Resources */,
-				61BAB67F170100F800498DA9 /* instructions in Resources */,
 				61DA86551701F24500EE52C5 /* IconRounded.png in Resources */,
+				6116464F170259100093E29F /* instructions in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
