@@ -1,5 +1,5 @@
 //
-//  FLKeyboardContainerView.m
+//  FLTypingController_iOS.h
 //  Fleksy
 //
 //  Copyright (c) 2011 Syntellia Inc. All rights reserved.
@@ -199,7 +199,7 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
 //      flcout << e.what() << endl;
 //    }
 
-    [[FLKeyboard sharedFLKeyboard] initWithFrame:CGRectMake(0, 0, 1, 1)];
+    FLKeyboard *keyboard = [[FLKeyboard sharedFLKeyboard] initWithFrame:CGRectMake(0, 0, 1, 1)];
   
     points = [[NSMutableArray alloc] init];
     pointTraces = [[NSMutableArray alloc] init];

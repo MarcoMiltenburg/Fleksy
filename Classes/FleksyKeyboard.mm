@@ -130,7 +130,10 @@ static FleksyKeyboard* instance = nil;
 - (void) handleSettingsChanged:(NSNotification*) notification {
   
   //NSLog(@"handleSettingsChanged: %@, userInfo: %@, delay: %.6f", notification, [notification userInfo], [VariousUtilities getNotificationDelay:notification]);
-  
+
+  double startTime = CFAbsoluteTimeGetCurrent();
+    
+
   NSDictionary* settings = [FileManager settings];
   if (!settings) {
     NSLog(@"no settings!");
@@ -207,6 +210,8 @@ static FleksyKeyboard* instance = nil;
   //NSLog(@"kbView->scrollWheelRecognizer.enabled: %d", kbView->scrollWheelRecognizer.enabled);
   
   [self setNeedsLayout];
+    
+  NSLog(@"END of handleSettingsChanged:, took %.6f", CFAbsoluteTimeGetCurrent() - startTime);
 }
 
 

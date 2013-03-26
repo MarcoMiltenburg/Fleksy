@@ -1,5 +1,5 @@
 //
-//  FLKeyboardContainerView.h
+//  FLTypingController_iOS.h
 //  Fleksy
 //
 //  Copyright (c) 2011 Syntellia Inc. All rights reserved.

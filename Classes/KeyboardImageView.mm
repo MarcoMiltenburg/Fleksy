@@ -324,6 +324,10 @@
     if (!FLEKSY_APP_SETTING_SPACE_BUTTON) {
       homeRowStripe.backgroundColor = [UIColor colorWithWhite:1 alpha:0.2];
     }
+    else  {
+        //TODO (Clean up) This displays a "fun" strip of fleksyBalls in the homeRow if SPACE_BUTTON enabled only.
+        homeRowStripe.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Icon.png"]];
+    }
     [self addSubview:homeRowStripe];
     [self sendSubviewToBack:homeRowStripe];
   } else {
