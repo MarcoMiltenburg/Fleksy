@@ -1,5 +1,6 @@
 #import "AppDelegate.h"
 #import "FleksyPack.h"
+#import "Settings.h"
 
 #import "Accelerate/Accelerate.h"
 #import <QuartzCore/QuartzCore.h>
