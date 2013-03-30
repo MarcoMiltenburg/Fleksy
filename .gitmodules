@@ -1,0 +1,6 @@
+[submodule "submodules/GestureTestbed"]
+	path = submodules/GestureTestbed
+	url = git@github.com:syntellia/GestureTestbed.git
+[submodule "submodules/FleksySDK-compiled"]
+	path = submodules/FleksySDK-compiled
+	url = git@github.com:syntellia/FleksySDK-compiled.git
