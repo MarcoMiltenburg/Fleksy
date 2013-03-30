@@ -473,9 +473,7 @@ static FleksyKeyboard* instance = nil;
         gestureRecognizer.state, gestureRecognizer.numberOfTouches, NSStringFromCGPoint([gestureRecognizer locationInView:self]));
   
   if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Hey, menu gesture has changed!" message:@"To invoke the menu, swipe up with two fingers anywhere on the screen" delegate:nil cancelButtonTitle:@"Got it!" otherButtonTitles:nil];
-    [alert show];
-    //[[NSNotificationCenter defaultCenter] postNotificationName:FLEKSY_MENU_INVOKED_NOTIFICATION object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:FLEKSY_MENU_INVOKED_NOTIFICATION object:nil];
   }
   
   if (gestureRecognizer.state == UIGestureRecognizerStateEnded || gestureRecognizer.state == UIGestureRecognizerStateCancelled) {
