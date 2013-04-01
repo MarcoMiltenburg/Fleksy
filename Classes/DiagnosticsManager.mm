@@ -7,8 +7,8 @@
 //
 
 #import "DiagnosticsManager.h"
-#import "vendor/SSZipArchive.h"
-#import "vendor/AFNetworking/AFNetworking.h"
+#import "SSZipArchive.h"
+#import "AFNetworking.h"
 
 #define MAX_FILE_SIZE (10 * 1024)
 
