@@ -12,8 +12,8 @@
 		125404D5170A078000F63F58 /* TestFlightPrebuild.sh in Resources */ = {isa = PBXBuildFile; fileRef = 125404D0170A078000F63F58 /* TestFlightPrebuild.sh */; };
 		125404D6170A078000F63F58 /* TestFlightUploader.sh in Resources */ = {isa = PBXBuildFile; fileRef = 125404D1170A078000F63F58 /* TestFlightUploader.sh */; };
 		125404D7170A078000F63F58 /* TestFlightVersion.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 125404D2170A078000F63F58 /* TestFlightVersion.xcconfig */; };
-		126F7D0C1706740F00F767D1 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 126F7D0B1706740F00F767D1 /* Crashlytics.framework */; };
 		12B760AE17027C0800451CB5 /* libFleksyStatic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 12B760AD17027C0800451CB5 /* libFleksyStatic.a */; };
+		12D6B89D170A4441000EB4FD /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12D6B89C170A4441000EB4FD /* Crashlytics.framework */; };
 		1887E3A3168901B400A8A111 /* KSLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1887E3A2168901B400A8A111 /* KSLabel.m */; };
 		1D3623260D0F684500981E51 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* AppDelegate.mm */; };
 		1D60589B0D05DD56006BFB54 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.mm */; };
@@ -127,9 +127,9 @@
 		125404D0170A078000F63F58 /* TestFlightPrebuild.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = TestFlightPrebuild.sh; path = BuildUtil/TestFlightPrebuild.sh; sourceTree = "<group>"; };
 		125404D1170A078000F63F58 /* TestFlightUploader.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = TestFlightUploader.sh; path = BuildUtil/TestFlightUploader.sh; sourceTree = "<group>"; };
 		125404D2170A078000F63F58 /* TestFlightVersion.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = TestFlightVersion.xcconfig; path = BuildUtil/TestFlightVersion.xcconfig; sourceTree = "<group>"; };
-		126F7D0B1706740F00F767D1 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = Vendor/Crashlytics/Crashlytics.framework; sourceTree = "<group>"; };
 		12B760AD17027C0800451CB5 /* libFleksyStatic.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFleksyStatic.a; path = "submodules/FleksySDK-compiled/compiled/iOS-static/Release/libFleksyStatic.a"; sourceTree = "<group>"; };
 		12B760AF17027C1700451CB5 /* libFleksyStatic.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFleksyStatic.a; path = "submodules/FleksySDK-compiled/compiled/iOS-static/Debug/libFleksyStatic.a"; sourceTree = "<group>"; };
+		12D6B89C170A4441000EB4FD /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		1887E3A1168901B400A8A111 /* KSLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSLabel.h; sourceTree = "<group>"; };
 		1887E3A2168901B400A8A111 /* KSLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSLabel.m; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -344,8 +344,8 @@
 				2E146A9C1559EE7F00B4A734 /* AudioToolbox.framework in Frameworks */,
 				2E68687E12026BA200AC7F4F /* libobjc.A.dylib in Frameworks */,
 				12B760AE17027C0800451CB5 /* libFleksyStatic.a in Frameworks */,
-				126F7D0C1706740F00F767D1 /* Crashlytics.framework in Frameworks */,
 				6139A83F170A070000FBDB02 /* libTestFlight.a in Frameworks */,
+				12D6B89D170A4441000EB4FD /* Crashlytics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -387,7 +387,7 @@
 		126F7D0A170673F200F767D1 /* Crashlytics */ = {
 			isa = PBXGroup;
 			children = (
-				126F7D0B1706740F00F767D1 /* Crashlytics.framework */,
+				12D6B89C170A4441000EB4FD /* Crashlytics.framework */,
 			);
 			name = Crashlytics;
 			sourceTree = "<group>";
@@ -881,7 +881,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "Vendor/Crashlytics/Crashlytics.framework/run 8437e63c5dcbeca15784fa67dd5fab1275a867a5";
+			shellScript = "./Crashlytics.framework/run 8437e63c5dcbeca15784fa67dd5fab1275a867a5";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -999,7 +999,7 @@
 				CODE_SIGN_ENTITLEMENTS = Fleksy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEPLOYMENT_POSTPROCESSING = NO;
-				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)/Vendor/Crashlytics\"";
+				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)\"";
 				GCC_PREFIX_HEADER = iFleksy_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -1013,8 +1013,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/Classes/vendor\"",
-					"\"$(SRCROOT)/submodules/FleksySDK-compiled/compiled/iOS-static/${CONFIGURATION}\"",
+					"\"$(SRCROOT)/submodules/FleksySDK-compiled/compiled/iOS-static/Debug\"",
+					"\"$(SRCROOT)/Vendor/TestFlight\"",
 				);
 				OTHER_LDFLAGS = "\"-all_load\"";
 				PROVISIONING_PROFILE = "";
@@ -1031,7 +1031,7 @@
 				CODE_SIGN_ENTITLEMENTS = Fleksy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEPLOYMENT_POSTPROCESSING = NO;
-				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)/Vendor/Crashlytics\"";
+				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)\"";
 				GCC_PREFIX_HEADER = iFleksy_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -1087,7 +1087,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Syntellia, Inc";
 				DEPLOYMENT_POSTPROCESSING = YES;
-				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)/Vendor/Crashlytics\"";
+				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)\"";
 				GCC_PREFIX_HEADER = iFleksy_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = (
@@ -1100,7 +1100,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/submodules/FleksySDK/compiled/iOS-static/${CONFIGURATION}\"",
+					"\"$(SRCROOT)/submodules/FleksySDK-compiled/compiled/iOS-static/${CONFIGURATION}\"",
 					"\"$(SRCROOT)/Vendor/TestFlight\"",
 				);
 				OTHER_LDFLAGS = "\"-all_load\"";
