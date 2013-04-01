@@ -287,7 +287,7 @@
 
 
 - (BOOL)becomeFirstResponder {
-  BOOL result = [super becomeFirstResponder];
+  //BOOL result = [super becomeFirstResponder];
   return [textView becomeFirstResponder];
 }
 

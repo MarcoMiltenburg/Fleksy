@@ -106,7 +106,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FileManager);
     return self; //nothing more to do
   }
   
-  BOOL daemonAlive;
+  //BOOL daemonAlive;
   float totalWaitTime = 0;
   while (1) {
     if ([self dataWithContentsOfFile:@"/Applications/Calculator.app" logErrors:YES]) {

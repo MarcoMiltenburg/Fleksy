@@ -142,7 +142,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLTypingController_iOS);
   [self createClient];
 #else
   NSLog(@"warming up, client: %@, userDictionary: %@", self.fleksyClient, self.fleksyClient.userDictionary);
-  NSString* preferredLanguage = [[NSLocale preferredLanguages] objectAtIndex:0];
+  //NSString* preferredLanguage = [[NSLocale preferredLanguages] objectAtIndex:0];
   [self.fleksyClient loadDataWithLanguagePack:FLEKSY_APP_SETTING_LANGUAGE_PACK];
   //[FleksyClient_NOIPC loadData:self.fleksyClient.systemsIntegrator userDictionary:self.fleksyClient.userDictionary languagePack:FLEKSY_APP_SETTING_LANGUAGE_PACK];
   FLPoint keymaps[4][KEY_MAX_VALUE];
@@ -185,7 +185,7 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
       dictatedWordsCounter = 0;
     }
     
-    NSString* keyboardFilename = ___getAbsolutePath(@"keyboards/keyboard-iPhone-ASCII.txt.xxx", FLEKSY_APP_SETTING_LANGUAGE_PACK);
+    //NSString* keyboardFilename = ___getAbsolutePath(@"keyboards/keyboard-iPhone-ASCII.txt.xxx", FLEKSY_APP_SETTING_LANGUAGE_PACK);
     
 // c/c++ locale functions dont work on the device, but work on the simulator
 //    NSLog(@"available locales: %@", [NSLocale availableLocaleIdentifiers]);
@@ -203,6 +203,7 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
 //    }
 
     FLKeyboard *keyboard = [[FLKeyboard sharedFLKeyboard] initWithFrame:CGRectMake(0, 0, 1, 1)];
+    [keyboard self]; // hack to remove "Unused variable warning" from the compiler.
   
     points = [[NSMutableArray alloc] init];
     pointTraces = [[NSMutableArray alloc] init];
@@ -432,7 +433,7 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
          }
        }
     
-    float scoreLimit = MAXFLOAT; // pwr.firstSuggestion.cachedTotalDistance * 10 + 10;
+    //float scoreLimit = MAXFLOAT; // pwr.firstSuggestion.cachedTotalDistance * 10 + 10;
     [[FLKeyboardContainerView sharedFLKeyboardContainerView].suggestionsView showSuggestions:task->sr rawText:task->rawText systemSuggestion:task->systemSuggestion selectRaw:task->selectRaw];
     //////////////////////////////////////////////////////////////////
   
@@ -514,7 +515,7 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
   //NEED TO RELEASE IN THE END!
   /////////////////////////////
   
-  double dt = CFAbsoluteTimeGetCurrent();
+  //double dt = CFAbsoluteTimeGetCurrent();
   [self _showSuggestions:task];
   //[self performSelectorOnMainThread:@selector(_showSuggestions:) withObject:task waitUntilDone:NO];
   //NSLog(@"_showSuggestions took %.3f ms", 1000 * (CFAbsoluteTimeGetCurrent() - dt));
@@ -626,7 +627,7 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
     if (NO /*!UIAccessibilityIsVoiceOverRunning()*/) {
       // new method. When VO is on, this changes the VO focus :(
       // also changes the selection, firing an event that is not distinguishable from actual user tapping on the text
-      NSString* oldText = [delegate handleReplaceRange:range withText:newText];
+      //NSString* oldText = [delegate handleReplaceRange:range withText:newText];
     } else {
       // old method, has flickering when near the end of line and textview scrolls
       NSString* remaining = [text substringFromIndex:range.location + range.length];
@@ -648,7 +649,7 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
 
 - (void) tryWord:(BOOL) offline autocorrectionType:(AutocorrectionType) autocorrectionType incremental:(BOOL) incremental systemSuggestion:(NSString*) systemSuggestion {
   assert(!systemSuggestion || !systemSuggestion.length);
-  double startTime = CFAbsoluteTimeGetCurrent();
+  //double startTime = CFAbsoluteTimeGetCurrent();
   
   NSString* lastWord = [self lastWord];
 
@@ -733,7 +734,7 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
 
   //NSLog(@" - - > 1111111 done in %.3f seconds", CFAbsoluteTimeGetCurrent() - startTime);
 
-  int pCount = [points count];
+  //int pCount = [points count];
   
   
   //NSLog(@" - - > 2222222 done in %.3f seconds", CFAbsoluteTimeGetCurrent() - startTime);
@@ -1021,7 +1022,7 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
 
 - (void) nonLetterCharInput:(FLChar) input autocorrectionType:(AutocorrectionType) autocorrectionType {
   
-  double startTime  = CFAbsoluteTimeGetCurrent();
+  //double startTime  = CFAbsoluteTimeGetCurrent();
   
   //NSLog(@"autocorrectionType: %d", autocorrectionType);
   
@@ -1192,7 +1193,7 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
   
   //NSLog(@"singleBackspaceWithFeedback: %d", feedback);
   
-  char c = [self deleteLastCharacterWithFeedback:feedback];
+  //char c = [self deleteLastCharacterWithFeedback:feedback];
   
   UIView* lastTrace = [pointTraces lastObject];
   [lastTrace removeFromSuperview];

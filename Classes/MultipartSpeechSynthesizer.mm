@@ -22,8 +22,8 @@
 }
 
 - (void)didFinishAnnouncement:(NSNotification *)dict {
-  NSString* valueSpoken = [[dict userInfo] objectForKey:UIAccessibilityAnnouncementKeyStringValue];
-  NSString* wasSuccessful = [[dict userInfo] objectForKey:UIAccessibilityAnnouncementKeyWasSuccessful];
+  //NSString* valueSpoken = [[dict userInfo] objectForKey:UIAccessibilityAnnouncementKeyStringValue];
+  //NSString* wasSuccessful = [[dict userInfo] objectForKey:UIAccessibilityAnnouncementKeyWasSuccessful];
   NSLog(@"didFinishAnnouncement, %@", dict);
   // TODO if (dict && ![wasSuccessful boolValue]) { [self stop]; return; }
   currentBlockIndex++;

@@ -187,7 +187,7 @@ NSArray* MyTextChecker::getAppleCandidatesForString(NSString* string) {
 void dsdsaads() {
   
 
-  float processingTimeApple = 0;
+  //float processingTimeApple = 0;
   //we try to infer string from points here, so we can use transformation
   //But: then we lose Apple's key charging
   //    double startTimeApple = fl_get_time();

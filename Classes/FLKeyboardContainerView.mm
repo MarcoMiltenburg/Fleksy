@@ -356,13 +356,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardContainerView);
   //if this is a repeat/hold, the actual recognizer wont have any touches
   if ([touches count]) {
     UITouch* touch = [touches objectAtIndex:0]; //should only be one
-    CGPoint startPoint = recognizer.startPoint; //same as our [touch initialLocationInView:recognizer.view];
-    CGPoint endPoint = [touch locationInView:recognizer.view];
-    double startTime = touch.initialTimestamp; //slightly different result: *(double*) [recognizer primitiveInstanceVariableForKey:@"_startTime"];
-    double endTime = touch.timestamp;
-    float distance = distanceOfPoints(FLPointFromCGPoint(startPoint), FLPointFromCGPoint(endPoint));
-    double dt = endTime - startTime;
-    double speed = distance / dt;
+    //CGPoint startPoint = recognizer.startPoint; //same as our [touch initialLocationInView:recognizer.view];
+    //CGPoint endPoint = [touch locationInView:recognizer.view];
+    //double startTime = touch.initialTimestamp; //slightly different result: *(double*) [recognizer primitiveInstanceVariableForKey:@"_startTime"];
+    //double endTime = touch.timestamp;
+    //float distance = distanceOfPoints(FLPointFromCGPoint(startPoint), FLPointFromCGPoint(endPoint));
+    //double dt = endTime - startTime;
     
     //NSLog(@"path: %@", touch.path);
     
@@ -454,7 +453,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardContainerView);
 
 - (void) handleActivationPointTap {
   NSLog(@"FLKeyboardContainerView handleActivationPointTap!");
-  double timeSinceLastActivation = CFAbsoluteTimeGetCurrent() - lastActivationPointTap;
+  //double timeSinceLastActivation = CFAbsoluteTimeGetCurrent() - lastActivationPointTap;
   //if (timeSinceLastActivation > 0.5) {
     //[self toggleLettersNumbers];
     lastActivationPointTap = CFAbsoluteTimeGetCurrent();
@@ -508,7 +507,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardContainerView);
  
   NSArray* touches = [recognizer orderedTouches];
   
-  double startTime = CFAbsoluteTimeGetCurrent();
+  //double startTime = CFAbsoluteTimeGetCurrent();
   int i = 0;
   for (UITouch* touch in touches) {
     if (![self handleTouch:touch]) {
@@ -516,7 +515,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardContainerView);
     }
     i++;
   }
-  double dt = CFAbsoluteTimeGetCurrent() - startTime;
+  //double dt = CFAbsoluteTimeGetCurrent() - startTime;
   
   //NSLog(@"dt: %.6f", dt);
 

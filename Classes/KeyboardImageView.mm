@@ -81,7 +81,7 @@
   popupView.tag = nearestChar;
   
   
-  CGPoint snapPoint = [self getKeyboardPointForChar:nearestChar];
+  //CGPoint snapPoint = [self getKeyboardPointForChar:nearestChar];
  
   float shiftY = -24; //fmin(hitPoint.y - snapPoint.y, 0) - 35;
   if (deviceIsPad()) {
@@ -119,7 +119,7 @@
     return;
   }
   
-  UILabel* keyLabel = [keyLabels objectForKey:[NSNumber numberWithChar:nearestChar]];
+  //UILabel* keyLabel = [keyLabels objectForKey:[NSNumber numberWithChar:nearestChar]];
   popupView.tag = nearestChar;
   
   NSArray *viewsToRemove = [popupInnerView subviews];
@@ -355,7 +355,7 @@
 
 - (void) doRippleForPoint:(CGPoint) pointToUse sharp:(BOOL) sharp {
   
-  UIView* view = self.superview.superview;
+  //UIView* view = self.superview.superview;
   FLChar nearestChar = [self getNearestCharForPoint:pointToUse];
   //pointToUse = [self getKeyboardPointForChar:nearestChar];
   //pointToUse = CGPointApplyAffineTransform(pointToUse, self.superview.transform);

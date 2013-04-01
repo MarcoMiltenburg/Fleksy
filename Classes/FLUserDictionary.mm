@@ -147,7 +147,7 @@
     // the user defaults database and the iCloud key-value store
     for (NSString* key in changedKeys) {
       id value = [store objectForKey:key];
-      id oldObject = [userDefaults objectForKey:key];
+      //id oldObject = [userDefaults objectForKey:key];
       
       if ([key hasPrefix:FL_WORD_PREFIX]) {
         if (value) {

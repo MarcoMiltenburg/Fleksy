@@ -364,7 +364,7 @@
       [self stopTrackingTouch:touch];
     }
     
-    float distance = [touch distanceSinceStartInView:self.view];
+    //float distance = [touch distanceSinceStartInView:self.view];
     
     
     // we want to notify the swipeAnalyzer that a swipe was finished, and we do it now rather

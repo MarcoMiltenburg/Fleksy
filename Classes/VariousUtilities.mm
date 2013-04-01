@@ -44,7 +44,7 @@ static NSString* talkMethodNameWithLanguageCode;
 static SEL talkMethodSelectorSimple = nil;
 static SEL talkMethodSelectorWithLanguageCode = nil;
 
-static double lastSpeakTime = 0;
+//static double lastSpeakTime = 0;
 
 UInt32 _sounds[kNumSounds];
 
@@ -906,8 +906,8 @@ struct timeval didRead[messageCount];
 int tcp_lat(int size, int count, BOOL parent)
 {
   void *buf;
-  int64_t delta;
-  struct timeval start, stop;
+  //int64_t delta;
+  //struct timeval start, stop;
   
   ssize_t len;
   size_t sofar;
@@ -994,7 +994,7 @@ int tcp_lat(int size, int count, BOOL parent)
     close(sockfd);
     
     for (int i = 0; i < count; i++) {
-      int64_t t = didRead[i].tv_sec * (int64_t) 1e6 + didRead[i].tv_usec;
+      //int64_t t = didRead[i].tv_sec * (int64_t) 1e6 + didRead[i].tv_usec;
     }
     
     NSLog(@"tcp_lat CHILD end");
@@ -1045,7 +1045,7 @@ int tcp_lat(int size, int count, BOOL parent)
       //NSLog("tcp_lat latency[%d]: %lli us", i, delay);
       totalDelay += delay;
       
-      int64_t t = startedWriting[i].tv_sec * (int64_t) 1e6 + startedWriting[i].tv_usec;
+      //int64_t t = startedWriting[i].tv_sec * (int64_t) 1e6 + startedWriting[i].tv_usec;
       //NSLog("tcp_lat PARENT startedWriting[%d] @ %lli", i, t);
     }
     
