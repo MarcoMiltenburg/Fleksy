@@ -11,6 +11,8 @@
 #include "StringConversion.h"
 #include "TimeFunctions.h"
 
+void dsdsaads();
+
 
 void MyTextChecker::log(const char* format, ...) {
   pthread_mutex_lock(&print_mutex);

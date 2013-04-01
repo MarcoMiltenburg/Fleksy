@@ -28,6 +28,9 @@
 
 #import "SynthesizeSingleton.h"
 
+
+NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack);
+
 @interface ShowSuggestionsTask : NSObject {
 @public
   FLResponse* sr;

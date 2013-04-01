@@ -48,6 +48,9 @@ static double lastSpeakTime = 0;
 
 UInt32 _sounds[kNumSounds];
 
+int pipe_lat(int size, int count, BOOL parent);
+int unix_lat(int size, int count, BOOL parent);
+int tcp_lat(int size, int count, BOOL parent);
 
 @interface DummyInterface : NSObject 
 - (id)setRate:(float)arg1;

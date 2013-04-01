@@ -26,6 +26,10 @@
 
 #include "FleksyPrivateAPI.h"
 
+
+bool preprocessedFilesExist(NSString* filepathFormat);
+NSString* getAbsolutePath(NSString* filepath, NSString* languagePack);
+
 @implementation FleksyClient_NOIPC
 
 - (void) handleSettingsChanged:(id) arg1 {

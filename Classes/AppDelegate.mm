@@ -29,6 +29,9 @@
 
 @class UIKeyboard;
 
+float distributionFunction(float x);
+
+
 @implementation AppDelegate
 
 
