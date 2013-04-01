@@ -627,7 +627,8 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
     if (NO /*!UIAccessibilityIsVoiceOverRunning()*/) {
       // new method. When VO is on, this changes the VO focus :(
       // also changes the selection, firing an event that is not distinguishable from actual user tapping on the text
-      //NSString* oldText = [delegate handleReplaceRange:range withText:newText];
+        //NSString* oldText = [delegate handleReplaceRange:range withText:newText];
+        [delegate handleReplaceRange:range withText:newText];
     } else {
       // old method, has flickering when near the end of line and textview scrolls
       NSString* remaining = [text substringFromIndex:range.location + range.length];
@@ -1192,8 +1193,8 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
 - (void) singleBackspaceWithFeedback:(BOOL) feedback {
   
   //NSLog(@"singleBackspaceWithFeedback: %d", feedback);
-  
   //char c = [self deleteLastCharacterWithFeedback:feedback];
+  [self deleteLastCharacterWithFeedback:feedback];
   
   UIView* lastTrace = [pointTraces lastObject];
   [lastTrace removeFromSuperview];
