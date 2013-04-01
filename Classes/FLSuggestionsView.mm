@@ -494,6 +494,7 @@
     //NSLog(@"BEGIN @synchronized");
     //double startTime = CFAbsoluteTimeGetCurrent();
     //double dt2 = [self _showSuggestions:suggestions0 rawText:rawText systemSuggestion:systemSuggestion selectRaw:selectRaw];
+    [self _showSuggestions:suggestions0 rawText:rawText systemSuggestion:systemSuggestion selectRaw:selectRaw];
     
     //NSLog(@"END @synchronized in %.8f (%.8f)", CFAbsoluteTimeGetCurrent() - startTime, dt2);
     //[NSThread sleepForTimeInterval:1];
