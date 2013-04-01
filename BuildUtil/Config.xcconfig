@@ -1,0 +1,18 @@
+//
+//  Config.xcconfig
+//  Fleksy
+//
+//  Created by John Engelhart on 3/27/13.
+//  Copyright (c) 2012 Syntellia Inc. All rights reserved.
+//
+
+FL_BUILDUTIL_DIR = BuildUtil;
+FL_BUILD_INFO_FILE = ${FL_BUILDUTIL_DIR}/BuildInfo.xcconfig;
+FL_TESTFLIGHT_BUILDINFO_SCRIPT = ${FL_BUILDUTIL_DIR}/BuildInfo.sh;
+FL_TESTFLIGHT_PREBUILD_SCRIPT = ${FL_BUILDUTIL_DIR}/TestFlightPrebuild.sh;
+FL_TESTFLIGHT_UPLOAD_SCRIPT = ${FL_BUILDUTIL_DIR}/TestFlightUploader.sh;
+
+FL_VERSION_EXTRA[config=Debug]="-${FL_GIT_SHORTHASH}-${INSTALL_OWNER}";
+FL_VERSION_EXTRA[config=TestFlight]="-TF (#${FL_TESTFLIGHT_BUILD_NUMBER} / ${FL_GIT_SHORTHASH})";
+//FL_VERSION_EXTRA[config=Release]="";
+

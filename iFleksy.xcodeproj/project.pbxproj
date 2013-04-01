@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		125404D3170A078000F63F58 /* BuildInfo.sh in Resources */ = {isa = PBXBuildFile; fileRef = 125404CE170A078000F63F58 /* BuildInfo.sh */; };
+		125404D4170A078000F63F58 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 125404CF170A078000F63F58 /* Config.xcconfig */; };
+		125404D5170A078000F63F58 /* TestFlightPrebuild.sh in Resources */ = {isa = PBXBuildFile; fileRef = 125404D0170A078000F63F58 /* TestFlightPrebuild.sh */; };
+		125404D6170A078000F63F58 /* TestFlightUploader.sh in Resources */ = {isa = PBXBuildFile; fileRef = 125404D1170A078000F63F58 /* TestFlightUploader.sh */; };
+		125404D7170A078000F63F58 /* TestFlightVersion.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 125404D2170A078000F63F58 /* TestFlightVersion.xcconfig */; };
 		126F7D0C1706740F00F767D1 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 126F7D0B1706740F00F767D1 /* Crashlytics.framework */; };
 		12B760AC17027BEA00451CB5 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 12B760AB17027BEA00451CB5 /* libTestFlight.a */; };
 		12B760AE17027C0800451CB5 /* libFleksyStatic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 12B760AD17027C0800451CB5 /* libFleksyStatic.a */; };
@@ -117,6 +122,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		125404CE170A078000F63F58 /* BuildInfo.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = BuildInfo.sh; path = BuildUtil/BuildInfo.sh; sourceTree = "<group>"; };
+		125404CF170A078000F63F58 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Config.xcconfig; path = BuildUtil/Config.xcconfig; sourceTree = "<group>"; };
+		125404D0170A078000F63F58 /* TestFlightPrebuild.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = TestFlightPrebuild.sh; path = BuildUtil/TestFlightPrebuild.sh; sourceTree = "<group>"; };
+		125404D1170A078000F63F58 /* TestFlightUploader.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = TestFlightUploader.sh; path = BuildUtil/TestFlightUploader.sh; sourceTree = "<group>"; };
+		125404D2170A078000F63F58 /* TestFlightVersion.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = TestFlightVersion.xcconfig; path = BuildUtil/TestFlightVersion.xcconfig; sourceTree = "<group>"; };
 		126F7D0B1706740F00F767D1 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = Vendor/Crashlytics/Crashlytics.framework; sourceTree = "<group>"; };
 		12B760AB17027BEA00451CB5 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTestFlight.a; path = Classes/vendor/libTestFlight.a; sourceTree = "<group>"; };
 		12B760AD17027C0800451CB5 /* libFleksyStatic.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFleksyStatic.a; path = "submodules/FleksySDK-compiled/compiled/iOS-static/Release/libFleksyStatic.a"; sourceTree = "<group>"; };
@@ -352,6 +362,18 @@
 			path = Classes;
 			sourceTree = "<group>";
 		};
+		125404CD170A075100F63F58 /* BuildUtil */ = {
+			isa = PBXGroup;
+			children = (
+				125404CE170A078000F63F58 /* BuildInfo.sh */,
+				125404CF170A078000F63F58 /* Config.xcconfig */,
+				125404D0170A078000F63F58 /* TestFlightPrebuild.sh */,
+				125404D1170A078000F63F58 /* TestFlightUploader.sh */,
+				125404D2170A078000F63F58 /* TestFlightVersion.xcconfig */,
+			);
+			name = BuildUtil;
+			sourceTree = "<group>";
+		};
 		126F7D09170673EB00F767D1 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
@@ -379,6 +401,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				125404CD170A075100F63F58 /* BuildUtil */,
 				126F7D09170673EB00F767D1 /* Vendor */,
 				12B760AF17027C1700451CB5 /* libFleksyStatic.a */,
 				12B760AD17027C0800451CB5 /* libFleksyStatic.a */,
@@ -765,6 +788,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "iFleksy" */;
 			buildPhases = (
+				125404D8170A093600F63F58 /* ShellScript */,
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
 				1D60588F0D05DD3D006BFB54 /* Frameworks */,
@@ -828,12 +852,30 @@
 				2E6965AC16C1967B0018ACA9 /* menu_blue.png in Resources */,
 				61DA86551701F24500EE52C5 /* IconRounded.png in Resources */,
 				6116464F170259100093E29F /* instructions in Resources */,
+				125404D3170A078000F63F58 /* BuildInfo.sh in Resources */,
+				125404D4170A078000F63F58 /* Config.xcconfig in Resources */,
+				125404D5170A078000F63F58 /* TestFlightPrebuild.sh in Resources */,
+				125404D6170A078000F63F58 /* TestFlightUploader.sh in Resources */,
+				125404D7170A078000F63F58 /* TestFlightVersion.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		125404D8170A093600F63F58 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ \"${CONFIGURATION}\" = \"TestFlight\" ]; then\n    /bin/sh \"${FL_TESTFLIGHT_PREBUILD_SCRIPT}\"\nfi\n\n/bin/sh \"${FL_TESTFLIGHT_BUILDINFO_SCRIPT}\"\n";
+		};
 		61BAB64A1700FF4300498DA9 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -932,8 +974,58 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		125404D9170A09D000F63F58 /* TestFlight */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 125404CF170A078000F63F58 /* Config.xcconfig */;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				PRODUCT_NAME = Fleksy;
+				PROVISIONING_PROFILE = "";
+				SDKROOT = iphoneos;
+			};
+			name = TestFlight;
+		};
+		125404DA170A09D000F63F58 /* TestFlight */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 125404D2170A078000F63F58 /* TestFlightVersion.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Fleksy.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEPLOYMENT_POSTPROCESSING = NO;
+				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)/Vendor/Crashlytics\"";
+				GCC_PREFIX_HEADER = iFleksy_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				HEADER_SEARCH_PATHS = (
+					"\"$SRCROOT/submodules/FleksySDK-compiled/include\"",
+					"\"$SRCROOT/submodules/FleksySDK-compiled/include/private\"",
+					"\"$SRCROOT/submodules/FleksySDK-compiled/include/private/PatternRecognizer\"",
+					"\"$SRCROOT/submodules/GestureTestbed\"/**",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/iFleksyInfo.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Classes/vendor\"",
+					"\"$(SRCROOT)/submodules/FleksySDK-compiled/compiled/iOS-static/${CONFIGURATION}\"",
+				);
+				OTHER_LDFLAGS = "\"-all_load\"";
+				PROVISIONING_PROFILE = "";
+				SEPARATE_STRIP = YES;
+				STRIP_INSTALLED_PRODUCT = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = TestFlight;
+		};
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 125404D2170A078000F63F58 /* TestFlightVersion.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Fleksy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -966,6 +1058,7 @@
 		};
 		2E146A9D155A079000B4A734 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 125404CF170A078000F63F58 /* Config.xcconfig */;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -982,6 +1075,7 @@
 		};
 		2E146A9E155A079000B4A734 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 125404D2170A078000F63F58 /* TestFlightVersion.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Syntellia, Inc";
 				DEPLOYMENT_POSTPROCESSING = YES;
@@ -1012,6 +1106,7 @@
 		};
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 125404CF170A078000F63F58 /* Config.xcconfig */;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -1032,6 +1127,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
+				125404DA170A09D000F63F58 /* TestFlight */,
 				2E146A9E155A079000B4A734 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -1041,6 +1137,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
+				125404D9170A09D000F63F58 /* TestFlight */,
 				2E146A9D155A079000B4A734 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
