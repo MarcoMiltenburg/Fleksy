@@ -493,8 +493,13 @@ static FleksyKeyboard* instance = nil;
 }
 
 - (float) activeHeight {
-  float result = [self landscape] ?
+    
+#ifndef __clang_analyzer__    
+    // Code not to be analyzed
+    float result = [self landscape] ?
   FLEKSY_DEFAULT_HEIGHT_LANDSCAPE + FLEKSY_TOP_PADDING_LANDSCAPE : FLEKSY_DEFAULT_HEIGHT_PORTRAIT + FLEKSY_TOP_PADDING_PORTRAIT;
+#endif
+  
   
   if ([self landscape]) {
     result = FLEKSY_DEFAULT_HEIGHT_LANDSCAPE + FLEKSY_TOP_PADDING_LANDSCAPE;

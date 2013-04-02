@@ -398,7 +398,11 @@
   //double startTime = CFAbsoluteTimeGetCurrent();
   
   BOOL needToAddRaw    = [self shouldInsertSuggestion:rawText          inList:suggestions];
-  BOOL needToAddSystem = [self shouldInsertSuggestion:systemSuggestion inList:suggestions];
+#ifndef __clang_analyzer__    
+    // Code not to be analyzed
+    BOOL needToAddSystem = [self shouldInsertSuggestion:systemSuggestion inList:suggestions];
+#endif
+  
   
   //needToAddRaw = YES;
   needToAddSystem = NO;

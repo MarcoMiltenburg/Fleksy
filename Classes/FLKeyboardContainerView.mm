@@ -305,8 +305,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardContainerView);
   
   BOOL directSuggestionSelection = NO;
   if (directSuggestionSelection) {
+#ifndef __clang_analyzer__
+      // Code not to be analyzed
+      float beganX = [recognizer locationInView:recognizer.view].x;
+#endif
     
-    float beganX = [recognizer locationInView:recognizer.view].x;
     float currentX = [recognizer currentLocationInView:recognizer.view].x;
     //NSLog(@"startX: %.3f, currentX: %.3f", x, currentX);
     beganX = currentX;
