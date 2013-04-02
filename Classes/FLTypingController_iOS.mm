@@ -584,11 +584,13 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
     result = [previousTokensStack lastObject];
     [previousTokensStack removeLastObject];
   }
+  //NSLog(@"popPreviousToken <%@>", result);
   [self sendPrepareNextCandidates];
   return result;
 }
 
 - (void) pushPreviousToken:(NSString*) newToken {
+  newToken = [newToken stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
   //NSLog(@"adding previousToken <%@>", newToken);
   [previousTokensStack addObject:newToken];
   while (previousTokensStack.count > 10) {
