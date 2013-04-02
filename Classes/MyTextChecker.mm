@@ -26,7 +26,7 @@ void MyTextChecker::log(const char* format, ...) {
 }
 
 //disable logging
-//#define log(format, ...)
+#define log(format, ...)
 
 
 MyTextChecker::MyTextChecker() {
