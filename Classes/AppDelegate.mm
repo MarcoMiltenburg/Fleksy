@@ -199,6 +199,7 @@ float distributionFunction(float x) {
   NSString* versionShort = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
   [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"iOS build %@-%@ (4.22/2.22)", versionShort, version] forKey:@"FLEKSY_APP_SETTING_VERSION"];
 
+  NSLog(@"CFBundleShortVersionString: %@", versionShort);
   RANDOM_SEED();
   
   [[UIApplication sharedApplication] setStatusBarHidden:FLEKSY_STATUS_BAR_HIDDEN];
