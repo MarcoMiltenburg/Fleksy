@@ -70,6 +70,7 @@ float distributionFunction(float x) {
     //UIKit stuff has to be done on main thread, and this will be called from the thread where
     //the notification was posted, which might not be the main thread
     [self performSelectorOnMainThread:@selector(fleksyLoaded) withObject:nil waitUntilDone:NO];
+    //[self fleksyLoaded];
   }
 }
 
@@ -148,7 +149,7 @@ float distributionFunction(float x) {
 #endif
 #endif
 
-#ifdef CRASHLYTICS
+#if CRASHLYTICS
     printf("Fleksy CRASHLYTICS\n");
     [Crashlytics startWithAPIKey:@"8437e63c5dcbeca15784fa67dd5fab1275a867a5"];
 #endif
@@ -223,6 +224,7 @@ float distributionFunction(float x) {
   [window makeKeyAndVisible];
   
   [self performSelectorOnMainThread:@selector(finishLoadingUI) withObject:nil waitUntilDone:NO];
+  //[self finishLoadingUI];
   
   NSLog(@"END of applicationDidFinishLaunching, took %.6f", CFAbsoluteTimeGetCurrent() - startTime);
 }
@@ -265,7 +267,13 @@ float distributionFunction(float x) {
   
   //[FleksyKeyboard enableFleksyForWebViews];
   [self startLoadingProgressTimer];
-  [customInputView performSelectorInBackground:@selector(startLoading) withObject:nil];
+  //[customInputView performSelectorInBackground:@selector(startLoading) withObject:nil];
+  
+  // Require load on mainThread, i.e. UIKit objects.
+  
+  [customInputView startLoading];
+  //textView.text = @"Loading";
+  
   
   NSLog(@"END of finishLoadingUI, took %.6f", CFAbsoluteTimeGetCurrent() - startTime);
 }
