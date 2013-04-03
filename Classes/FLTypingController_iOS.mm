@@ -144,12 +144,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLTypingController_iOS);
   NSLog(@"warming up, client: %@, userDictionary: %@", self.fleksyClient, self.fleksyClient.userDictionary);
   //NSString* preferredLanguage = [[NSLocale preferredLanguages] objectAtIndex:0];
   [self.fleksyClient loadDataWithLanguagePack:FLEKSY_APP_SETTING_LANGUAGE_PACK];
-  //[FleksyClient_NOIPC loadData:self.fleksyClient.systemsIntegrator userDictionary:self.fleksyClient.userDictionary languagePack:FLEKSY_APP_SETTING_LANGUAGE_PACK];
-  FLPoint keymaps[4][KEY_MAX_VALUE];
-  // hack. Should loop through the n (4) keyboards and copy individually, dont rely on internal represenation being contiguous.
-  memcpy(keymaps, self.fleksyClient.systemsIntegrator->getKeymap(0), sizeof(keymaps));
-  [[FLKeyboard sharedFLKeyboard] setKeymaps:keymaps];
   
+  [self loadKeymaps];
+  
+  // notify loading is 100% done
+  [[NSNotificationCenter defaultCenter] postNotificationName:FLEKSY_LOADING_NOTIFICATION object:[NSNumber numberWithFloat:1]];
+  
+  //[FleksyClient_NOIPC loadData:self.fleksyClient.systemsIntegrator userDictionary:self.fleksyClient.userDictionary languagePack:FLEKSY_APP_SETTING_LANGUAGE_PACK];
+  //[self performSelectorOnMainThread:@selector(loadKeymaps) withObject:nil waitUntilDone:YES];
+
   [self pushPreviousToken:@"the"];
   FLRequest* request = [self createRequest:3 platformSuggestions:NULL];
   // word "say"
@@ -162,6 +165,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLTypingController_iOS);
   free(response);
 #endif
 
+}
+
+- (void) loadKeymaps {
+  FLPoint keymaps[4][KEY_MAX_VALUE];
+  // hack. Should loop through the n (4) keyboards and copy individually, dont rely on internal represenation being contiguous.
+  memcpy(keymaps, self.fleksyClient.systemsIntegrator->getKeymap(0), sizeof(keymaps));
+  [[FLKeyboard sharedFLKeyboard] setKeymaps:keymaps];
 }
 
 //TODO: refactor!
@@ -247,7 +257,7 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
     
     previousTokensStack = [[NSMutableArray alloc] init];
     
-    checker = new MyTextChecker();
+    //checker = new MyTextChecker();
     
     [self reset];
   }
@@ -686,7 +696,9 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
   FLString s = NSStringToFLString(lastWord);
   vector<FLString> platfromResults;
   double startTime1 = fl_get_time();
-  checker->peekResults(platfromResults, s);
+  if (checker) {
+    checker->peekResults(platfromResults, s);
+  }
   printf("got %lu platform results in %.6f\n", platfromResults.size(), fl_get_time() - startTime1);
   for (FLString z : platfromResults) {
     printf("platform result: %s\n", z.c_str());
@@ -1009,7 +1021,9 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
   //////
   NSString* lastWord = [self lastWord];
   FLString s = NSStringToFLString(lastWord);
-  checker->prepareResultsAsync(s);
+  if (checker) {
+    checker->prepareResultsAsync(s);
+  }
   //////
 }
 

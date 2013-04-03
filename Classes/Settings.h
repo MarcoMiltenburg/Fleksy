@@ -13,6 +13,9 @@
 
 #define DEBUG_NO_WORDS 0
 
+// Set to 1 for development. 0 for released code.
+#define FLEKSY_IS_MAIN_THREAD_CHECK 1
+
 //Installing Crashlytics = 1
 #define CRASHLYTICS 1
 

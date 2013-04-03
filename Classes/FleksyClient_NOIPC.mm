@@ -113,8 +113,6 @@ NSString* getAbsolutePath(NSString* filepath, NSString* languagePack) {
     NSLog(@"tests took %.6f", CFAbsoluteTimeGetCurrent() - startTime);
 #endif
   
-  // notify loading is 100% done
-  [[NSNotificationCenter defaultCenter] postNotificationName:FLEKSY_LOADING_NOTIFICATION object:[NSNumber numberWithFloat:1]];
 }
 
 
