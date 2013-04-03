@@ -4,3 +4,6 @@
 [submodule "submodules/FleksySDK-compiled"]
 	path = submodules/FleksySDK-compiled
 	url = git@github.com:syntellia/FleksySDK-compiled.git
+[submodule "UIAutomationTests/tuneup"]
+	path = UIAutomationTests/tuneup
+	url = git://github.com/alexvollmer/tuneup_js.git
