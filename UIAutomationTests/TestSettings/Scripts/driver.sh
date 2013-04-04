@@ -36,15 +36,15 @@ FL_TEST=Test_iFleksySettingFavoriteDoneHelloVerifyClear.js
 
 echo $FL_APPNAME : $FL_TEST
 echo
-echo BEGIN Test Driver 800 times >> $0
+echo Test Driver $1 times: script $0
+
 COUNT=0
-while [ $COUNT != 800 ] 
+while [ $COUNT != $1 ]
 do
     echo TEST:  $COUNT 
-    $TESTER $FL_APPBUNDLE $FL_AUTOMATIONTEST_PATH/$FL_TEST_DIR/$FL_TEST ../Results/$FL_TEST_RESULTS_DIR --verbose --timeout 70
+    $TESTER $FL_APPBUNDLE $FL_AUTOMATIONTEST_PATH/$FL_TEST_DIR/$FL_TEST ../Results/$FL_TEST_RESULTS_DIR --verbose --timeout 15
     sleep 1
     let COUNT=$COUNT+1
 done
 
 echo TEST Driver Cycle Completed $COUNT Runs
-BEGIN Test Driver 800 times
