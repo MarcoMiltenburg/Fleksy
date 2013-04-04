@@ -17,7 +17,7 @@
  
  */
 
-#import "../tuneup/tuneup.js"
+#import "../../tuneup/tuneup.js"
 
 var MAX_COUNT = 1
 var testName1 = "Test_iFleksySettingFavoriteDoneHelloVerifyClear.";
