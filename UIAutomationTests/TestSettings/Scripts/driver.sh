@@ -17,7 +17,20 @@
 
 #Library/Developer/Xcode/DerivedData/iFleksy-cnieacgsclhowuapljisvitxicyg/Build/Products/Debug-iphonesimulator
 
-: ${1?"USAGE: driver.sh <# of runs>"}
+
+echo command: $0 $1 $2 $3
+
+: ${1?"USAGE: driver.sh <# of runs> [-d | --device <UDID | dynamic>]"}
+
+if [ $1 == "-h" ]; then
+    echo "USAGE: driver.sh <# of runs> [-d | --device <UDID | dynamic>]"
+    echo "dynamic: auto-search for an iDevice at runtime"
+    exit 1
+fi
+
+#if [ $2 && $2 == "dynamic" ]; then
+#echo "An iDevice will be dynamically found and used"
+#fi
 
 #: ${FLEKSY_PATH?"Need to set FLEKSY_PATH in your .profile, i.e. FLEKSY_PATH=~/Xcode/Fleksy"}
 if [ -z "$FLEKSY_PATH" ]; then
@@ -52,7 +65,7 @@ COUNT=0
 while [ $COUNT != $1 ]
 do
     echo TEST:  $COUNT 
-    $TESTER $FL_APPBUNDLE $FL_AUTOMATIONTEST_PATH/$FL_TEST_DIR/$FL_TEST ../Results/$FL_TEST_RESULTS_DIR --verbose --timeout 15
+    $TESTER $FL_APPBUNDLE $FL_AUTOMATIONTEST_PATH/$FL_TEST_DIR/$FL_TEST ../Results/$FL_TEST_RESULTS_DIR  $2 $3 --verbose --timeout 60
     sleep 1
     let COUNT=$COUNT+1
 done

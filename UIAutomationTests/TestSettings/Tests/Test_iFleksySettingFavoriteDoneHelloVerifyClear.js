@@ -138,6 +138,8 @@ Source:
          
          //target.setDeviceOrientation(UIA_DEVICE_ORIENTATION_PORTRAIT);
      
+         // Added for iDevice
+         target.delay(1);
      
      } //while (count++ != MAX_COUNT)
      
