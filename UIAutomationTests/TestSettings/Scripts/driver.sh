@@ -17,8 +17,16 @@
 
 #Library/Developer/Xcode/DerivedData/iFleksy-cnieacgsclhowuapljisvitxicyg/Build/Products/Debug-iphonesimulator
 
+#: ${FLEKSY_PATH?"Need to set FLEKSY_PATH in your .profile, i.e. FLEKSY_PATH=~/Xcode/Fleksy"}
+if [ -z "$FLEKSY_PATH" ]; then
+    echo "Set FLEKSY_PATH in your .profile, i.e. FLEKSY_PATH=~/Xcode/Fleksy then export FLEKSY_PATH"
+    exit 1
+else
+    echo FLEKSY_PATH is ${FLEKSY_PATH}
+fi
+
 FEATURE=Settings
-FLEKSY_PATH=~/Xcode/Fleksy
+#FLEKSY_PATH=~/Xcode/Fleksy
 IFLEKSY_DIR=$FLEKSY_PATH/iFleksy
 
 FL_AUTOMATIONTEST_PATH=$IFLEKSY_DIR/UIAutomationTests
