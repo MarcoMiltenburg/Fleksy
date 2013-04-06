@@ -95,6 +95,7 @@ typedef enum {
 - (void) setTextFieldDelegate:(id<MyTextField>) d;
 - (void) selectedItem:(NSString*) item replaceText:(NSString*) replaceText capitalization:(NSString*) capitalization offsetWas:(int) offset;
 - (void) caretPositionDidChange;
+- (void) sendPrepareNextCandidates;
 
 - (void) addRemoveUserWord:(NSString*) wordToAddRemove;
 

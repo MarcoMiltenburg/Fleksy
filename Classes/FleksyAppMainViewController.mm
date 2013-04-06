@@ -310,6 +310,7 @@
 
 - (void) resetState {
   textView.text = @"";
+  [[FLTypingController_iOS sharedFLTypingController_iOS] sendPrepareNextCandidates];
   [[FLKeyboardContainerView sharedFLKeyboardContainerView] reset];
 }
 
