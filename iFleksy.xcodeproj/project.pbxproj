@@ -7,12 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		125404D3170A078000F63F58 /* BuildInfo.sh in Resources */ = {isa = PBXBuildFile; fileRef = 125404CE170A078000F63F58 /* BuildInfo.sh */; };
-		125404D4170A078000F63F58 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 125404CF170A078000F63F58 /* Config.xcconfig */; };
-		125404D5170A078000F63F58 /* TestFlightPrebuild.sh in Resources */ = {isa = PBXBuildFile; fileRef = 125404D0170A078000F63F58 /* TestFlightPrebuild.sh */; };
-		125404D6170A078000F63F58 /* TestFlightUploader.sh in Resources */ = {isa = PBXBuildFile; fileRef = 125404D1170A078000F63F58 /* TestFlightUploader.sh */; };
-		125404D7170A078000F63F58 /* TestFlightVersion.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 125404D2170A078000F63F58 /* TestFlightVersion.xcconfig */; };
-		127BF793170A670400090407 /* BuildInfo.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 127BF792170A670400090407 /* BuildInfo.xcconfig */; };
 		12B760AE17027C0800451CB5 /* libFleksyStatic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 12B760AD17027C0800451CB5 /* libFleksyStatic.a */; };
 		12D6B89D170A4441000EB4FD /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12D6B89C170A4441000EB4FD /* Crashlytics.framework */; };
 		1887E3A3168901B400A8A111 /* KSLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1887E3A2168901B400A8A111 /* KSLabel.m */; };
@@ -865,12 +859,6 @@
 				2E6965AC16C1967B0018ACA9 /* menu_blue.png in Resources */,
 				61DA86551701F24500EE52C5 /* IconRounded.png in Resources */,
 				6116464F170259100093E29F /* instructions in Resources */,
-				125404D3170A078000F63F58 /* BuildInfo.sh in Resources */,
-				125404D4170A078000F63F58 /* Config.xcconfig in Resources */,
-				125404D5170A078000F63F58 /* TestFlightPrebuild.sh in Resources */,
-				125404D6170A078000F63F58 /* TestFlightUploader.sh in Resources */,
-				125404D7170A078000F63F58 /* TestFlightVersion.xcconfig in Resources */,
-				127BF793170A670400090407 /* BuildInfo.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
