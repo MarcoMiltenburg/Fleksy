@@ -153,14 +153,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLTypingController_iOS);
   //[FleksyClient_NOIPC loadData:self.fleksyClient.systemsIntegrator userDictionary:self.fleksyClient.userDictionary languagePack:FLEKSY_APP_SETTING_LANGUAGE_PACK];
   //[self performSelectorOnMainThread:@selector(loadKeymaps) withObject:nil waitUntilDone:YES];
 
-  [self pushPreviousToken:@"the"];
+  [self pushPreviousToken:@"the" notify:YES];
   FLRequest* request = [self createRequest:3 platformSuggestions:NULL];
   // word "say"
   request->points[0] = FLPointMake(58.475685, 112.231873);
   request->points[1] = FLPointMake(16.655285, 109.025909);
   request->points[2] = FLPointMake(171.190826, 41.109081);
   FLResponse* response = [self.fleksyClient getCandidatesForRequest:request];
-  while ([self popPreviousToken]) {}
+  while ([self popPreviousTokenWithNotify:YES]) {}
   free(request);
   free(response);
 #endif
@@ -573,9 +573,8 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
 }
 
 - (NSString*) changePreviousToken:(NSString*) newToken {
-  NSString* oldToken = [self popPreviousToken];
-  [self pushPreviousToken:newToken];
-  [self sendPrepareNextCandidates];
+  NSString* oldToken = [self popPreviousTokenWithNotify:NO];
+  [self pushPreviousToken:newToken notify:YES];
   return oldToken;
 }
 
@@ -588,18 +587,20 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
   return result;
 }
 
-- (NSString*) popPreviousToken {
+- (NSString*) popPreviousTokenWithNotify:(BOOL) notify {
   NSString* result = nil;
   if (previousTokensStack.count) {
     result = [previousTokensStack lastObject];
     [previousTokensStack removeLastObject];
   }
   //NSLog(@"popPreviousToken <%@>", result);
-  [self sendPrepareNextCandidates];
+  if (notify) {
+    [self sendPrepareNextCandidates];
+  }
   return result;
 }
 
-- (void) pushPreviousToken:(NSString*) newToken {
+- (void) pushPreviousToken:(NSString*) newToken notify:(BOOL) notify {
   newToken = [newToken stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
   //NSLog(@"adding previousToken <%@>", newToken);
   [previousTokensStack addObject:newToken];
@@ -799,9 +800,9 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
     if (!self.currentWordIsPrecise) {
       //NSLog(@"replaceText: %@, newText: %@, capitalization: %@", lastWord, lettersToUse, lastWord);
       [self replaceText:lastWord newText:lettersToUse capitalization:lastWord];
-      [self pushPreviousToken:lettersToUse];
+      [self pushPreviousToken:lettersToUse notify:YES];
     } else {
-      [self pushPreviousToken:lastWord];
+      [self pushPreviousToken:lastWord notify:YES];
     }
   
     
@@ -814,7 +815,9 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
     
     //NSLog(@"%@", best->letters);
     
-  } 
+  } else {
+    [self pushPreviousToken:lastWord notify:YES];
+  }
   
   //NSLog(@" - - > 3333333 done in %.3f seconds", CFAbsoluteTimeGetCurrent() - startTime);
 
@@ -919,7 +922,7 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
   //lastCharIsLetter = [[VariousUtilities strictlyLettersSet] characterIsMember:[c characterAtIndex:0]];
   
   if (punctuationShortcut && FLEKSY_APP_SETTING_SHOW_SUGGESTIONS) {
-    [self pushPreviousToken:@"."];
+    [self pushPreviousToken:@"." notify:YES];
     [[FLKeyboardContainerView sharedFLKeyboardContainerView].suggestionsViewSymbols showSuggestions:shortcutPunctuationMarks selectedSuggestionIndex:0 capitalization:@""];
     [[FLKeyboardContainerView sharedFLKeyboardContainerView].suggestionsView hide];
   }
@@ -1386,7 +1389,7 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
       }
     }
     
-    [self popPreviousToken];
+    [self popPreviousTokenWithNotify:YES];
     
     NSString* lastWord = [[self lastWord] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     NSString* compare = [self peekPreviousToken];
