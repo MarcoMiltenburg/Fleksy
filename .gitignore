@@ -20,3 +20,4 @@ DerivedData
 *~
 
 BuildUtil/BuildInfo.xcconfig
+UIAutomationTests/TestSettings/Results
