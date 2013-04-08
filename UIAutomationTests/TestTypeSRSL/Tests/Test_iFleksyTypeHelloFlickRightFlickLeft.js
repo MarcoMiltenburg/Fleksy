@@ -1,6 +1,6 @@
 /*
  
- iFlesky Test - Test_iFleksySettingFavoriteDoneHelloVerifyClear
+ iFlesky Test - Test_iFleksyTypeHelloFlickRightFlickLeft.js
   
  1. Launch App
  2. Tap Menu Ball
@@ -37,12 +37,14 @@ UIATarget.onAlert = function onAlert(alert){
 }
 
 var MAX_COUNT = 1
-var testName1 = "Test_iFleksySettingFavoriteDoneHelloVerifyClear.";
+var testName1 = "Test_iFleksyTypeHelloFlickRightFlickLeft.js";
 
 test(testName1, function(target,app) {
      
      UIALogger.logStart("Test start");
 	 
+     // This initializes the app to a known state
+     
 	 app.windows()[1].buttons()["Action"].tap();
 	 app.windows()[1].popover().actionSheet().buttons()["Instructions"].tap();
 	 app.mainWindow().buttons()["Instructions"].tapWithOptions({tapCount:5});
@@ -74,8 +76,6 @@ test(testName1, function(target,app) {
      
          var testName = testName1 + count;
          
-         app.windows()[1].buttons()["Action"].tap();
-	 
 	 /* 
 	  
 	  Benign error:
@@ -91,10 +91,6 @@ Source:
 		UIAElement.js, line 130
 	  
 	  */
-         app.windows()[1].popover().actionSheet().buttons()["Settings"].tap();
-         app.mainWindow().tableViews()["Empty list"].cells()["Favorites"].textFields()[0].tap();
-         app.keyboard().typeString("0123456789");
-         app.navigationBar().rightButton().tap();
          
          // Slowly Tap Hello on Keyboard
      
@@ -104,38 +100,27 @@ Source:
          app.windows()[1].elements()["Activate keyboard with a single tap before typing"].tapWithOptions({tapOffset:{x:0.93, y:0.82}});
          app.windows()[1].elements()["Activate keyboard with a single tap before typing"].tapWithOptions({tapOffset:{x:0.86, y:0.71}});
          
-         app.windows()[1].buttons()["Action"].tap();
-         
          target.logElementTree();
          
          //UIAButton: name:Send to 0123456789 rect:{{478, 161}, {272, 43}}
          
-         var testValue = app.windows()[1].popover().actionSheet().buttons()["Send to 0123456789"].name()
-         var compareValue = "Send to 0123456789";
-         
-         UIALogger.logMessage( testValue );
-         
-         app.windows()[1].popover().actionSheet().buttons()["Settings"].tap();
-         app.mainWindow().tableViews()["Empty list"].cells()["Favorites"].textFields()[0].tap();
-         
-         target.delay(1);
-         
-         app.keyboard().keys()["Delete"].tap();
-         app.keyboard().keys()["Delete"].tap();
-         app.keyboard().keys()["Delete"].tap();
-         app.keyboard().keys()["Delete"].tap();
-         app.keyboard().keys()["Delete"].tap();
-         app.keyboard().keys()["Delete"].tap();
-         app.keyboard().keys()["Delete"].tap();
-         app.keyboard().keys()["Delete"].tap();
-         app.keyboard().keys()["Delete"].tap();
-         app.keyboard().keys()["Delete"].tap();
-         app.navigationBar().rightButton().tap();
-         app.windows()[1].buttons()["Action"].tap();
+         // var testValue = app.windows()[1].popover().actionSheet().buttons()["Send to 0123456789"].name()
+         // var compareValue = "Send to 0123456789";
      
          target.delay(1);
+         UIALogger.logMessage("Swipe Right");
+         target.flickInsideWithOptions({startOffset:{x:0.62, y:0.5}, endOffset:{x:0.8, y:0.5}});
+         target.delay(1);
+         UIALogger.logMessage("Swipe Left");
+         target.flickInsideWithOptions({startOffset:{x:0.8, y:0.5}, endOffset:{x:0.6, y:0.5}});
      
-         app.windows()[1].popover().actionSheet().buttons()["Copy & Clear"].tap();
+         var testValue = "1";
+         var compareValue = "1";
+     
+         //target.delay(1);
+         //app.windows()[1].buttons()["Action"].tap();
+     
+         //app.windows()[1].popover().actionSheet().buttons()["Copy & Clear"].tap();
          
          //         if (testValue == compareValue) {
          //         UIALogger.logPass( testName );
@@ -144,13 +129,18 @@ Source:
          //         UIALogger.logFail( testName );
          //         }
          
-         assertEquals(compareValue, testValue, "Menu > Sent to button must match expected value from Settings > Favorite");
-         
+         assertEquals(compareValue, testValue, "1 is not equal 1");
          //target.setDeviceOrientation(UIA_DEVICE_ORIENTATION_PORTRAIT);
      
          // Added for iDevice
          target.delay(1);
+         UIALogger.logMessage("END OF LOOP");
+     
      
      } //while (count++ != MAX_COUNT)
+     
+	 target.delay(1);
+     UIALogger.logMessage("END OF RUN");
+     target.delay(1);
      
 });

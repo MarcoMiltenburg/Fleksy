@@ -40,7 +40,7 @@ else
     echo FLEKSY_PATH is ${FLEKSY_PATH}
 fi
 
-FEATURE=Settings
+FEATURE=TypeSRSL
 #FLEKSY_PATH=~/Xcode/Fleksy
 IFLEKSY_DIR=$FLEKSY_PATH/iFleksy
 
@@ -56,7 +56,7 @@ FL_TEST_RESULTS_DIR=Test$FEATURE
 TESTRUNNER_PATH=$FL_AUTOMATIONTEST_PATH/tuneup/test_runner
 TESTER=$TESTRUNNER_PATH/run
 
-FL_TEST=Test_iFleksySettingFavoriteDoneHelloVerifyClear.js
+FL_TEST=Test_iFleksyTypeHelloFlickRightFlickLeft.js
 
 echo $FL_APPNAME : $FL_TEST
 echo
