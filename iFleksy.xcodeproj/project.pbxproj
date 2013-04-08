@@ -1094,7 +1094,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 127BF792170A670400090407 /* BuildInfo.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Syntellia, Inc";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEPLOYMENT_POSTPROCESSING = YES;
 				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)\"";
 				GCC_PREFIX_HEADER = iFleksy_Prefix.pch;
@@ -1113,7 +1113,7 @@
 					"\"$(SRCROOT)/Vendor/TestFlight\"",
 				);
 				OTHER_LDFLAGS = "\"-all_load\"";
-				PROVISIONING_PROFILE = "00FBE598-F4C5-4B9E-8BCF-FED770920C0F";
+				PROVISIONING_PROFILE = "";
 				SEPARATE_STRIP = YES;
 				STRIP_INSTALLED_PRODUCT = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
