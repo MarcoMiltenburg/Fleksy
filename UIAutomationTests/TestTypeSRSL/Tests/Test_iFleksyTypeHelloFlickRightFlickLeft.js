@@ -21,7 +21,7 @@
 
 UIATarget.onAlert = function onAlert(alert){
     UIALogger.logMessage("alert Shown");
-	target.logElementTree();
+	//target.logElementTree();
     
     if (target.frontMostApp().alert().buttons()["DELETE"].name() != null) {
         UIALogger.logMessage("DELETE alert");
@@ -41,8 +41,6 @@ var testName1 = "Test_iFleksyTypeHelloFlickRightFlickLeft.js";
 
 test(testName1, function(target,app) {
      
-     UIALogger.logStart("Test start");
-	 
      // This initializes the app to a known state
      
 	 app.windows()[1].buttons()["Action"].tap();
@@ -100,7 +98,7 @@ Source:
          app.windows()[1].elements()["Activate keyboard with a single tap before typing"].tapWithOptions({tapOffset:{x:0.93, y:0.82}});
          app.windows()[1].elements()["Activate keyboard with a single tap before typing"].tapWithOptions({tapOffset:{x:0.86, y:0.71}});
          
-         target.logElementTree();
+         //target.logElementTree();
          
          //UIAButton: name:Send to 0123456789 rect:{{478, 161}, {272, 43}}
          
@@ -109,10 +107,12 @@ Source:
      
          target.delay(1);
          UIALogger.logMessage("Swipe Right");
-         target.flickInsideWithOptions({startOffset:{x:0.62, y:0.5}, endOffset:{x:0.8, y:0.5}});
+         target.flickInsideWithOptions({startOffset:{x:0.62, y:0.5}, endOffset:{x:0.82, y:0.5}});
+         //target.logElementTree();
          target.delay(1);
          UIALogger.logMessage("Swipe Left");
          target.flickInsideWithOptions({startOffset:{x:0.8, y:0.5}, endOffset:{x:0.6, y:0.5}});
+         //target.logElementTree();
      
          var testValue = "1";
          var compareValue = "1";
