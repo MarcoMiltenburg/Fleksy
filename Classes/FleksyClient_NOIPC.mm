@@ -53,6 +53,7 @@ NSString* getAbsolutePath(NSString* filepath, NSString* languagePack);
   if (self = [super init]) {
     EmptyOutputInterface e = EmptyOutputInterface();
     fleksyAPI = new FleksyAPI(e);
+    // TODO: hack to access internal SystemsIntegrator object. Access to fleksyAPI->pImpl should be completely eliminated.
     self.systemsIntegrator = fleksyAPI->pImpl->fleksy;
     self->_userDictionary = [[FLUserDictionary alloc] initWithChangeListener:self];
     [VariousUtilities loadSettingsAndListen:self action:@selector(handleSettingsChanged:)];
