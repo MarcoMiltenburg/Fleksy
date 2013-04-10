@@ -537,15 +537,9 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
 
 - (FLRequest*) createRequest:(int) nPoints platformSuggestions:(vector<FLString>*) platformSuggestions {
   
-  FLString previousToken1;
-  FLString previousToken2;
-
-  if (previousTokensStack.count > 1) {
-    previousToken1 = NSStringToFLString([previousTokensStack objectAtIndex:previousTokensStack.count-2]);
-  }
-  if (previousTokensStack.count > 0) {
-    previousToken2 = NSStringToFLString([previousTokensStack objectAtIndex:previousTokensStack.count-1]);
-  }
+  NSArray* previousTokens = [self getPreviousTokens];
+  FLString previousToken1 = NSStringToFLString([previousTokens objectAtIndex:0]);
+  FLString previousToken2 = NSStringToFLString([previousTokens objectAtIndex:1]);
   
   FLRequest* result = FLRequest::FLRequestMake(nPoints, &previousToken1, &previousToken2);
   
@@ -561,8 +555,17 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
   return result;
 }
 
-// returns TWO NSStrings
 - (NSArray*) getPreviousTokens {
+  NSArray* results = [self _getPreviousTokens];
+  if ([[results objectAtIndex:1] isEqualToString:@"."]) {
+    //NSLog(@"found period as second token, ignoring first one");
+    return [NSArray arrayWithObjects:@"", @".", nil];
+  }
+  return results;
+}
+
+// returns TWO NSStrings
+- (NSArray*) _getPreviousTokens {
   
   if (previousTokensStack.count >= MAX_WORD_DEPTH) {
     return [previousTokensStack subarrayWithRange:NSMakeRange(previousTokensStack.count-MAX_WORD_DEPTH, MAX_WORD_DEPTH)];
@@ -572,7 +575,8 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
     return [NSArray arrayWithObjects:@"", [previousTokensStack lastObject], nil];
   }
 
-  return [NSArray arrayWithObjects:@"", @"", nil];
+  // use a period token to force fallback on unigrams
+  return [NSArray arrayWithObjects:@"", @".", nil];
 }
 
 - (NSString*) changePreviousToken:(NSString*) newToken {
@@ -640,7 +644,7 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
   if (range.location != NSNotFound) {
     newText = [VariousUtilities capitalizeString:newText basedOn:capitalization];
     
-    if (NO /*!UIAccessibilityIsVoiceOverRunning()*/) {
+    if (!UIAccessibilityIsVoiceOverRunning()) {
       // new method. When VO is on, this changes the VO focus :(
       // also changes the selection, firing an event that is not distinguishable from actual user tapping on the text
         //NSString* oldText = [delegate handleReplaceRange:range withText:newText];
