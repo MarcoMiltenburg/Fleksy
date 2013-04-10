@@ -171,7 +171,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLTypingController_iOS);
   FLPoint keymaps[4][KEY_MAX_VALUE];
   // hack. Should loop through the n (4) keyboards and copy individually, dont rely on internal represenation being contiguous.
   memcpy(keymaps, self.fleksyClient.systemsIntegrator->getKeymap(0), sizeof(keymaps));
-  
+  //TODO: Update for FleksyAPI usage
   //self.fleksyClient->fleksyAPI->getKeymapForKeyboard(0);
   
   [[FLKeyboard sharedFLKeyboard] setKeymaps:keymaps];

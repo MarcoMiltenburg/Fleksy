@@ -949,7 +949,19 @@
   [TestFlight submitFeedback:textView.text];
   
   if (purchaseManager.fullVersion) {
-    [self sendInAppMailTo:@"feedback@fleksy.com" useText:textView.text subjectPrefix:@"Feedback: "];
+    
+    BOOL voiceover = UIAccessibilityIsVoiceOverRunning();
+    
+    NSMutableString *subjectPrefixString = [@"Feedback" mutableCopy];
+    
+    if (voiceover) {
+      [subjectPrefixString appendString:@": "];
+    }
+    else {
+      [subjectPrefixString appendString:@":: "];
+    }
+    
+    [self sendInAppMailTo:@"feedback@fleksy.com" useText:textView.text subjectPrefix:subjectPrefixString];
   } else {
     [VariousUtilities performAudioFeedbackFromString:@"Thank you. Your feedback has been submitted"];
   }
