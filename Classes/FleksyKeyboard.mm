@@ -622,7 +622,7 @@ static FleksyKeyboard* instance = nil;
   [responder replaceRange:textRange withText:text];
   
   // restore previous cursor position, otherwise cursor automatically goes to end of replaced range
-  UITextPosition* newCursorPosition = [responder positionFromPosition:responder.beginningOfDocument offset:cursor];
+  UITextPosition* newCursorPosition = [responder positionFromPosition:responder.beginningOfDocument offset:cursor + text.length - oldText.length];
   responder.selectedTextRange = [responder textRangeFromPosition:newCursorPosition toPosition:newCursorPosition];
   
   // used for sanity checks
