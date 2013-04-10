@@ -20,6 +20,9 @@
 #import "SwipeFeedbackView.h"
 #import "DebugGestureRecognizer.h"
 
+// TODO: FleksyAPI Testing
+#include "Fleksy.h"
+#include "FleksyListenerImplC.h"
 
 #define FLEKSY_DEFAULT_HEIGHT_PORTRAIT_IPHONE 244
 #define FLEKSY_DEFAULT_HEIGHT_LANDSCAPE_IPHONE FLEKSY_DEFAULT_HEIGHT_PORTRAIT_IPHONE
@@ -49,8 +52,11 @@
 @interface FLKeyboardContainerView : UIView <UIGestureRecognizerDelegate> {
   // Where to pass all typing related events.
   FLTypingController_iOS* typingController;
-  
+
+  // TODO: FleksyAPI Testing
   //FLTypingController* typingControllerGeneric;
+  FleksyListenerImplC* fleksyListener;
+  FleksyAPI* fleksyApi;
   
   FLKeyboard* keyboard;
   FLSuggestionsView* suggestionsView;
