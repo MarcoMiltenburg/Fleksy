@@ -1,0 +1,23 @@
+//
+// Prefix header for all source files of the 'GestureTest' target in the 'GestureTest' project
+//
+
+
+#include <CoreGraphics/CGGeometry.h>
+typedef CGPoint FLPoint;
+#define CUSTOM_FLPOINT_DEFINE
+#define FLPointMake CGPointMake
+#define FLPointZero CGPointZero
+#define FLPointFromCGPoint(__p__) FLPointMake(__p__.x, __p__.y)
+
+
+#import <Availability.h>
+
+#ifndef __IPHONE_4_0
+#warning "This project uses features only available in iOS SDK 4.0 and later."
+#endif
+
+#ifdef __OBJC__
+  #import <UIKit/UIKit.h>
+  #import <Foundation/Foundation.h>
+#endif
