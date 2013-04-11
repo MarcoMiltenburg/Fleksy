@@ -7,6 +7,7 @@
 //
 
 #import "MyTextView.h"
+#import "Settings.h"
 
 @implementation MyTextView {
 

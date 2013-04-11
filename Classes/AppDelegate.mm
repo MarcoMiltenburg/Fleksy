@@ -143,6 +143,11 @@ float distributionFunction(float x) {
 
 #ifdef RELEASE
   printf("Fleksy RELEASE\n");
+  
+  [TestFlight setOptions:[NSDictionary dictionaryWithObjectsAndKeys:
+                          @NO, TFOptionLogToConsole,
+                          @NO, TFOptionLogToSTDERR, nil]];
+  
 #if APP_STORE
   [TestFlight takeOff:@"91f69c10-d1a3-4e7a-905d-dea51af78a82"];
 #else

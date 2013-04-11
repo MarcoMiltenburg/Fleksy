@@ -11,6 +11,7 @@
 #import "UIGestureUtilities.h"
 #import "UITouchManager.h"
 #import "VariousUtilities.h"
+#import "Settings.h"
 
 @implementation UISwipeAndHoldGestureRecognizer
 
