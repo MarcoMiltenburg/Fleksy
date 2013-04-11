@@ -1,4 +1,5 @@
 
+#if FLEKSY_API_TESTING
 
 #include "FleksyListenerImplC.h"
 
@@ -36,3 +37,5 @@ void FleksyListenerImplC::onChangeSelection(int selectionStart, int selectionEnd
 FLExternalEditorState FleksyListenerImplC::onRequestEditorState(){
   return state;
 }
+
+#endif

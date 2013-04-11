@@ -13,14 +13,17 @@
 
 #define DEBUG_NO_WORDS 0
 
-// Set to 1 for development. 0 for released code.
-#define FLEKSY_IS_MAIN_THREAD_CHECK 1
+//TODO: FleksyAPI Testing - this goes away when full FleksyApi is used.
+#define FLEKSY_API_TESTING 0
 
 //Installing Crashlytics = 1
 #define CRASHLYTICS 1
 
 //if 0 also change bundle identifier to "com.syntellia.FleksyBETA" and product name to "Fleksy Beta"
 #define APP_STORE 0
+
+// Set to 1 for development. 0 for released code.
+#define FLEKSY_IS_MAIN_THREAD_CHECK !APP_STORE
 
 #define FLEKSY_EXPIRES !APP_STORE
 #if FLEKSY_EXPIRES
