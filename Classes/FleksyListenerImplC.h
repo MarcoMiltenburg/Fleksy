@@ -6,6 +6,8 @@
 //  Copyright (c) 2013 Syntellia. All rights reserved.
 //
 
+#if FLEKSY_API_TESTING 
+
 #ifndef __FleksySample1__FleksyListenerImplC__
 #define __FleksySample1__FleksyListenerImplC__
 
@@ -38,3 +40,5 @@ private:
 };
 
 #endif /* defined(__FleksySample1__FleksyListenerImplC__) */
+
+#endif

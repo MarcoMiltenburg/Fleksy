@@ -37,20 +37,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardContainerView);
   
   if (self = [super initWithFrame:CGRectMake(0, 0, 10, 10)]) {
     
-    // TODO: FleksyAPI Testing
-    
-    NSLog(@" ***** FleksyAPI Testing: START of Loading");
-    
-    fleksyListener = new FleksyListenerImplC();
-    fleksyApi = new FleksyAPI(*fleksyListener);
-    
-    NSString* resourcePath = [NSString stringWithFormat:@"%@/en-US/", [[NSBundle mainBundle] bundlePath]];
-    
-    fleksyApi->setResourcePath(resourcePath.UTF8String);
-    fleksyApi->loadResources();
-    
-    NSLog(@" ***** FleksyAPI Testing: END of Loading");
-
     self.backgroundColor = [UIColor clearColor];
     
     typingController = [FLTypingController_iOS sharedFLTypingController_iOS];
@@ -93,6 +79,27 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardContainerView);
     topShadowView.layer.shadowOpacity = 0.4;
     [self addSubview:topShadowView];
     [self sendSubviewToBack:topShadowView];
+
+#if FLEKSY_API_TESTING  
+    // TODO: FleksyAPI Testing
+  
+    NSLog(@" ***** FleksyAPI Testing: START of Loading");
+    
+    fleksyListener = new FleksyListenerImplC();
+    fleksyApi = new FleksyAPI(*fleksyListener);
+    
+    // TODO: FleksyAPI Testing
+    
+    NSLog(@" ***** FleksyAPI Testing: START of Loading");
+    
+    fleksyListener = new FleksyListenerImplC();
+    //fleksyApi = new FleksyAPI(*fleksyListener);
+    
+    fleksyApi = typingController.fleksyClient->fleksyAPI;
+    
+    NSLog(@" ***** FleksyAPI Testing: END of Loading");
+#endif
+    
   }
 
   return self;
@@ -221,11 +228,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardContainerView);
     //std::string* s = new std::string("");
     //s->push_back(c);
     //typingControllerGeneric->sendCharacter(*s, point.x, point.y, 0);
-    
+#if FLEKSY_API_TESTING     
     NSLog(@" ***** FleksyAPI Testing: START api->sendTap");
     fleksyApi->sendTap(point.x, point.y);
     NSLog(@" ***** FleksyAPI Testing: END api->sendTap");    
-    
+#endif
     if (FleksyUtilities::isalpha(c)) { // [VariousUtilities charIsAlpha:c]) {
       [suggestionsView fadeout];
       [suggestionsViewSymbols fadeout];
@@ -252,9 +259,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardContainerView);
   [typingController nonLetterCharInput:' ' autocorrectionType:keyboard.activeView.tag == KEYBOARD_TAG_ABC_UPPER ? kAutocorrectionChangeAndSuggest : kAutocorrectionNone];
   [feedbackView swipeRecognized:UISwipeGestureRecognizerDirectionRight padding:![suggestionsView isHidden] || ![suggestionsViewSymbols isHidden]];  
   //typingControllerGeneric->swipeRight();
+#if FLEKSY_API_TESTING 
   NSLog(@" ***** FleksyAPI Testing: START api->space");
   fleksyApi->space();
   NSLog(@" ***** FleksyAPI Testing: END api->space");
+#endif
 }
 
 - (void) handleSwipeDirection:(UISwipeGestureRecognizerDirection) direction fromTouch:(UITouch*) touch caller:(NSString*) caller {
@@ -284,9 +293,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardContainerView);
     [typingController backspace];
     [feedbackView swipeRecognized:direction padding:![suggestionsView isHidden] || ![suggestionsViewSymbols isHidden]];
     //typingControllerGeneric->backspace();
+#if FLEKSY_API_TESTING 
     NSLog(@" ***** FleksyAPI Testing: START api->backspace");
     fleksyApi->backspace();
     NSLog(@" ***** FleksyAPI Testing: END api->backspace");
+#endif
   }
   
   if (direction == UISwipeGestureRecognizerDirectionUp) {
@@ -295,9 +306,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardContainerView);
     } else {
       [self cycleSuggestion:-1];
       //typingControllerGeneric->swipeUp();
+#if FLEKSY_API_TESTING 
       NSLog(@" ***** FleksyAPI Testing: START api->previousSuggestion");
       fleksyApi->previousSuggestion();
       NSLog(@" ***** FleksyAPI Testing: END api->previousSuggestion");
+#endif
     }
   }
   
@@ -307,9 +320,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardContainerView);
     } else {
       [self cycleSuggestion:1];
       //typingControllerGeneric->swipeDown();
+#if FLEKSY_API_TESTING 
       NSLog(@" ***** FleksyAPI Testing: START api->nextSuggestion");
       fleksyApi->nextSuggestion();
       NSLog(@" ***** FleksyAPI Testing: END api->nextSuggestion");
+#endif
     }
   }
   
