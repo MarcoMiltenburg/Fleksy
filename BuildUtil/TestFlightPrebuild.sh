@@ -15,14 +15,27 @@
 #
 # If there is some kind of error, abort and roll back to pre-script run state for all state mutations.
 
-if [ "${CONFIGURATION}" -ne "TestFlight" ]; then
-	exit 0;
+# If any command fails, cause the script to fail and exit with non-zero status.
+set -e
+# If any variable is used but unset, cause the script to fail and exit with non-zero status.
+set -u
+
+
+if [[ ( "${CONFIGURATION}" != "TestFlight" ) ]]; then
+    exit 0;
 fi
+
 
 # Check if there's any outstanding modifications that need to be commited, and abort if so.
 #
 # TODO!
 #
+
+if [[ $(git status --untracked-files=no --ignore-submodules=untracked -s) != "" ]]; then
+    echo "error: There are uncomitted changes."
+    exit 1;
+fi
+
 
 
 # Do the "Edit the release notes" bit.
