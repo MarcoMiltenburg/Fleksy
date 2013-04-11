@@ -1403,6 +1403,8 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
     
     NSLog(@"lastWord: %@, compare: %@", lastWord, compare);
     //assert((!lastWord.length && !compare) || [lastWord isEqualToString:compare]);
+#pragma unused(lastWord)
+#pragma unused(compare)
   }
   
   [self playBackspace];

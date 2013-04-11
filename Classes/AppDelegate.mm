@@ -140,12 +140,19 @@ float distributionFunction(float x) {
 - (void) applicationDidFinishLaunching:(UIApplication *) application loadServer:(BOOL) loadServer {
   
   double startTime = CFAbsoluteTimeGetCurrent();
-  
+
 #ifdef RELEASE
   printf("Fleksy RELEASE\n");
+#if APP_STORE
   [TestFlight takeOff:@"91f69c10-d1a3-4e7a-905d-dea51af78a82"];
-#if !APP_STORE
+#else
+  printf("Fleksy TESTFLIGHT ONLY\n");
+//http://blog.goosoftware.co.uk/2012/04/18/unique-identifier-no-warnings/
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
   [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
+#pragma clang diagnostic pop
+  [TestFlight takeOff:@"c71a4345-0f62-4435-bf92-fb68f1c20d3a"]; 
 #endif
 #endif
 
@@ -180,7 +187,7 @@ float distributionFunction(float x) {
   
   BOOL ok = [[[NSBundle mainBundle] bundlePath] hasSuffix:[NSString stringWithFormat:@"%@.app", FLEKSY_PRODUCT_NAME]];
   assert(ok);
-  
+#pragma unused(ok)
   fleksyAppViewController = [[FleksyAppMainViewController alloc] initWithNibName:nil bundle:nil];
   
 //  if ([self checkVersionOKToRun]) {
@@ -228,6 +235,7 @@ float distributionFunction(float x) {
   //[self finishLoadingUI];
   
   NSLog(@"END of applicationDidFinishLaunching, took %.6f", CFAbsoluteTimeGetCurrent() - startTime);
+#pragma unused(startTime)
 }
 
 
@@ -236,12 +244,16 @@ float distributionFunction(float x) {
   NSLog(@"START of finishLoadingUI");
 
   double startTime = CFAbsoluteTimeGetCurrent();
+#pragma unused(startTime)
   
 #if !DEBUG_NO_WORDS
   [fleksyAppViewController showAlerts];
 #endif
-  
+
+
   CGRect rect = [[UIScreen mainScreen] applicationFrame];
+//http://stackoverflow.com/questions/5451123/how-can-i-get-rid-of-an-unused-variable-warning-in-xcode
+#pragma unused(rect)
   NSLog(@"applicationFrame: %@, bounds: %@", NSStringFromCGRect(rect), NSStringFromCGRect([[UIScreen mainScreen] bounds]));
   
   textView = [[FleksyTextView alloc] initWithFrame:window.bounds];

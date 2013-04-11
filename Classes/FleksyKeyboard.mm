@@ -212,6 +212,7 @@ static FleksyKeyboard* instance = nil;
   [self setNeedsLayout];
     
   NSLog(@"END of handleSettingsChanged:, took %.6f", CFAbsoluteTimeGetCurrent() - startTime);
+#pragma unused(startTime)
 }
 
 

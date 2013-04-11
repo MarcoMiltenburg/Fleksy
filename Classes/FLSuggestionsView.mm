@@ -337,6 +337,7 @@
   int index = [customSegmentedControl indexOfItemNearestX:viewX];
   NSLog(@"x: %.3f, viewX: %.3f, index: %d", x, viewX, index);
   NSString* newText = [customSegmentedControl titleForSegmentAtIndex:index];
+#pragma unused(newText)
   int selectedIndexOld = customSegmentedControl.selectedIndex;
   int offset = index - selectedIndexOld;
   NSLog(@"selectedIndexOld: %d, offset: %d, newText: %@", selectedIndexOld, offset, newText);

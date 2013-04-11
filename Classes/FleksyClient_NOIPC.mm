@@ -142,6 +142,7 @@ NSString* getAbsolutePath(NSString* filepath, NSString* languagePack) {
 
   double dt = CFAbsoluteTimeGetCurrent() - startTime;
   NSLog(@"FleksyClient_NOIPC request took %.6f (average over %d runs)", dt / n, n);
+#pragma unused(dt)
   return result;
 }
 

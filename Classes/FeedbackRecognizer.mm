@@ -114,6 +114,7 @@
     default:
       NSString* character = [NSString stringWithFormat:@"%C", c];
       NSLog(@"speakNATOforChar: %@ -> unknown", character);
+#pragma unused(character)
       return;
       break;
   }
@@ -274,6 +275,7 @@
     double dt = touch.timeSinceTouchdown;
     double velocity = distance / dt;
     NSLog(@"could be swipe, distance:%.3f, dt:%.3f, v:%.3f", distance, dt, velocity);
+#pragma unused(velocity)
     if (dt < 0.150) {
       BOOL allowSwipe = YES; //swipeAnalyzer.enabled;
       if (direction == UISwipeGestureRecognizerDirectionDown || direction == UISwipeGestureRecognizerDirectionUp || direction == UISwipeGestureRecognizerDirectionLeft) {

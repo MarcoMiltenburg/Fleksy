@@ -296,6 +296,7 @@ BOOL isRingerMuted() {
   NSString* encoded = [VariousUtilities encode:string];
   NSString* decoded = [VariousUtilities decode:encoded];
   NSLog(@"encoding %@ becomes %@, then decoding it becomes %@. ", string, encoded, decoded);
+#pragma unused(decoded)
 }
 
 + (void) recreateSpeechEngine {
@@ -983,7 +984,8 @@ int tcp_lat(int size, int count, BOOL parent)
       timeval* f = (timeval*) buf;
       int64_t serverTime = f->tv_sec * (int64_t) 1e6 + f->tv_usec;
       NSLog(@"tcp_lat CHILD didRead[%d] @ %lli, serverTime was %lli, delay: %lli usec", i, didReadTime, serverTime, didReadTime - serverTime);
-    
+#pragma unused(didReadTime)
+#pragma unused(serverTime)  
       if (write(new_fd, buf, size) != size) {
         perror("write");
         return 1;

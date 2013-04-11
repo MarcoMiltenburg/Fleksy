@@ -142,6 +142,7 @@
 //  if ([value isEqualToString:self.accessibilityValue]) {
     BOOL moved = ![range.start isEqual:newRange.start];
     NSLog(@"FleksyTextView range equality: %d", !moved);
+#pragma unused(moved)
 //  }
   
   self.accessibilityValue = value;

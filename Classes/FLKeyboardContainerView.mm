@@ -407,6 +407,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardContainerView);
       CGPoint current  = [[path objectAtIndex:i]  CGPointValue];
       float delta = distanceOfPoints(FLPointFromCGPoint(current), FLPointFromCGPoint(previous));
       NSLog(@"delta: %.3f", delta);
+#pragma unused(delta)
 //      if ((delta > 40 && i > 1) || (delta > 60)) {
 //        NSLog(@"SPLITTING!!");
 //        if (!didSplit) {
