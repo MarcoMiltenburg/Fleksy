@@ -51,6 +51,7 @@
 		2E8A6C44168139520007B0D0 /* en-US in Resources */ = {isa = PBXBuildFile; fileRef = 2E8A6C40168139520007B0D0 /* en-US */; };
 		2E8A6C46168139520007B0D0 /* es-ES in Resources */ = {isa = PBXBuildFile; fileRef = 2E8A6C42168139520007B0D0 /* es-ES */; };
 		2E9138C114A543B200186EB6 /* CustomScrollView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2E9138C014A543B200186EB6 /* CustomScrollView.mm */; };
+		2E92321D171778E70047AB76 /* UIView+Extensions.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2E92321C171778E70047AB76 /* UIView+Extensions.mm */; };
 		2E961B20154E24C80061C37D /* Settings_HIDDEN.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2E961B1F154E24C80061C37D /* Settings_HIDDEN.bundle */; };
 		2E9A140A16DC36F200E9726B /* MyTextChecker.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2E9A140916DC36F200E9726B /* MyTextChecker.mm */; };
 		2EA0B72B15C1CB6E0000E724 /* FleksyTextView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2EA0B72A15C1CB6E0000E724 /* FleksyTextView.mm */; };
@@ -196,6 +197,8 @@
 		2E8A6C42168139520007B0D0 /* es-ES */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "es-ES"; path = "../submodules/FleksySDK-compiled/FLResources/encrypted/es-ES"; sourceTree = "<group>"; };
 		2E9138BF14A543B200186EB6 /* CustomScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomScrollView.h; sourceTree = "<group>"; };
 		2E9138C014A543B200186EB6 /* CustomScrollView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CustomScrollView.mm; sourceTree = "<group>"; };
+		2E92321B171778E70047AB76 /* UIView+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extensions.h"; sourceTree = "<group>"; };
+		2E92321C171778E70047AB76 /* UIView+Extensions.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "UIView+Extensions.mm"; sourceTree = "<group>"; };
 		2E961B1F154E24C80061C37D /* Settings_HIDDEN.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings_HIDDEN.bundle; sourceTree = "<group>"; };
 		2E9A140816DC36F200E9726B /* MyTextChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTextChecker.h; sourceTree = "<group>"; };
 		2E9A140916DC36F200E9726B /* MyTextChecker.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MyTextChecker.mm; sourceTree = "<group>"; };
@@ -585,6 +588,8 @@
 		2E9F282D11EFF42F00AD3EEB /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				2E92321B171778E70047AB76 /* UIView+Extensions.h */,
+				2E92321C171778E70047AB76 /* UIView+Extensions.mm */,
 				1887E3A1168901B400A8A111 /* KSLabel.h */,
 				1887E3A2168901B400A8A111 /* KSLabel.m */,
 				2E1E745215C871BA0029E761 /* MyTextView.h */,
@@ -985,6 +990,7 @@
 				6139A853170A0CB800FBDB02 /* zip.c in Sources */,
 				61D2EA97170BA5BB00DA7639 /* UIView+MainThreadCheck.m in Sources */,
 				617DACC01715DCA5009D93CB /* FleksyListenerImplC.cpp in Sources */,
+				2E92321D171778E70047AB76 /* UIView+Extensions.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

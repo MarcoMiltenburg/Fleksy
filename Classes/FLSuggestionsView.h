@@ -48,5 +48,6 @@
 @property (weak, readonly) NSString* selectedTitle;
 @property (readwrite, copy) NSString* capitalization;
 @property BOOL needsSpellingFeedback;
+@property BOOL vertical;
 
 @end

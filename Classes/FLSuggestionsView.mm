@@ -24,6 +24,8 @@
 
 #define FULL_ALPHA 0.85
 
+#define LOOKAHEAD_PADDING 100
+
 @implementation FLSuggestionsView
 
 - (void) recreateCustomSegmentedControlWithItems:(NSArray*) items differentFirst:(BOOL) differentFirst {
@@ -34,7 +36,7 @@
   [customSegmentedControl clear];
   [customSegmentedControl setItems:items differentFirst:differentFirst large:!needsSpellingFeedback];
   
-  bg.contentSize = customSegmentedControl.frame.size;
+  bg.contentSize = customSegmentedControl.currentSize;// customSegmentedControl.frame.size;
   
   //[segmentedControl layoutSubviews];
   
@@ -54,7 +56,12 @@
   //NSLog(@"FLSuggestionsView layoutSubviews %@", NSStringFromCGRect(self.frame));
   
   bg.frame = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height);
-  customSegmentedControl.frame = CGRectMake(0, 0, 1999, self.bounds.size.height);
+  
+  if (self.vertical) {
+    customSegmentedControl.frame = CGRectMake(0, 0, self.bounds.size.width, 1999);
+  } else {
+    customSegmentedControl.frame = CGRectMake(0, 0, 1999, self.bounds.size.height);
+  }
 }
 
 - (void) reset {
@@ -65,6 +72,8 @@
 - (id) initWithListener:(id) _listener {
   if ( (self = [super init]) ) {
     // Initialization code
+    
+    self.vertical = NO;
 
     self->listener = _listener;
     self->capitalization = nil;
@@ -79,15 +88,17 @@
     //allow rest of contents to be visible outside
     //our frame is smaller than width of screen so that
     //scrollRectToVisible happens before we reach the end (so we can see whats coming)
-    self.clipsToBounds = NO;
+    self.clipsToBounds = YES;
     bg.clipsToBounds = NO;
     
-    customSegmentedControl = [[CustomSegmentedControl alloc] init];
+    
+    customSegmentedControl = [[CustomSegmentedControl alloc] initWithVertical:self.vertical];
     customSegmentedControl.backgroundColor = [UIColor clearColor];
     [bg addSubview:customSegmentedControl];
 
     self.userInteractionEnabled = NO;
     self.needsSpellingFeedback = YES;
+    
   }
   return self;
 }
@@ -117,18 +128,33 @@
 }
 
 - (void) bounce:(float) bounce {
-
+  
   float x1; //= bg.contentOffset.x + bounce;
   float x2; //= bg.contentOffset.x - bounce;
   
+  float y1;
+  float y2;
+  
   if (bounce > 0) {
-    x2 = customSegmentedControl.currentWidth - self.bounds.size.width;
+    x2 = customSegmentedControl.currentSize.width - self.bounds.size.width;
     x2 = fmax(x2, bg.contentOffset.x);
+    y2 = customSegmentedControl.currentSize.height - self.bounds.size.height;
+    y2 = fmax(y2, bg.contentOffset.y);
   } else {
     x2 = 0;
+    y2 = 0;
   }
   
   x1 = x2 + bounce;
+  y1 = y2 + bounce;
+  
+  if (self.vertical) {
+    x1 = 0;
+    x2 = 0;
+  } else {
+    y1 = 0;
+    y2 = 0;
+  }
   
   BOOL previousAnimationsState = [UIView areAnimationsEnabled];
   [UIView setAnimationsEnabled:YES];
@@ -136,7 +162,7 @@
                         delay:0.0
                       options:0
                    animations:^{
-                     [bg setContentOffset:CGPointMake(x1, 0)];
+                     [bg setContentOffset:CGPointMake(x1, y1)];
                    }
                    completion:^(BOOL finished){
                      BOOL previousAnimationsState2 = [UIView areAnimationsEnabled];
@@ -145,7 +171,7 @@
                                            delay:0
                                          options:0
                                       animations:^{
-                                        [bg setContentOffset:CGPointMake(x2, 0)];
+                                        [bg setContentOffset:CGPointMake(x2, y2)];
                                       }
                                       completion:^(BOOL finished){
                                       }];
@@ -266,46 +292,17 @@
     customSegmentedControl.selectedIndex = selectedIndexNew;
     CGRect frameToUse = [customSegmentedControl selectedView].frame;
     
-    //     float lookahead = 100;
-    //     if (offset < 0) {
-    //       frameToUse = CGRectMake(fmax(0, frameToUse.origin.x - lookahead), frameToUse.origin.y, frameToUse.size.width, frameToUse.size.height);
-    //     } else {
-    //       frameToUse = CGRectMake(frameToUse.origin.x, frameToUse.origin.y, fmin(customSegmentedControl.currentWidth - frameToUse.origin.x, frameToUse.size.width + lookahead), frameToUse.size.height);
-    //     }
-    
-    //[bg scrollRectToVisible:frameToUse animated:selectedIndexOld != UISegmentedControlNoSegment];
-    
-    //NSLog(@"frameToUse: %@", NSStringFromCGRect(frameToUse));
-    
-    float frameMidpoint = frameToUse.origin.x + frameToUse.size.width * 0.5 - bg.contentOffset.x;
-    float snapTo = self.bounds.size.width * 0.5;
-    
-    float scrollX = frameMidpoint - snapTo;
-    
-    //NSLog(@"screen frameMidpoint: %f, need to scroll %f", frameMidpoint, scrollX);
-    
-    if (scroll) {
-      if (offset < 0) {
-        if (frameMidpoint < snapTo) {
-          float newOffset = scrollX + bg.contentOffset.x;
-          newOffset = fmaxf(0, newOffset);
-          //NSLog(@"scroll from %f to %f (%f)", bg.contentOffset.x, newOffset, newOffset - bg.contentOffset.x);
-          [bg setContentOffset:CGPointMake(newOffset, 0) animated:selectedIndexOld != UISegmentedControlNoSegment];
-        }
+    if (self.vertical) {
+      frameToUse = CGRectMake(frameToUse.origin.x, frameToUse.origin.y + 1 * frameToUse.size.height, frameToUse.size.width, frameToUse.size.height);
+    } else {
+      if (offset > 0) {
+        frameToUse = CGRectMake(frameToUse.origin.x, frameToUse.origin.y, frameToUse.size.width + LOOKAHEAD_PADDING, frameToUse.size.height);
       } else {
-        if (frameMidpoint > snapTo) {
-          
-          float newOffset = scrollX + bg.contentOffset.x;
-          if (newOffset > customSegmentedControl.currentWidth - self.bounds.size.width) {
-            newOffset = customSegmentedControl.currentWidth - self.bounds.size.width;
-          }
-          //NSLog(@"scroll from %f to %f (%f)", bg.contentOffset.x, newOffset, newOffset - bg.contentOffset.x);
-          if (newOffset > bg.contentOffset.x) {
-            [bg setContentOffset:CGPointMake(newOffset, 0) animated:selectedIndexOld != UISegmentedControlNoSegment];
-          }
-        }
+        frameToUse = CGRectMake(fmax(0, frameToUse.origin.x - LOOKAHEAD_PADDING), frameToUse.origin.y, frameToUse.size.width + LOOKAHEAD_PADDING, frameToUse.size.height);
       }
     }
+    
+    [bg scrollRectToVisible:frameToUse animated:selectedIndexOld != UISegmentedControlNoSegment];
   }
   
   self->givingSpellingFeedback = NO;
@@ -356,7 +353,15 @@
     [self recreateCustomSegmentedControlWithItems:items differentFirst:selected == 1];
     [self showWithSelection:nil];
     [self selectSuggestionWithOffset:selected+1 replaceText:NO scroll:NO notifyListener:YES];
-    [bg setContentOffset:CGPointMake([customSegmentedControl selectedView].frame.origin.x, 0)];
+    
+    if (self.vertical) {
+      // Don't do this as we want to scroll even further inside above selectSuggestionWithOffset when vertical.
+      // We dont want to show current suggestion anymore
+      //[bg setContentOffset:CGPointMake(0, [customSegmentedControl selectedView].frame.origin.y)];
+    } else {
+      //scroll raw text out of the way
+      [bg setContentOffset:CGPointMake([customSegmentedControl selectedView].frame.origin.x, 0)];
+    }
   }
 }
 

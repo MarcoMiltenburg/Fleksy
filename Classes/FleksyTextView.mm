@@ -276,7 +276,7 @@
   return YES;
 }
 
-- (void) textViewDidChange:(UITextView *)textView {
+- (void) textViewDidChange:(UITextView *)_textView {
   NSLog(@"textViewDidChange");
 }
 

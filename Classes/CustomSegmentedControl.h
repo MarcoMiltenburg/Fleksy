@@ -29,6 +29,7 @@
   BOOL differentFirst;
 }
 
+- (id) initWithVertical:(BOOL) vertical;
 - (void) clear;
 - (void) setItems:(NSArray*) items differentFirst:(BOOL) _differentFirst large:(BOOL) large;
 - (UIView*) selectedView;
@@ -38,6 +39,7 @@
 
 @property int selectedIndex;
 @property (readonly) int numberOfSegments;
-@property (readonly) float currentWidth;
+@property (readonly) CGSize currentSize;
+@property BOOL vertical;
 
 @end

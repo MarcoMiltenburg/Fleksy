@@ -14,7 +14,7 @@
 }
 
 - (void) reloadInputViews {
-  NSLog(@"MyTextView reloadInputViews called, self.isFirstResponder: %d", self.isFirstResponder);
+  //NSLog(@"MyTextView reloadInputViews called, self.isFirstResponder: %d", self.isFirstResponder);
   [super reloadInputViews]; // 'NSGenericException', reason: '*** Collection <CALayerArray: 0xf060c10> was mutated while being enumerated.'
   //[super performSelectorOnMainThread:@selector(reloadInputViews) withObject:nil waitUntilDone:NO]; // infinite recursion
 }

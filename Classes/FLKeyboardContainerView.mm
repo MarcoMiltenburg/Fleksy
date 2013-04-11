@@ -50,8 +50,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardContainerView);
     keyboard = [FLKeyboard sharedFLKeyboard];
     
     [self addSubview:keyboard];
-    [self addSubview:suggestionsView];
-    [self addSubview:suggestionsViewSymbols];
+    if (!suggestionsView.vertical) {
+      [self addSubview:suggestionsView];
+      [self addSubview:suggestionsViewSymbols];
+    }
     
     self.userInteractionEnabled = YES;
     self.multipleTouchEnabled = YES;
@@ -166,8 +168,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardContainerView);
   float paddingRight = 0;
   
   suggestionsView.frame = CGRectMake(0, [self topPadding], self.bounds.size.width - paddingRight, FLEKSY_SUGGESTIONS_HEIGHT);
-  suggestionsViewSymbols.frame = suggestionsView.frame;
   feedbackView.frame = suggestionsView.frame;
+  
+  if (suggestionsView.vertical) {
+    suggestionsView.frame = CGRectMake(0, 0, 100, FLEKSY_SUGGESTIONS_HEIGHT * 1);
+  }
+  
+  suggestionsViewSymbols.frame = suggestionsView.frame;
   
   //NSLog(@"FLKeyboardContainerView layoutSubviews 2222");
   [keyboard setNeedsLayout];
