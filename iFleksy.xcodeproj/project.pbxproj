@@ -126,8 +126,8 @@
 		125404D1170A078000F63F58 /* TestFlightUploader.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = TestFlightUploader.sh; path = BuildUtil/TestFlightUploader.sh; sourceTree = "<group>"; };
 		125404D2170A078000F63F58 /* TestFlightVersion.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = TestFlightVersion.xcconfig; path = BuildUtil/TestFlightVersion.xcconfig; sourceTree = "<group>"; };
 		127BF792170A670400090407 /* BuildInfo.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = BuildInfo.xcconfig; path = BuildUtil/BuildInfo.xcconfig; sourceTree = "<group>"; };
-		12B760AD17027C0800451CB5 /* libFleksyStatic.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFleksyStatic.a; path = "submodules/FleksySDK-compiled/compiled/iOS-static/Release/libFleksyStatic.a"; sourceTree = "<group>"; };
-		12B760AF17027C1700451CB5 /* libFleksyStatic.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFleksyStatic.a; path = "submodules/FleksySDK-compiled/compiled/iOS-static/Debug/libFleksyStatic.a"; sourceTree = "<group>"; };
+		12B760AD17027C0800451CB5 /* libFleksyStatic.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFleksyStatic.a; path = "submodules/FleksySDK-compiled/ios/lib/Release/libFleksyStatic.a"; sourceTree = "<group>"; };
+		12B760AF17027C1700451CB5 /* libFleksyStatic.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFleksyStatic.a; path = "submodules/FleksySDK-compiled/ios/lib/Debug/libFleksyStatic.a"; sourceTree = "<group>"; };
 		12D6B89C170A4441000EB4FD /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		1887E3A1168901B400A8A111 /* KSLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSLabel.h; sourceTree = "<group>"; };
 		1887E3A2168901B400A8A111 /* KSLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSLabel.m; sourceTree = "<group>"; };
@@ -192,9 +192,9 @@
 		2E859EBF16485E1D007AFCB3 /* Default-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
 		2E896DC314BAC9EA0098FD4F /* FleksyClient_IPC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = FleksyClient_IPC.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		2E896DC414BAC9EA0098FD4F /* FleksyClient_IPC.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = FleksyClient_IPC.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		2E8A6C39168131850007B0D0 /* sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; name = sounds; path = "../submodules/FleksySDK-compiled/FLResources/sounds"; sourceTree = "<group>"; };
-		2E8A6C40168139520007B0D0 /* en-US */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "en-US"; path = "../submodules/FleksySDK-compiled/FLResources/encrypted/en-US"; sourceTree = "<group>"; };
-		2E8A6C42168139520007B0D0 /* es-ES */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "es-ES"; path = "../submodules/FleksySDK-compiled/FLResources/encrypted/es-ES"; sourceTree = "<group>"; };
+		2E8A6C39168131850007B0D0 /* sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; name = sounds; path = "../submodules/FleksySDK-compiled/ios/FleksySDKResources/sounds"; sourceTree = "<group>"; };
+		2E8A6C40168139520007B0D0 /* en-US */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "en-US"; path = "../submodules/FleksySDK-compiled/ios/FleksySDKResources/encrypted/en-US"; sourceTree = "<group>"; };
+		2E8A6C42168139520007B0D0 /* es-ES */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "es-ES"; path = "../submodules/FleksySDK-compiled/ios/FleksySDKResources/encrypted/es-ES"; sourceTree = "<group>"; };
 		2E9138BF14A543B200186EB6 /* CustomScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomScrollView.h; sourceTree = "<group>"; };
 		2E9138C014A543B200186EB6 /* CustomScrollView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CustomScrollView.mm; sourceTree = "<group>"; };
 		2E92321B171778E70047AB76 /* UIView+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extensions.h"; sourceTree = "<group>"; };
@@ -1034,16 +1034,15 @@
 				GCC_PREFIX_HEADER = iFleksy_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = (
-					"\"$SRCROOT/submodules/FleksySDK-compiled/include\"",
-					"\"$SRCROOT/submodules/FleksySDK-compiled/include/private\"",
-					"\"$SRCROOT/submodules/FleksySDK-compiled/include/private/PatternRecognizer\"",
-					"\"$SRCROOT/submodules/GestureTestbed\"/**",
+					"\"$SRCROOT/submodules/FleksySDK-compiled/ios/include\"",
+					"\"$SRCROOT/submodules/FleksySDK-compiled/ios/include/private\"",
+					"\"$SRCROOT/submodules/FleksySDK-compiled/ios/include/private/PatternRecognizer\"",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/iFleksyInfo.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/submodules/FleksySDK-compiled/compiled/iOS-static/Release\"",
+					"\"$(SRCROOT)/submodules/FleksySDK-compiled/ios/lib/Release\"",
 					"\"$(SRCROOT)/Vendor/TestFlight\"",
 				);
 				OTHER_LDFLAGS = "\"-all_load\"";
@@ -1067,16 +1066,15 @@
 				GCC_PREFIX_HEADER = iFleksy_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = (
-					"\"$SRCROOT/submodules/FleksySDK-compiled/include\"",
-					"\"$SRCROOT/submodules/FleksySDK-compiled/include/private\"",
-					"\"$SRCROOT/submodules/FleksySDK-compiled/include/private/PatternRecognizer\"",
-					"\"$SRCROOT/submodules/GestureTestbed\"/**",
+					"\"$SRCROOT/submodules/FleksySDK-compiled/ios/include\"",
+					"\"$SRCROOT/submodules/FleksySDK-compiled/ios/include/private\"",
+					"\"$SRCROOT/submodules/FleksySDK-compiled/ios/include/private/PatternRecognizer\"",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/iFleksyInfo.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/submodules/FleksySDK-compiled/compiled/iOS-static/${CONFIGURATION}\"",
+					"\"$(SRCROOT)/submodules/FleksySDK-compiled/ios/lib/${CONFIGURATION}\"",
 					"\"$(SRCROOT)/Vendor/TestFlight\"",
 				);
 				OTHER_LDFLAGS = "\"-all_load\"";
@@ -1124,16 +1122,15 @@
 				GCC_PREFIX_HEADER = iFleksy_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = (
-					"\"$SRCROOT/submodules/FleksySDK-compiled/include\"",
-					"\"$SRCROOT/submodules/FleksySDK-compiled/include/private\"",
-					"\"$SRCROOT/submodules/FleksySDK-compiled/include/private/PatternRecognizer\"",
-					"\"$SRCROOT/submodules/GestureTestbed\"/**",
+					"\"$SRCROOT/submodules/FleksySDK-compiled/ios/include\"",
+					"\"$SRCROOT/submodules/FleksySDK-compiled/ios/include/private\"",
+					"\"$SRCROOT/submodules/FleksySDK-compiled/ios/include/private/PatternRecognizer\"",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/iFleksyInfo.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/submodules/FleksySDK-compiled/compiled/iOS-static/${CONFIGURATION}\"",
+					"\"$(SRCROOT)/submodules/FleksySDK-compiled/ios/lib/${CONFIGURATION}\"",
 					"\"$(SRCROOT)/Vendor/TestFlight\"",
 				);
 				OTHER_LDFLAGS = "\"-all_load\"";
