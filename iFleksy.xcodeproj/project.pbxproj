@@ -894,7 +894,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"${CONFIGURATION}\" = \"TestFlight\" ]; then\n    /bin/sh \"${FL_TESTFLIGHT_PREBUILD_SCRIPT}\"\nfi\n\n/bin/sh \"${FL_TESTFLIGHT_BUILDINFO_SCRIPT}\"\n";
+			shellScript = "# If any command fails, cause the script to fail and exit with non-zero status.\nset -e\n# If any variable is used but unset, cause the script to fail and exit with non-zero status.\nset -u\n\nif [ \"${CONFIGURATION}\" = \"TestFlight\" ]; then\n    /bin/sh \"${FL_TESTFLIGHT_PREBUILD_SCRIPT}\"\nfi\n\n/bin/sh \"${FL_TESTFLIGHT_BUILDINFO_SCRIPT}\"\n";
 		};
 		61BAB64A1700FF4300498DA9 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1028,7 +1028,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Fleksy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				DEPLOYMENT_POSTPROCESSING = NO;
+				DEPLOYMENT_POSTPROCESSING = YES;
 				FL_VERSION_EXTRA = "-TF (#${FL_TESTFLIGHT_BUILD_NUMBER} / ${FL_GIT_SHORTHASH})";
 				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)\"";
 				GCC_PREFIX_HEADER = iFleksy_Prefix.pch;
