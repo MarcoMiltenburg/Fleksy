@@ -17,6 +17,7 @@
 #import "Settings.h"
 #import "FLKeyboardContainerView.h"
 #import "VariousUtilities.h"
+#import "UIView+Extensions.h"
 #import <QuartzCore/QuartzCore.h>
 
 //#import "/usr/include/objc/objc-runtime.h"
@@ -29,48 +30,8 @@
 #import "FLTouchEventInterceptor.h"
 #endif
 
-//used to simply cache the last result
-static UIView* lastKnownFirstResponder = nil;
 static BOOL webviewSupportEnabled = NO;
 static FleksyKeyboard* instance = nil;
-
-@interface UIView (FleksyAdditions)
-- (UIView*) findFirstResponder;
-+ (UIView*) findFirstResponder;
-@end
-
-@implementation UIView (FleksyAdditions)
-- (UIView*) findFirstResponder {
-  if (self.isFirstResponder) {
-    return self;
-  }
-  for (UIView* subView in self.subviews) {
-    if ([subView isFirstResponder]){
-      return subView;
-    }
-    if ([subView findFirstResponder]){
-      return [subView findFirstResponder];
-    }
-  }
-  return nil;
-}
-
-+ (UIView*) findFirstResponder {
-  
-  if (lastKnownFirstResponder && [lastKnownFirstResponder isFirstResponder]) {
-    return lastKnownFirstResponder;
-  }
-  
-  //double startTime = CFAbsoluteTimeGetCurrent();
-  //NSLog(@"recalculating lastKnownFirstResponder");
-  UIView* result = [[UIApplication sharedApplication].keyWindow findFirstResponder];
-  //NSLog(@"findFirstResponder took %.6f", CFAbsoluteTimeGetCurrent() - startTime);
-  lastKnownFirstResponder = result;
-  return result;
-}
-
-@end
-
 
 @interface FleksyKeyboard (Private)
 
@@ -79,7 +40,7 @@ static FleksyKeyboard* instance = nil;
 @end
 
 @implementation FleksyKeyboard {
-
+  
   FLKeyboardContainerView* keyboardContainerView;
   UISwipeAndHoldGestureRecognizer* swipeAndHoldRecognizer;
   FeedbackRecognizer* feedbackRecognizer;
@@ -130,10 +91,10 @@ static FleksyKeyboard* instance = nil;
 - (void) handleSettingsChanged:(NSNotification*) notification {
   
   //NSLog(@"handleSettingsChanged: %@, userInfo: %@, delay: %.6f", notification, [notification userInfo], [VariousUtilities getNotificationDelay:notification]);
-
+  
   double startTime = CFAbsoluteTimeGetCurrent();
-    
-
+  
+  
   NSDictionary* settings = [FileManager settings];
   if (!settings) {
     NSLog(@"no settings!");
@@ -171,7 +132,7 @@ static FleksyKeyboard* instance = nil;
   //NSLog(@"FleksyKeyboard handleSettingsChanged: %@", settings);
   
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  //now apply individual settings as necessary  
+  //now apply individual settings as necessary
   keyboardContainerView.alpha = FLEKSY_APP_SETTING_INVISIBLE_KEYBOARD ? INVISIBLE_ALPHA : 1;
   
   
@@ -180,14 +141,14 @@ static FleksyKeyboard* instance = nil;
   //NOTE: seems we cant have direct touch and elements hidden at the same time!
   self.accessibilityTraits |= UIAccessibilityTraitAllowsDirectInteraction /*| UIAccessibilityTraitSummaryElement*/; //summary is hint to default focus
   //self.accessibilityTraits |= UIAccessibilityTraitAdjustable;
-//  self.accessibilityLabel = @"Fleksy keyboard";
+  //  self.accessibilityLabel = @"Fleksy keyboard";
   //  self.accessibilityHint = @"You don't need to wait for feedback for every letter";
   self.accessibilityHint = FLEKSY_ACTIVATE_KEYBOARD_WARNING;
   //self.accessibilityViewIsModal = YES;
   // END DIRECT TOUCH
   
   //self.exclusiveTouch = YES;
-
+  
 #if !FLEKSY_SDK
   AppDelegate* appDelegate = (AppDelegate*) [UIApplication sharedApplication].delegate;
   NSString* newFavorites = FLEKSY_APP_SETTING_SPEED_DIAL_1;
@@ -210,7 +171,7 @@ static FleksyKeyboard* instance = nil;
   //NSLog(@"kbView->scrollWheelRecognizer.enabled: %d", kbView->scrollWheelRecognizer.enabled);
   
   [self setNeedsLayout];
-    
+  
   NSLog(@"END of handleSettingsChanged:, took %.6f", CFAbsoluteTimeGetCurrent() - startTime);
 #pragma unused(startTime)
 }
@@ -229,8 +190,8 @@ static FleksyKeyboard* instance = nil;
   
   if (self = [super initWithFrame:frame]) {
     // Initialization code
-//    self.backgroundColor = [UIColor greenColor];
-//    self.alpha = 0.5;
+    //    self.backgroundColor = [UIColor greenColor];
+    //    self.alpha = 0.5;
     
     NSLog(@"FleksyKeyboard initWithFrame: %@", NSStringFromCGRect(frame));
     
@@ -243,7 +204,7 @@ static FleksyKeyboard* instance = nil;
     //[swipeAndHoldRecognizer setRepeatDelay:0.6 repeatInterval:0.08 forDirection:UISwipeGestureRecognizerDirectionLeft]; // was faster for video
     [self addGestureRecognizer:swipeAndHoldRecognizer];
     
-
+    
     feedbackRecognizer = [[FeedbackRecognizer alloc] initWithTarget:self action:@selector(handleFeedback:)];
     //feedbackRecognizer.delegate = keyboardContainerView;
     feedbackRecognizer.returnKeyLabel = @"\n";
@@ -281,16 +242,16 @@ static FleksyKeyboard* instance = nil;
 #endif
     }
     
-//    UIRotorRecognizer* rotor = [[UIRotorRecognizer alloc] initWithTarget:self action:@selector(rotorDetected:)];
-//    //rotor.delegate = (id<UIGestureRecognizerDelegate>) self;
-//    [self addGestureRecognizer:rotor];
+    //    UIRotorRecognizer* rotor = [[UIRotorRecognizer alloc] initWithTarget:self action:@selector(rotorDetected:)];
+    //    //rotor.delegate = (id<UIGestureRecognizerDelegate>) self;
+    //    [self addGestureRecognizer:rotor];
     
     if (!FLEKSY_SDK && FLEKSY_FULLSCREEN) {
       
       actionRecognizer2Up = [[MySwipeGestureRecognizer alloc] initWithTarget:self action:@selector(twoFingerSwipeUp:)];
       actionRecognizer2Up.numberOfTouchesRequired = 2;
       actionRecognizer2Up.direction = UISwipeGestureRecognizerDirectionUp;
-     
+      
       actionRecognizer2Down = [[MySwipeGestureRecognizer alloc] initWithTarget:self action:@selector(twoFingerSwipeDown:)];
       actionRecognizer2Down.numberOfTouchesRequired = 2;
       actionRecognizer2Down.direction = UISwipeGestureRecognizerDirectionDown;
@@ -311,14 +272,14 @@ static FleksyKeyboard* instance = nil;
     }
     
     
-//    for (int touchCount = 1; touchCount <= 4; touchCount++) {
-//      UITapGestureRecognizer2* tap = [[UITapGestureRecognizer2 alloc] initWithTarget:keyboardContainerView action:@selector(handleTapFrom2:)];
-//      tap.numberOfTouchesRequired = touchCount;
-//      tap.delegate = keyboardContainerView;
-//      [tap requireGestureRecognizerToFail:longPressRecognizer];
-//      [tap requireGestureRecognizerToFail:[swipeAndHoldRecognizer swipeRecognizerForDirection:UISwipeGestureRecognizerDirectionRight]];
-//      [tap requireGestureRecognizerToFail:[swipeAndHoldRecognizer swipeRecognizerForDirection:UISwipeGestureRecognizerDirectionLeft]];
-//    }
+    //    for (int touchCount = 1; touchCount <= 4; touchCount++) {
+    //      UITapGestureRecognizer2* tap = [[UITapGestureRecognizer2 alloc] initWithTarget:keyboardContainerView action:@selector(handleTapFrom2:)];
+    //      tap.numberOfTouchesRequired = touchCount;
+    //      tap.delegate = keyboardContainerView;
+    //      [tap requireGestureRecognizerToFail:longPressRecognizer];
+    //      [tap requireGestureRecognizerToFail:[swipeAndHoldRecognizer swipeRecognizerForDirection:UISwipeGestureRecognizerDirectionRight]];
+    //      [tap requireGestureRecognizerToFail:[swipeAndHoldRecognizer swipeRecognizerForDirection:UISwipeGestureRecognizerDirectionLeft]];
+    //    }
     
     
     ///////////////////////////////////////////////////////////////////////////
@@ -409,12 +370,12 @@ static FleksyKeyboard* instance = nil;
     target.backgroundColor = [UIColor colorWithWhite:0.15 alpha:1];
   }
   
-//  if (target == spacebarSeperator1) {
-//    [[FLKeyboardContainerView sharedFLKeyboardContainerView] handleSwipeDirection:UISwipeGestureRecognizerDirectionUp];
-//  }
-//  if (target == spacebarSeperator2) {
-//    [[FLKeyboardContainerView sharedFLKeyboardContainerView] handleSwipeDirection:UISwipeGestureRecognizerDirectionDown];
-//  }
+  //  if (target == spacebarSeperator1) {
+  //    [[FLKeyboardContainerView sharedFLKeyboardContainerView] handleSwipeDirection:UISwipeGestureRecognizerDirectionUp];
+  //  }
+  //  if (target == spacebarSeperator2) {
+  //    [[FLKeyboardContainerView sharedFLKeyboardContainerView] handleSwipeDirection:UISwipeGestureRecognizerDirectionDown];
+  //  }
 }
 
 - (BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
@@ -430,9 +391,9 @@ static FleksyKeyboard* instance = nil;
 }
 
 //- (void) singleTap:(UIGestureRecognizer*) gestureRecognizer {
-//  
+//
 //  NSLog(@"singleTap! %d", gestureRecognizer.state);
-//  
+//
 //  if (gestureRecognizer.state == UIGestureRecognizerStateRecognized) {
 //    AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
 //    [appDelegate speakCurrentText];
@@ -494,10 +455,10 @@ static FleksyKeyboard* instance = nil;
 }
 
 - (float) activeHeight {
-    
-#ifndef __clang_analyzer__    
-    // Code not to be analyzed
-    float result = [self landscape] ?
+  
+#ifndef __clang_analyzer__
+  // Code not to be analyzed
+  float result = [self landscape] ?
   FLEKSY_DEFAULT_HEIGHT_LANDSCAPE + FLEKSY_TOP_PADDING_LANDSCAPE : FLEKSY_DEFAULT_HEIGHT_PORTRAIT + FLEKSY_TOP_PADDING_PORTRAIT;
 #endif
   
@@ -521,12 +482,12 @@ static FleksyKeyboard* instance = nil;
 - (void) layoutSubviews {
   NSLog(@"FleksyKeyboard layoutSubviews self.frame: %@", NSStringFromCGRect(self.frame));
   
-//  if (feedbackRecognizer.hoverMode) {
-//    // vertical align bottom
-//    keyboardContainerView.frame = CGRectMake(0, self.bounds.size.height - keyboardContainerView.frame.size.height, self.bounds.size.width, keyboardContainerView.frame.size.height);
-//  } else {
-//    keyboardContainerView.frame = self.bounds;
-//  }
+  //  if (feedbackRecognizer.hoverMode) {
+  //    // vertical align bottom
+  //    keyboardContainerView.frame = CGRectMake(0, self.bounds.size.height - keyboardContainerView.frame.size.height, self.bounds.size.width, keyboardContainerView.frame.size.height);
+  //  } else {
+  //    keyboardContainerView.frame = self.bounds;
+  //  }
   
   // vertical align bottom
   keyboardContainerView.frame = CGRectMake(0, self.bounds.size.height - self.activeHeight - SPACEBAR_HEIGHT, self.bounds.size.width, self.activeHeight /*+ SPACEBAR_HEIGHT*/ /* comment out +SH to allow spacebar at the bottom */);
@@ -561,10 +522,10 @@ static FleksyKeyboard* instance = nil;
   // is animated into the screen. Also note that activationPoint is in SCREEN coordinates, not view
   // In keyboardDidShow the keyboard is already in place
   //NSLog(@"FleksyKeyboard keyboardDidShow, will adjust activation point");
-//  CGPoint originInScreen1 = self.accessibilityFrame.origin;
-//  CGPoint originInWindow1 = [self.window convertPoint:originInScreen1 fromWindow:nil]; //nil means screen
-//  CGPoint originInView1 = [self convertPoint:originInWindow1 fromView:self.window];
-//  NSLog(@"1 originInScreen: %@, originInWindow: %@, originInView: %@", NSStringFromCGPoint(originInScreen1), NSStringFromCGPoint(originInWindow1), NSStringFromCGPoint(originInView1));
+  //  CGPoint originInScreen1 = self.accessibilityFrame.origin;
+  //  CGPoint originInWindow1 = [self.window convertPoint:originInScreen1 fromWindow:nil]; //nil means screen
+  //  CGPoint originInView1 = [self convertPoint:originInWindow1 fromView:self.window];
+  //  NSLog(@"1 originInScreen: %@, originInWindow: %@, originInView: %@", NSStringFromCGPoint(originInScreen1), NSStringFromCGPoint(originInWindow1), NSStringFromCGPoint(originInView1));
   CGPoint originInView2 = FLEKSY_ACTIVATION_POINT;
   CGPoint originInWindow2 = [self convertPoint:originInView2 toView:self.window];
   CGPoint originInScreen2 = [self.window convertPoint:originInWindow2 toWindow:nil]; //nil means screen
@@ -586,7 +547,7 @@ static FleksyKeyboard* instance = nil;
 
 - (void) handleStringInput:(NSString*) s {
   UIResponder<UITextInput>* responder = self.currentResponder;
-  [responder insertText:s]; 
+  [responder insertText:s];
   
   //marking text only works when not firsResponder...
   //[responder resignFirstResponder];
@@ -619,6 +580,7 @@ static FleksyKeyboard* instance = nil;
   UITextPosition* end = [responder positionFromPosition:start offset:range.length];
   UITextRange* textRange = [responder textRangeFromPosition:start toPosition:end];
   NSString* oldText = [responder textInRange:textRange];
+  
   // replace
   [responder replaceRange:textRange withText:text];
   
@@ -712,7 +674,7 @@ static FleksyKeyboard* instance = nil;
   self.frame              = CGRectMake(rect.origin.x, rect.origin.y - enlarge_height, rect.size.width, rect.size.height + enlarge_height);
   //self.accessibilityFrame = CGRectMake(rect.origin.x, rect.origin.y - enlarge_height, rect.size.width, rect.size.height + enlarge_height);
   MyAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, nil);
-  //MyAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, nil);  
+  //MyAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, nil);
   [[NSNotificationCenter defaultCenter] postNotificationName:UIKeyboardDidChangeFrameNotification object:self];
 }
 
@@ -724,7 +686,7 @@ static FleksyKeyboard* instance = nil;
   self.frame = CGRectMake(rect.origin.x, rect.origin.y + enlarge_height, rect.size.width, rect.size.height - enlarge_height);
   //self.accessibilityFrame = CGRectMake(rect.origin.x, rect.origin.y + enlarge_height, rect.size.width, rect.size.height - enlarge_height);
   //MyAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, nil);
-  //MyAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, nil);  
+  //MyAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, nil);
   [[NSNotificationCenter defaultCenter] postNotificationName:UIKeyboardDidChangeFrameNotification object:self];
 }
 
@@ -791,7 +753,7 @@ static FleksyKeyboard* instance = nil;
   keyboardContainerView.alpha = enabled ? 1 : 0.5;
 }
 
-// Override the following methods to know when an assistive technology has set or unset its virtual focus on the element. 
+// Override the following methods to know when an assistive technology has set or unset its virtual focus on the element.
 - (void) accessibilityElementDidBecomeFocused {
   NSLog(@"FleksyKeyboard accessibilityElementDidBecomeFocused");
   focusedCount++;
@@ -855,9 +817,9 @@ static FleksyKeyboard* instance = nil;
 /// UIWebView hack/support
 
 - (UIView*) UIWebBrowserView_inputView {
-//  UIView* view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 200)];
-//  view.backgroundColor = [UIColor blackColor];
-
+  //  UIView* view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 200)];
+  //  view.backgroundColor = [UIColor blackColor];
+  
   NSLog(@"UIWebBrowserView_inputView called");
   FleksyKeyboard* view = [[FleksyKeyboard alloc] initWithFrame:CGRectMake(0, 0, 320, 216)];
   return view;
@@ -926,8 +888,8 @@ static FleksyKeyboard* instance = nil;
 - (NSString*) returnKeyLabel {
   return feedbackRecognizer.returnKeyLabel;
 }
-  
-  
+
+
 //@synthesize KEYBOARD_HEIGHT_PORTRAIT;
 //@synthesize KEYBOARD_HEIGHT_LANDSCAPE;
 

@@ -20,6 +20,7 @@
 #import <MessageUI/MFMailComposeViewController.h>
 
 #import "FleksyUtilities.h"
+#import "UIView+Extensions.h"
 
 #import "notify.h"
 #include <string>
@@ -508,6 +509,8 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
 
 - (void) showSuggestions:(FLResponse*) sr includeFirst:(BOOL) includeFirst rawText:(NSString*) rawText systemSuggestion:(NSString*) systemSuggestion selectRaw:(BOOL) selectRaw {
   
+  [self repositionSuggestionsToCursor];
+  
   //if we are already displaying a word suggestion, and we want to show yet another one, the punctuation view is done
   //NSLog(@"suggestionsView isHidden: %d", [[FLKeyboardContainerView sharedFLKeyboardContainerView].suggestionsView isHidden]);
   if (![[FLKeyboardContainerView sharedFLKeyboardContainerView].suggestionsView isHidden]) {
@@ -706,12 +709,12 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
   double startTime1 = fl_get_time();
   if (checker) {
     checker->peekResults(platfromResults, s);
+    printf("got %lu platform results in %.6f\n", platfromResults.size(), fl_get_time() - startTime1);
+    for (FLString z : platfromResults) {
+      printf("platform result: %s\n", z.c_str());
+    }
+    printf("\n");
   }
-  printf("got %lu platform results in %.6f\n", platfromResults.size(), fl_get_time() - startTime1);
-  for (FLString z : platfromResults) {
-    printf("platform result: %s\n", z.c_str());
-  }
-  printf("\n");
   
   FLRequest* request = [self createRequest:points.count platformSuggestions:&platfromResults];
   request->debug = FLEKSY_LOG;
@@ -930,6 +933,7 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
   
   if (punctuationShortcut && FLEKSY_APP_SETTING_SHOW_SUGGESTIONS) {
     [self pushPreviousToken:@"." notify:YES];
+    [self repositionSuggestionsToCursor];
     [[FLKeyboardContainerView sharedFLKeyboardContainerView].suggestionsViewSymbols showSuggestions:shortcutPunctuationMarks selectedSuggestionIndex:0 capitalization:@""];
     [[FLKeyboardContainerView sharedFLKeyboardContainerView].suggestionsView hide];
   }
@@ -1176,7 +1180,6 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
   
   [self addCharacter:input];
   
-  
   //[Keyboard sharedKeyboard].shiftIsOn = NO;
   
   //NSLog(@"nonLetterCharInput <%c> done in %.6f", input, CFAbsoluteTimeGetCurrent() - startTime);
@@ -1196,7 +1199,49 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
   }
 }*/
 
+- (id<UITextInput>) getTextInput {
+  UIResponder* r = [[UIApplication sharedApplication].windows[0] findFirstResponder];
+  if ([r conformsToProtocol:@protocol(UITextInput)]) {
+    
+    if (![FLKeyboardContainerView sharedFLKeyboardContainerView].suggestionsView.superview) {
+      [(UIView*)r addSubview:[FLKeyboardContainerView sharedFLKeyboardContainerView].suggestionsView];
+      [(UIView*)r addSubview:[FLKeyboardContainerView sharedFLKeyboardContainerView].suggestionsViewSymbols];
+    }
+    
+    return (id<UITextInput>) r;
+  }
+  NSLog(@"Could not find id<UITextInput>!");
+  return nil;
+}
+
+- (void) repositionSuggestionsToCursor {
+  
+  if (![FLKeyboardContainerView sharedFLKeyboardContainerView].suggestionsView.vertical) {
+    return;
+  }
+  
+  UITextView* textView = (UITextView*) [self getTextInput];
+  CGRect cursorRect = [textView caretRectForPosition:textView.selectedTextRange.start];
+  
+  CGPoint cursorPosition = CGPointMake(cursorRect.origin.x + cursorRect.size.width/2, cursorRect.origin.y);
+  //cursorPosition = [self convertPoint:cursorPosition fromView:textView];
+  
+  NSString* lastWord = [self lastWord];
+  NSLog(@"lastWord: <%@>", lastWord);
+  
+  float dx = [lastWord sizeWithFont:textView.font].width;
+  
+  [FLKeyboardContainerView sharedFLKeyboardContainerView].suggestionsView.frame = CGRectMake(cursorPosition.x - dx, cursorPosition.y + 23,
+                                                                                             180,
+                                                                                             [FLKeyboardContainerView sharedFLKeyboardContainerView].suggestionsView.frame.size.height);
+  
+  [FLKeyboardContainerView sharedFLKeyboardContainerView].suggestionsViewSymbols.frame = [FLKeyboardContainerView sharedFLKeyboardContainerView].suggestionsView.frame;
+}
+
+
 - (void) reshowAppropriateSuggestionView {
+  
+  [self repositionSuggestionsToCursor];
   
   FLChar c = [self lastNonSpaceChar];
   if (!c) {

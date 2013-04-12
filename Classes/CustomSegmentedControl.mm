@@ -16,14 +16,16 @@
 
 @implementation CustomSegmentedControl
 
-- (id) init {
+- (id) initWithVertical:(BOOL) vertical {
     self = [super init];
     if (self) {
+      
+      self.vertical = vertical;
       
       //defaultBackgroundColor = [UIColor clearColor];
       selectedBackgroundColor = [UIColor clearColor]; //[UIColor darkGrayColor];
       defaultTextColor = [UIColor colorWithWhite:0.55 alpha:1];
-      selectedTextColor = [UIColor whiteColor];
+      selectedTextColor = vertical ? [UIColor clearColor] : [UIColor whiteColor];
       
       //defaultTextColor = [UIColor clearColor];
       //selectedTextColor = [UIColor clearColor];
@@ -33,6 +35,14 @@
       selectedTextFont = [UIFont fontWithName:@"HelveticaNeue-Bold" size:21 * extra];
       largeTextFont = [UIFont fontWithName:@"HelveticaNeue-Bold" size:22 * extra];
       largeSelectedTextFont = [UIFont fontWithName:@"HelveticaNeue-Bold" size:23 * extra];
+      
+      if (self.vertical) {
+        textFont = [UIFont fontWithName:@"HelveticaNeue-Italic" size:19 * extra];
+        selectedTextFont = [UIFont fontWithName:@"HelveticaNeue-Italic" size:19 * extra];
+        largeTextFont = [UIFont fontWithName:@"HelveticaNeue-Italic" size:19 * extra];
+        largeSelectedTextFont = [UIFont fontWithName:@"HelveticaNeue-Italic" size:19 * extra];
+        defaultTextColor = [UIColor colorWithWhite:0 alpha:0.25];
+      }
       
       selectionView = [[UIView alloc] init];
       selectionView.backgroundColor = selectedBackgroundColor;
@@ -85,6 +95,7 @@
   large = _large;
   
   float x = 0;
+  float y = 0;
   int i = 0;
   for (NSString* title in items) {
     UILabel* label = [labels objectAtIndex:i];
@@ -95,7 +106,7 @@
       label.tag = TAG_NO_TRAILING_SPACE;
       label.text = title;
     }
-    label.textAlignment = NSTextAlignmentCenter;
+    label.textAlignment = self.vertical ? NSTextAlignmentLeft : NSTextAlignmentCenter;
     label.font = large ? largeTextFont : textFont;
     label.hidden = NO;
     
@@ -107,14 +118,18 @@
     float padding = 10 + 75.0 / powf(fmax(title.length, 2), 2);
     width += padding * (deviceIsPad() ? 1.5 : 1);
     
-    
-    label.frame = CGRectMake(x, 0, width, self.bounds.size.height);
+    if (self.vertical) {
+      label.frame = CGRectMake(0, y, width, expectedLabelSize.height);
+    } else {
+      label.frame = CGRectMake(x, 0, width, self.bounds.size.height);
+    }
     
     if (differentFirst && i == 0) {
       label.font = [UIFont fontWithName:@"HelveticaNeue-Italic" size:label.font.pointSize];
     }
     
-    x += width;
+    x += label.frame.size.width;
+    y += label.frame.size.height;
     i++;
   }
   
@@ -173,12 +188,12 @@
   return currentSegments;
 }
 
-- (float) currentWidth {
+- (CGSize) currentSize {
   if (!currentSegments) {
-    return 0;
+    return CGSizeMake(0, 0);
   }
   UILabel* lastLabel = [labels objectAtIndex:currentSegments-1];
-  return lastLabel.frame.origin.x + lastLabel.frame.size.width;
+  return CGSizeMake(lastLabel.frame.origin.x + lastLabel.frame.size.width, lastLabel.frame.origin.y + lastLabel.frame.size.height);
 }
 
 - (int) indexOfItemNearestX:(float) x {

@@ -217,6 +217,15 @@ float distributionFunction(float x) {
   [[UIApplication sharedApplication] setStatusBarHidden:FLEKSY_STATUS_BAR_HIDDEN];
   //[[UIApplication sharedApplication] statusBarOrientation];
 
+  
+  //we use bounds here and not application frame, since the view controller inside will adjust accordingly for the status bar
+  window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+  window.backgroundColor = FLEKSY_TEXTVIEW_COLOR;
+  window.rootViewController = fleksyAppViewController;
+  // Show the window
+  [window makeKeyAndVisible];
+  
+  
   // now create the custom keyboard view
   // this seems to always be aligned at the bottom and width is set to screen width
   // Need to create before window.rootViewController and [window makeKeyAndVisible] to make sure we already have loaded settings such as FLEKSY_APP_SETTING_LOCK_ORIENTATION
@@ -227,14 +236,6 @@ float distributionFunction(float x) {
   NSLog(@"using frame %@", NSStringFromCGRect(frame));
   customInputView.frame = frame;
   customInputView.listener = self;
-  
-  
-  //we use bounds here and not application frame, since the view controller inside will adjust accordingly for the status bar
-  window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-  window.backgroundColor = FLEKSY_TEXTVIEW_COLOR;
-  window.rootViewController = fleksyAppViewController;
-  // Show the window
-  [window makeKeyAndVisible];
   
   [self performSelectorOnMainThread:@selector(finishLoadingUI) withObject:nil waitUntilDone:NO];
   //[self finishLoadingUI];
