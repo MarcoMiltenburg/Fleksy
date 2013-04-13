@@ -189,6 +189,7 @@ float distributionFunction(float x) {
   NSLog(@"screen bounds: %@, application frame: %@", NSStringFromCGRect([[UIScreen mainScreen] bounds]), NSStringFromCGRect([[UIScreen mainScreen] applicationFrame]));  
   NSLog(@"sizeof(FLChar): %lu", sizeof(FLChar));
   NSLog(@"FLEKSY_APP_SETTING_LANGUAGE_PACK: %@", FLEKSY_APP_SETTING_LANGUAGE_PACK);
+  NSLog(@"FLEKSY_PRODUCT_NAME: %@ : BundlePath: %@", FLEKSY_PRODUCT_NAME, [[NSBundle mainBundle] bundlePath]);
   
   BOOL ok = [[[NSBundle mainBundle] bundlePath] hasSuffix:[NSString stringWithFormat:@"%@.app", FLEKSY_PRODUCT_NAME]];
   assert(ok);
