@@ -73,7 +73,7 @@
   if ( (self = [super init]) ) {
     // Initialization code
     
-    self.vertical = YES;
+    self.vertical = NO;
 
     self->listener = _listener;
     self->capitalization = nil;
