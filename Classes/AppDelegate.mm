@@ -148,7 +148,7 @@ float distributionFunction(float x) {
                           @NO, TFOptionLogToConsole,
                           @NO, TFOptionLogToSTDERR, nil]];
   
-#if APP_STORE
+#ifdef FL_BUILD_FOR_APP_STORE
   [TestFlight takeOff:@"91f69c10-d1a3-4e7a-905d-dea51af78a82"];
 #else
   printf("Fleksy TESTFLIGHT ONLY\n");
@@ -167,10 +167,10 @@ float distributionFunction(float x) {
 #endif
 
 #ifdef DEBUG
-  printf("Fleksy DEBUG\n");
+  printf("%s DEBUG\n", FLEKSY_PRODUCT_NAME.UTF8String);
 #endif
 
-#if APP_STORE
+#ifdef FL_BUILD_FOR_APP_STORE
   printf("Fleksy APP_STORE\n");
 #else
   printf("Fleksy NOT app_store\n");

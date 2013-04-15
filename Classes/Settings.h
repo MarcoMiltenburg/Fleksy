@@ -8,24 +8,63 @@
 #ifndef SETTINGS_H
 #define SETTINGS_H
 
+////////////////////// MASTER SWITCHES //////////////////////
 
-///////////////////////////////////////////
+#ifdef FL_BUILD_FOR_DEVELOPMENT
+#endif
 
-#define DEBUG_NO_WORDS 0
+#ifdef FL_BUILD_FOR_BETA
+#endif
 
+#ifdef FL_BUILD_FOR_TESTFLIGHT
+#endif
+
+#ifdef FL_BUILD_FOR_APP_STORE
+#endif
+
+///////////////////////////////////////////////////////////
+
+#ifdef FL_BUILD_FOR_APP_STORE
+#define FL_BUILD_FOR_APPSTORE 1
+#define FLEKSY_API_TESTING 0
+#else
+#define FL_BUILD_FOR_APPSTORE 0
 //TODO: FleksyAPI Testing - this goes away when full FleksyApi is used.
 #define FLEKSY_API_TESTING 0
+#endif
+
+#define DEBUG_NO_WORDS 0
 
 //Installing Crashlytics = 1
 #define CRASHLYTICS 1
 
-//if 0 also change bundle identifier to "com.syntellia.FleksyBETA" and product name to "Fleksy Beta"
-#define APP_STORE 0
-
 // Set to 1 for development. 0 for released code.
-#define FLEKSY_IS_MAIN_THREAD_CHECK !APP_STORE
+#define FLEKSY_IS_MAIN_THREAD_CHECK !FL_BUILD_FOR_APPSTORE
 
-#define FLEKSY_EXPIRES !APP_STORE
+////////////////////// PRODUCT NAME //////////////////////
+
+//if 0 also change bundle identifier to "com.syntellia.FleksyBETA" and product name to "Fleksy Beta"
+//#define APP_STORE 0
+
+#ifdef FL_BUILD_FOR_DEVELOPMENT
+#define FLEKSY_PRODUCT_NAME @"Fleksy Dev"
+#endif
+
+#ifdef FL_BUILD_FOR_BETA
+#define FLEKSY_PRODUCT_NAME @"Fleksy BETA"
+#endif
+
+#ifdef FL_BUILD_FOR_TESTFLIGHT
+#define FLEKSY_PRODUCT_NAME @"Fleksy Beta"
+#endif
+
+#ifdef FL_BUILD_FOR_APP_STORE
+#define FLEKSY_PRODUCT_NAME @"Fleksy"
+#endif
+
+////////////////////// BETA TESTING //////////////////////
+
+#define FLEKSY_EXPIRES !FL_BUILD_FOR_APPSTORE
 #if FLEKSY_EXPIRES
 #define FLEKSY_EXPIRES_YEAR 2013
 #define FLEKSY_EXPIRES_MONTH 5
@@ -34,11 +73,7 @@
 #define FLEKSY_EXPIRES_MINUTE 0
 #endif
 
-#if APP_STORE
-#define FLEKSY_PRODUCT_NAME @"Fleksy"
-#else
-#define FLEKSY_PRODUCT_NAME @"Fleksy Beta"
-#endif
+////////////////////// DEVELOPMENT LOGGING //////////////////////
 
 #ifdef RELEASE
 #define NSLog(fmt,...)
@@ -48,7 +83,9 @@
 //#define NSLog(fmt,...)
 #endif 
 
-#ifdef APP_STORE
+////////////////////// TESTFLIGHT LOGGING //////////////////////
+
+#ifdef FL_BUILD_FOR_APP_STORE
 #define TestFlightLog(fmt,...)
 #else
 #define TestFlightLog(fmt,...) TFLog(fmt,##__VA_ARGS__)
