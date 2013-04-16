@@ -288,10 +288,8 @@ float distributionFunction(float x) {
   
   [textView setInputView:customInputView];
   
-  
   [fleksyAppViewController.view addSubview:textView];
   fleksyAppViewController.textView = textView;
-  
   
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:)  name:UIKeyboardDidShowNotification  object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -308,14 +306,10 @@ float distributionFunction(float x) {
   
   //[FleksyKeyboard enableFleksyForWebViews];
   [self startLoadingProgressTimer];
-  //[customInputView performSelectorInBackground:@selector(startLoading) withObject:nil];
   
   // Require load on mainThread, i.e. UIKit objects.
-  
   [customInputView startLoading];
-  //textView.text = @"Loading";
-  
-  
+    
   NSLog(@"END of finishLoadingUI, took %.6f", CFAbsoluteTimeGetCurrent() - startTime);
 }
 

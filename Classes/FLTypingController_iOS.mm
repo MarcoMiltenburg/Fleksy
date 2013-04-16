@@ -141,19 +141,27 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLTypingController_iOS);
       [[NSNotificationCenter defaultCenter] postNotificationName:FLEKSY_LOADING_NOTIFICATION object:[NSNumber numberWithFloat:1]];
     }
   [self createClient];
-#else
+#else  
+  [self performSelectorInBackground:@selector(finishForceLoad) withObject:nil];
+#endif
+
+}
+
+- (void)finishForceLoad
+{
+  // Run in background to allow concurrent update of UI progress on main thread
+  
   NSLog(@"warming up, client: %@, userDictionary: %@", self.fleksyClient, self.fleksyClient.userDictionary);
   //NSString* preferredLanguage = [[NSLocale preferredLanguages] objectAtIndex:0];
   [self.fleksyClient loadDataWithLanguagePack:FLEKSY_APP_SETTING_LANGUAGE_PACK];
   
-  [self loadKeymaps];
+  [self performSelectorOnMainThread:@selector(loadKeymaps) withObject:nil waitUntilDone:YES];
   
   // notify loading is 100% done
   [[NSNotificationCenter defaultCenter] postNotificationName:FLEKSY_LOADING_NOTIFICATION object:[NSNumber numberWithFloat:1]];
   
   //[FleksyClient_NOIPC loadData:self.fleksyClient.systemsIntegrator userDictionary:self.fleksyClient.userDictionary languagePack:FLEKSY_APP_SETTING_LANGUAGE_PACK];
-  //[self performSelectorOnMainThread:@selector(loadKeymaps) withObject:nil waitUntilDone:YES];
-
+  
   [self pushPreviousToken:@"the" notify:YES];
   FLRequest* request = [self createRequest:3 platformSuggestions:NULL];
   // word "say"
@@ -164,17 +172,18 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLTypingController_iOS);
   while ([self popPreviousTokenWithNotify:YES]) {}
   free(request);
   free(response);
-#endif
 
 }
 
 - (void) loadKeymaps {
+  
   FLPoint keymaps[4][KEY_MAX_VALUE];
   // hack. Should loop through the n (4) keyboards and copy individually, dont rely on internal represenation being contiguous.
   memcpy(keymaps, self.fleksyClient.systemsIntegrator->getKeymap(0), sizeof(keymaps));
   //TODO: Update for FleksyAPI usage
   //self.fleksyClient->fleksyAPI->getKeymapForKeyboard(0);
   
+  NSParameterAssert([NSThread isMainThread] == YES);
   [[FLKeyboard sharedFLKeyboard] setKeymaps:keymaps];
 }
 
