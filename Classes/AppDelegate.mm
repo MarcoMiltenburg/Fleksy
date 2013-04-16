@@ -140,6 +140,27 @@ float distributionFunction(float x) {
 - (void) applicationDidFinishLaunching:(UIApplication *) application loadServer:(BOOL) loadServer {
   
   double startTime = CFAbsoluteTimeGetCurrent();
+  
+  ////////////////////// MASTER SWITCHES //////////////////////
+  
+#ifdef FL_BUILD_FOR_DEVELOPMENT
+  printf("SCHEME: FL_BUILD_FOR_DEVELOPMENT\n");
+#endif
+  
+#ifdef FL_BUILD_FOR_BETA
+    printf("SCHEME: FL_BUILD_FOR_BETA\n");
+#endif
+  
+#ifdef FL_BUILD_FOR_TESTFLIGHT
+    printf("SCHEME: FL_BUILD_FOR_TESTFLIGHT\n");
+#endif
+  
+#ifdef FL_BUILD_FOR_APP_STORE
+    printf("SCHEME: FL_BUILD_FOR_APP_STORE\n");
+#endif
+  
+  ///////////////////////////////////////////////////////////
+
 
 #ifdef RELEASE
   printf("Fleksy RELEASE\n");
