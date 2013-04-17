@@ -567,17 +567,8 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
   return result;
 }
 
-- (NSArray*) getPreviousTokens {
-  NSArray* results = [self _getPreviousTokens];
-  if ([[results objectAtIndex:1] isEqualToString:@"."]) {
-    //NSLog(@"found period as second token, ignoring first one");
-    return [NSArray arrayWithObjects:@"", @".", nil];
-  }
-  return results;
-}
-
 // returns TWO NSStrings
-- (NSArray*) _getPreviousTokens {
+- (NSArray*) getPreviousTokens {
   
   if (previousTokensStack.count >= MAX_WORD_DEPTH) {
     return [previousTokensStack subarrayWithRange:NSMakeRange(previousTokensStack.count-MAX_WORD_DEPTH, MAX_WORD_DEPTH)];
@@ -587,8 +578,7 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
     return [NSArray arrayWithObjects:@"", [previousTokensStack lastObject], nil];
   }
 
-  // use a period token to force fallback on unigrams
-  return [NSArray arrayWithObjects:@"", @".", nil];
+  return [NSArray arrayWithObjects:@"", @"", nil];
 }
 
 - (NSString*) changePreviousToken:(NSString*) newToken {
@@ -1015,9 +1005,10 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
     rawChar = FleksyUtilities::tolower(rawChar);
   }
   
+  printf("FLEKSY_APP_SETTING_KEY_SNAP: %d\n", FLEKSY_APP_SETTING_KEY_SNAP);
   if (FLEKSY_APP_SETTING_KEY_SNAP) {
     KeyboardImageView* kbImageView = (KeyboardImageView*) [FLKeyboard sharedFLKeyboard].activeView;
-    point1 = [kbImageView getKeyboardPointForChar:rawChar];
+    point1 = [kbImageView getKeyboardPointForChar:FleksyUtilities::toupper(rawChar)];
   }
   
   if (!FleksyUtilities::isalpha(rawChar)) { // [VariousUtilities charIsAlpha:rawChar]) {

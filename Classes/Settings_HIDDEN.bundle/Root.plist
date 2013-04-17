@@ -46,16 +46,6 @@
 			<key>DefaultValue</key>
 			<true/>
 			<key>Key</key>
-			<string>FLEKSY_CORE_SETTING_USE_TX</string>
-			<key>Title</key>
-			<string>Use KB transformation</string>
-			<key>Type</key>
-			<string>PSToggleSwitchSpecifier</string>
-		</dict>
-		<dict>
-			<key>DefaultValue</key>
-			<true/>
-			<key>Key</key>
 			<string>FLEKSY_APP_SETTING_KEYBOARD_CLICKS</string>
 			<key>Title</key>
 			<string>Keyboard Clicks</string>
@@ -151,6 +141,54 @@
 			<string>Space button</string>
 			<key>Type</key>
 			<string>PSToggleSwitchSpecifier</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSSliderSpecifier</string>
+			<key>Key</key>
+			<string>SHAPE_LAYER_WEIGHT</string>
+			<key>DefaultValue</key>
+			<integer>1</integer>
+			<key>MinimumValue</key>
+			<integer>0</integer>
+			<key>MaximumValue</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSSliderSpecifier</string>
+			<key>Key</key>
+			<string>TRANSFORM_LAYER_WEIGHT</string>
+			<key>DefaultValue</key>
+			<integer>1</integer>
+			<key>MinimumValue</key>
+			<integer>0</integer>
+			<key>MaximumValue</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSSliderSpecifier</string>
+			<key>Key</key>
+			<string>CONTEXT_LAYER_WEIGHT</string>
+			<key>DefaultValue</key>
+			<integer>1</integer>
+			<key>MinimumValue</key>
+			<integer>0</integer>
+			<key>MaximumValue</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSSliderSpecifier</string>
+			<key>Key</key>
+			<string>PLATFORM_LAYER_WEIGHT</string>
+			<key>DefaultValue</key>
+			<integer>0</integer>
+			<key>MinimumValue</key>
+			<integer>0</integer>
+			<key>MaximumValue</key>
+			<integer>1</integer>
 		</dict>
 	</array>
 	<key>StringsTable</key>
