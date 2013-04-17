@@ -47,11 +47,11 @@
 //#define APP_STORE 0
 
 #ifdef FL_BUILD_FOR_DEVELOPMENT
-#define FLEKSY_PRODUCT_NAME @"Fleksy Dev"
+#define FLEKSY_PRODUCT_NAME @"FleksyDev"
 #endif
 
 #ifdef FL_BUILD_FOR_BETA
-#define FLEKSY_PRODUCT_NAME @"Fleksy BETA"
+#define FLEKSY_PRODUCT_NAME @"FleksyBETA"
 #endif
 
 #ifdef FL_BUILD_FOR_TESTFLIGHT
