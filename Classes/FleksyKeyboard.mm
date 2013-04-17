@@ -153,8 +153,8 @@ static FleksyKeyboard* instance = nil;
   AppDelegate* appDelegate = (AppDelegate*) [UIApplication sharedApplication].delegate;
   NSString* newFavorites = FLEKSY_APP_SETTING_SPEED_DIAL_1;
   if (![newFavorites isEqualToString:oldFavorites]) {
-    //NSLog(@"favorites DID change");
-    [appDelegate.fleksyAppViewController reloadFavorites];
+    NSLog(@"%s: favorites DID change in background (0) = %d", __PRETTY_FUNCTION__, [NSThread isMainThread]);
+    [appDelegate.fleksyAppViewController performSelectorOnMainThread:@selector(reloadFavorites) withObject:nil waitUntilDone:YES];
   } else {
     //NSLog(@"favorites didn't change");
   }
