@@ -2,7 +2,6 @@
 #import "FleksyAppMainViewController.h"
 #import "FleksyKeyboard.h"
 #import "FleksyTextView.h"
-#import "FLUserDictionary.h"
 
 #define LOAD_SERVER YES
 
