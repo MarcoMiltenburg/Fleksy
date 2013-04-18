@@ -11,14 +11,28 @@
 
 @implementation UIView (MainThreadCheck)
 
-#ifdef DEBUG
 #if FLEKSY_IS_MAIN_THREAD_CHECK
 +(id)alloc
 {
   NSParameterAssert([NSThread isMainThread]==YES);
   return [super alloc];
 }
+#else
++(id)alloc {
+  if (![NSThread isMainThread]) {
+    [TestFlight passCheckpoint:[NSString stringWithFormat:@"Called on Background Thread %@ from %@ ", [[NSThread currentThread] description],  [[self class ] stackDescription]]];
+  }
+  return [super alloc];
+}
 #endif
-#endif
+
++ (NSString *)stackDescription {
+  NSMutableString *stackString = [[self class].description mutableCopy];
+  
+  for (NSString * methodName in [NSThread callStackSymbols]) {
+    [stackString appendFormat:@"\n %@", methodName];
+  }
+  return stackString;
+}
 
 @end
