@@ -19,7 +19,7 @@
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
 
-#import "FleksyUtilities.h"
+#import "StringUtilities.h"
 #import "UIView+Extensions.h"
 
 #import "notify.h"
@@ -1000,18 +1000,18 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
   //NSLog(@"tapOccured: %d, tolower: %d, toupper: %d", rawChar, FleksyUtilities::tolower(rawChar), FleksyUtilities::toupper(rawChar));
   
   if (shift) {
-    rawChar = FleksyUtilities::toupper(rawChar);
+    rawChar = StringUtilities::toupper(rawChar);
   } else {
-    rawChar = FleksyUtilities::tolower(rawChar);
+    rawChar = StringUtilities::tolower(rawChar);
   }
   
   printf("FLEKSY_APP_SETTING_KEY_SNAP: %d\n", FLEKSY_APP_SETTING_KEY_SNAP);
   if (FLEKSY_APP_SETTING_KEY_SNAP) {
     KeyboardImageView* kbImageView = (KeyboardImageView*) [FLKeyboard sharedFLKeyboard].activeView;
-    point1 = [kbImageView getKeyboardPointForChar:FleksyUtilities::toupper(rawChar)];
+    point1 = [kbImageView getKeyboardPointForChar:StringUtilities::toupper(rawChar)];
   }
   
-  if (!FleksyUtilities::isalpha(rawChar)) { // [VariousUtilities charIsAlpha:rawChar]) {
+  if (!StringUtilities::isalpha(rawChar)) { // [VariousUtilities charIsAlpha:rawChar]) {
 
     [self nonLetterCharInput:rawChar autocorrectionType:kAutocorrectionNone];
     
@@ -1250,7 +1250,7 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
     return;
   }
   
-  if (FleksyUtilities::isalpha(c)) {
+  if (StringUtilities::isalpha(c)) {
     //[[FLKeyboardContainerView sharedFLKeyboardContainerView].suggestionsViewSymbols dismiss];
     NSString* word = [self lastWord];
     [[FLKeyboardContainerView sharedFLKeyboardContainerView].suggestionsViewSymbols hide];
@@ -1485,12 +1485,12 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
     
     unichar lastChar = [self peekLastCharacter];
     unichar newChar;
-    BOOL wasLower = FleksyUtilities::islower(lastChar);
+    BOOL wasLower = StringUtilities::islower(lastChar);
     
     if (wasLower) {
-      newChar = FleksyUtilities::toupper(lastChar);
+      newChar = StringUtilities::toupper(lastChar);
     } else {
-      newChar = FleksyUtilities::tolower(lastChar);
+      newChar = StringUtilities::tolower(lastChar);
     }
     
     if (newChar != lastChar) {
@@ -1498,7 +1498,7 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
       [self addCharacter:newChar];
       
       //TODO: do this as suggestions instead, so sighted users know how to use it
-      NSString* speakString = [NSString stringWithFormat:@"%@%c", FleksyUtilities::isupper(newChar) ? @"Capital " : @"", FleksyUtilities::tolower(newChar)];
+      NSString* speakString = [NSString stringWithFormat:@"%@%c", StringUtilities::isupper(newChar) ? @"Capital " : @"", StringUtilities::tolower(newChar)];
       [VariousUtilities performAudioFeedbackFromString:speakString];
     }
   }

@@ -19,6 +19,7 @@
 #import "FLTouchEventInterceptor.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import "VariousUtilities.h"
+#import "StringUtilities.h"
 #import <QuartzCore/QuartzCore.h>
 
 #import <Foundation/NSObjCRuntime.h>
@@ -240,7 +241,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardContainerView);
     fleksyApi->sendTap(point.x, point.y);
     NSLog(@" ***** FleksyAPI Testing: END api->sendTap");    
 #endif
-    if (FleksyUtilities::isalpha(c)) { // [VariousUtilities charIsAlpha:c]) {
+    if (StringUtilities::isalpha(c)) { // [VariousUtilities charIsAlpha:c]) {
       [suggestionsView fadeout];
       [suggestionsViewSymbols fadeout];
     }

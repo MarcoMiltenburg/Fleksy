@@ -13,6 +13,7 @@
 #import "UITouchManager.h"
 #import "AppDelegate.h"
 #import "VariousUtilities.h"
+#import "StringUtilities.h"
 #import <Foundation/NSProcessInfo.h>
 
 #define POPUP_DELAY    0.060
@@ -27,8 +28,8 @@
 
 - (void) speakNATOforChar:(NSString*) charString {
   unichar c = [charString characterAtIndex:0];
-  if (FleksyUtilities::isalpha(c)) {
-    c = FleksyUtilities::toupper(c);
+  if (StringUtilities::isalpha(c)) {
+    c = StringUtilities::toupper(c);
   }
   NSString* speak = nil;
   switch (c) {
@@ -180,7 +181,7 @@
   if (lastChar == '\n') {
     [VariousUtilities performAudioFeedbackFromString:self.returnKeyLabel];
   } else {
-    FLChar c = FleksyUtilities::tolower(lastChar);
+    FLChar c = StringUtilities::tolower(lastChar);
     FLString temp(&c, 1);
     NSString* charString = FLStringToNSString(temp);
     [VariousUtilities performAudioFeedbackFromString:charString];

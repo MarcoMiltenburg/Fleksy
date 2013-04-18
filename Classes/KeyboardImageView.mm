@@ -15,6 +15,7 @@
 #import "VariousUtilities.h"
 #import "VariousUtilities2.h"
 #include "FleksyUtilities.h"
+#include "StringUtilities.h"
 #import <QuartzCore/QuartzCore.h>
 
 #define LABEL_FONT_SIZE (deviceIsPad() ? 44 : 30)
@@ -630,8 +631,8 @@
   NSArray* characters = [VariousUtilities explodeString:wordString];
   for (NSString* character in characters) {
     char c = [character characterAtIndex:0];
-    if (FleksyUtilities::isalpha(c)) {
-      c = FleksyUtilities::toupper(c);
+    if (StringUtilities::isalpha(c)) {
+      c = StringUtilities::toupper(c);
       [self highlightKey:c off:NO];
     }
   }
