@@ -89,7 +89,12 @@ static FleksyKeyboard* instance = nil;
 }
 
 - (void) handleSettingsChanged:(NSNotification*) notification {
-  
+
+  if([NSThread isMainThread] == NO) {
+    [self performSelectorOnMainThread:_cmd withObject:notification waitUntilDone:NO];
+    return;
+  }
+
   //NSLog(@"handleSettingsChanged: %@, userInfo: %@, delay: %.6f", notification, [notification userInfo], [VariousUtilities getNotificationDelay:notification]);
   
   double startTime = CFAbsoluteTimeGetCurrent();
