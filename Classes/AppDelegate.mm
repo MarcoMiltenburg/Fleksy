@@ -225,15 +225,6 @@ float distributionFunction(float x) {
 //    return;
 //  }
   
-  
-  [[NSUbiquitousKeyValueStore defaultStore] synchronize]; 
-  [[NSUserDefaults standardUserDefaults] synchronize];
-  
-  NSString* version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
-  NSString* versionShort = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
-  [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@-%@ (4.33/2.33)", versionShort, version] forKey:@"FLEKSY_APP_SETTING_VERSION"];
-
-  NSLog(@"CFBundleShortVersionString: %@", versionShort);
   RANDOM_SEED();
   
   [[UIApplication sharedApplication] setStatusBarHidden:FLEKSY_STATUS_BAR_HIDDEN];
@@ -260,10 +251,29 @@ float distributionFunction(float x) {
   customInputView.listener = self;
   
   [self performSelectorOnMainThread:@selector(finishLoadingUI) withObject:nil waitUntilDone:NO];
-  //[self finishLoadingUI];
   
+  NSString* apiVersionShort = [self parseApiVersion:[[NSUserDefaults standardUserDefaults] objectForKey:FLEKSY_APP_API_VERSION_KEY]];
+  NSString* version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+  NSString* versionShort = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+  [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@-%@ (%@)", versionShort, version, apiVersionShort] forKey:@"FLEKSY_APP_SETTING_VERSION"];
+  
+  [[NSUbiquitousKeyValueStore defaultStore] synchronize];
+  [[NSUserDefaults standardUserDefaults] synchronize];
+                               
+  NSLog(@"TotalVersionString: %@", [NSString stringWithFormat:@"%@-%@ (%@)", versionShort, version, apiVersionShort]);
+
   NSLog(@"END of applicationDidFinishLaunching, took %.6f", CFAbsoluteTimeGetCurrent() - startTime);
 #pragma unused(startTime)
+}
+                               
+- (NSString *)parseApiVersion:(NSString *)apiVersion
+{
+//  API v.0.2 (77909ce0d9cf279e2818a831d7982a5f1b481288-kostas @ Thu Apr 18 00:09:22 UTC 2013)
+//  SystemsIntegrator v2.50
+//  TypingController v135
+// Just use the v.0.2 (the 2nd token)
+  
+  return [[apiVersion componentsSeparatedByString:@" "] objectAtIndex:1];
 }
 
 
