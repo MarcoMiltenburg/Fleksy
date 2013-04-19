@@ -192,7 +192,7 @@
 }
 
 - (void) layoutSubviews {
-  //NSLog(@"CustomScrollView layoutSubviews, self.frame: %@, self.bounds: %@", NSStringFromCGRect(self.frame), NSStringFromCGRect(self.bounds));
+  NSLog(@"CustomScrollView layoutSubviews, self.frame: %@, self.bounds: %@", NSStringFromCGRect(self.frame), NSStringFromCGRect(self.bounds));
   if (USE_ZOOM_OUT_EFFECT) {
     float scaleFactor = 1.0 - 0.3 * self.contentOffset.y / self.bounds.size.height;
     activeView.transform = CGAffineTransformConcat(CGAffineTransformMakeScale(scaleFactor, scaleFactor), CGAffineTransformMakeTranslation((1.0 - scaleFactor) * self.bounds.size.width * 0.5, 0));

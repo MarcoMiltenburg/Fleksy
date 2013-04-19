@@ -158,7 +158,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLTypingController_iOS);
   [self performSelectorOnMainThread:@selector(loadKeymaps) withObject:nil waitUntilDone:YES];
   
   // notify loading is 100% done
+  NSLog(@"Firing Notification %@ Now", FLEKSY_LOADING_NOTIFICATION);
   [[NSNotificationCenter defaultCenter] postNotificationName:FLEKSY_LOADING_NOTIFICATION object:[NSNumber numberWithFloat:1]];
+  NSLog(@"Fired Notification %@", FLEKSY_LOADING_NOTIFICATION);
   
   //[FleksyClient_NOIPC loadData:self.fleksyClient.systemsIntegrator userDictionary:self.fleksyClient.userDictionary languagePack:FLEKSY_APP_SETTING_LANGUAGE_PACK];
   

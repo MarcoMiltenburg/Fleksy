@@ -137,7 +137,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardContainerView);
 
 - (void) layoutSubviews {
   
-  //NSLog(@"FLKeyboardContainerView layoutSubviews, self.frame: %@, self.bounds: %@", NSStringFromCGRect(self.frame), NSStringFromCGRect(self.bounds));
+  NSLog(@"FLKeyboardContainerView layoutSubviews, self.frame: %@, self.bounds: %@", NSStringFromCGRect(self.frame), NSStringFromCGRect(self.bounds));
 
   //CGAffineTransform previous = keyboard.transform;
   
@@ -225,7 +225,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardContainerView);
 
 - (void) processTouchPoint:(CGPoint) point precise:(BOOL) precise character:(unichar) c {
  
-  //NSLog(@"processTouchPoint %d", c);
+  NSLog(@"processTouchPoint %d", c);
   
   if (c == '\t' || c == BACK_TO_LETTERS) {
     [self toggleLettersNumbers];

@@ -847,11 +847,13 @@ static FleksyKeyboard* instance = nil;
 }
 
 - (void) loadingProgress:(NSNotification*) notification {
+  NSLog(@"Handling Notification %@ NOW on Thread = %@", notification, [NSThread currentThread]);
   NSNumber* progress = notification.object;
   if (progress.floatValue == 1) {
     self->hasFinishedLoading = YES;
   }
   if ([self.listener respondsToSelector:@selector(loadingProgress:)]) {
+    NSLog(@"Passing Notification Handling to listener %@ NOW", self.listener);
     [self.listener loadingProgress:progress.floatValue];
   }
 }

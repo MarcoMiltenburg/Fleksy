@@ -53,7 +53,7 @@
 
 - (void) layoutSubviews {
   
-  //NSLog(@"FLSuggestionsView layoutSubviews %@", NSStringFromCGRect(self.frame));
+  NSLog(@"FLSuggestionsView layoutSubviews %@", NSStringFromCGRect(self.frame));
   
   bg.frame = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height);
   

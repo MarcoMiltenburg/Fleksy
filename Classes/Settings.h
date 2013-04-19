@@ -16,6 +16,7 @@
 #endif
 
 #ifdef FL_BUILD_FOR_BETA
+#define FLEKSY_IS_MAIN_THREAD_CHECK 1
 #endif
 
 #ifdef FL_BUILD_FOR_TESTFLIGHT

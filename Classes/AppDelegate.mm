@@ -66,6 +66,7 @@ float distributionFunction(float x) {
 }
 
 - (void) loadingProgress:(float) progress {
+  NSLog(@"Listener %@ progress = %f of Notification NOW on Thread = %@", self, progress, [NSThread currentThread]);
   if (progress == 1) {
     //UIKit stuff has to be done on main thread, and this will be called from the thread where
     //the notification was posted, which might not be the main thread

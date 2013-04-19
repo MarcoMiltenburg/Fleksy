@@ -75,7 +75,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboard);
 }
 
 - (void) layoutSubviews {
-  //NSLog(@"FLKeyboard layoutSubviews, frame: %@, transform: %@", NSStringFromCGRect(self.frame), NSStringFromCGAffineTransform(self.transform));
+  NSLog(@"FLKeyboard layoutSubviews, frame: %@, transform: %@", NSStringFromCGRect(self.frame), NSStringFromCGAffineTransform(self.transform));
   
   imageViewABC.frame      = self.bounds;
   imageViewSymbolsA.frame = self.bounds;

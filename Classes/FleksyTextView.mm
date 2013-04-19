@@ -215,6 +215,7 @@
 }
 
 - (void) makeReady {
+  NSLog(@"%s",__PRETTY_FUNCTION__);
   textView.editable = YES;
   [self voiceOverStatusChanged:nil];
   [textView becomeFirstResponder];

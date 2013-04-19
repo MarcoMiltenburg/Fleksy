@@ -583,7 +583,7 @@
 
 - (void) layoutSubviews {
   
-  //NSLog(@"KeyboardImageView layoutSubviews (%x)", self);
+  NSLog(@"KeyboardImageView layoutSubviews (%@)", self);
   
   // changing the transform of the labels on popup triggers a layout that is uneccessary
   if (!CGAffineTransformIsIdentity(lastTransform) && CGAffineTransformEqualToTransform(lastTransform, self.superview.transform)) {
