@@ -11,20 +11,24 @@
 
 #import "../../tuneup/tuneup.js"
 
-UIATarget.onAlert = function onAlert(alert) {
-    UIALogger.logMessage("alert Shown");
-	//target.logElementTree();
+function onFleksyAlert(alert) {
+    UIALogger.logMessage("alert Shown: " + alert);
+	target.logElementTree();
+	//UIALogger.logMessage("alert after log");
     
-    if (target.frontMostApp().alert().buttons()["DELETE"].name() != null) {
+    if (alert.buttons()["DELETE"].name() != null) {
         UIALogger.logMessage("DELETE alert");
-        target.frontMostApp().alert().buttons()["DELETE"].tap();
+        alert.buttons()["DELETE"].tap();
+        UIALogger.logMessage("alert DELETE handled");
         return true;
     }
-    else if (target.frontMostApp().alert().buttons()["Cool!"].name() != null) {
-        UIALogger.logMessage("Cool! alert");
-        target.frontMostApp().alert().buttons()["Cool!"].tap();
-        return true;
+    else if (alert.buttons()["Cool!"].name() != null) {
+        //UIALogger.logMessage("Cool! alert " + alert.buttons()["Cool!"] + ", " + alert.cancelButton());
+        alert.buttons()["Cool!"].tap();
+        //alert.cancelButton().tap();
+    	return true;
     }
+    UIALogger.logMessage("did not handle_");
     return false;
 }
 
@@ -54,46 +58,108 @@ function swipeRight() {
 
 
 var MAX_COUNT = 1
-var testName1 = "Test_iFleksyTypingSwiping.js";
+var testName1 = "Test_iFleksyTypingSwiping2.js";
+
+// System will handle 
+UIATarget.onAlert = function(alert) {
+	UIALogger.logMessage("empty onAlert handler, returning false");
+    return false;
+}
 
 test(testName1, function(target,app) {
+
+     //UIATarget.onAlert
      
      // Loading . . requires a delay for initial blank TextView
      
-     target.delay(10);
+     target.pushTimeout(0);
+
+	var keyboardWindow = null;     
      
      // This initializes the app to a known state
      
-	 app.windows()[1].buttons()["Action"].tap();
-	 app.windows()[1].popover().actionSheet().buttons()["Instructions"].tap();
+     while (true) {
+     
+     	for (var i = 0; i < app.windows().length; i++) {
+     		var temp = app.windows()[i].elements()["Activate keyboard with a single tap before typing"];
+     		if (temp && temp.isValid()) {
+     			keyboardWindow = app.windows()[i];
+     			break;
+     		}
+
+     	}
+     	
+     	if (keyboardWindow) {
+     		break;
+     	}
+     	
+     	var delay = 1;
+     	UIALogger.logMessage("Did not find keyboardWindow. waiting " + delay);
+     	target.delay(delay);
+     	
+     	 // UIALogger.logMessage("0000");
+//      		if (hasAlert(app)) {
+//      		UIALogger.logMessage("1111");
+//      		onFleksyAlert(app.alert());
+//      		UIALogger.logMessage("2222");
+//      	
+//      	}
+     	
+     }
+     
+     UIATarget.onAlert = onFleksyAlert;
+     
+     UIALogger.logMessage("keyboardWindow: " + keyboardWindow);
+     //keyboardWindow.logElementTree();
+     
+     var actionButton = null;
+     
+     while (!actionButton || !actionButton.isValid()) {
+     	UIALogger.logMessage("waiting 1 second for actionButton: " + actionButton + ", kbw: " + keyboardWindow);
+     	//keyboardWindow.logElementTree();
+     	target.delay(1);
+     	actionButton = keyboardWindow.buttons()["Action"];
+     	
+     	//target.logElementTree();
+	
+     }
+     
+     //UIALogger.logMessage("NORMAL FAST EXIT FOR TESTING");
+     //return true;
+     
+	 actionButton.tap();
+	 
+	 target.popTimeout();
+	 
+	 keyboardWindow.popover().actionSheet().buttons()["Instructions"].tap();
 	 app.mainWindow().buttons()["Instructions"].tapWithOptions({tapCount:5});
 
 	 // Alert detected. Expressions for handling alerts should be moved into the UIATarget.onAlert function definition.
 	 
-	 UIALogger.logMessage("alert dismisssed");
-	 
+	 UIALogger.logMessage("Continuing...");
+	 UIALogger.logMessage("Continuing 2...");
 	 target.delay(1);
 	 
-	 app.mainWindow().buttons()["Back"].tap();	 
-	 app.windows()[1].buttons()["Action"].tap();
+	 app.mainWindow().buttons()["Back"].tap();
+	 UIALogger.logMessage("back button tap");	 
+	 keyboardWindow.buttons()["Action"].tap();
 	 
-	 var copyClearButton = app.windows()[1].popover().actionSheet().buttons()["Copy & Clear"].name();	 
+	 var copyClearButton = keyboardWindow.popover().actionSheet().buttons()["Copy & Clear"].name();	 
 	 if (copyClearButton != null) {
 	 	UIALogger.logMessage("Copy and Clear available");
-	 	app.windows()[1].popover().actionSheet().buttons()["Copy & Clear"].tap();
+	 	keyboardWindow.popover().actionSheet().buttons()["Copy & Clear"].tap();
 	 }
 	 else {
 	 	UIALogger.logMessage("No Copy and Clear. Dismiss popover");
 	 	target.tap({x:155.00, y:98.00});
 	 }
 	 
-	 target.delay(0);
-	 
      var count = 0;
      
      while (count++ != MAX_COUNT) {
      
          var testName = testName1 + count;
+
          
 	 /* 
 	  
@@ -111,46 +177,59 @@ Source:
 	  
 	  */
 
-     // 2. Type Hello SR 6LW SR SD 8LW SR SD SD SD SD SU SU SL SL SL
+     	 // 2. Type Hello SR 6LW SR SD 8LW SR SD SD SD SD SU SU SL SL SL
      
          // Slowly Tap Hello on Keyboard
-     
-         app.windows()[1].elements()["Activate keyboard with a single tap before typing"].tapWithOptions({tapOffset:{x:0.62, y:0.82}});
-         app.windows()[1].elements()["Activate keyboard with a single tap before typing"].tapWithOptions({tapOffset:{x:0.26, y:0.70}});
-         app.windows()[1].elements()["Activate keyboard with a single tap before typing"].tapWithOptions({tapOffset:{x:0.92, y:0.82}});
-         app.windows()[1].elements()["Activate keyboard with a single tap before typing"].tapWithOptions({tapOffset:{x:0.93, y:0.82}});
-         app.windows()[1].elements()["Activate keyboard with a single tap before typing"].tapWithOptions({tapOffset:{x:0.86, y:0.71}});
-         
-        swipeRight();
-     
-         target.delay(1);
-    
-     // Slowly Tap 6 letter word on Keyboard
-     
-     app.windows()[1].elements()["Activate keyboard with a single tap before typing"].tapWithOptions({tapOffset:{x:0.42, y:0.82}});
-     app.windows()[1].elements()["Activate keyboard with a single tap before typing"].tapWithOptions({tapOffset:{x:0.26, y:0.70}});
-     app.windows()[1].elements()["Activate keyboard with a single tap before typing"].tapWithOptions({tapOffset:{x:0.26, y:0.70}});
-     app.windows()[1].elements()["Activate keyboard with a single tap before typing"].tapWithOptions({tapOffset:{x:0.92, y:0.82}});
-     app.windows()[1].elements()["Activate keyboard with a single tap before typing"].tapWithOptions({tapOffset:{x:0.93, y:0.82}});
-     app.windows()[1].elements()["Activate keyboard with a single tap before typing"].tapWithOptions({tapOffset:{x:0.86, y:0.71}});
 
+	     var keyboard = keyboardWindow.elements()["Activate keyboard with a single tap before typing"];
+	     
+	     target.pushTimeout(1);
      
+     	 UIALogger.logMessage("Keyboard 5 start");
+     	 
+         keyboard.tapWithOptions({tapOffset:{x:0.62, y:0.82}});
+         keyboard.tapWithOptions({tapOffset:{x:0.26, y:0.70}});
+         keyboard.tapWithOptions({tapOffset:{x:0.92, y:0.82}});
+         keyboard.tapWithOptions({tapOffset:{x:0.93, y:0.82}});
+         keyboard.tapWithOptions({tapOffset:{x:0.86, y:0.71}});
+         UIALogger.logMessage("Keyboard 5 end");
+         
+         swipeRight();
+         
+         //target.popTimeout();
+    
+     	// Slowly Tap 6 letter word on Keyboard
+     
+	    //target.pushTimeout(1);
+     	UIALogger.logMessage("Keyboard 6 start");
+     	keyboard.tapWithOptions({tapOffset:{x:0.42, y:0.82}});
+     	keyboard.tapWithOptions({tapOffset:{x:0.26, y:0.70}});
+     	keyboard.tapWithOptions({tapOffset:{x:0.26, y:0.70}});
+     	keyboard.tapWithOptions({tapOffset:{x:0.92, y:0.82}});
+     	keyboard.tapWithOptions({tapOffset:{x:0.93, y:0.82}});
+     	keyboard.tapWithOptions({tapOffset:{x:0.86, y:0.71}});
+     	UIALogger.logMessage("Keyboard 6 end");
+
         swipeRight();
      
         swipeDown();
-     
-     // Slowly Tap 8 letter word on Keyboard
-     
-     app.windows()[1].elements()["Activate keyboard with a single tap before typing"].tapWithOptions({tapOffset:{x:0.62, y:0.82}});
-     app.windows()[1].elements()["Activate keyboard with a single tap before typing"].tapWithOptions({tapOffset:{x:0.26, y:0.70}});
-     app.windows()[1].elements()["Activate keyboard with a single tap before typing"].tapWithOptions({tapOffset:{x:0.92, y:0.82}});
-     app.windows()[1].elements()["Activate keyboard with a single tap before typing"].tapWithOptions({tapOffset:{x:0.26, y:0.70}});
-     app.windows()[1].elements()["Activate keyboard with a single tap before typing"].tapWithOptions({tapOffset:{x:0.26, y:0.70}});
-     app.windows()[1].elements()["Activate keyboard with a single tap before typing"].tapWithOptions({tapOffset:{x:0.26, y:0.70}});
-     app.windows()[1].elements()["Activate keyboard with a single tap before typing"].tapWithOptions({tapOffset:{x:0.26, y:0.70}});
-     app.windows()[1].elements()["Activate keyboard with a single tap before typing"].tapWithOptions({tapOffset:{x:0.27, y:0.58}});
-     
+
+     	// Slowly Tap 8 letter word on Keyboard
+	    
+     	UIALogger.logMessage("Keyboard 8 start");     
+     	keyboard.tapWithOptions({tapOffset:{x:0.62, y:0.82}});
+     	keyboard.tapWithOptions({tapOffset:{x:0.26, y:0.70}});
+     	keyboard.tapWithOptions({tapOffset:{x:0.92, y:0.82}});
+     	keyboard.tapWithOptions({tapOffset:{x:0.26, y:0.70}});
+     	keyboard.tapWithOptions({tapOffset:{x:0.26, y:0.70}});
+     	keyboard.tapWithOptions({tapOffset:{x:0.26, y:0.70}});
+     	keyboard.tapWithOptions({tapOffset:{x:0.26, y:0.70}});
+     	keyboard.tapWithOptions({tapOffset:{x:0.27, y:0.58}});
+     	UIALogger.logMessage("Keyboard 8 end");
+
         swipeRight();
+        
+        target.popTimeout();
  
         swipeDown();
         swipeDown();
@@ -165,16 +244,16 @@ Source:
 
      //target.logElementTree();
      //UIAButton: name:Send to 0123456789 rect:{{478, 161}, {272, 43}}
-     // var testValue = app.windows()[1].popover().actionSheet().buttons()["Send to 0123456789"].name()
+     // var testValue = keyboardWindow.popover().actionSheet().buttons()["Send to 0123456789"].name()
      // var compareValue = "Send to 0123456789";
      
          var testValue = "1";
          var compareValue = "1";
      
          //target.delay(1);
-         //app.windows()[1].buttons()["Action"].tap();
+         //keyboardWindow.buttons()["Action"].tap();
      
-         //app.windows()[1].popover().actionSheet().buttons()["Copy & Clear"].tap();
+         //keyboardWindow.popover().actionSheet().buttons()["Copy & Clear"].tap();
          
          //         if (testValue == compareValue) {
          //         UIALogger.logPass( testName );

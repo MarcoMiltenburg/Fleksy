@@ -15,4 +15,4 @@ int main(int argc, char* argv[]) {
     NSLog(@"Running as standalone app");
     return UIApplicationMain(argc, argv, nil, @"AppDelegate");
   }
-}
+} 

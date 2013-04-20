@@ -1319,7 +1319,17 @@
   if (purchaseManager.previousRuns < 1 && !UIAccessibilityIsVoiceOverRunning()) {
     blindAppAlert = [[UIAlertView alloc] initWithTitle:@"Happy Typing!"
                                                message:@"\nThousands of sighted and blind users enjoy typing with Fleksy.\n\nClose your eyes and try typing! :)" delegate:nil cancelButtonTitle:@"Cool!" otherButtonTitles:nil];
-    [blindAppAlert show];
+  
+  NSLog(@"%s BEFORE blindAppAlert",__PRETTY_FUNCTION__);
+  
+#ifdef FL_BUILD_FOR_BETA
+  [blindAppAlert performSelector:@selector(show) withObject:nil afterDelay:3.0];
+#else
+  [blindAppAlert show];  
+#endif
+  NSLog(@"%s AFTER blindAppAlert",__PRETTY_FUNCTION__);
+
+  
   }
 #endif
 }
