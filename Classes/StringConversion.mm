@@ -39,7 +39,9 @@ FLString _NSStringToString(NSString* str) {
   NSUInteger usedLength = -1;
   BOOL ok = [str getBytes:buffer maxLength:bufferSize usedLength:&usedLength encoding:NSISOLatin1StringEncoding options:0 range:NSMakeRange(0, str.length) remainingRange:nil];
   if (!ok) {
+#ifndef FL_BUILD_FOR_APP_STORE
     NSLog(@"_NSStringToString: NSISOLatin1StringEncoding !ok for <%@>, trying NSWindowsCP1252StringEncoding", str);
+#endif
     ok = [str getBytes:buffer maxLength:bufferSize usedLength:&usedLength encoding:NSWindowsCP1252StringEncoding options:0 range:NSMakeRange(0, str.length) remainingRange:nil];
   }
   //NSLog(@"_NSStringToString: <%@>, bufferSize: %lu, usedLength: %d, ok: %d", str, bufferSize, usedLength, ok);

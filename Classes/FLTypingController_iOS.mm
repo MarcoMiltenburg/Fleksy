@@ -1006,8 +1006,11 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
   } else {
     rawChar = StringUtilities::tolower(rawChar);
   }
+
   
+#ifndef FL_BUILD_FOR_APP_STORE
   printf("FLEKSY_APP_SETTING_KEY_SNAP: %d\n", FLEKSY_APP_SETTING_KEY_SNAP);
+#endif
   if (FLEKSY_APP_SETTING_KEY_SNAP) {
     KeyboardImageView* kbImageView = (KeyboardImageView*) [FLKeyboard sharedFLKeyboard].activeView;
     point1 = [kbImageView getKeyboardPointForChar:StringUtilities::toupper(rawChar)];

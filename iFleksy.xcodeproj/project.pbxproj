@@ -1048,7 +1048,7 @@
 			baseConfigurationReference = 127BF792170A670400090407 /* BuildInfo.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Fleksy.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEPLOYMENT_POSTPROCESSING = YES;
 				FL_VERSION_EXTRA = "-TF-${FL_TESTFLIGHT_BUILD_NUMBER}-${FL_GIT_SHORTHASH}";
 				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)\"";

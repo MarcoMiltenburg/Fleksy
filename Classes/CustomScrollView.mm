@@ -7,6 +7,7 @@
 //
 
 #import "CustomScrollView.h"
+#import "Settings.h"
 
 #define USE_ZOOM_OUT_EFFECT YES
 

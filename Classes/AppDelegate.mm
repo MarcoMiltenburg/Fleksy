@@ -157,14 +157,14 @@ float distributionFunction(float x) {
 #endif
   
 #ifdef FL_BUILD_FOR_APP_STORE
-    printf("SCHEME: FL_BUILD_FOR_APP_STORE\n");
+    //printf("SCHEME: FL_BUILD_FOR_APP_STORE\n");
 #endif
   
   ///////////////////////////////////////////////////////////
 
 
 #ifdef RELEASE
-  printf("Fleksy RELEASE\n");
+  //printf("Fleksy RELEASE\n");
   
   [TestFlight setOptions:[NSDictionary dictionaryWithObjectsAndKeys:
                           @NO, TFOptionLogToConsole,
@@ -184,7 +184,9 @@ float distributionFunction(float x) {
 #endif
 
 #if CRASHLYTICS
+#ifndef FL_BUILD_FOR_APP_STORE
     printf("Fleksy CRASHLYTICS\n");
+#endif
     [Crashlytics startWithAPIKey:@"8437e63c5dcbeca15784fa67dd5fab1275a867a5"];
 #endif
 
@@ -193,7 +195,7 @@ float distributionFunction(float x) {
 #endif
 
 #ifdef FL_BUILD_FOR_APP_STORE
-  printf("Fleksy APP_STORE\n");
+  //printf("Fleksy APP_STORE\n");
 #else
   printf("Fleksy NOT app_store\n");
 #endif
