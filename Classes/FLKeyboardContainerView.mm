@@ -90,15 +90,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardContainerView);
     
     fleksyListener = new FleksyListenerImplC();
     fleksyApi = new FleksyAPI(*fleksyListener);
-    
+
     // TODO: FleksyAPI Testing
     
-    NSLog(@" ***** FleksyAPI Testing: START of Loading");
+    //NSLog(@" ***** FleksyAPI Testing: START of Loading");
     
-    fleksyListener = new FleksyListenerImplC();
+    //fleksyListener = new FleksyListenerImplC();
     //fleksyApi = new FleksyAPI(*fleksyListener);
     
-    fleksyApi = typingController.fleksyClient->fleksyAPI;
+    //fleksyApi = typingController.fleksyClient->fleksyAPI;
     
     NSLog(@" ***** FleksyAPI Testing: END of Loading");
 #endif

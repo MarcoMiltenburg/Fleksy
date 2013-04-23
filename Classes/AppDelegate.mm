@@ -167,6 +167,7 @@ float distributionFunction(float x) {
   //printf("Fleksy RELEASE\n");
   
   [TestFlight setOptions:[NSDictionary dictionaryWithObjectsAndKeys:
+                          @NO, TFOptionDisableInAppUpdates,
                           @NO, TFOptionLogToConsole,
                           @NO, TFOptionLogToSTDERR, nil]];
   
