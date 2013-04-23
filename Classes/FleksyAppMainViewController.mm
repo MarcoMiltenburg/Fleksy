@@ -349,6 +349,9 @@
   if (UIAccessibilityIsVoiceOverRunning()) {
     actionMainMenu.title = [NSString stringWithFormat:@"%@", textView.text];
   }
+  else {
+    actionMainMenu.title =[NSString string];
+  }
   
   if (deviceIsPad()) {
     // on the iPad, if title.length > X we get menuception bug. Recreate to solve
