@@ -176,7 +176,7 @@ static FleksyKeyboard* instance = nil;
   //NSLog(@"kbView->scrollWheelRecognizer.enabled: %d", kbView->scrollWheelRecognizer.enabled);
   
   [self setNeedsLayout];
-  
+  NSLog(@"FleksyKeyboard handleSettingsChanged: %@", settings);
   NSLog(@"END of handleSettingsChanged:, took %.6f", CFAbsoluteTimeGetCurrent() - startTime);
 #pragma unused(startTime)
 }
