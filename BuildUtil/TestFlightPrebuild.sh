@@ -20,6 +20,8 @@ set -e
 # If any variable is used but unset, cause the script to fail and exit with non-zero status.
 set -u
 
+# Side-stepping script until fix, see PT [#49090661]
+exit 0;
 
 if [[ ( "${CONFIGURATION}" != "TestFlight" ) ]]; then
     exit 0;
