@@ -74,13 +74,13 @@
 #pragma mark IASKAppSettingsViewControllerDelegate protocol
 
 - (void)settingsViewControllerDidEnd:(IASKAppSettingsViewController*)sender {
-    [self dismissModalViewControllerAnimated:YES];
 	
 	// your code here to reconfigure the app for changed settings
     
-    NSLog(@"%s: sender = %@", __PRETTY_FUNCTION__, sender);
+  NSLog(@"%s: sender = %@", __PRETTY_FUNCTION__, sender);
     
-    [textView.inputView performSelector:@selector(handleSettingsChanged:) withObject:nil];
+  [textView.inputView performSelector:@selector(handleSettingsChanged:) withObject:nil];
+  [self dismissModalViewControllerAnimated:YES];
 }
 
 //optional
@@ -1553,7 +1553,8 @@
   //FLEKSY_APP_SETTING_LOCK_CURRENT_ORIENTATION = [[[NSUserDefaults standardUserDefaults] valueForKey:@"FLEKSY_APP_SETTING_LOCK_CURRENT_ORIENTATION"] boolValue];
   
   BOOL result = YES; //!FLEKSY_APP_SETTING_LOCK_CURRENT_ORIENTATION;
-  //NSLog(@"123123 shouldAutorotate, FLEKSY_APP_SETTING_LOCK_CURRENT_ORIENTATION: %d, current device orientation: %d. Result: %d", FLEKSY_APP_SETTING_LOCK_CURRENT_ORIENTATION, [UIDevice currentDevice].orientation, result);
+  ///NSLog(@"123123 shouldAutorotate, FLEKSY_APP_SETTING_LOCK_CURRENT_ORIENTATION: %d, current device orientation: %d. Result: %d", FLEKSY_APP_SETTING_LOCK_CURRENT_ORIENTATION, [UIDevice currentDevice].orientation, result);
+  NSLog(@"123123 shouldAutorotate, FLEKSY_APP_SETTING_LOCK_ORIENTATION: %d, result: %d", FLEKSY_APP_SETTING_LOCK_ORIENTATION, result);
   return result;
 }
 
