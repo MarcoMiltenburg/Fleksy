@@ -97,14 +97,14 @@ static string* _resolveFilepath(string& filepathFormat, int i) {
 }
 
 NSString* getAbsolutePath(NSString* filepath, NSString* languagePack) {
-  return [NSString stringWithFormat:@"%@/%@/%@", [[VariousUtilities theBundle] bundlePath], languagePack, filepath];
+  return [NSString stringWithFormat:@"%@/resourceArchive-%@.jet", [[VariousUtilities theBundle] bundlePath], languagePack];
 }
 
 - (void) loadDataWithLanguagePack:(NSString*) languagePack {
-
+  
   NSLog(@"FleksyClient_NOIPC LOADING, languagePack: %@", languagePack);
   
-  fleksyAPI->setResourcePath(getAbsolutePath(@"", languagePack).UTF8String);
+  fleksyAPI->setResourceFile(getAbsolutePath(@"", languagePack).UTF8String);
   fleksyAPI->loadResources();  
   
   
