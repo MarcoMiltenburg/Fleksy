@@ -1048,7 +1048,7 @@
 			baseConfigurationReference = 127BF792170A670400090407 /* BuildInfo.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Fleksy.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Syntellia, Inc";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				DEPLOYMENT_POSTPROCESSING = YES;
 				FL_VERSION_EXTRA = "-TF-${FL_TESTFLIGHT_BUILD_NUMBER}-${FL_GIT_SHORTHASH}";
 				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)\"";
@@ -1068,7 +1068,7 @@
 				);
 				OTHER_LDFLAGS = "\"-all_load\"";
 				PRODUCT_NAME = "Fleksy Beta";
-				PROVISIONING_PROFILE = "451C8A0F-B558-4B1A-9099-8D99677CA1CD";
+				PROVISIONING_PROFILE = "";
 				SEPARATE_STRIP = YES;
 				STRIP_INSTALLED_PRODUCT = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1080,7 +1080,11 @@
 			baseConfigurationReference = 127BF792170A670400090407 /* BuildInfo.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Fleksy.entitlements;
+<<<<<<< Updated upstream
 				CODE_SIGN_IDENTITY = "iPhone Developer: Vince Mansel (QT5V7NXWHY)";
+=======
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+>>>>>>> Stashed changes
 				DEPLOYMENT_POSTPROCESSING = NO;
 				FL_VERSION_EXTRA = "-${FL_GIT_SHORTHASH}-${INSTALL_OWNER}";
 				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)\"";
@@ -1100,7 +1104,11 @@
 				);
 				OTHER_LDFLAGS = "\"-all_load\"";
 				PRODUCT_NAME = FleksyDev;
+<<<<<<< Updated upstream
 				PROVISIONING_PROFILE = "8C93A449-B450-460C-92D3-EAFE9C485EE8";
+=======
+				PROVISIONING_PROFILE = "";
+>>>>>>> Stashed changes
 				SEPARATE_STRIP = YES;
 				STRIP_INSTALLED_PRODUCT = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1142,7 +1150,7 @@
 			baseConfigurationReference = 127BF792170A670400090407 /* BuildInfo.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Fleksy.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Syntellia, Inc (3Q962663R2)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				DEPLOYMENT_POSTPROCESSING = YES;
 				FL_VERSION_EXTRA = "";
 				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)\"";
@@ -1161,7 +1169,7 @@
 					"\"$(SRCROOT)/Vendor/TestFlight\"",
 				);
 				OTHER_LDFLAGS = "\"-all_load\"";
-				PROVISIONING_PROFILE = "2B4897E5-0408-46D4-9668-44E3E704E7FA";
+				PROVISIONING_PROFILE = "";
 				SEPARATE_STRIP = YES;
 				STRIP_INSTALLED_PRODUCT = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1204,7 +1212,7 @@
 			baseConfigurationReference = 127BF792170A670400090407 /* BuildInfo.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Fleksy.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Vince Mansel (V9F55D3X43)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEPLOYMENT_POSTPROCESSING = NO;
 				FL_VERSION_EXTRA = "-B-${FL_GIT_SHORTHASH}-${INSTALL_OWNER}";
 				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)\"";
@@ -1224,7 +1232,7 @@
 				);
 				OTHER_LDFLAGS = "\"-all_load\"";
 				PRODUCT_NAME = FleksyBETA;
-				PROVISIONING_PROFILE = "82CAA71E-12A5-4816-B8F3-6C004B73643D";
+				PROVISIONING_PROFILE = "";
 				SEPARATE_STRIP = YES;
 				STRIP_INSTALLED_PRODUCT = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
