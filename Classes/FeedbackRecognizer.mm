@@ -8,12 +8,11 @@
 
 #import "FeedbackRecognizer.h"
 #import "KeyboardImageView.h"
-#import "FLKeyboard.h"
+#import "FLKeyboardView.h"
 #import "FLKeyboardContainerView.h"
 #import "UITouchManager.h"
 #import "AppDelegate.h"
 #import "VariousUtilities.h"
-#import "StringUtilities.h"
 #import <Foundation/NSProcessInfo.h>
 
 #define POPUP_DELAY    0.060
@@ -28,8 +27,9 @@
 
 - (void) speakNATOforChar:(NSString*) charString {
   unichar c = [charString characterAtIndex:0];
-  if (StringUtilities::isalpha(c)) {
-    c = StringUtilities::toupper(c);
+  FLKeyboard* keyboard = [FLKeyboardView sharedFLKeyboardView]->keyboard;
+  if (keyboard->isalpha(c)) {
+    c = keyboard->toupper(c);
   }
   NSString* speak = nil;
   switch (c) {
@@ -150,7 +150,7 @@
 }
 
 - (KeyboardImageView*) keyboardImageView {
-  return (KeyboardImageView*) [FLKeyboard sharedFLKeyboard].activeView;
+  return (KeyboardImageView*) [FLKeyboardView sharedFLKeyboardView].activeView;
 }
 
 - (void) playTockForTouch:(UITouch*) touch {
@@ -181,7 +181,7 @@
   if (lastChar == '\n') {
     [VariousUtilities performAudioFeedbackFromString:self.returnKeyLabel];
   } else {
-    FLChar c = StringUtilities::tolower(lastChar);
+    FLChar c = [FLKeyboardView sharedFLKeyboardView]->keyboard->tolower(lastChar);
     FLString temp(&c, 1);
     NSString* charString = FLStringToNSString(temp);
     [VariousUtilities performAudioFeedbackFromString:charString];

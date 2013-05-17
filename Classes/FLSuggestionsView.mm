@@ -13,7 +13,7 @@
 #import "Settings.h"
 #import "AppDelegate.h"
 #import "FLKeyboardContainerView.h"
-#import "FLKeyboard.h"
+#import "FLKeyboardView.h"
 #import "VariousUtilities.h"
 #import <QuartzCore/QuartzCore.h>
 

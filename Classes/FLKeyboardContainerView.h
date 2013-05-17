@@ -10,7 +10,7 @@
 
 #import "FLTypingController_iOS.h"
 //#import "FLTypingController.h"
-#import "FLKeyboard.h"
+#import "FLKeyboardView.h"
 
 //#import "UICustomTapGestureRecognizer.h"
 #import "UISwipeAndHoldGestureRecognizer.h"
@@ -60,7 +60,7 @@
   FleksyAPI* fleksyApi;
 #endif
   
-  FLKeyboard* keyboard;
+  FLKeyboardView* keyboard;
   FLSuggestionsView* suggestionsView;
   FLSuggestionsView* suggestionsViewSymbols;
   

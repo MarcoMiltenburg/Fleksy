@@ -37,7 +37,6 @@ public:
 @interface FleksyClient_NOIPC : NSObject<FLUserDictionaryChangeListener> {
   
   EmptyOutputInterface* outputInterface;
-  FleksyAPI* fleksyAPI;
   FLUserDictionary* _userDictionary;
   //NSString* languagePack;
 }
@@ -48,5 +47,6 @@ public:
 
 @property (readonly, getter = theUserDictionary) FLUserDictionary* userDictionary;
 @property SystemsIntegrator* systemsIntegrator;
+@property FleksyAPI* fleksyAPI;
 
 @end

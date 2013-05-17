@@ -58,7 +58,7 @@
 		2EA3E84616964AA200BC54A4 /* MultipartSpeechSynthesizer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2EA3E84516964AA200BC54A4 /* MultipartSpeechSynthesizer.mm */; };
 		2EA8917F16126A4700B4E62A /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EA8917E16126A4700B4E62A /* Default-568h@2x.png */; };
 		2EAC83B716D6C73400D44A29 /* UILongPressGestureRecognizer2.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2EAC83B616D6C73400D44A29 /* UILongPressGestureRecognizer2.mm */; };
-		2EBE811811D3038500397176 /* FLKeyboard.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2EBE811711D3038500397176 /* FLKeyboard.mm */; };
+		2EBE811811D3038500397176 /* FLKeyboardView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2EBE811711D3038500397176 /* FLKeyboardView.mm */; };
 		2EBF199011EAF9AC00C7B0F1 /* FLSuggestionsView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF198F11EAF9AC00C7B0F1 /* FLSuggestionsView.mm */; };
 		2EC0B6D5168CE0B1005AD155 /* StringConversion.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2EC0B6D4168CE0B1005AD155 /* StringConversion.mm */; };
 		2EC0B6FC168D1668005AD155 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EC0B6FA168D1641005AD155 /* Icon@2x.png */; };
@@ -209,8 +209,8 @@
 		2EA8917E16126A4700B4E62A /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		2EAC83B516D6C73400D44A29 /* UILongPressGestureRecognizer2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UILongPressGestureRecognizer2.h; sourceTree = "<group>"; };
 		2EAC83B616D6C73400D44A29 /* UILongPressGestureRecognizer2.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = UILongPressGestureRecognizer2.mm; sourceTree = "<group>"; };
-		2EBE811611D3038500397176 /* FLKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLKeyboard.h; sourceTree = "<group>"; };
-		2EBE811711D3038500397176 /* FLKeyboard.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = FLKeyboard.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		2EBE811611D3038500397176 /* FLKeyboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLKeyboardView.h; sourceTree = "<group>"; };
+		2EBE811711D3038500397176 /* FLKeyboardView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = FLKeyboardView.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		2EBF198E11EAF9AC00C7B0F1 /* FLSuggestionsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLSuggestionsView.h; sourceTree = "<group>"; };
 		2EBF198F11EAF9AC00C7B0F1 /* FLSuggestionsView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FLSuggestionsView.mm; sourceTree = "<group>"; };
 		2EC0B6D3168CE0B1005AD155 /* StringConversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StringConversion.h; path = Classes/StringConversion.h; sourceTree = "<group>"; };
@@ -581,8 +581,8 @@
 				2E24C0CF1473ED010056B137 /* FleksyKeyboard.mm */,
 				2E9138BF14A543B200186EB6 /* CustomScrollView.h */,
 				2E9138C014A543B200186EB6 /* CustomScrollView.mm */,
-				2EBE811611D3038500397176 /* FLKeyboard.h */,
-				2EBE811711D3038500397176 /* FLKeyboard.mm */,
+				2EBE811611D3038500397176 /* FLKeyboardView.h */,
+				2EBE811711D3038500397176 /* FLKeyboardView.mm */,
 				2ECB37C514BBBC05008EBA10 /* KeyboardImageView.h */,
 				2ECB37C614BBBC05008EBA10 /* KeyboardImageView.mm */,
 				2EBF198E11EAF9AC00C7B0F1 /* FLSuggestionsView.h */,
@@ -935,7 +935,7 @@
 				1D60589B0D05DD56006BFB54 /* main.mm in Sources */,
 				1D3623260D0F684500981E51 /* AppDelegate.mm in Sources */,
 				2EDB2DC311CBE7A200489CA8 /* FLKeyboardContainerView.mm in Sources */,
-				2EBE811811D3038500397176 /* FLKeyboard.mm in Sources */,
+				2EBE811811D3038500397176 /* FLKeyboardView.mm in Sources */,
 				2EDB469011DA95B40057E60D /* FLTypingController_iOS.mm in Sources */,
 				2EBF199011EAF9AC00C7B0F1 /* FLSuggestionsView.mm in Sources */,
 				2E24C0D01473ED010056B137 /* FleksyKeyboard.mm in Sources */,

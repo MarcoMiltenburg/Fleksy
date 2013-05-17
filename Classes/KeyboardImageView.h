@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Settings.h"
 #import "FleksyDefines.h"
+#import <FLPoint.h>
 //#import "AUIAnimatableLabel.h"
 #import "FLString.h"
 #import "KSLabel.h"

@@ -337,11 +337,11 @@ static FleksyKeyboard* instance = nil;
     
     
     if (ALLOW_KB_FLICKUP_CHANGE) {
-      [[FLKeyboard sharedFLKeyboard].panGestureRecognizer addTarget:self action:@selector(handlePanGesture:)];
+      [[FLKeyboardView sharedFLKeyboardView].panGestureRecognizer addTarget:self action:@selector(handlePanGesture:)];
     } else {
-      [FLKeyboard sharedFLKeyboard].panGestureRecognizer.enabled = NO;
+      [FLKeyboardView sharedFLKeyboardView].panGestureRecognizer.enabled = NO;
     }
-    //[feedbackRecognizer requireGestureRecognizerToFail:[FLKeyboard sharedFLKeyboard].panGestureRecognizer];
+    //[feedbackRecognizer requireGestureRecognizerToFail:[FLKeyboardView sharedFLKeyboardView].panGestureRecognizer];
     //[longPressRecognizer requireGestureRecognizerToFail:[Keyboard sharedKeyboard].panGestureRecognizer];
   }
   instance = self;
@@ -637,7 +637,7 @@ static FleksyKeyboard* instance = nil;
   
   if (rotorRecognizer.position == 0) {
     [VariousUtilities performAudioFeedbackFromString:@"Letters"];
-    [[FLKeyboard sharedFLKeyboard] resetWithActiveView:[FLKeyboard sharedFLKeyboard]->imageViewABC];
+    [[FLKeyboardView sharedFLKeyboardView] resetWithActiveView:[FLKeyboardView sharedFLKeyboardView]->imageViewABC];
   }
   
   //if we switch to any keyboard FROM the letter keyboard
@@ -649,12 +649,12 @@ static FleksyKeyboard* instance = nil;
   
   if (rotorRecognizer.position == 1) {
     [VariousUtilities performAudioFeedbackFromString:@"Symbols"];
-    [[FLKeyboard sharedFLKeyboard] resetWithActiveView:[FLKeyboard sharedFLKeyboard]->imageViewSymbolsB];
+    [[FLKeyboardView sharedFLKeyboardView] resetWithActiveView:[FLKeyboardView sharedFLKeyboardView]->imageViewSymbolsB];
   }
   
   if (rotorRecognizer.position == 2) {
     [VariousUtilities performAudioFeedbackFromString:@"Numbers"];
-    [[FLKeyboard sharedFLKeyboard] resetWithActiveView:[FLKeyboard sharedFLKeyboard]->imageViewSymbolsA];
+    [[FLKeyboardView sharedFLKeyboardView] resetWithActiveView:[FLKeyboardView sharedFLKeyboardView]->imageViewSymbolsA];
   }
   
 }
@@ -702,7 +702,7 @@ static FleksyKeyboard* instance = nil;
   if (recognizer.state == UIGestureRecognizerStateBegan) {
     
     //show extra buttons
-    [[FLKeyboard sharedFLKeyboard] enableQWERTYextraKeys];
+    [[FLKeyboardView sharedFLKeyboardView] enableQWERTYextraKeys];
     //scrollWheelRecognizer.state = UIGestureRecognizerStateFailed;
     [feedbackRecognizer startHover];
     
@@ -712,7 +712,7 @@ static FleksyKeyboard* instance = nil;
     
     //[self temporarilyEnlargeKeyboard];
     
-    recognizer.myTag = [FLKeyboard sharedFLKeyboard].activeView.tag;
+    recognizer.myTag = [FLKeyboardView sharedFLKeyboardView].activeView.tag;
   }
   
   if (recognizer.state == UIGestureRecognizerStateChanged) {
@@ -721,21 +721,21 @@ static FleksyKeyboard* instance = nil;
   
   if (recognizer.state == UIGestureRecognizerStateEnded) {
     
-    if ([FLKeyboard sharedFLKeyboard].activeView.tag != recognizer.myTag) {
+    if ([FLKeyboardView sharedFLKeyboardView].activeView.tag != recognizer.myTag) {
       NSLog(@"Long tap release on different keyboard than it started. Ignoring");
     } else {
       
       //NSLog(@"handleLongPressFrom, state = %d", recognizer.state);
       FLChar c = feedbackRecognizer.lastChar;
       assert(c);
-      //CGPoint point = [recognizer locationInView:[FLKeyboard sharedFLKeyboard]];
-      CGPoint point = [((KeyboardImageView*) [FLKeyboard sharedFLKeyboard].activeView) getKeyboardPointForChar:c];
+      //CGPoint point = [recognizer locationInView:[FLKeyboardView sharedFLKeyboardView]];
+      CGPoint point = [((KeyboardImageView*) [FLKeyboardView sharedFLKeyboardView].activeView) getKeyboardPointForChar:c];
       
       
       //    NSLog(@"f.lastChar: %d @ %@", c, NSStringFromCGPoint(point));
-      //    FLChar c2 = [((KeyboardImageView*) [FLKeyboard sharedFLKeyboard].activeView) getNearestCharForPoint:point];
-      //    NSLog(@"c: %C, c2: %C, point: %@, activeView: %@", c, c2, NSStringFromCGPoint(point), [FLKeyboard sharedFLKeyboard].activeView);
-      assert(c == [((KeyboardImageView*) [FLKeyboard sharedFLKeyboard].activeView) getNearestCharForPoint:point]);
+      //    FLChar c2 = [((KeyboardImageView*) [FLKeyboardView sharedFLKeyboardView].activeView) getNearestCharForPoint:point];
+      //    NSLog(@"c: %C, c2: %C, point: %@, activeView: %@", c, c2, NSStringFromCGPoint(point), [FLKeyboardView sharedFLKeyboardView].activeView);
+      assert(c == [((KeyboardImageView*) [FLKeyboardView sharedFLKeyboardView].activeView) getNearestCharForPoint:point]);
       //assert([self testZZZ]);
       
       [VariousUtilities playTock];
@@ -747,7 +747,7 @@ static FleksyKeyboard* instance = nil;
   }
   
   if (recognizer.state == UIGestureRecognizerStateEnded || recognizer.state == UIGestureRecognizerStateCancelled) {
-    [[FLKeyboard sharedFLKeyboard] disableQWERTYextraKeys];
+    [[FLKeyboardView sharedFLKeyboardView] disableQWERTYextraKeys];
     [actionRecognizer2Up clearTouches];
     [actionRecognizer2Down clearTouches];
   }

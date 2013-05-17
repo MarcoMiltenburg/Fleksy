@@ -1,11 +1,11 @@
 //
-//  FLKeyboard.m
+//  FLKeyboardView.m
 //  Fleksy
 //
 //  Copyright (c) 2011 Syntellia Inc. All rights reserved.
 //
 
-#import "FLKeyboard.h"
+#import "FLKeyboardView.h"
 #import "MathFunctions.h"
 #import "FleksyUtilities.h"
 #import "Settings.h"
@@ -15,15 +15,15 @@
 #import "VariousUtilities.h"
 #import "VariousUtilities2.h"
 
-@implementation FLKeyboard
+@implementation FLKeyboardView
 
-SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboard);
+SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardView);
 
-- (void) setKeymaps:(FLPoint[4][KEY_MAX_VALUE]) keymap {
+- (void) setKeymaps:(FLPoint[FLKeyboardID_NUMBER_OF_KEYBOARDS][KEY_MAX_VALUE]) keymap {
 
-  [imageViewABC      setKeys:keymap[KEYBOARD_TAG_ABC_UPPER]];
-  [imageViewSymbolsA setKeys:keymap[KEYBOARD_TAG_SYMBOLS1]];
-  [imageViewSymbolsB setKeys:keymap[KEYBOARD_TAG_SYMBOLS2]];
+  [imageViewABC      setKeys:keymap[FLKeyboardID_QWERTY_UPPER]];
+  [imageViewSymbolsA setKeys:keymap[FLKeyboardID_NUMBERS]];
+  [imageViewSymbolsB setKeys:keymap[FLKeyboardID_SYMBOLS]];
   
   [self disableQWERTYextraKeys];
   [self reset];
@@ -45,9 +45,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboard);
   imageViewSymbolsA = [[KeyboardImageView alloc] initWithImage:nil];
   imageViewSymbolsB = [[KeyboardImageView alloc] initWithImage:nil];
   
-  imageViewABC.tag      = KEYBOARD_TAG_ABC_UPPER;
-  imageViewSymbolsA.tag = KEYBOARD_TAG_SYMBOLS1;
-  imageViewSymbolsB.tag = KEYBOARD_TAG_SYMBOLS2;
+  imageViewABC.tag      = FLKeyboardID_QWERTY_UPPER;
+  imageViewSymbolsA.tag = FLKeyboardID_NUMBERS;
+  imageViewSymbolsB.tag = FLKeyboardID_SYMBOLS;
   
   if (self = [super initWithFrame:frame view1:imageViewABC view2A:imageViewSymbolsA view2B:imageViewSymbolsB]) {
     
@@ -75,7 +75,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboard);
 }
 
 - (void) layoutSubviews {
-  NSLog(@"FLKeyboard layoutSubviews, frame: %@, transform: %@", NSStringFromCGRect(self.frame), NSStringFromCGAffineTransform(self.transform));
+  NSLog(@"FLKeyboardView layoutSubviews, frame: %@, transform: %@", NSStringFromCGRect(self.frame), NSStringFromCGAffineTransform(self.transform));
   
   imageViewABC.frame      = self.bounds;
   imageViewSymbolsA.frame = self.bounds;
@@ -86,7 +86,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboard);
     return;
   }
 
-  //NSLog(@"FLKeyboard layoutSubviews2 [%d], frame: %@, transform: %@", self.activeView.tag, NSStringFromCGRect(self.frame), NSStringFromCGAffineTransform(self.transform));
+  //NSLog(@"FLKeyboardView layoutSubviews2 [%d], frame: %@, transform: %@", self.activeView.tag, NSStringFromCGRect(self.frame), NSStringFromCGAffineTransform(self.transform));
   
   //need to force call this because self.bounds might not have changed, but self.superview.bounds might be different
   //eg on orientation change.
@@ -99,7 +99,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboard);
   float rowHeight = a.y - q.y;
   
   extraKeysBgView.frame = CGRectMake(0, -rowHeight, self.bounds.size.width, rowHeight);
-  //NSLog(@"FLKeyboard layoutSubviews DONE");
+  //NSLog(@"FLKeyboardView layoutSubviews DONE");
 }
 
 - (void) disableQWERTYextraKeys {

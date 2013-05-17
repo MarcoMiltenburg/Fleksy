@@ -57,16 +57,16 @@ NSString* getAbsolutePath(NSString* filepath, NSString* languagePack);
   
   if (self = [super init]) {
     EmptyOutputInterface e = EmptyOutputInterface();
-    fleksyAPI = new FleksyAPI(e);
+    self.fleksyAPI = new FleksyAPI(e);
     
-    NSString* apiVersion = [NSString stringWithCString:fleksyAPI->getVersion().c_str() encoding:NSASCIIStringEncoding];
+    NSString* apiVersion = [NSString stringWithCString:self.fleksyAPI->getVersion().c_str() encoding:NSASCIIStringEncoding];
     NSLog(@"%@", apiVersion);
     
     [[NSUserDefaults standardUserDefaults] setObject:apiVersion forKey:FLEKSY_APP_API_VERSION_KEY];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     // TODO: hack to access internal SystemsIntegrator object. Access to fleksyAPI->pImpl should be completely eliminated.
-    self.systemsIntegrator = fleksyAPI->pImpl->fleksy;
+    self.systemsIntegrator = self.fleksyAPI->pImpl->fleksy;
     self->_userDictionary = [[FLUserDictionary alloc] initWithChangeListener:self];
     [VariousUtilities loadSettingsAndListen:self action:@selector(handleSettingsChanged:)];
   }
@@ -104,8 +104,8 @@ NSString* getAbsolutePath(NSString* filepath, NSString* languagePack) {
   
   NSLog(@"FleksyClient_NOIPC LOADING, languagePack: %@", languagePack);
   
-  fleksyAPI->setResourceFile(getAbsolutePath(@"", languagePack).UTF8String);
-  fleksyAPI->loadResources();  
+  self.fleksyAPI->setResourceFile(getAbsolutePath(@"", languagePack).UTF8String);
+  self.fleksyAPI->loadResources();
   
   
   if (self.userDictionary && !RUN_FLEKSY_TESTS) {
@@ -131,7 +131,7 @@ NSString* getAbsolutePath(NSString* filepath, NSString* languagePack) {
 
 - (FLAddWordResult) addedUserWord:(NSString*) word frequency:(float) frequency {
   NSLog(@"FleksyClient_NOIPC: addedUserWord: %@", word);
-  return self.systemsIntegrator->addUserWord(NSStringToFLString(word), frequency);
+  return self.systemsIntegrator->addUserWord(NSStringToFLString(word));
 }
 
 - (bool) removedUserWord:(NSString*) word {

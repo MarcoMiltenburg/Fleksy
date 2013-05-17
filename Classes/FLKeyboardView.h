@@ -1,5 +1,5 @@
 //
-//  FLKeyboard.h
+//  FLKeyboardView.h
 //  Fleksy
 //
 //  Copyright (c) 2011 Syntellia Inc. All rights reserved.
@@ -7,8 +7,9 @@
 
 #import "CustomScrollView.h"
 #import "KeyboardImageView.h"
+#import "FLKeyboard.h"
 
-@interface FLKeyboard : CustomScrollView {
+@interface FLKeyboardView : CustomScrollView {
   
 @public
   float width;
@@ -22,12 +23,14 @@
   NSString* shortcutKeysNumbers;
   
   BOOL loadedKeyboardFile;
+  
+  FLKeyboard* keyboard;
 }
 
-- (void) setKeymaps:(FLPoint[4][KEY_MAX_VALUE]) keymap;
+- (void) setKeymaps:(FLPoint[FLKeyboardID_NUMBER_OF_KEYBOARDS][KEY_MAX_VALUE]) keymap;
 
 // Singleton class accessor
-+ (FLKeyboard*) sharedFLKeyboard;
++ (FLKeyboardView*) sharedFLKeyboardView;
 
 - (void) disableQWERTYextraKeys;
 - (void) enableQWERTYextraKeys;

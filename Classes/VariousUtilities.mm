@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-#include "StringUtilities.h"
 #import "VariousUtilities.h"
 #import "notify.h"
 #import "Settings.h"
@@ -222,9 +221,9 @@ BOOL isRingerMuted() {
       //NSString* s = [[NSString alloc] initWithBytes:&c length:1 encoding:NSISOLatin1StringEncoding];
       NSString* s = [[NSString alloc] initWithBytes:&c length:1 encoding:NSWindowsCP1252StringEncoding];
       //NSLog(@"\naaa: <%@>\nbbb: <%@>", aaa, bbb);
-      if (!StringUtilities::isalpha(c)) {
-        NSLog(@"Warning: getCharacterDescription for character <%@> <%d>", s, c);
-      }
+//      if (!StringUtilities::isalpha(c)) {
+//        NSLog(@"Warning: getCharacterDescription for character <%@> <%d>", s, c);
+//      }
       return s;
   }
 }

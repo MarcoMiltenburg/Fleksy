@@ -10,7 +10,7 @@
 #import "Settings.h"
 #import "AppDelegate.h"
 #import "FLKeyboardContainerView.h"
-#import "FLKeyboard.h"
+#import "FLKeyboardView.h"
 #import "FileManager.h"
 #import "VariousUtilities.h"
 
@@ -19,7 +19,6 @@
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
 
-#import "StringUtilities.h"
 #import "UIView+Extensions.h"
 
 #import "notify.h"
@@ -179,14 +178,24 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLTypingController_iOS);
 
 - (void) loadKeymaps {
   
-  FLPoint keymaps[4][KEY_MAX_VALUE];
-  // hack. Should loop through the n (4) keyboards and copy individually, dont rely on internal represenation being contiguous.
-  memcpy(keymaps, self.fleksyClient.systemsIntegrator->getKeymap(0), sizeof(keymaps));
-  //TODO: Update for FleksyAPI usage
-  //self.fleksyClient->fleksyAPI->getKeymapForKeyboard(0);
+  [FLKeyboardView sharedFLKeyboardView]->keyboard = self.fleksyClient.systemsIntegrator->getKeyboard().get();
+  
+  FLPoint keymaps[FLKeyboardID_NUMBER_OF_KEYBOARDS][KEY_MAX_VALUE];
+  for (int i = 0; i < FLKeyboardID_NUMBER_OF_KEYBOARDS; i++) {
+    for (int z = 0; z < KEY_MAX_VALUE; z++) {
+      keymaps[i][z] = FLPointInvalid;
+    }
+  }
+  
+  for (int i = 0; i < FLKeyboardID_NUMBER_OF_KEYBOARDS; i++) {
+    std::map<FLChar, FLPoint> map = self.fleksyClient.fleksyAPI->getKeymapForKeyboard((FLKeyboardID) i);
+    for (auto& entry : map) {
+      keymaps[i][entry.first] = entry.second;
+    }
+  }
   
   NSParameterAssert([NSThread isMainThread] == YES);
-  [[FLKeyboard sharedFLKeyboard] setKeymaps:keymaps];
+  [[FLKeyboardView sharedFLKeyboardView] setKeymaps:keymaps];
 }
 
 //TODO: refactor!
@@ -227,7 +236,7 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
 //      flcout << e.what() << endl;
 //    }
 
-    FLKeyboard *keyboard = [[FLKeyboard sharedFLKeyboard] initWithFrame:CGRectMake(0, 0, 1, 1)];
+    FLKeyboardView *keyboard = [[FLKeyboardView sharedFLKeyboardView] initWithFrame:CGRectMake(0, 0, 1, 1)];
     [keyboard self]; // hack to remove "Unused variable warning" from the compiler.
   
     points = [[NSMutableArray alloc] init];
@@ -237,13 +246,13 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
     traceCentroid.backgroundColor = [UIColor redColor];
     traceCentroid.alpha = 0.5f;//0.1;
     traceCentroid.tag = TAG_TRACE;
-    [[FLKeyboard sharedFLKeyboard] addSubview:traceCentroid];
+    [[FLKeyboardView sharedFLKeyboardView] addSubview:traceCentroid];
     
     traceMedian = [[UIView alloc] initWithFrame:CGRectMake(-10, -10, 4, 4)];
     traceMedian.backgroundColor = [UIColor blueColor];
     traceMedian.alpha = 0.5f;//0.1;
     traceMedian.tag = TAG_TRACE;
-    [[FLKeyboard sharedFLKeyboard] addSubview:traceMedian];
+    [[FLKeyboardView sharedFLKeyboardView] addSubview:traceMedian];
     
     lastTapOccured = CFAbsoluteTimeGetCurrent();
     
@@ -333,8 +342,8 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
   //NSLog(@"traceMedian: %.4f, %.4f [iterations: %d]", traceMedian.center.x, traceMedian.center.y, iterations);
   
   
-  [[FLKeyboard sharedFLKeyboard] bringSubviewToFront:traceCentroid];
-  [[FLKeyboard sharedFLKeyboard] bringSubviewToFront:traceMedian];
+  [[FLKeyboardView sharedFLKeyboardView] bringSubviewToFront:traceCentroid];
+  [[FLKeyboardView sharedFLKeyboardView] bringSubviewToFront:traceMedian];
 }
 
 - (void) addPointTrace:(CGPoint) point color:(UIColor *) color {
@@ -353,8 +362,8 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
   [pointTraces addObject:trace];
   trace.center = CGPointMake(point.x, point.y);
   trace.backgroundColor = color;
-  [[FLKeyboard sharedFLKeyboard] addSubview:trace];
-  [[FLKeyboard sharedFLKeyboard] bringSubviewToFront:trace];
+  [[FLKeyboardView sharedFLKeyboardView] addSubview:trace];
+  [[FLKeyboardView sharedFLKeyboardView] bringSubviewToFront:trace];
   
   
   //if (! ([rawWordText length] % 2)) {
@@ -370,7 +379,7 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
   }
   [pointTraces removeAllObjects];
   [self recalculateTracesCentroid];
-  KeyboardImageView* kbImageView = (KeyboardImageView*) [FLKeyboard sharedFLKeyboard].activeView;
+  KeyboardImageView* kbImageView = (KeyboardImageView*) [FLKeyboardView sharedFLKeyboardView].activeView;
   [kbImageView unhighlightAllKeys];
 }
 
@@ -662,7 +671,7 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
       
       // highlight keyboard
       if (NO) {
-        KeyboardImageView* kbImageView = (KeyboardImageView*) [FLKeyboard sharedFLKeyboard].activeView;
+        KeyboardImageView* kbImageView = (KeyboardImageView*) [FLKeyboardView sharedFLKeyboardView].activeView;
         [kbImageView unhighlightAllKeys];
         [kbImageView highlightKeysForWord:newText];
       }
@@ -696,7 +705,7 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
 //    }
 //    if (prefixOK) {
 //      //NSLog(@"lastWord: %@, lastWordRawText: %@, prefix: %@", lastWord, lastWordRawText, prefix);
-//      KeyboardImageView* kbImageView = (KeyboardImageView*) [FLKeyboard sharedFLKeyboard]->imageViewABC;
+//      KeyboardImageView* kbImageView = (KeyboardImageView*) [FLKeyboardView sharedFLKeyboardView]->imageViewABC;
 //      for (int i = 0; i < prefix.length; i++) {
 //        char c = [prefix characterAtIndex:i];
 //        CGPoint point = [kbImageView getKeyboardPointForChar:c];
@@ -1001,10 +1010,12 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
 
   //NSLog(@"tapOccured: %d, tolower: %d, toupper: %d", rawChar, FleksyUtilities::tolower(rawChar), FleksyUtilities::toupper(rawChar));
   
+  FLKeyboard* keyboard = [FLKeyboardView sharedFLKeyboardView]->keyboard;
+  
   if (shift) {
-    rawChar = StringUtilities::toupper(rawChar);
+    rawChar = keyboard->toupper(rawChar);
   } else {
-    rawChar = StringUtilities::tolower(rawChar);
+    rawChar = keyboard->tolower(rawChar);
   }
 
   
@@ -1012,11 +1023,11 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
   printf("FLEKSY_APP_SETTING_KEY_SNAP: %d\n", FLEKSY_APP_SETTING_KEY_SNAP);
 #endif
   if (FLEKSY_APP_SETTING_KEY_SNAP) {
-    KeyboardImageView* kbImageView = (KeyboardImageView*) [FLKeyboard sharedFLKeyboard].activeView;
-    point1 = [kbImageView getKeyboardPointForChar:StringUtilities::toupper(rawChar)];
+    KeyboardImageView* kbImageView = (KeyboardImageView*) [FLKeyboardView sharedFLKeyboardView].activeView;
+    point1 = [kbImageView getKeyboardPointForChar:keyboard->toupper(rawChar)];
   }
   
-  if (!StringUtilities::isalpha(rawChar)) { // [VariousUtilities charIsAlpha:rawChar]) {
+  if (!keyboard->isalpha(rawChar)) { // [VariousUtilities charIsAlpha:rawChar]) {
 
     [self nonLetterCharInput:rawChar autocorrectionType:kAutocorrectionNone];
     
@@ -1255,7 +1266,7 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
     return;
   }
   
-  if (StringUtilities::isalpha(c)) {
+  if ([FLKeyboardView sharedFLKeyboardView]->keyboard->isalpha(c)) {
     //[[FLKeyboardContainerView sharedFLKeyboardContainerView].suggestionsViewSymbols dismiss];
     NSString* word = [self lastWord];
     [[FLKeyboardContainerView sharedFLKeyboardContainerView].suggestionsViewSymbols hide];
@@ -1488,14 +1499,16 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
   //TODO allow arbitraty cursor positions too for editing? See "- (void) moveCaret:(int) offset"
   if ([points count]) {
     
+    FLKeyboard* keyboard = [FLKeyboardView sharedFLKeyboardView]->keyboard;
+    
     unichar lastChar = [self peekLastCharacter];
     unichar newChar;
-    BOOL wasLower = StringUtilities::islower(lastChar);
+    BOOL wasLower = keyboard->islower(lastChar);
     
     if (wasLower) {
-      newChar = StringUtilities::toupper(lastChar);
+      newChar = keyboard->toupper(lastChar);
     } else {
-      newChar = StringUtilities::tolower(lastChar);
+      newChar = keyboard->tolower(lastChar);
     }
     
     if (newChar != lastChar) {
@@ -1503,7 +1516,7 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
       [self addCharacter:newChar];
       
       //TODO: do this as suggestions instead, so sighted users know how to use it
-      NSString* speakString = [NSString stringWithFormat:@"%@%c", StringUtilities::isupper(newChar) ? @"Capital " : @"", StringUtilities::tolower(newChar)];
+      NSString* speakString = [NSString stringWithFormat:@"%@%c", keyboard->isupper(newChar) ? @"Capital " : @"", keyboard->tolower(newChar)];
       [VariousUtilities performAudioFeedbackFromString:speakString];
     }
   }

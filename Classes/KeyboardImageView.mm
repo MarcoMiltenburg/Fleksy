@@ -7,7 +7,7 @@
 //
 
 #import "KeyboardImageView.h"
-#import "FLKeyboard.h"
+#import "FLKeyboardView.h"
 #import "MathFunctions.h"
 #import "Settings.h"
 #import "CircleUIView.h"
@@ -15,7 +15,6 @@
 #import "VariousUtilities.h"
 #import "VariousUtilities2.h"
 #include "FleksyUtilities.h"
-#include "StringUtilities.h"
 #import <QuartzCore/QuartzCore.h>
 
 #define LABEL_FONT_SIZE (deviceIsPad() ? 44 : 30)
@@ -32,7 +31,7 @@
 
 - (FLChar) getNearestCharForPoint:(CGPoint) target {
   FLPoint p = FLPointFromCGPoint(target);
-  FLChar c = VariousUtilities2::getNearestCharForPoint(p, keyPoints);
+  FLChar c = [FLKeyboardView sharedFLKeyboardView]->keyboard->getNearestChar(p, (FLKeyboardID) self.tag);
   //NSLog(@"getNearestCharForPoint %@: %d", NSStringFromCGPoint(target), c);
   return c;
 }
@@ -44,9 +43,9 @@
   //NSLog(@"getKeyboardPointForChar: %d, toupper: %d", c, FleksyUtilities::toupper(c));
   
   assert(c >= 0 && c < KEY_MAX_VALUE);
-  CGPoint result = keyPoints[c];
+  FLPoint result = keyPoints[c];
   
-  if (result.x == -1 && result.y == -1) {
+  if (FLPointEqualToPoint(result, FLPointInvalid)) {
     [NSException raise:@"KeyboardImageView getKeyboardPointForChar" format:@"no value for char <%c>", c];
   }
   
@@ -631,8 +630,9 @@
   NSArray* characters = [VariousUtilities explodeString:wordString];
   for (NSString* character in characters) {
     char c = [character characterAtIndex:0];
-    if (StringUtilities::isalpha(c)) {
-      c = StringUtilities::toupper(c);
+    FLKeyboard* keyboard = [FLKeyboardView sharedFLKeyboardView]->keyboard;
+    if (keyboard->isalpha(c)) {
+      c = keyboard->toupper(c);
       [self highlightKey:c off:NO];
     }
   }
@@ -674,9 +674,9 @@
   label.alpha = 0.0;
   
   CGPoint point = keyPoints[c];
-  if (point.x != -1) {
+  if (!FLPointEqualToPoint(point, FLPointInvalid)) {
     disabledKeyPoints[c] = point;
-    keyPoints[c] = CGPointMake(-1, -1);
+    keyPoints[c] = FLPointInvalid;
   }
 }
 
@@ -686,9 +686,9 @@
   label.alpha = 1.0;
   
   CGPoint point = disabledKeyPoints[c];
-  if (point.x != -1) {
+  if (!FLPointEqualToPoint(point, FLPointInvalid)) {
     keyPoints[c] = point;
-    disabledKeyPoints[c] = CGPointMake(-1, -1);
+    disabledKeyPoints[c] = FLPointInvalid;
   }
 }
 

@@ -167,7 +167,7 @@
     return;
   }
   
-//  if ([[FLKeyboard sharedFLKeyboard] isDragging]) {
+//  if ([[FLKeyboardView sharedFLKeyboardView] isDragging]) {
 //    NSLog(@"ignoring touchesMoved, KB dragging");
 //    self.state = UIGestureRecognizerStateFailed;
 //    return;

@@ -10,7 +10,7 @@
 #import "MathFunctions.h"
 #import "Settings.h"
 #import "SynthesizeSingleton.h"
-#import "FLKeyboard.h"
+#import "FLKeyboardView.h"
 #import "FileManager.h"
 #import "UIGestureUtilities.h"
 #import "UITapGestureRecognizer2.h"
@@ -19,7 +19,6 @@
 #import "FLTouchEventInterceptor.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import "VariousUtilities.h"
-#import "StringUtilities.h"
 #import <QuartzCore/QuartzCore.h>
 
 #import <Foundation/NSObjCRuntime.h>
@@ -48,7 +47,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardContainerView);
     suggestionsView = [[FLSuggestionsView alloc] initWithListener:typingController];
     suggestionsViewSymbols = [[FLSuggestionsView alloc] initWithListener:typingController];
     suggestionsViewSymbols.needsSpellingFeedback = NO;
-    keyboard = [FLKeyboard sharedFLKeyboard];
+    keyboard = [FLKeyboardView sharedFLKeyboardView];
     
     [self addSubview:keyboard];
     if (!suggestionsView.vertical) {
@@ -112,7 +111,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardContainerView);
   //NSLog(@"FLKeyboardContainerView setAlpha: %.3f", alpha);
   [super setAlpha:alpha];
   
-  // we have to overide and do this since topShadowView is the only view with non-clear color apart from FLKeyboard
+  // we have to overide and do this since topShadowView is the only view with non-clear color apart from FLKeyboardView
   if (alpha == 1) {
     topShadowView.alpha = 1;
   } else {
@@ -181,7 +180,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardContainerView);
   [keyboard setNeedsLayout];
   
   
-  CGRect f = [FLKeyboard sharedFLKeyboard].frame;
+  CGRect f = [FLKeyboardView sharedFLKeyboardView].frame;
   // it doesnt matter exactly how high this is, but shadow wont be drawn if its very small...
   float z = 10; //topShadowView.layer.shadowRadius;
   topShadowView.frame = CGRectMake(f.origin.x, f.origin.y, f.size.width, z);
@@ -213,13 +212,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardContainerView);
 }
 
 - (void) toggleLettersNumbers {
-  BOOL isLetters = keyboard.activeView.tag == KEYBOARD_TAG_ABC_UPPER;
+  BOOL isLetters = keyboard.activeView.tag == FLKeyboardID_QWERTY_UPPER;
   if (isLetters) {
     [VariousUtilities performAudioFeedbackFromString:@"Numbers"];
-    [[FLKeyboard sharedFLKeyboard] resetWithActiveView:[FLKeyboard sharedFLKeyboard]->imageViewSymbolsA];
+    [[FLKeyboardView sharedFLKeyboardView] resetWithActiveView:[FLKeyboardView sharedFLKeyboardView]->imageViewSymbolsA];
   } else {
     [VariousUtilities performAudioFeedbackFromString:@"Letters"];
-    [[FLKeyboard sharedFLKeyboard] resetWithActiveView:[FLKeyboard sharedFLKeyboard]->imageViewABC];
+    [[FLKeyboardView sharedFLKeyboardView] resetWithActiveView:[FLKeyboardView sharedFLKeyboardView]->imageViewABC];
   }
 }
 
@@ -241,7 +240,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardContainerView);
     fleksyApi->sendTap(point.x, point.y);
     NSLog(@" ***** FleksyAPI Testing: END api->sendTap");    
 #endif
-    if (StringUtilities::isalpha(c)) { // [VariousUtilities charIsAlpha:c]) {
+    if ([FLKeyboardView sharedFLKeyboardView]->keyboard->isalpha(c)) {
       [suggestionsView fadeout];
       [suggestionsViewSymbols fadeout];
     }
@@ -260,11 +259,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardContainerView);
 
 - (void) space {
   
-  if ([FLKeyboard sharedFLKeyboard].activeView != [FLKeyboard sharedFLKeyboard]->imageViewABC) {
-    [[FLKeyboard sharedFLKeyboard] resetWithActiveView:[FLKeyboard sharedFLKeyboard]->imageViewABC];
+  if ([FLKeyboardView sharedFLKeyboardView].activeView != [FLKeyboardView sharedFLKeyboardView]->imageViewABC) {
+    [[FLKeyboardView sharedFLKeyboardView] resetWithActiveView:[FLKeyboardView sharedFLKeyboardView]->imageViewABC];
   }
   
-  [typingController nonLetterCharInput:' ' autocorrectionType:keyboard.activeView.tag == KEYBOARD_TAG_ABC_UPPER ? kAutocorrectionChangeAndSuggest : kAutocorrectionNone];
+  [typingController nonLetterCharInput:' ' autocorrectionType:keyboard.activeView.tag == FLKeyboardID_QWERTY_UPPER ? kAutocorrectionChangeAndSuggest : kAutocorrectionNone];
   [feedbackView swipeRecognized:UISwipeGestureRecognizerDirectionRight padding:![suggestionsView isHidden] || ![suggestionsViewSymbols isHidden]];  
   //typingControllerGeneric->swipeRight();
 #if FLEKSY_API_TESTING 
@@ -486,12 +485,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardContainerView);
       
       // new idea for symbols KB
       if (false) {
-        if ([FLKeyboard sharedFLKeyboard].activeView == [FLKeyboard sharedFLKeyboard]->imageViewABC) {
-          [[FLKeyboard sharedFLKeyboard] resetWithActiveView:[FLKeyboard sharedFLKeyboard]->imageViewSymbolsB];
-        } else if ([FLKeyboard sharedFLKeyboard].activeView == [FLKeyboard sharedFLKeyboard]->imageViewSymbolsB) {
-          [[FLKeyboard sharedFLKeyboard] resetWithActiveView:[FLKeyboard sharedFLKeyboard]->imageViewSymbolsA];
+        if ([FLKeyboardView sharedFLKeyboardView].activeView == [FLKeyboardView sharedFLKeyboardView]->imageViewABC) {
+          [[FLKeyboardView sharedFLKeyboardView] resetWithActiveView:[FLKeyboardView sharedFLKeyboardView]->imageViewSymbolsB];
+        } else if ([FLKeyboardView sharedFLKeyboardView].activeView == [FLKeyboardView sharedFLKeyboardView]->imageViewSymbolsB) {
+          [[FLKeyboardView sharedFLKeyboardView] resetWithActiveView:[FLKeyboardView sharedFLKeyboardView]->imageViewSymbolsA];
         } else {
-          [[FLKeyboard sharedFLKeyboard] resetWithActiveView:[FLKeyboard sharedFLKeyboard]->imageViewABC];
+          [[FLKeyboardView sharedFLKeyboardView] resetWithActiveView:[FLKeyboardView sharedFLKeyboardView]->imageViewABC];
         }
       }
       
@@ -542,7 +541,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardContainerView);
     return NO;
   }
   
-  KeyboardImageView* kbImageView = (KeyboardImageView*) [FLKeyboard sharedFLKeyboard].activeView;
+  KeyboardImageView* kbImageView = (KeyboardImageView*) [FLKeyboardView sharedFLKeyboardView].activeView;
   unichar rawChar = [kbImageView getNearestCharForPoint:point];
   [self processTouchPoint:point precise:NO character:rawChar];
   return YES;

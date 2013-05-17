@@ -6,7 +6,7 @@
 #import "Settings.h"
 #import "FleksyUtilities.h"
 
-#import "FLKeyboard.h"
+#import "FLKeyboardView.h"
 
 #import "Accelerate/Accelerate.h"
 #import "VariousUtilities.h"
