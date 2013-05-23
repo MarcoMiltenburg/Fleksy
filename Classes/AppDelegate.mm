@@ -23,7 +23,15 @@
 
 #import <PatternRecognizer/Platform.h>
 
-#define APP_STORE_LINK @"http://itunes.apple.com/us/app/fleksy/id520337246"
+//#define APP_STORE_LINK1 @"http://itunes.apple.com/us/app/fleksy/id520337246"
+//#define APP_STORE_LINK2 @"http://itunes.com/apps/fleksy"
+// Generic itunes link on the device
+#define APP_STORE_LINK @"itms-apps://itunes.apple.com/app/id520337246"
+
+// TODO: Do AppStore Lookup and parse to inform user of update:
+// http://itunes.apple.com/lookup?id=520337246
+// http://charcoaldesign.co.uk/source/cocoa#iversion
+// https://github.com/nicklockwood/iVersion
 
 #define randf() ( rand() / (RAND_MAX + 1.0f) )
 
@@ -532,7 +540,7 @@ float distributionFunction(float x) {
   NSDate *expireDate = [NSDate dateWithTimeIntervalSince1970:EXPIRATION_DATE_IN_SECONDS];
   NSDate *currentDate = [NSDate date];
   
-  NSLog(@"Current Date: %s\nExpiration Date: %s\n", currentDate, expireDate);
+  NSLog(@"Current Date: %s \nExpiration Date: %s \n", currentDate.description.UTF8String, expireDate.description.UTF8String);
   
   if ([currentDate timeIntervalSince1970] > EXPIRATION_DATE_IN_SECONDS){ // The Past
     [[[UIAlertView alloc] initWithTitle:@"Fleksy Update" message:@"There are new features on the AppStore. Update now!" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil] show];
