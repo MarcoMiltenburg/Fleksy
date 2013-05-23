@@ -21,6 +21,10 @@
 
 #include <string>
 
+#import <PatternRecognizer/Platform.h>
+
+#define APP_STORE_LINK @"http://itunes.apple.com/us/app/fleksy/id520337246"
+
 #define randf() ( rand() / (RAND_MAX + 1.0f) )
 
 #define LAST_VERSION_KEY @"FleksyLastRunVersion"
@@ -31,8 +35,11 @@
 
 float distributionFunction(float x);
 
+@interface AppDelegate () <UIAlertViewDelegate>
 
-@implementation AppDelegate
+@end
+
+@implementation AppDelegate 
 
 
 float distributionFunction(float x) {
@@ -489,7 +496,15 @@ float distributionFunction(float x) {
 #endif
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-  exit(0);
+#if FLEKSY_EXPIRES
+  if (![self magicOK]) {
+    exit(0);
+  }
+#endif
+#if FLEKSY_LIBRARY_EXPIRES
+  printf("Sending user to the AppStore\n\n");
+  [[UIApplication sharedApplication] openURL:[NSURL URLWithString:APP_STORE_LINK]];
+#endif
 }
 
 - (void) applicationDidFinishLaunching:(UIApplication *) application {
@@ -501,9 +516,33 @@ float distributionFunction(float x) {
   }
 #endif
   
+  if ([self checkForFleksyLibraryExpiration]) {
+    return;
+  }
+  
   [self applicationDidFinishLaunching:application loadServer:LOAD_SERVER];
 }
 
+
+- (BOOL)checkForFleksyLibraryExpiration {
+#if FLEKSY_LIBRARY_EXPIRES
+  
+  NSLog(@" Now: <%f> Expires <%f>\n", [[NSDate date] timeIntervalSince1970], (float)EXPIRATION_DATE_IN_SECONDS);
+  
+  NSDate *expireDate = [NSDate dateWithTimeIntervalSince1970:EXPIRATION_DATE_IN_SECONDS];
+  NSDate *currentDate = [NSDate date];
+  
+  NSLog(@"Current Date: %s\nExpiration Date: %s\n", currentDate, expireDate);
+  
+  if ([currentDate timeIntervalSince1970] > EXPIRATION_DATE_IN_SECONDS){ // The Past
+    [[[UIAlertView alloc] initWithTitle:@"Fleksy Update" message:@"There are new features on the AppStore. Update now!" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil] show];
+    
+    return YES;
+  }
+#pragma unused(expireDate)
+#endif
+  return NO;
+}
 
 -(void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
   // Do whatever you need to do here
@@ -540,6 +579,10 @@ float distributionFunction(float x) {
 - (void)applicationWillEnterForeground:(UIApplication*)application {
   NSLog(@"applicationWillEnterForeground");
   [customInputView performSelector:@selector(handleSettingsChanged:) withObject:nil];
+  
+  if ([self checkForFleksyLibraryExpiration]) {
+    return;
+  }
   
   //[fleksyAppViewController.view setNeedsLayout];
 }
