@@ -677,6 +677,7 @@
   if (!FLPointEqualToPoint(point, FLPointInvalid)) {
     disabledKeyPoints[c] = point;
     keyPoints[c] = FLPointInvalid;
+    [FLKeyboardView sharedFLKeyboardView]->keyboard->setPointForChar(FLPointInvalid, c, (FLKeyboardID) self.tag);
   }
 }
 
@@ -689,6 +690,7 @@
   if (!FLPointEqualToPoint(point, FLPointInvalid)) {
     keyPoints[c] = point;
     disabledKeyPoints[c] = FLPointInvalid;
+    [FLKeyboardView sharedFLKeyboardView]->keyboard->setPointForChar(point, c, (FLKeyboardID) self.tag);
   }
 }
 
