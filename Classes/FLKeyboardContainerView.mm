@@ -44,6 +44,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardContainerView);
     //FLOutputImplementation* outputImplementation = new FLOutputImplementation();
     //typingControllerGeneric = new FLTypingController(*outputImplementation);
     
+    //[FLKeyboardContainerView sharedFLKeyboardContainerView].typingController.fleksyClient.fleksyAPI->setPlatformKeyboardSize(w, h);
+    
     suggestionsView = [[FLSuggestionsView alloc] initWithListener:typingController];
     suggestionsViewSymbols = [[FLSuggestionsView alloc] initWithListener:typingController];
     suggestionsViewSymbols.needsSpellingFeedback = NO;
@@ -161,6 +163,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardContainerView);
   //NSLog(@"FLKeyboardContainerView layoutSubviews, keyboard.transform: %@", NSStringFromCGAffineTransform(keyboard.transform));
   //NSLog(@"FLKeyboardContainerView layoutSubviews, keyboardFrame %@", NSStringFromCGRect(keyboardFrame));
   keyboard.center = CGPointMake(self.frame.size.width * 0.5, self.frame.size.height - keyboardFrame.size.height * 0.5);
+  
+  CGFloat w = keyboardFrame.size.width;
+  CGFloat h = keyboardFrame.size.height;
+  
+  [FLKeyboardContainerView sharedFLKeyboardContainerView].typingController.fleksyClient.fleksyAPI->setPlatformKeyboardSize(w, h);
+  NSLog(@" Called FleksyAPI::setPlatformKeyboardSize( %f, %f)\n\n", w, h);
   
   //float locationTop = [self convertPoint:CGPointZero fromView:keyboard].y; 
   //NSLog(@"FLKeyboardContainerView layoutSubviews 1111");
