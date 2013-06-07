@@ -131,7 +131,8 @@ NSString* getAbsolutePath(NSString* filepath, NSString* languagePack) {
 
 - (FLAddWordResult) addedUserWord:(NSString*) word frequency:(float) frequency {
   NSLog(@"FleksyClient_NOIPC: addedUserWord: %@", word);
-  return self.systemsIntegrator->addUserWord(NSStringToFLString(word));
+  FLStringPtr wordPtr = FLStringPtr(new FLStringMake(word.UTF8String));
+  return self.systemsIntegrator->addUserWord(wordPtr);
 }
 
 - (bool) removedUserWord:(NSString*) word {
