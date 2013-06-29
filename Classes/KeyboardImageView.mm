@@ -169,7 +169,9 @@
   
   [UIView animateWithDuration:duration delay:delay options:UIViewAnimationOptionCurveLinear
                    animations:^{
-                     keyLabel.textColor = [UIColor colorWithWhite:1.0 alpha:1];
+                     // TODO: Theme Vanilla
+                     //keyLabel.textColor = [UIColor colorWithWhite:1.0 alpha:1];
+                     keyLabel.textColor = FLBlackColor;
                      keyLabel.transform = CGAffineTransformConcat(CGAffineTransformInvert(self.superview.transform), CGAffineTransformMakeScale(0.5, 0.5));
                   }
                    completion:^(BOOL finished){
@@ -209,7 +211,10 @@
   }
   label.font = popup ? [UIFont fontWithName:@"HelveticaNeue-Bold" size:size] : [UIFont fontWithName:@"HelveticaNeue-Bold" size:size/*+12*/];
   label.frame = CGRectMake(0, 0, [label.font lineHeight], [label.font lineHeight]);
-  label.textColor = popup ? [UIColor whiteColor] : [UIColor whiteColor];//[UIColor lightGrayColor];
+  
+  //TODO: Theme Vanilla
+  //label.textColor = popup ? [UIColor whiteColor] : [UIColor whiteColor];//[UIColor lightGrayColor];
+  label.textColor = popup ? FLBlackColor : FLBlackColor;//[UIColor lightGrayColor];
   label.textAlignment = NSTextAlignmentCenter; // UITextAlignmentCenter;
   label.backgroundColor = [UIColor clearColor];
   //label.alpha = 0.5;
@@ -322,7 +327,10 @@
   if (_keys['Q'].x != -1) {
     homeRowStripe = [[UIView alloc] init];
     if (!FLEKSY_APP_SETTING_SPACE_BUTTON) {
-      homeRowStripe.backgroundColor = [UIColor colorWithWhite:1 alpha:0.2];
+      //TODO: Theme Vanilla
+      //homeRowStripe.backgroundColor = [UIColor colorWithWhite:1 alpha:0.2];
+      homeRowStripe.backgroundColor = [UIColor lightGrayColor];
+
     }
     else  {
         //TODO (Clean up) This displays a "fun" strip of fleksyBalls in the homeRow if SPACE_BUTTON enabled only.

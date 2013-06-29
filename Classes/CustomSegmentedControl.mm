@@ -8,6 +8,7 @@
 
 #import "CustomSegmentedControl.h"
 #import "VariousUtilities.h"
+#import "Settings.h"
 
 #define SEGMENTS_N 13
 #define TAG_NO_TRAILING_SPACE 0
@@ -25,7 +26,9 @@
       //defaultBackgroundColor = [UIColor clearColor];
       selectedBackgroundColor = [UIColor clearColor]; //[UIColor darkGrayColor];
       defaultTextColor = [UIColor colorWithWhite:0.55 alpha:1];
-      selectedTextColor = vertical ? [UIColor clearColor] : [UIColor whiteColor];
+      //TODO: Theme Vanilla
+      //selectedTextColor = vertical ? [UIColor clearColor] : [UIColor whiteColor];
+      selectedTextColor = vertical ? [UIColor clearColor] : FLeksyColor;
       
       //defaultTextColor = [UIColor clearColor];
       //selectedTextColor = [UIColor clearColor];

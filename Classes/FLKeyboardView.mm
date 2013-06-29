@@ -52,8 +52,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardView);
   if (self = [super initWithFrame:frame view1:imageViewABC view2A:imageViewSymbolsA view2B:imageViewSymbolsB]) {
     
     extraKeysBgView = [[UIView alloc] init];
+    //TODO: Theme Vanilla
     //extraKeysBgView.backgroundColor = [UIColor blackColor];
-    extraKeysBgView.backgroundColor = [UIColor colorWithWhite:0.25 alpha:1];
+    extraKeysBgView.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.2];
     [self addSubview:extraKeysBgView];
     [self sendSubviewToBack:extraKeysBgView];
     
@@ -61,7 +62,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardView);
     
     //capsLock = NO;
     //self.backgroundColor = FacebookBlue;
-    self.backgroundColor = [UIColor blackColor];
+    //TODO: Theme Vanilla
+    //self.backgroundColor = [UIColor blackColor];
+    self.backgroundColor = [UIColor colorWithWhite:1 alpha:0.2];
+
     
     shortcutKeysLetters = @"@.#$(:/5";
     shortcutKeysNumbers = @"@.#$(:/,";

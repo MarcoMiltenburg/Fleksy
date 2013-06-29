@@ -133,6 +133,8 @@ static FleksyKeyboard* instance = nil;
   FLEKSY_APP_SETTING_EMAIL_INCLUDE_FIRST_LINE  = [[VariousUtilities getSettingNamed:@"FLEKSY_APP_SETTING_EMAIL_INCLUDE_FIRST_LINE" fromSettings:settings] boolValue];
   FLEKSY_APP_SETTING_SPACE_BUTTON              = [[VariousUtilities getSettingNamed:@"FLEKSY_APP_SETTING_SPACE_BUTTON" fromSettings:settings] boolValue];
   FLEKSY_APP_SETTING_LANGUAGE_PACK             =  [VariousUtilities getSettingNamed:@"FLEKSY_APP_SETTING_LANGUAGE_PACK" fromSettings:settings];
+  FLEKSY_APP_SETTING_THEME                     = [[VariousUtilities getSettingNamed:@"FLEKSY_APP_SETTING_THEME" fromSettings:settings] intValue];
+
   
   //NSLog(@"FleksyKeyboard handleSettingsChanged: %@", settings);
   
