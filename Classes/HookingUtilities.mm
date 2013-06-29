@@ -136,8 +136,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(HookingUtilities);
     NSString* key = [NSString stringWithFormat:@"%@/%@", NSStringFromClass(orgClass), orgMethodName];
     [originalImplementations setObject:[NSValue valueWithPointer:(void*) method_getImplementation(orgMethod)] forKey:key];
     method_exchangeImplementations(orgMethod, customMethod);
-//    NSLog(@"orgMethod:    %@", [self getMethodDescription:orgMethod]);
-//    NSLog(@"customMethod: %@", [self getMethodDescription:customMethod]);
+    NSLog(@"orgMethod:    %@", [self getMethodDescription:orgMethod]);
+    NSLog(@"customMethod: %@", [self getMethodDescription:customMethod]);
   } else {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     NSLog(@"swapMethod FAILED!");

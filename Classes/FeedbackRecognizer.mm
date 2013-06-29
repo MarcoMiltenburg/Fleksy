@@ -236,9 +236,11 @@
   
   self.state = UIGestureRecognizerStateBegan;
   
+  printf("  touchesBegan.TOUCHES = %s", touches.description.UTF8String);
+  
   //can choose if we want a small delay to eliminate some popups on quick swipes
   for (UITouch* touch in touches) {
-    //NSLog(@" - began %p", touch);
+    NSLog(@" - began %p", touch);
     [currentTouches addObject:touch];
     lastTouchDown = touch;
     //NSLog(@"touchesBegan, distance since start: %.3f", [touch distanceSinceStartInView:self.view]);
@@ -349,7 +351,7 @@
   
   for (UITouch* touch in touches) {
     
-    //NSLog(@" - ended %p, cancelled: %d, recognizers: %@", touch, touch.phase == UITouchPhaseCancelled, touch.gestureRecognizers);
+    NSLog(@" - ended %p, cancelled: %d, recognizers: %@", touch, touch.phase == UITouchPhaseCancelled, touch.gestureRecognizers);
     
     if (self.hoverMode) {
       [self updateHoverChar:touch];
@@ -392,7 +394,7 @@
   
   for (UITouch* touch in touches) {
     [currentTouches removeObject:touch];
-    //NSLog(@"touchesEnded, distance since start: %.3f", [touch distanceSinceStartInView:self.view]);
+    NSLog(@"touchesEnded, distance since start: %.3f", [touch distanceSinceStartInView:self.view]);
   }
   [self touchesEnded:touches];
   
