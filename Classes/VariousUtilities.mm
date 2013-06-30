@@ -166,7 +166,7 @@ BOOL isRingerMuted() {
 + (id) getSettingNamed:(NSString*) setting fromSettings:(NSDictionary*) settings {
   id result = [settings objectForKey:setting];
   if (!result) {
-    //NSLog(@"ERROR: attempted to access non-existent setting %@", setting);
+    NSLog(@"ERROR: attempted to access non-existent setting %@", setting);
   }
   return result;
 }

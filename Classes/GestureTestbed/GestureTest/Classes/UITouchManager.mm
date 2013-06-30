@@ -83,9 +83,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UITouchManager)
     UITouch_setTimestampImplementation = [[HookingUtilities sharedHookingUtilities] originalMethodNamed:SET_TIMESTAMP_METHOD inClass:[UITouch class]];
     UITouch_dealloc                    = [[HookingUtilities sharedHookingUtilities] originalMethodNamed:@"dealloc"    inClass:[UITouch class]];
     
-    NSLog(@"UITouch_setLocationImplementation: %p", UITouch_setLocationImplementation);
-    NSLog(@"UITouch_setTimestampImplementation: %p", UITouch_setTimestampImplementation);
-    NSLog(@"UITouch_dealloc: %p", UITouch_dealloc);
+//    NSLog(@"UITouch_setLocationImplementation: %p", UITouch_setLocationImplementation);
+//    NSLog(@"UITouch_setTimestampImplementation: %p", UITouch_setTimestampImplementation);
+//    NSLog(@"UITouch_dealloc: %p", UITouch_dealloc);
   }
   return self;
 }
