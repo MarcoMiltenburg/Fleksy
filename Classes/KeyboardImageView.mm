@@ -196,8 +196,9 @@
   //}
   KSLabel* label = [[KSLabel alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
   if (!deviceIsPad()) {
-    label.outlineColor = [UIColor blackColor];
-    label.outlineWidth = 2;
+    //TODO: Theme Vanilla - Just comment out lines 
+    //label.outlineColor = [UIColor blackColor];
+    //label.outlineWidth = 2;
   }
   
   if (c == '\n') {

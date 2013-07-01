@@ -144,7 +144,7 @@
 #define FacebookBlue [UIColor colorWithRed:0.23 green:0.35 blue:0.59 alpha:1];
 
 //FSA15FLVars_Colour_FLBLACK_ = [AndroidGraphicsColor rgbWithInt:25 withInt:25 withInt:25];
-#define FLBlackColor [UIColor colorWithRed:(25.0/255.0) green:(25.0/255.0) blue:(25.0/255.0) alpha:0.75]
+#define FLBlackColor [UIColor colorWithRed:(25.0/255.0) green:(25.0/255.0) blue:(25.0/255.0) alpha:1.0]
 //FSA15FLVars_Colour_FLEKSY_ = [AndroidGraphicsColor rgbWithInt:52 withInt:160 withInt:194];
 #define FLeksyColor [UIColor colorWithRed:(52.0/255.0) green:(160.0/255.0) blue:(194.0/255.0) alpha:1.0]
 
