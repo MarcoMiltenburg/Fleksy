@@ -10,6 +10,52 @@
 #import "ABWrappers.h"
 #import "ABContactsHelper+EmailSearch.h"
 
+@interface FLFavoritesTableViewCell : UITableViewCell
+
+@end
+
+@implementation FLFavoritesTableViewCell
+
+//http://stackoverflow.com/questions/14325758/uitableview-swipe-to-delete-button-frame-issue/14330031#14330031
+
+- (void)willTransitionToState:(UITableViewCellStateMask)state {
+  
+  [super willTransitionToState:state];
+  
+  if (state == UITableViewCellStateDefaultMask) {
+    
+    NSLog(@"Default");
+    // When the cell returns to normal (not editing)
+    // Do something...
+    
+  } else if ((state & UITableViewCellStateShowingEditControlMask) && (state & UITableViewCellStateShowingDeleteConfirmationMask)) {
+    
+    NSLog(@"Edit Control + Delete Button");
+    // When the cell goes from Showing-the-Edit-Control (-) to Showing-the-Edit-Control (-) AND the Delete Button [Delete]
+    // !!! It's important to have this BEFORE just showing the Edit Control because the edit control applies to both cases.!!!
+    // Do something...
+    
+    //TODO: Change the Red button title from Delete to Remove
+    
+  } else if (state & UITableViewCellStateShowingEditControlMask) {
+    
+    NSLog(@"Edit Control Only");
+    // When the cell goes into edit mode and Shows-the-Edit-Control (-)
+    // Do something...
+    
+  } else if (state == UITableViewCellStateShowingDeleteConfirmationMask) {
+    
+    NSLog(@"Swipe to Delete [Delete] button only");
+    // When the user swipes a row to delete without using the edit button.
+    // Do something...
+    
+    //TODO: Change the Red button title from Delete to Remove
+
+  }
+}
+
+@end
+
 @interface FLFavoritesTableViewController ()<ABPersonViewControllerDelegate, ABUnknownPersonViewControllerDelegate>
 
 @property (nonatomic, strong) NSIndexPath *currentIndexPath;
@@ -114,6 +160,10 @@ ABAddressBookRef addressBook;
   }
 }
 
+- (void)changeCancelButton {
+  self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(cancelled:)];
+}
+
 #pragma mark - ABPeoplePickerNavigationController Drivers
 
 - (void) showPickerEmailAndPhone:(id)sender {
@@ -194,6 +244,8 @@ ABAddressBookRef addressBook;
     [self.favorites addObject:favString];
   }
   [[NSNotificationCenter defaultCenter] postNotificationName:FleksyFavoritesDidUpdateNotification object:self userInfo:[NSDictionary dictionaryWithObject:[self.favorites copy] forKey:FleksyFavoritesKey]];
+
+  [self changeCancelButton];
 
   // This favorite is added to the end of the tableView.
   // Scroll and highlight it.
@@ -313,11 +365,11 @@ ABAddressBookRef addressBook;
   //[tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellIdentifier];
   //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
   
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+  FLFavoritesTableViewCell *cell = (FLFavoritesTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
   
   if (cell == nil)
 	{
-    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+    cell = [[FLFavoritesTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
 
 		cell.selectionStyle = UITableViewCellSelectionStyleBlue;
     if (self.operatingMode == FL_FavoritesTVC_Mode_Operate) {
@@ -381,29 +433,34 @@ ABAddressBookRef addressBook;
     [self.favorites removeObjectAtIndex:indexPath.row];
     [[NSNotificationCenter defaultCenter] postNotificationName:FleksyFavoritesDidUpdateNotification object:self userInfo:[NSDictionary dictionaryWithObject:[self.favorites copy] forKey:FleksyFavoritesKey]];
     [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-
   }
   else if (editingStyle == UITableViewCellEditingStyleInsert) {
     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
   }
+  [self changeCancelButton];
 }
 
+// Override to support rearranging the table view.
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
+{
+  [[NSNotificationCenter defaultCenter] postNotificationName:FleksyFavoritesWillUpdateNotification object:self userInfo:[NSDictionary dictionaryWithObject:[self.favorites copy] forKey:FleksyFavoritesKey]];
+  id item = [self.favorites objectAtIndex:fromIndexPath.row];
+  [self.favorites removeObjectAtIndex:fromIndexPath.row];
+  [self.favorites insertObject:item atIndex:toIndexPath.row];
+  [[NSNotificationCenter defaultCenter] postNotificationName:FleksyFavoritesDidUpdateNotification object:self userInfo:[NSDictionary dictionaryWithObject:[self.favorites copy] forKey:FleksyFavoritesKey]];
+  [self changeCancelButton];
+}
 
-/*
- // Override to support rearranging the table view.
- - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
- {
- }
- */
+// Override to support conditional rearranging of the table view.
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  // Return NO if you do not want the item to be re-orderable.
+  if (self.operatingMode == FL_FavoritesTVC_Mode_Operate) {
+    return NO;
+  }
+  return YES;
+}
 
-/*
- // Override to support conditional rearranging of the table view.
- - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Return NO if you do not want the item to be re-orderable.
- return YES;
- }
- */
 
 #pragma mark - Table view delegate
 
@@ -535,6 +592,7 @@ ABAddressBookRef addressBook;
   [[NSNotificationCenter defaultCenter] postNotificationName:FleksyFavoritesDidUpdateNotification object:self userInfo:[NSDictionary dictionaryWithObject:[self.favorites copy] forKey:FleksyFavoritesKey]];
   
   [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+  [self changeCancelButton];
 }
 
 - (void)pushUPVC:(ABUnknownPersonViewController *)upvc contact:(ABContact *)contact message:(NSString *)message alternateName:(NSString *)selectedCellString {
