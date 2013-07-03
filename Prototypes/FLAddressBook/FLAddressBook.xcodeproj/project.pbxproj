@@ -1,0 +1,377 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		61ACEEFF1783C1310070F3F5 /* ABContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 61ACEEF51783C1310070F3F5 /* ABContact.m */; };
+		61ACEF001783C1310070F3F5 /* ABContactsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 61ACEEF71783C1310070F3F5 /* ABContactsHelper.m */; };
+		61ACEF011783C1310070F3F5 /* ABContactsHelper+EmailSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 61ACEEF91783C1310070F3F5 /* ABContactsHelper+EmailSearch.m */; };
+		61ACEF021783C1310070F3F5 /* ABGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 61ACEEFB1783C1310070F3F5 /* ABGroup.m */; };
+		61ACEF031783C1310070F3F5 /* ABStandin.m in Sources */ = {isa = PBXBuildFile; fileRef = 61ACEEFD1783C1310070F3F5 /* ABStandin.m */; };
+		61B4C02517810EFE00A17F6C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61B4C02417810EFE00A17F6C /* UIKit.framework */; };
+		61B4C02717810EFE00A17F6C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61B4C02617810EFE00A17F6C /* Foundation.framework */; };
+		61B4C02917810EFE00A17F6C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61B4C02817810EFE00A17F6C /* CoreGraphics.framework */; };
+		61B4C02F17810EFE00A17F6C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 61B4C02D17810EFE00A17F6C /* InfoPlist.strings */; };
+		61B4C03117810EFF00A17F6C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 61B4C03017810EFF00A17F6C /* main.m */; };
+		61B4C03517810EFF00A17F6C /* FLABAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 61B4C03417810EFF00A17F6C /* FLABAppDelegate.m */; };
+		61B4C03717810EFF00A17F6C /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 61B4C03617810EFF00A17F6C /* Default.png */; };
+		61B4C03917810EFF00A17F6C /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 61B4C03817810EFF00A17F6C /* Default@2x.png */; };
+		61B4C03B17810EFF00A17F6C /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 61B4C03A17810EFF00A17F6C /* Default-568h@2x.png */; };
+		61B4C03E17810EFF00A17F6C /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61B4C03C17810EFF00A17F6C /* MainStoryboard_iPhone.storyboard */; };
+		61B4C04117810EFF00A17F6C /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61B4C03F17810EFF00A17F6C /* MainStoryboard_iPad.storyboard */; };
+		61B4C04417810EFF00A17F6C /* FLABViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 61B4C04317810EFF00A17F6C /* FLABViewController.m */; };
+		61B4C04C17810F1F00A17F6C /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61B4C04A17810F1F00A17F6C /* AddressBook.framework */; };
+		61B4C04D17810F1F00A17F6C /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61B4C04B17810F1F00A17F6C /* AddressBookUI.framework */; };
+		61CC6A541782552C008928C0 /* FLFavoritesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 61CC6A531782552C008928C0 /* FLFavoritesTableViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		61ACEEF41783C1310070F3F5 /* ABContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ABContact.h; path = ABWrappers/ABContact.h; sourceTree = "<group>"; };
+		61ACEEF51783C1310070F3F5 /* ABContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ABContact.m; path = ABWrappers/ABContact.m; sourceTree = "<group>"; };
+		61ACEEF61783C1310070F3F5 /* ABContactsHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ABContactsHelper.h; path = ABWrappers/ABContactsHelper.h; sourceTree = "<group>"; };
+		61ACEEF71783C1310070F3F5 /* ABContactsHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ABContactsHelper.m; path = ABWrappers/ABContactsHelper.m; sourceTree = "<group>"; };
+		61ACEEF81783C1310070F3F5 /* ABContactsHelper+EmailSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "ABContactsHelper+EmailSearch.h"; path = "ABWrappers/ABContactsHelper+EmailSearch.h"; sourceTree = "<group>"; };
+		61ACEEF91783C1310070F3F5 /* ABContactsHelper+EmailSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "ABContactsHelper+EmailSearch.m"; path = "ABWrappers/ABContactsHelper+EmailSearch.m"; sourceTree = "<group>"; };
+		61ACEEFA1783C1310070F3F5 /* ABGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ABGroup.h; path = ABWrappers/ABGroup.h; sourceTree = "<group>"; };
+		61ACEEFB1783C1310070F3F5 /* ABGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ABGroup.m; path = ABWrappers/ABGroup.m; sourceTree = "<group>"; };
+		61ACEEFC1783C1310070F3F5 /* ABStandin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ABStandin.h; path = ABWrappers/ABStandin.h; sourceTree = "<group>"; };
+		61ACEEFD1783C1310070F3F5 /* ABStandin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ABStandin.m; path = ABWrappers/ABStandin.m; sourceTree = "<group>"; };
+		61ACEEFE1783C1310070F3F5 /* ABWrappers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ABWrappers.h; path = ABWrappers/ABWrappers.h; sourceTree = "<group>"; };
+		61B4C02117810EFE00A17F6C /* FLAddressBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FLAddressBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		61B4C02417810EFE00A17F6C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		61B4C02617810EFE00A17F6C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		61B4C02817810EFE00A17F6C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		61B4C02C17810EFE00A17F6C /* FLAddressBook-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FLAddressBook-Info.plist"; sourceTree = "<group>"; };
+		61B4C02E17810EFE00A17F6C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		61B4C03017810EFF00A17F6C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		61B4C03217810EFF00A17F6C /* FLAddressBook-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FLAddressBook-Prefix.pch"; sourceTree = "<group>"; };
+		61B4C03317810EFF00A17F6C /* FLABAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FLABAppDelegate.h; sourceTree = "<group>"; };
+		61B4C03417810EFF00A17F6C /* FLABAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FLABAppDelegate.m; sourceTree = "<group>"; };
+		61B4C03617810EFF00A17F6C /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		61B4C03817810EFF00A17F6C /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		61B4C03A17810EFF00A17F6C /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		61B4C03D17810EFF00A17F6C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
+		61B4C04017810EFF00A17F6C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
+		61B4C04217810EFF00A17F6C /* FLABViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FLABViewController.h; sourceTree = "<group>"; };
+		61B4C04317810EFF00A17F6C /* FLABViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FLABViewController.m; sourceTree = "<group>"; };
+		61B4C04A17810F1F00A17F6C /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		61B4C04B17810F1F00A17F6C /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		61CC6A521782552C008928C0 /* FLFavoritesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLFavoritesTableViewController.h; sourceTree = "<group>"; };
+		61CC6A531782552C008928C0 /* FLFavoritesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLFavoritesTableViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		61B4C01E17810EFE00A17F6C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				61B4C04C17810F1F00A17F6C /* AddressBook.framework in Frameworks */,
+				61B4C04D17810F1F00A17F6C /* AddressBookUI.framework in Frameworks */,
+				61B4C02517810EFE00A17F6C /* UIKit.framework in Frameworks */,
+				61B4C02717810EFE00A17F6C /* Foundation.framework in Frameworks */,
+				61B4C02917810EFE00A17F6C /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		61ACEEF31783C1190070F3F5 /* ABWrappers */ = {
+			isa = PBXGroup;
+			children = (
+				61ACEEF41783C1310070F3F5 /* ABContact.h */,
+				61ACEEF51783C1310070F3F5 /* ABContact.m */,
+				61ACEEF61783C1310070F3F5 /* ABContactsHelper.h */,
+				61ACEEF71783C1310070F3F5 /* ABContactsHelper.m */,
+				61ACEEF81783C1310070F3F5 /* ABContactsHelper+EmailSearch.h */,
+				61ACEEF91783C1310070F3F5 /* ABContactsHelper+EmailSearch.m */,
+				61ACEEFA1783C1310070F3F5 /* ABGroup.h */,
+				61ACEEFB1783C1310070F3F5 /* ABGroup.m */,
+				61ACEEFC1783C1310070F3F5 /* ABStandin.h */,
+				61ACEEFD1783C1310070F3F5 /* ABStandin.m */,
+				61ACEEFE1783C1310070F3F5 /* ABWrappers.h */,
+			);
+			name = ABWrappers;
+			sourceTree = "<group>";
+		};
+		61B4C01817810EFE00A17F6C = {
+			isa = PBXGroup;
+			children = (
+				61B4C02A17810EFE00A17F6C /* FLAddressBook */,
+				61B4C02317810EFE00A17F6C /* Frameworks */,
+				61B4C02217810EFE00A17F6C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		61B4C02217810EFE00A17F6C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				61B4C02117810EFE00A17F6C /* FLAddressBook.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		61B4C02317810EFE00A17F6C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				61B4C04A17810F1F00A17F6C /* AddressBook.framework */,
+				61B4C04B17810F1F00A17F6C /* AddressBookUI.framework */,
+				61B4C02417810EFE00A17F6C /* UIKit.framework */,
+				61B4C02617810EFE00A17F6C /* Foundation.framework */,
+				61B4C02817810EFE00A17F6C /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		61B4C02A17810EFE00A17F6C /* FLAddressBook */ = {
+			isa = PBXGroup;
+			children = (
+				61ACEEF31783C1190070F3F5 /* ABWrappers */,
+				61B4C03317810EFF00A17F6C /* FLABAppDelegate.h */,
+				61B4C03417810EFF00A17F6C /* FLABAppDelegate.m */,
+				61B4C03C17810EFF00A17F6C /* MainStoryboard_iPhone.storyboard */,
+				61B4C03F17810EFF00A17F6C /* MainStoryboard_iPad.storyboard */,
+				61B4C04217810EFF00A17F6C /* FLABViewController.h */,
+				61B4C04317810EFF00A17F6C /* FLABViewController.m */,
+				61CC6A521782552C008928C0 /* FLFavoritesTableViewController.h */,
+				61CC6A531782552C008928C0 /* FLFavoritesTableViewController.m */,
+				61B4C02B17810EFE00A17F6C /* Supporting Files */,
+			);
+			path = FLAddressBook;
+			sourceTree = "<group>";
+		};
+		61B4C02B17810EFE00A17F6C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				61B4C02C17810EFE00A17F6C /* FLAddressBook-Info.plist */,
+				61B4C02D17810EFE00A17F6C /* InfoPlist.strings */,
+				61B4C03017810EFF00A17F6C /* main.m */,
+				61B4C03217810EFF00A17F6C /* FLAddressBook-Prefix.pch */,
+				61B4C03617810EFF00A17F6C /* Default.png */,
+				61B4C03817810EFF00A17F6C /* Default@2x.png */,
+				61B4C03A17810EFF00A17F6C /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		61B4C02017810EFE00A17F6C /* FLAddressBook */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 61B4C04717810EFF00A17F6C /* Build configuration list for PBXNativeTarget "FLAddressBook" */;
+			buildPhases = (
+				61B4C01D17810EFE00A17F6C /* Sources */,
+				61B4C01E17810EFE00A17F6C /* Frameworks */,
+				61B4C01F17810EFE00A17F6C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FLAddressBook;
+			productName = FLAddressBook;
+			productReference = 61B4C02117810EFE00A17F6C /* FLAddressBook.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		61B4C01917810EFE00A17F6C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = FLAB;
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = Syntellia;
+			};
+			buildConfigurationList = 61B4C01C17810EFE00A17F6C /* Build configuration list for PBXProject "FLAddressBook" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 61B4C01817810EFE00A17F6C;
+			productRefGroup = 61B4C02217810EFE00A17F6C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				61B4C02017810EFE00A17F6C /* FLAddressBook */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		61B4C01F17810EFE00A17F6C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				61B4C02F17810EFE00A17F6C /* InfoPlist.strings in Resources */,
+				61B4C03717810EFF00A17F6C /* Default.png in Resources */,
+				61B4C03917810EFF00A17F6C /* Default@2x.png in Resources */,
+				61B4C03B17810EFF00A17F6C /* Default-568h@2x.png in Resources */,
+				61B4C03E17810EFF00A17F6C /* MainStoryboard_iPhone.storyboard in Resources */,
+				61B4C04117810EFF00A17F6C /* MainStoryboard_iPad.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		61B4C01D17810EFE00A17F6C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				61B4C03117810EFF00A17F6C /* main.m in Sources */,
+				61B4C03517810EFF00A17F6C /* FLABAppDelegate.m in Sources */,
+				61B4C04417810EFF00A17F6C /* FLABViewController.m in Sources */,
+				61CC6A541782552C008928C0 /* FLFavoritesTableViewController.m in Sources */,
+				61ACEEFF1783C1310070F3F5 /* ABContact.m in Sources */,
+				61ACEF001783C1310070F3F5 /* ABContactsHelper.m in Sources */,
+				61ACEF011783C1310070F3F5 /* ABContactsHelper+EmailSearch.m in Sources */,
+				61ACEF021783C1310070F3F5 /* ABGroup.m in Sources */,
+				61ACEF031783C1310070F3F5 /* ABStandin.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		61B4C02D17810EFE00A17F6C /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				61B4C02E17810EFE00A17F6C /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		61B4C03C17810EFF00A17F6C /* MainStoryboard_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				61B4C03D17810EFF00A17F6C /* en */,
+			);
+			name = MainStoryboard_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		61B4C03F17810EFF00A17F6C /* MainStoryboard_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				61B4C04017810EFF00A17F6C /* en */,
+			);
+			name = MainStoryboard_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		61B4C04517810EFF00A17F6C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		61B4C04617810EFF00A17F6C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		61B4C04817810EFF00A17F6C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FLAddressBook/FLAddressBook-Prefix.pch";
+				INFOPLIST_FILE = "FLAddressBook/FLAddressBook-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		61B4C04917810EFF00A17F6C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FLAddressBook/FLAddressBook-Prefix.pch";
+				INFOPLIST_FILE = "FLAddressBook/FLAddressBook-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		61B4C01C17810EFE00A17F6C /* Build configuration list for PBXProject "FLAddressBook" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				61B4C04517810EFF00A17F6C /* Debug */,
+				61B4C04617810EFF00A17F6C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		61B4C04717810EFF00A17F6C /* Build configuration list for PBXNativeTarget "FLAddressBook" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				61B4C04817810EFF00A17F6C /* Debug */,
+				61B4C04917810EFF00A17F6C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 61B4C01917810EFE00A17F6C /* Project object */;
+}
