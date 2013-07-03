@@ -41,11 +41,12 @@ NSString *FLEKSY_APP_SETTING_SPEED_DIAL_1;
   // Dispose of any resources that can be recreated.
 
   [[NSNotificationCenter defaultCenter] removeObserver:self];
+  myNavCon = nil;
 }
 
 - (IBAction)showPicker:(id)sender {
   
-  [FLFavoritesTableViewController checkAddressBookAuthorization];
+  //[FLFavoritesTableViewController checkAddressBookAuthorization];
   FLFavoritesTableViewController *favTVC = [[FLFavoritesTableViewController alloc] initWithStyle:UITableViewStylePlain withMode:FL_FavoritesTVC_Mode_Settings];
   favTVC.propertyType = FL_PropertyType_PhoneNumber | FL_PropertyType_EmailAddress;
   [self reloadFavorites];
@@ -62,12 +63,12 @@ NSString *FLEKSY_APP_SETTING_SPEED_DIAL_1;
   
   [self presentViewController:myNavCon animated:YES completion:NULL];
 
-  
   //[self showPersonEmailAndPhone];
 }
 
 - (IBAction)menuSelector:(id)sender {
-  [FLFavoritesTableViewController checkAddressBookAuthorization];
+  //[FLFavoritesTableViewController checkAddressBookAuthorization];
+  // Authorization Check not required in operational mode
   FLFavoritesTableViewController *favTVC = [[FLFavoritesTableViewController alloc] initWithStyle:UITableViewStylePlain];
   favTVC.propertyType = FL_PropertyType_PhoneNumber | FL_PropertyType_EmailAddress;
   [self reloadFavorites];
@@ -83,7 +84,6 @@ NSString *FLEKSY_APP_SETTING_SPEED_DIAL_1;
   [myNavCon addChildViewController:favTVC];
   
   [self presentViewController:myNavCon animated:YES completion:NULL];
-
 }
 
 //- (IBAction)showPickerPhone:(id)sender {

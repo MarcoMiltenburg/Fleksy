@@ -40,6 +40,7 @@ ABAddressBookRef addressBook;
   self = [super initWithStyle:style];
   if (self) {
     _operatingMode = aMode;
+    [FLFavoritesTableViewController checkAddressBookAuthorization];
   }
   return self;
 }
@@ -49,10 +50,11 @@ ABAddressBookRef addressBook;
   self = [super initWithStyle:style];
   if (self) {
     _operatingMode = FL_FavoritesTVC_Mode_Operate;
+    _operatingMode = FL_FavoritesTVC_Mode_Operate;
+    _propertyType = FL_PropertyType_EmailAndPhone;
   }
   return self;
 }
-
 
 - (void)viewDidLoad
 {
@@ -63,12 +65,17 @@ ABAddressBookRef addressBook;
   
   if (self.operatingMode == FL_FavoritesTVC_Mode_Settings) {
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addFavorite:)];
+    
+    UIBarButtonItem *flexSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    UIBarButtonItem *editButton = self.editButtonItem;
+    
+    [self.navigationController setToolbarHidden:NO];
+    
+    [self setToolbarItems:[NSArray arrayWithObjects:flexSpace, editButton, nil]];
+
   }
   
   self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelled:)];
-  
-  //TODO: Make the following line to display an Edit button in the bottom toolbar for this view controller.
-  //self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)didReceiveMemoryWarning
@@ -82,10 +89,10 @@ ABAddressBookRef addressBook;
 - (void)addFavorite:(id)sender {
   [FLFavoritesTableViewController checkAddressBookAuthorization];
   if (self.propertyType == FL_PropertyType_EmailAddress) {
-    [self showPickerEmail:sender];
+    //[self showPickerEmail:sender];
   }
   else if (self.propertyType == FL_PropertyType_PhoneNumber) {
-    [self showPickerPhone:sender];
+    //[self showPickerPhone:sender];
   }
   else if (self.propertyType == FL_PropertyType_EmailAndPhone) {
     [self showPickerEmailAndPhone:sender];
@@ -119,27 +126,27 @@ ABAddressBookRef addressBook;
   [self presentViewController:picker animated:YES completion:nil];
 }
 
-- (void)showPickerPhone:(id)sender {
-  
-  ABPeoplePickerNavigationController *picker = [[ABPeoplePickerNavigationController alloc] init];
-  picker.peoplePickerDelegate = self;
-  picker.navigationBar.topItem.prompt = @"Choose contact to add to phone favorites";
-  
-  [picker setDisplayedProperties: [NSArray arrayWithObject:@(kABPersonPhoneProperty)]];
-  
-  [self presentViewController:picker animated:YES completion:NULL];
-}
-
-
-- (void)showPickerEmail:(id)sender {
-  ABPeoplePickerNavigationController *picker = [[ABPeoplePickerNavigationController alloc] init];
-  picker.peoplePickerDelegate = self;
-  picker.navigationBar.topItem.prompt = @"Choose contact to add to email favorites";
-  
-  [picker setDisplayedProperties: [NSArray arrayWithObject:@(kABPersonEmailProperty)]];
-  
-  [self presentViewController:picker animated:YES completion:NULL];
-}
+//- (void)showPickerPhone:(id)sender {
+//  
+//  ABPeoplePickerNavigationController *picker = [[ABPeoplePickerNavigationController alloc] init];
+//  picker.peoplePickerDelegate = self;
+//  picker.navigationBar.topItem.prompt = @"Choose contact to add to phone favorites";
+//  
+//  [picker setDisplayedProperties: [NSArray arrayWithObject:@(kABPersonPhoneProperty)]];
+//  
+//  [self presentViewController:picker animated:YES completion:NULL];
+//}
+//
+//
+//- (void)showPickerEmail:(id)sender {
+//  ABPeoplePickerNavigationController *picker = [[ABPeoplePickerNavigationController alloc] init];
+//  picker.peoplePickerDelegate = self;
+//  picker.navigationBar.topItem.prompt = @"Choose contact to add to email favorites";
+//  
+//  [picker setDisplayedProperties: [NSArray arrayWithObject:@(kABPersonEmailProperty)]];
+//  
+//  [self presentViewController:picker animated:YES completion:NULL];
+//}
 
 #pragma mark - ABPeoplePickerNavigationControllerDelegate Methods
 
@@ -298,6 +305,10 @@ ABAddressBookRef addressBook;
 {
   static NSString *CellIdentifier = @"FavoritesCell";
   
+  if (self.operatingMode == FL_FavoritesTVC_Mode_Settings) {
+    CellIdentifier = @"FavoritesSetupCell";
+  }
+  
   //FYI: This is iOS 6+ only. Need to deal with iOS 5 devices also if used.
   //[tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellIdentifier];
   //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
@@ -309,7 +320,12 @@ ABAddressBookRef addressBook;
     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
 
 		cell.selectionStyle = UITableViewCellSelectionStyleBlue;
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    if (self.operatingMode == FL_FavoritesTVC_Mode_Operate) {
+      cell.accessoryType = UITableViewCellAccessoryNone;
+    }
+    else {
+      cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
   }
   
   NSString *favString;
@@ -343,28 +359,35 @@ ABAddressBookRef addressBook;
   return favString;
 }
 
-/*
- // Override to support conditional editing of the table view.
- - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Return NO if you do not want the specified item to be editable.
- return YES;
- }
- */
+// Override to support conditional editing of the table view.
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  // Return NO if you do not want the specified item to be editable.
+  if (self.operatingMode == FL_FavoritesTVC_Mode_Operate) {
+    return NO;
+  }
+  return YES;
+}
 
-/*
- // Override to support editing the table view.
- - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
- {
- if (editingStyle == UITableViewCellEditingStyleDelete) {
- // Delete the row from the data source
- [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
- }
- else if (editingStyle == UITableViewCellEditingStyleInsert) {
- // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
- }
- }
- */
+// Override to support editing the table view.
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  if (self.operatingMode == FL_FavoritesTVC_Mode_Operate) {
+    return;
+  }
+  if (editingStyle == UITableViewCellEditingStyleDelete) {
+    // Delete the row from the data source
+    [[NSNotificationCenter defaultCenter] postNotificationName:FleksyFavoritesWillUpdateNotification object:self userInfo:[NSDictionary dictionaryWithObject:[self.favorites copy] forKey:FleksyFavoritesKey]];
+    [self.favorites removeObjectAtIndex:indexPath.row];
+    [[NSNotificationCenter defaultCenter] postNotificationName:FleksyFavoritesDidUpdateNotification object:self userInfo:[NSDictionary dictionaryWithObject:[self.favorites copy] forKey:FleksyFavoritesKey]];
+    [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+
+  }
+  else if (editingStyle == UITableViewCellEditingStyleInsert) {
+    // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+  }
+}
+
 
 /*
  // Override to support rearranging the table view.
@@ -533,10 +556,17 @@ ABAddressBookRef addressBook;
 // TODO: Handle when a user selects a favorite, then deassociates(deletes) the property from the name.
 //  - The favorite should be deleted. Or should the property just go back into the list. If no action, the list goes stale and may not be what the user expects.
 
-// FYI: Do not Handle when a user has replinished contacts on one device, and contacts are iCloud transferred to another device (via Settings)
-// fred_jones:555-555-5555 will find fred_jones but will not edit address book with propertyType (assume address book is iCloud connected)
+// FYI: Do not Handle when a user has replinished contacts on one device, and Fleksy favoritescontacts are iCloud transferred to another device (via Settings)
+// fred_jones:555-555-5555 will find fred_jones but will not edit address book with propertyType (assume address book contacts are iCloud connected)
 
 // TODO: If Jane_Blow (in Favorites) shares a number with Joe_Blow, and Joe_Blow is the AB, when the Jane_Blow is selected, the name is not found in address book.
+
+// TODO: If user makes a mistake and replinishes/associates a property with a person, they can delete the entry from the ABContact form, then delete the favorite.
+//  - They will lose the property and have to re-enter.
+
+// TODO: If user creates duplicate entry in favorite (same name, same property), the user is reqiured to manually delete one of the entries.
+
+// TODO: Provide a setting to allow user to sort entries, or manually priortize (re-arrange)
 
 #pragma mark - ABPersonViewControllerDelegate Method
 
@@ -581,7 +611,9 @@ shouldPerformDefaultActionForPerson:(ABRecordRef)person
                            property:(ABPropertyID)property
                          identifier:(ABMultiValueIdentifier)identifier
 {
-  return YES;
+  // If this is YES, will attempt to make phone call or send email.
+  // TODO: Can send this to delegate as 
+  return NO;
 }
 
 @end
