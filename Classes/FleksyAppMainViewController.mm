@@ -75,6 +75,25 @@
 
 #pragma mark IASKAppSettingsViewControllerDelegate protocol
 
+- (void)settingsViewController:(IASKAppSettingsViewController*)sender buttonTappedForSpecifier:(IASKSpecifier*)specifier {
+  NSLog(@" Launching Favorites Setup: %s", __PRETTY_FUNCTION__);
+  FLFavoritesTableViewController *favTVC = [[FLFavoritesTableViewController alloc] initWithStyle:UITableViewStylePlain withMode:FL_FavoritesTVC_Mode_Settings];
+  favTVC.propertyType = (FL_PropertyType)(FL_PropertyType_PhoneNumber | FL_PropertyType_EmailAddress);
+  [self reloadFavorites];
+  favTVC.favorites = favorites;
+  favTVC.favoritesDelegate = self;
+  favTVC.title = @"Favorites Setup";
+  
+  if (favoritesNavigationController) {
+    favoritesNavigationController = nil;
+  }
+  favoritesNavigationController = [[UINavigationController alloc] init];
+  
+  [favoritesNavigationController addChildViewController:favTVC];
+  
+  [sender presentViewController:favoritesNavigationController animated:YES completion:NULL];
+}
+
 - (void)settingsViewControllerDidEnd:(IASKAppSettingsViewController*)sender {
 	
 	// your code here to reconfigure the app for changed settings
@@ -511,8 +530,6 @@
   smsController.body = [NSString stringWithFormat:@"%@\n%@", text, [self getMessageFooter]];
   smsController.recipients = [NSArray arrayWithObjects:recipient, nil];
   
-  // TODO: Integrating Favorites Here
-  
   if (isExecutedWithFavorites) {
     [favoritesNavigationController presentViewController:smsController animated:YES completion:nil];
     isExecutedWithFavorites = NO;
@@ -652,16 +669,24 @@
 - (void)handleFavoritesDidUpdate:(NSNotification *)aNotification {
   NSLog(@" aNotification = %@", aNotification);
   
+  NSString *localSpeedDialCache;
+  
   //Serialize the Favorites Array to a comma seperated string
   
   favorites = [[(NSDictionary *)[aNotification userInfo] objectForKey:FleksyFavoritesKey] mutableCopy];
   
   //[textView.inputView performSelector:@selector(handleSettingsChanged:) withObject:nil];
   
-  //FLEKSY_APP_SETTING_SPEED_DIAL_1 = [favorites componentsJoinedByString:@","];
+  localSpeedDialCache = [favorites componentsJoinedByString:@","];
   
-  [[NSUserDefaults standardUserDefaults] setObject:[favorites componentsJoinedByString:@","]
+  // TODO: handleSettingsChange keeps same list in place because it is out of sync until final Done of Settings.
+  // So favorites and FLEKSY_APP_SETTING_SPEED_DIAL_1 both are changed in other classes and methods, so keep local cache
+  //  to reflect changes while user is still in the Settings.
+
+  [[NSUserDefaults standardUserDefaults] setObject:localSpeedDialCache
                                             forKey:@"FLEKSY_APP_SETTING_SPEED_DIAL_1"];
+  
+  FLEKSY_APP_SETTING_SPEED_DIAL_1 = localSpeedDialCache;
   
   [[NSUbiquitousKeyValueStore defaultStore] synchronize];
   [[NSUserDefaults standardUserDefaults] synchronize];
@@ -1111,7 +1136,6 @@
     } else if ([buttonTitle isEqualToString:@"We love feedback!"]) {
       [self sendFeedback];
     } else if ([buttonTitle hasPrefix:@"Send to Favorites"]) {
-      //TODO: integrating Favorites here
       
       isExecutedWithFavorites = YES;
       

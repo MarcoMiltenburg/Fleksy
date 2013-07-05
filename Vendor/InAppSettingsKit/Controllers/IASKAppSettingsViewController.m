@@ -593,11 +593,19 @@ CGRect IASKCGRectSwap(CGRect rect);
 		cell.detailTextLabel.text = [specifier.defaultValue description];
 	} else if ([specifier.type isEqualToString:kIASKButtonSpecifier]) {
 		NSString *value = [self.settingsStore objectForKey:specifier.key];
-		cell.textLabel.text = [value isKindOfClass:[NSString class]] ? [self.settingsReader titleForStringId:value] : specifier.title;
+    
+//TODO: HACK HERE!!!! since the value is a string, it is chosen over the specifier.title, so just force it for now.
+    NSLog(@" CELL TEXT = %@ from %@ should be %@", cell.textLabel.text, [self.settingsReader titleForStringId:value], specifier.title);
+
+    if ([specifier.title isEqualToString:@"Favorites"]) {
+      cell.textLabel.text = specifier.title;
+    }
+    else {
+      cell.textLabel.text = [value isKindOfClass:[NSString class]] ? [self.settingsReader titleForStringId:value] : specifier.title;
+    }
 	} else {
 		cell.textLabel.text = specifier.title;
 	}
-    
 	cell.imageView.image = specifier.cellImage;
 	cell.imageView.highlightedImage = specifier.highlightedCellImage;
     

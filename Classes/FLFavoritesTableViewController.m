@@ -331,7 +331,7 @@ ABAddressBookRef addressBook;
                     otherButtonTitles:nil] show];
 }
 
-#pragma mark - Table view data source
+#pragma mark - UITableViewDataSource Protocol Methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -462,7 +462,7 @@ ABAddressBookRef addressBook;
 }
 
 
-#pragma mark - Table view delegate
+#pragma mark - UITableViewDelegate Protocol Methods
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -488,6 +488,10 @@ ABAddressBookRef addressBook;
     
     [self.favoritesDelegate selectedFavorite:favString];
   }
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
+  return @"Remove";
 }
 
 #pragma mark - Table View Delegate Helpers
