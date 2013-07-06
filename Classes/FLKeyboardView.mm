@@ -54,7 +54,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardView);
     extraKeysBgView = [[UIView alloc] init];
     //TODO: Theme Vanilla
     //extraKeysBgView.backgroundColor = [UIColor blackColor];
-    extraKeysBgView.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.2];
+    extraKeysBgView.backgroundColor = FLWhiteColor;
     [self addSubview:extraKeysBgView];
     [self sendSubviewToBack:extraKeysBgView];
     
@@ -64,7 +64,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardView);
     //self.backgroundColor = FacebookBlue;
     //TODO: Theme Vanilla
     //self.backgroundColor = [UIColor blackColor];
-    self.backgroundColor = [UIColor colorWithWhite:1 alpha:0.2];
+    self.backgroundColor = FLWhiteColor;
 
     
     shortcutKeysLetters = @"@.#$(:/5";

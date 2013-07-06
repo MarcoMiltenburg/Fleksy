@@ -164,7 +164,7 @@
 }
 
 - (void) restoreKeyLabel:(UILabel*) keyLabel duration:(float) duration delay:(float) delay {
-  
+    
   //NSLog(@"restoreKeyLabel %@, duration: %.3f, delay: %.3f", keyLabel.text, duration, delay);
   
   [UIView animateWithDuration:duration delay:delay options:UIViewAnimationOptionCurveLinear
@@ -330,7 +330,7 @@
     if (!FLEKSY_APP_SETTING_SPACE_BUTTON) {
       //TODO: Theme Vanilla
       //homeRowStripe.backgroundColor = [UIColor colorWithWhite:1 alpha:0.2];
-      homeRowStripe.backgroundColor = [UIColor lightGrayColor];
+      homeRowStripe.backgroundColor = FLLightGrayColor;
 
     }
     else  {
@@ -378,8 +378,13 @@
   touchTrace.userInteractionEnabled = NO;
   touchTrace.layer.cornerRadius = 5 * multiplierX;
   touchTrace.center = CGPointMake(keyLabel.bounds.size.width * 0.5, keyLabel.bounds.size.height * 0.5);
-  touchTrace.backgroundColor = [UIColor whiteColor]; //[UIColor colorWithRed:1 green:0 blue:1 alpha:1]; // [UIColor greenColor];
-  touchTrace.alpha = 0.3;
+  //TODO: Theme Vanilla
+  //touchTrace.backgroundColor = [UIColor whiteColor]; //[UIColor colorWithRed:1 green:0 blue:1 alpha:1]; // [UIColor greenColor];
+  //touchTrace.backgroundColor = currentTheme.traceColor  [UIColor blackColor]; //[UIColor colorWithRed:1 green:0 blue:1 alpha:1]; // [UIColor greenColor];
+  touchTrace.backgroundColor = [UIColor blackColor]; //[UIColor colorWithRed:1 green:0 blue:1 alpha:1]; // [UIColor greenColor];
+  //touchTrace.alpha = 0.3;
+  // Even for DarkSide Theme make 0.2
+  touchTrace.alpha = 0.2;
   touchTrace.tag = RIPPLE_VIEW_TAG;
   [keyLabel addSubview:touchTrace];
   

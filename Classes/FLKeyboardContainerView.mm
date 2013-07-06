@@ -78,11 +78,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardContainerView);
     topShadowView = [[UIView alloc] init];
     topShadowView.userInteractionEnabled = NO;
     //TODO: Theme Vanilla
+    topShadowView.backgroundColor = FLeksyColor;
     //topShadowView.backgroundColor = [UIColor blackColor];
-    topShadowView.backgroundColor = [UIColor colorWithWhite:1 alpha:0.2];
+    //topShadowView.backgroundColor = FLWhiteColor;
     topShadowView.layer.shadowOffset = CGSizeMake(0, -4);
     topShadowView.layer.shadowRadius = 4;
-    topShadowView.layer.shadowOpacity = 0.4;
+    topShadowView.layer.shadowOpacity = 0.3;
+    topShadowView.layer.shadowColor = [FLeksyColor CGColor];
+    
     [self addSubview:topShadowView];
     [self sendSubviewToBack:topShadowView];
 

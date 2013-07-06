@@ -581,18 +581,9 @@ ABAddressBookRef addressBook;
 } //End:- (void)tableView:(UITableView *)tableView setupFavoriteAtIndexPath:(NSIndexPath *)indexPath
 
 - (void)replinishFavoritesWithContact:(ABContact *)contact selectedCellString:(NSString *)selectedCellString atIndexPath:(NSIndexPath *)indexPath {
-  NSString *firstName = contact.firstname;
-  NSString *lastName = contact.lastname;
   
-  NSMutableString *replacementFavString = [firstName mutableCopy];
-  if (lastName) {
-    [replacementFavString appendString:@"_"];
-    [replacementFavString appendString:lastName];
-  }
-  [replacementFavString appendString:@":"];
-  [replacementFavString appendString:selectedCellString];
-  
-  
+  NSString *replacementFavString = [FLFavoritesTableViewController replinishFavoritesWithContact:contact selectedFavorite:selectedCellString];
+    
   //TODO: This simply changes the text of the Cell and sets the favorites. The user is prompted by animation but may be surprised at quickness.
   //IDEA: How about just pre-converted all propertyTypes ahead before user even gets to this point.
   
@@ -639,19 +630,45 @@ ABAddressBookRef addressBook;
 
 - (BOOL)personViewController: (ABPersonViewController *)personViewController shouldPerformDefaultActionForPerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifierForValue
 {
+  
+  FLFavoritesTableViewCell *favCell = (FLFavoritesTableViewCell *)[self.tableView cellForRowAtIndexPath:self.currentIndexPath];
   // Reveal the item that was selected
   if ([ABContact propertyIsMultiValue:property])
   {
     NSArray *array = [ABContact arrayForProperty:property inRecord:person];
     NSLog(@"%@", [array objectAtIndex:identifierForValue]);
+    
+    NSLog(@" personeViewControlley array currentCellString = %@", self.currentCellString);
+    
+    [self replinishFavoritesWithContact:[ABContact contactWithRecord:person] selectedCellString:[array objectAtIndex:identifierForValue] atIndexPath:self.currentIndexPath];
+    NSLog(@" personeViewController favCell.textLabel.text = %@", favCell.textLabel.text);
+    NSLog(@" personeViewController favString = %@", [array objectAtIndex:identifierForValue]);
+
   }
   else
   {
     id object = [ABContact objectForProperty:property inRecord:person];
     NSLog(@"%@", [object description]);
+    
+    NSLog(@" personeViewController object currentCellString = %@", self.currentCellString);
+#pragma unused(object)
   }
-  
   return NO;
+}
+
+- (NSString *)replaceCurrentFavString:(NSString *)currentCellString WithSelectedProperty:(NSString *)selectedProperty {
+  NSMutableString *returnString = [NSMutableString string];
+  
+  NSArray *components = [currentCellString componentsSeparatedByString:@":"];
+  
+  NSLog(@"components = %@", components);
+  
+  [returnString appendString:components[0]];
+  [returnString appendString:@":"];
+  [returnString appendString:selectedProperty];
+  
+  NSLog(@" returnString = %@", returnString);
+  return returnString;
 }
 
 #pragma mark ABUnknownPersonViewControllerDelegate Method
