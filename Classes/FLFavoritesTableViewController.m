@@ -631,7 +631,7 @@ ABAddressBookRef addressBook;
 - (BOOL)personViewController: (ABPersonViewController *)personViewController shouldPerformDefaultActionForPerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifierForValue
 {
   
-  FLFavoritesTableViewCell *favCell = (FLFavoritesTableViewCell *)[self.tableView cellForRowAtIndexPath:self.currentIndexPath];
+  //FLFavoritesTableViewCell *favCell = (FLFavoritesTableViewCell *)[self.tableView cellForRowAtIndexPath:self.currentIndexPath];
   // Reveal the item that was selected
   if ([ABContact propertyIsMultiValue:property])
   {
@@ -643,7 +643,7 @@ ABAddressBookRef addressBook;
     NSLog(@" personeViewControlley array currentCellString = %@", self.currentCellString);
     
     [self replinishFavoritesWithContact:[ABContact contactWithRecord:person] selectedCellString:[array objectAtIndex:identifierForValue] atIndexPath:self.currentIndexPath];
-    NSLog(@" personeViewController favCell.textLabel.text = %@", favCell.textLabel.text);
+    //NSLog(@" personeViewController favCell.textLabel.text = %@", favCell.textLabel.text);
     NSLog(@" personeViewController favString = %@", [array objectAtIndex:identifierForValue]);
   }
   else
