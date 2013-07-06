@@ -9,6 +9,7 @@
 #import "FLFavoritesTableViewController.h"
 #import "ABWrappers.h"
 #import "ABContactsHelper+EmailSearch.h"
+#import "Settings.h"
 
 @interface FLFavoritesTableViewCell : UITableViewCell
 
@@ -96,7 +97,6 @@ ABAddressBookRef addressBook;
   self = [super initWithStyle:style];
   if (self) {
     _operatingMode = FL_FavoritesTVC_Mode_Operate;
-    _operatingMode = FL_FavoritesTVC_Mode_Operate;
     _propertyType = FL_PropertyType_EmailAndPhone;
   }
   return self;
@@ -108,7 +108,8 @@ ABAddressBookRef addressBook;
   
   // Uncomment the following line to preserve selection between presentations.
   // self.clearsSelectionOnViewWillAppear = NO;
-  
+
+#if FLEKSY_FAVORITES_ALL_TOGETHER
   if (self.operatingMode == FL_FavoritesTVC_Mode_Settings) {
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addFavorite:)];
     
@@ -121,7 +122,11 @@ ABAddressBookRef addressBook;
 
   }
   
-  self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelled:)];
+  self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveTapped:)];
+#else
+  // TODO: Bill's Layout - /Users/vince/Dropbox/Documentation/iOS Fleksy Development/iFleksy_UI_Design/mockup 003.jpg
+  
+#endif
 }
 
 - (void)didReceiveMemoryWarning
@@ -135,10 +140,10 @@ ABAddressBookRef addressBook;
 - (void)addFavorite:(id)sender {
   [FLFavoritesTableViewController checkAddressBookAuthorization];
   if (self.propertyType == FL_PropertyType_EmailAddress) {
-    //[self showPickerEmail:sender];
+    [self showPickerEmail:sender];
   }
   else if (self.propertyType == FL_PropertyType_PhoneNumber) {
-    //[self showPickerPhone:sender];
+    [self showPickerPhone:sender];
   }
   else if (self.propertyType == FL_PropertyType_EmailAndPhone) {
     [self showPickerEmailAndPhone:sender];
@@ -149,7 +154,7 @@ ABAddressBookRef addressBook;
   }
 }
 
-- (void)cancelled:(id)sender {
+- (void)saveTapped:(id)sender {
   
   if ([self.favoritesDelegate respondsToSelector:@selector(dismissFavoritesTVC)]) {
     [self.favoritesDelegate dismissFavoritesTVC];
@@ -161,7 +166,7 @@ ABAddressBookRef addressBook;
 }
 
 - (void)changeCancelButton {
-  self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(cancelled:)];
+  //self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(cancelled:)];
 }
 
 #pragma mark - ABPeoplePickerNavigationController Drivers
@@ -176,27 +181,27 @@ ABAddressBookRef addressBook;
   [self presentViewController:picker animated:YES completion:nil];
 }
 
-//- (void)showPickerPhone:(id)sender {
-//  
-//  ABPeoplePickerNavigationController *picker = [[ABPeoplePickerNavigationController alloc] init];
-//  picker.peoplePickerDelegate = self;
-//  picker.navigationBar.topItem.prompt = @"Choose contact to add to phone favorites";
-//  
-//  [picker setDisplayedProperties: [NSArray arrayWithObject:@(kABPersonPhoneProperty)]];
-//  
-//  [self presentViewController:picker animated:YES completion:NULL];
-//}
-//
-//
-//- (void)showPickerEmail:(id)sender {
-//  ABPeoplePickerNavigationController *picker = [[ABPeoplePickerNavigationController alloc] init];
-//  picker.peoplePickerDelegate = self;
-//  picker.navigationBar.topItem.prompt = @"Choose contact to add to email favorites";
-//  
-//  [picker setDisplayedProperties: [NSArray arrayWithObject:@(kABPersonEmailProperty)]];
-//  
-//  [self presentViewController:picker animated:YES completion:NULL];
-//}
+- (void)showPickerPhone:(id)sender {
+  
+  ABPeoplePickerNavigationController *picker = [[ABPeoplePickerNavigationController alloc] init];
+  picker.peoplePickerDelegate = self;
+  picker.navigationBar.topItem.prompt = @"Choose contact to add to phone favorites";
+  
+  [picker setDisplayedProperties: [NSArray arrayWithObject:@(kABPersonPhoneProperty)]];
+  
+  [self presentViewController:picker animated:YES completion:NULL];
+}
+
+
+- (void)showPickerEmail:(id)sender {
+  ABPeoplePickerNavigationController *picker = [[ABPeoplePickerNavigationController alloc] init];
+  picker.peoplePickerDelegate = self;
+  picker.navigationBar.topItem.prompt = @"Choose contact to add to email favorites";
+  
+  [picker setDisplayedProperties: [NSArray arrayWithObject:@(kABPersonEmailProperty)]];
+  
+  [self presentViewController:picker animated:YES completion:NULL];
+}
 
 #pragma mark - ABPeoplePickerNavigationControllerDelegate Methods
 
@@ -674,8 +679,65 @@ shouldPerformDefaultActionForPerson:(ABRecordRef)person
                          identifier:(ABMultiValueIdentifier)identifier
 {
   // If this is YES, will attempt to make phone call or send email.
-  // TODO: Can send this to delegate as 
+
   return NO;
 }
+
+#pragma mark - Automatic Magic Replenisher
+
++ (NSMutableArray *)automaticReplenisherForFavorites:(NSMutableArray *)myFavorites {
+  
+  ABContact *contact;
+  NSInteger favoriteIndex = 0;
+  NSMutableArray *returnFavorites = [myFavorites mutableCopy];
+  
+  for (NSString *selectedFavorite in myFavorites) {
+    
+    if ([selectedFavorite rangeOfString:@":"].location != NSNotFound) {
+      // Already replinished, so skip
+      break;
+    }
+    
+    NSString *replenishedFavorite;
+    
+    if ([selectedFavorite rangeOfString:@"@"].location != NSNotFound) {
+      contact = [[ABContactsHelper contactsMatchingEmail:selectedFavorite] lastObject];
+    }
+    else {
+      contact = [[ABContactsHelper contactsMatchingPhone:selectedFavorite] lastObject];
+    }
+    
+    if (contact) {
+      //Fix up the Fleksy favorite with a name
+      
+      replenishedFavorite = [FLFavoritesTableViewController replinishFavoritesWithContact:contact selectedFavorite:selectedFavorite];
+      [returnFavorites replaceObjectAtIndex:favoriteIndex withObject:replenishedFavorite];
+    }
+    else {
+      // This email does not have a know contact
+      NSLog(@"Could not replenish %@", selectedFavorite);
+    }
+    
+    favoriteIndex++;
+  }
+
+  return returnFavorites;
+}
+
++ (NSString *)replinishFavoritesWithContact:(ABContact *)contact selectedFavorite:(NSString *)selectedFavorite {
+  NSString *firstName = contact.firstname;
+  NSString *lastName = contact.lastname;
+  
+  NSMutableString *replacementFavString = [firstName mutableCopy];
+  if (lastName) {
+    [replacementFavString appendString:@"_"];
+    [replacementFavString appendString:lastName];
+  }
+  [replacementFavString appendString:@":"];
+  [replacementFavString appendString:selectedFavorite];
+  
+  return replacementFavString;
+}
+
 
 @end

@@ -669,20 +669,21 @@
 - (void)handleFavoritesDidUpdate:(NSNotification *)aNotification {
   NSLog(@" aNotification = %@", aNotification);
   
-  NSString *localSpeedDialCache;
-  
-  //Serialize the Favorites Array to a comma seperated string
-  
   favorites = [[(NSDictionary *)[aNotification userInfo] objectForKey:FleksyFavoritesKey] mutableCopy];
   
-  //[textView.inputView performSelector:@selector(handleSettingsChanged:) withObject:nil];
+  [self updateFavoriteStorage:favorites];
+}
+
+- (void)updateFavoriteStorage:(NSMutableArray *)myFavorites {
   
-  localSpeedDialCache = [favorites componentsJoinedByString:@","];
+  //Serialize the Favorites Array to a comma seperated string
+
+  NSString *localSpeedDialCache = [favorites componentsJoinedByString:@","];
   
   // TODO: handleSettingsChange keeps same list in place because it is out of sync until final Done of Settings.
   // So favorites and FLEKSY_APP_SETTING_SPEED_DIAL_1 both are changed in other classes and methods, so keep local cache
   //  to reflect changes while user is still in the Settings.
-
+  
   [[NSUserDefaults standardUserDefaults] setObject:localSpeedDialCache
                                             forKey:@"FLEKSY_APP_SETTING_SPEED_DIAL_1"];
   
@@ -1629,7 +1630,7 @@
     
     favorites = [[NSMutableArray alloc] init];
     [self reloadFavorites];
-    
+        
     //self.wantsFullScreenLayout = YES;
     
     shownTutorial = NO;
@@ -1658,6 +1659,46 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+#ifndef RELEASE
+  NSLog(@"Favorites before strip: %@", favorites);
+  NSLog(@"SPEED DIAL before strip: %@", FLEKSY_APP_SETTING_SPEED_DIAL_1);
+  
+  favorites = [self testStripFavoritesOfNames:[favorites mutableCopy]];
+  
+  NSLog(@"Favorites after strip: %@", favorites);
+  NSLog(@"SPEED DIAL after strip: %@", FLEKSY_APP_SETTING_SPEED_DIAL_1);
+  
+  [self updateFavoriteStorage:favorites];
+#endif
+  
+  NSLog(@"Favorites before magic: %@", favorites);
+  NSLog(@"SPEED DIAL before magic: %@", FLEKSY_APP_SETTING_SPEED_DIAL_1);
+  
+  favorites = [FLFavoritesTableViewController automaticReplenisherForFavorites:[favorites mutableCopy]];
+  
+  NSLog(@"Favorites after magic: %@", favorites);
+  NSLog(@"SPEED DIAL after magic: %@", FLEKSY_APP_SETTING_SPEED_DIAL_1);
+  
+  [self updateFavoriteStorage:favorites];
+  
+  NSLog(@"Favorites after update: %@", favorites);
+  NSLog(@"SPEED DIAL after update: %@", FLEKSY_APP_SETTING_SPEED_DIAL_1);
+
+
+}
+
+- (NSMutableArray *)testStripFavoritesOfNames:(NSMutableArray *)myFavorites {
+    
+  // Convert  {Sam_Jones:a1@b1.com,Tiny_Tim:222-333-4444} to {a1b1.com, 222-333-4444}
+  for (int i = 0; i < [myFavorites count]; i++) {
+    NSString *favString = [myFavorites objectAtIndex:i];
+    NSArray *components = [favString componentsSeparatedByString:@":"];
+    if ([components count] > 1) {
+      [myFavorites replaceObjectAtIndex:i withObject:components[1]];
+    }
+  }
+  return myFavorites;
 }
 
 

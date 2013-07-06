@@ -43,6 +43,7 @@ typedef enum {
 
 - (id)initWithStyle:(UITableViewStyle)style withMode:(FL_FavoritesTVC_Mode)mode;
 + (void)checkAddressBookAuthorization;
++ (NSMutableArray *)automaticReplenisherForFavorites:(NSMutableArray *)myFavorites;
 
 /**
  * @notification FleksyFavoritesWillUpdateNotification, FleksyFavoritesDidUpdateNotification
