@@ -636,6 +636,8 @@ ABAddressBookRef addressBook;
   if ([ABContact propertyIsMultiValue:property])
   {
     NSArray *array = [ABContact arrayForProperty:property inRecord:person];
+    
+    NSLog(@"ARRAY = %@", array);
     NSLog(@"%@", [array objectAtIndex:identifierForValue]);
     
     NSLog(@" personeViewControlley array currentCellString = %@", self.currentCellString);
@@ -643,7 +645,6 @@ ABAddressBookRef addressBook;
     [self replinishFavoritesWithContact:[ABContact contactWithRecord:person] selectedCellString:[array objectAtIndex:identifierForValue] atIndexPath:self.currentIndexPath];
     NSLog(@" personeViewController favCell.textLabel.text = %@", favCell.textLabel.text);
     NSLog(@" personeViewController favString = %@", [array objectAtIndex:identifierForValue]);
-
   }
   else
   {
