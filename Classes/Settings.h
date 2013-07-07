@@ -143,16 +143,6 @@
 
 #define MyAccessibilityPostNotification(NOTIFICATION_TYPE, ARGUMENT) { /*NSLog(@"UIAccessibilityPostNotification(%u, %@)", NOTIFICATION_TYPE, ARGUMENT);*/ UIAccessibilityPostNotification(NOTIFICATION_TYPE, ARGUMENT);}
 
-#define FacebookBlue [UIColor colorWithRed:0.23 green:0.35 blue:0.59 alpha:1]
-
-//FSA15FLVars_Colour_FLBLACK_ = [AndroidGraphicsColor rgbWithInt:25 withInt:25 withInt:25];
-#define FLBlackColor [UIColor colorWithRed:(25.0/255.0) green:(25.0/255.0) blue:(25.0/255.0) alpha:1.0]
-//FSA15FLVars_Colour_FLEKSY_ = [AndroidGraphicsColor rgbWithInt:52 withInt:160 withInt:194];
-#define FLeksyColor [UIColor colorWithRed:(52.0/255.0) green:(160.0/255.0) blue:(194.0/255.0) alpha:1.0]
-
-#define FLWhiteColor [UIColor colorWithWhite:1.0 alpha:1.0]
-#define FLLightGrayColor [UIColor lightGrayColor]
-
 extern bool FLEKSY_APP_SETTING_SPEAK;
 extern bool FLEKSY_APP_SETTING_KEYBOARD_CLICKS;
 extern bool FLEKSY_APP_SETTING_SHOW_TRACES;
@@ -180,13 +170,5 @@ extern int FLEKSY_APP_SETTING_THEME;
 //extern bool FLEKSY_CORE_SETTING_USE_SEARCH_FILTER;
 
 #define FLEKSY_APP_API_VERSION_KEY @"FLEKSY_APP_API_VERSION_KEY"
-
-typedef enum {
-  FLThemeTypeNormal,
-  FLThemeTypeVanilla,
-  FLThemeTypeIOS7,
-} FLThemeType;
-
-
 
 #endif

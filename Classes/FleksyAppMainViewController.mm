@@ -660,7 +660,7 @@
   //favoritesNavigationController = nil;
 }
 
-#pragma mark - FLFavoritesTableViewControllerNotification Handlers
+#pragma mark - FLFavoritesTableViewController Notification Handlers
 
 - (void)handleFavoritesWillUpdate:(NSNotification *)aNotification {
   NSLog(@" aNotification = %@", aNotification);
@@ -691,6 +691,14 @@
   
   [[NSUbiquitousKeyValueStore defaultStore] synchronize];
   [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+#pragma mark - FLTheme Notification Handlers
+
+- (void)handleThemeDidChange:(NSNotification *)aNote {
+  NSLog(@"handleThemeDidChange = %@", aNote);
+  actionButton.imageView.backgroundColor = FLEKSYTHEME.actionButton_imageView_backgroundColor;
+  [self.view setNeedsLayout];
 }
 
 #pragma mark - Menu Instructions
@@ -1608,7 +1616,7 @@
     [actionButton setImage:image forState:UIControlStateNormal];
     actionButton.showsTouchWhenHighlighted = YES;
     //actionButton.backgroundColor = [UIColor redColor];
-    actionButton.imageView.backgroundColor = [UIColor clearColor]; //FLEKSY_TEXTVIEW_COLOR;
+    actionButton.imageView.backgroundColor = FLEKSYTHEME.actionButton_imageView_backgroundColor;
     actionButton.accessibilityLabel = @"Action";
     actionButton.accessibilityHint = @"Double tap for menu";
     [actionButton addTarget:self action:@selector(showMenu) forControlEvents:UIControlEventTouchUpInside];
@@ -1644,6 +1652,9 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleFavoritesWillUpdate:) name:FleksyFavoritesWillUpdateNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleFavoritesDidUpdate:) name:FleksyFavoritesDidUpdateNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleThemeDidChange:) name:FleksyThemeDidChangeNotification object:nil];
+
   }
   return self;
 }

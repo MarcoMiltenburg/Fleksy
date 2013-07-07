@@ -79,10 +79,10 @@
     self->capitalization = nil;
     
     [self hide];
-    self.backgroundColor = [UIColor clearColor];
+    self.backgroundColor = FLClearColor;
 
     bg = [[UIScrollView alloc] init];
-    bg.backgroundColor = [UIColor clearColor];
+    bg.backgroundColor = FLClearColor;
     [self addSubview:bg];
     
     //allow rest of contents to be visible outside
@@ -93,7 +93,7 @@
     
     
     customSegmentedControl = [[CustomSegmentedControl alloc] initWithVertical:self.vertical];
-    customSegmentedControl.backgroundColor = [UIColor clearColor];
+    customSegmentedControl.backgroundColor = FLClearColor;
     [bg addSubview:customSegmentedControl];
 
     self.userInteractionEnabled = NO;

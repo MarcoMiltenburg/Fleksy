@@ -22,6 +22,7 @@
 #import <QuartzCore/QuartzCore.h>
 
 #import <Foundation/NSObjCRuntime.h>
+#import "AppDelegate.h"
 
 @implementation FLKeyboardContainerView
 
@@ -37,7 +38,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardContainerView);
   
   if (self = [super initWithFrame:CGRectMake(0, 0, 10, 10)]) {
     
-    self.backgroundColor = [UIColor clearColor];
+    self.backgroundColor = FLClearColor;
     
     typingController = [FLTypingController_iOS sharedFLTypingController_iOS];
     
@@ -77,10 +78,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardContainerView);
   
     topShadowView = [[UIView alloc] init];
     topShadowView.userInteractionEnabled = NO;
-    //TODO: Theme Vanilla
-    topShadowView.backgroundColor = FLeksyColor;
-    //topShadowView.backgroundColor = [UIColor blackColor];
-    //topShadowView.backgroundColor = FLWhiteColor;
+    topShadowView.backgroundColor = FLEKSYTHEME.topShadowView_backgroundColor;
     topShadowView.layer.shadowOffset = CGSizeMake(0, -4);
     topShadowView.layer.shadowRadius = 4;
     topShadowView.layer.shadowOpacity = 0.3;
@@ -109,10 +107,21 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardContainerView);
     NSLog(@" ***** FleksyAPI Testing: END of Loading");
 #endif
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleThemeDidChange:) name:FleksyThemeDidChangeNotification object:nil];
+
   }
 
   return self;
 }
+
+#pragma mark - FLTheme Notification Handlers
+
+- (void)handleThemeDidChange:(NSNotification *)aNote {
+  NSLog(@"handleThemeDidChange = %@", aNote);
+  topShadowView.backgroundColor = FLEKSYTHEME.topShadowView_backgroundColor;
+  [self setNeedsLayout];
+}
+
 
 - (void) setAlpha:(CGFloat)alpha {
   //NSLog(@"FLKeyboardContainerView setAlpha: %.3f", alpha);

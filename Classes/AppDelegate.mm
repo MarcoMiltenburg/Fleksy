@@ -22,6 +22,10 @@
 #include <string>
 
 #import <PatternRecognizer/Platform.h>
+#import "FLTheme.h"
+#import "FleksyAppMainViewController.h"
+#import "AppDelegate+Theme.h"
+
 
 //#define APP_STORE_LINK1 @"http://itunes.apple.com/us/app/fleksy/id520337246"
 //#define APP_STORE_LINK2 @"http://itunes.com/apps/fleksy"
@@ -47,8 +51,9 @@ float distributionFunction(float x);
 
 @end
 
-@implementation AppDelegate 
+@implementation AppDelegate
 
+@synthesize theme = _theme;
 
 float distributionFunction(float x) {
   
@@ -216,6 +221,12 @@ float distributionFunction(float x) {
   printf("Fleksy NOT app_store\n");
 #endif
   
+//  self.theme = [FLTheme theme];
+//  self.theme.currentThemeType = FLThemeTypeNormal; //
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleThemeDidChange:) name:FleksyThemeDidChangeNotification object:nil];
+  
+  self.theme = [self themeWithHandler:self withType:FLThemeTypeNormal];
   
   NSDictionary* settings = [FileManager settings];
   if (!settings) {
@@ -262,7 +273,7 @@ float distributionFunction(float x) {
   
   //we use bounds here and not application frame, since the view controller inside will adjust accordingly for the status bar
   window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-  window.backgroundColor = FLEKSY_TEXTVIEW_COLOR;
+  window.backgroundColor = FLEKSYTHEME.window_backgroundColor;
   window.rootViewController = fleksyAppViewController;
   // Show the window
   [window makeKeyAndVisible];
@@ -282,6 +293,16 @@ float distributionFunction(float x) {
   NSLog(@"END of applicationDidFinishLaunching, took %.6f", CFAbsoluteTimeGetCurrent() - startTime);
 #pragma unused(startTime)
 }
+
+#pragma mark - FLTheme Notification Handlers
+
+- (void)handleThemeDidChange:(NSNotification *)aNote {
+  NSLog(@"handleThemeDidChange = %@", aNote);
+  window.backgroundColor = FLEKSYTHEME.window_backgroundColor;
+  [window makeKeyAndVisible];
+  //[window setNeedsLayout];
+}
+
                                
 - (NSString *)parseApiVersion:(NSString *)apiVersion
 {

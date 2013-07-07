@@ -125,6 +125,10 @@
 		61EDA3AA1784E0DC00C5CC52 /* ABStandin.m in Sources */ = {isa = PBXBuildFile; fileRef = 61EDA3A41784E0DC00C5CC52 /* ABStandin.m */; };
 		61EDA3AD1784E0F700C5CC52 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61EDA3AB1784E0F700C5CC52 /* AddressBook.framework */; };
 		61EDA3AE1784E0F700C5CC52 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61EDA3AC1784E0F700C5CC52 /* AddressBookUI.framework */; };
+		61FCFEE21788E19000F41988 /* FLTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 61FCFEE11788E19000F41988 /* FLTheme.m */; };
+		61FCFEE61788E55F00F41988 /* FLThemeVanilla.m in Sources */ = {isa = PBXBuildFile; fileRef = 61FCFEE51788E55F00F41988 /* FLThemeVanilla.m */; };
+		61FCFEE9178905A400F41988 /* AppDelegate+Theme.m in Sources */ = {isa = PBXBuildFile; fileRef = 61FCFEE8178905A400F41988 /* AppDelegate+Theme.m */; };
+		61FCFEEC17890CDA00F41988 /* FLThemeNightLight.m in Sources */ = {isa = PBXBuildFile; fileRef = 61FCFEEB17890CDA00F41988 /* FLThemeNightLight.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -351,6 +355,14 @@
 		61EDA3A51784E0DC00C5CC52 /* ABWrappers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABWrappers.h; sourceTree = "<group>"; };
 		61EDA3AB1784E0F700C5CC52 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		61EDA3AC1784E0F700C5CC52 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		61FCFEE01788E19000F41988 /* FLTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLTheme.h; sourceTree = "<group>"; };
+		61FCFEE11788E19000F41988 /* FLTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLTheme.m; sourceTree = "<group>"; };
+		61FCFEE41788E55F00F41988 /* FLThemeVanilla.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLThemeVanilla.h; sourceTree = "<group>"; };
+		61FCFEE51788E55F00F41988 /* FLThemeVanilla.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLThemeVanilla.m; sourceTree = "<group>"; };
+		61FCFEE7178905A400F41988 /* AppDelegate+Theme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+Theme.h"; sourceTree = "<group>"; };
+		61FCFEE8178905A400F41988 /* AppDelegate+Theme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+Theme.m"; sourceTree = "<group>"; };
+		61FCFEEA17890CDA00F41988 /* FLThemeNightLight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLThemeNightLight.h; sourceTree = "<group>"; };
+		61FCFEEB17890CDA00F41988 /* FLThemeNightLight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLThemeNightLight.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -552,6 +564,7 @@
 		2E896DC914BAC9F60098FD4F /* Client */ = {
 			isa = PBXGroup;
 			children = (
+				61FCFEE31788E53100F41988 /* Themes */,
 				61EDA3961784E08D00C5CC52 /* AddressBook */,
 				617DACBE1715DC78009D93CB /* FleksyAPI_Testing */,
 				2E1EA2231656E27800B5177E /* GestureTestbed */,
@@ -658,6 +671,8 @@
 				2EE7C88F15BDE30700307235 /* FLPurchaseManager.mm */,
 				2E804A4814AE69C900E0EC59 /* FleksyAppMainViewController.h */,
 				2E804A4914AE69C900E0EC59 /* FleksyAppMainViewController.mm */,
+				61FCFEE7178905A400F41988 /* AppDelegate+Theme.h */,
+				61FCFEE8178905A400F41988 /* AppDelegate+Theme.m */,
 			);
 			name = App;
 			sourceTree = "<group>";
@@ -878,6 +893,19 @@
 			path = ABWrappers;
 			sourceTree = "<group>";
 		};
+		61FCFEE31788E53100F41988 /* Themes */ = {
+			isa = PBXGroup;
+			children = (
+				61FCFEE01788E19000F41988 /* FLTheme.h */,
+				61FCFEE11788E19000F41988 /* FLTheme.m */,
+				61FCFEE41788E55F00F41988 /* FLThemeVanilla.h */,
+				61FCFEE51788E55F00F41988 /* FLThemeVanilla.m */,
+				61FCFEEA17890CDA00F41988 /* FLThemeNightLight.h */,
+				61FCFEEB17890CDA00F41988 /* FLThemeNightLight.m */,
+			);
+			name = Themes;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1069,6 +1097,10 @@
 				61EDA3A81784E0DC00C5CC52 /* ABContactsHelper.m in Sources */,
 				61EDA3A91784E0DC00C5CC52 /* ABGroup.m in Sources */,
 				61EDA3AA1784E0DC00C5CC52 /* ABStandin.m in Sources */,
+				61FCFEE21788E19000F41988 /* FLTheme.m in Sources */,
+				61FCFEE61788E55F00F41988 /* FLThemeVanilla.m in Sources */,
+				61FCFEE9178905A400F41988 /* AppDelegate+Theme.m in Sources */,
+				61FCFEEC17890CDA00F41988 /* FLThemeNightLight.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

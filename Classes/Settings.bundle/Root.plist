@@ -23,11 +23,13 @@
 			<array>
 				<real>0</real>
 				<integer>1</integer>
+				<string>2</string>
 			</array>
 			<key>Titles</key>
 			<array>
 				<string>Dark Side</string>
 				<string>Vanilla</string>
+				<string>Night Light</string>
 			</array>
 			<key>DefaultValue</key>
 			<integer>0</integer>

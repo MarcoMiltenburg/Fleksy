@@ -10,7 +10,6 @@
 #import "FleksyKeyboard.h"
 #import "MyTextView.h"
 
-#define FLEKSY_TEXTVIEW_COLOR [UIColor colorWithRed:0.929 green:0.925 blue:0.878 alpha:1]
 /// [UIColor colorWithRed:1 green:1 blue:0.7 alpha:1];
 
 @interface FleksyTextView : UIView <UITextViewDelegate> {

@@ -16,6 +16,7 @@
 #import "VariousUtilities2.h"
 #include "FleksyUtilities.h"
 #import <QuartzCore/QuartzCore.h>
+#import "AppDelegate.h"
 
 #define LABEL_FONT_SIZE (deviceIsPad() ? 44 : 30)
 #define POPUP_WIDTH  (2*LABEL_FONT_SIZE)
@@ -27,7 +28,6 @@
 
 
 @implementation KeyboardImageView
-
 
 - (FLChar) getNearestCharForPoint:(CGPoint) target {
   FLPoint p = FLPointFromCGPoint(target);
@@ -169,9 +169,7 @@
   
   [UIView animateWithDuration:duration delay:delay options:UIViewAnimationOptionCurveLinear
                    animations:^{
-                     // TODO: Theme Vanilla
-                     //keyLabel.textColor = [UIColor colorWithWhite:1.0 alpha:1];
-                     keyLabel.textColor = FLBlackColor;
+                     keyLabel.textColor = FLEKSYTHEME.keyboardImageView_keyLabelColor;
                      keyLabel.transform = CGAffineTransformConcat(CGAffineTransformInvert(self.superview.transform), CGAffineTransformMakeScale(0.5, 0.5));
                   }
                    completion:^(BOOL finished){
@@ -196,9 +194,8 @@
   //}
   KSLabel* label = [[KSLabel alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
   if (!deviceIsPad()) {
-    //TODO: Theme Vanilla - Just comment out lines 
-    //label.outlineColor = [UIColor blackColor];
-    //label.outlineWidth = 2;
+    label.outlineColor = FLEKSYTHEME.keyboardImageView_label_outlineColor;
+    label.outlineWidth = FLEKSYTHEME.keyboardImageView_label_outlineWidth;
   }
   
   if (c == '\n') {
@@ -213,11 +210,9 @@
   label.font = popup ? [UIFont fontWithName:@"HelveticaNeue-Bold" size:size] : [UIFont fontWithName:@"HelveticaNeue-Bold" size:size/*+12*/];
   label.frame = CGRectMake(0, 0, [label.font lineHeight], [label.font lineHeight]);
   
-  //TODO: Theme Vanilla
-  //label.textColor = popup ? [UIColor whiteColor] : [UIColor whiteColor];//[UIColor lightGrayColor];
-  label.textColor = popup ? FLBlackColor : FLBlackColor;//[UIColor lightGrayColor];
+  label.textColor = popup ? FLEKSYTHEME.keyboardImageView_label_textColorForPopup : FLEKSYTHEME.keyboardImageView_label_textColor; //[UIColor lightGrayColor];
   label.textAlignment = NSTextAlignmentCenter; // UITextAlignmentCenter;
-  label.backgroundColor = [UIColor clearColor];
+  label.backgroundColor = FLClearColor;
   //label.alpha = 0.5;
   if (!popup) {
     label.center = point;
@@ -242,7 +237,7 @@
   self = [super initWithImage:image];
   if (self) {
 
-    self.backgroundColor = [UIColor clearColor];// [UIColor colorWithWhite:0.0 alpha:1];
+    self.backgroundColor = FLClearColor;// [UIColor colorWithWhite:0.0 alpha:1];
     
     centroids = [[NSMutableArray alloc] init];
     
@@ -272,8 +267,18 @@
     //self.multipleTouchEnabled = YES;
     
     lastTransform = CGAffineTransformIdentity;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleThemeDidChange:) name:FleksyThemeDidChangeNotification object:nil];
   }
   return self;
+}
+
+#pragma mark - FLTheme Notification Handlers
+
+- (void)handleThemeDidChange:(NSNotification *)aNote {
+  NSLog(@"handleThemeDidChange = %@", aNote);
+  homeRowStripe.backgroundColor = FLEKSYTHEME.keyboardImageView_homeStripeBackgroundColor;
+  [self setNeedsLayout];
 }
 
 
@@ -328,9 +333,8 @@
   if (_keys['Q'].x != -1) {
     homeRowStripe = [[UIView alloc] init];
     if (!FLEKSY_APP_SETTING_SPACE_BUTTON) {
-      //TODO: Theme Vanilla
-      //homeRowStripe.backgroundColor = [UIColor colorWithWhite:1 alpha:0.2];
-      homeRowStripe.backgroundColor = FLLightGrayColor;
+
+      homeRowStripe.backgroundColor = FLEKSYTHEME.keyboardImageView_homeStripeBackgroundColor;
 
     }
     else  {
@@ -378,13 +382,8 @@
   touchTrace.userInteractionEnabled = NO;
   touchTrace.layer.cornerRadius = 5 * multiplierX;
   touchTrace.center = CGPointMake(keyLabel.bounds.size.width * 0.5, keyLabel.bounds.size.height * 0.5);
-  //TODO: Theme Vanilla
-  //touchTrace.backgroundColor = [UIColor whiteColor]; //[UIColor colorWithRed:1 green:0 blue:1 alpha:1]; // [UIColor greenColor];
-  //touchTrace.backgroundColor = currentTheme.traceColor  [UIColor blackColor]; //[UIColor colorWithRed:1 green:0 blue:1 alpha:1]; // [UIColor greenColor];
-  touchTrace.backgroundColor = [UIColor blackColor]; //[UIColor colorWithRed:1 green:0 blue:1 alpha:1]; // [UIColor greenColor];
-  //touchTrace.alpha = 0.3;
-  // Even for DarkSide Theme make 0.2
-  touchTrace.alpha = 0.2;
+  touchTrace.backgroundColor = FLEKSYTHEME.keyboardImageView_touchTrace_backgroundColor; //[UIColor colorWithRed:1 green:0 blue:1 alpha:1]; // [UIColor greenColor];
+  touchTrace.alpha = FLEKSYTHEME.keyboardImageView_touchTrace_alpha;
   touchTrace.tag = RIPPLE_VIEW_TAG;
   [keyLabel addSubview:touchTrace];
   

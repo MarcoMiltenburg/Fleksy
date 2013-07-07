@@ -16,6 +16,7 @@
 #import "FleksyTextView.h"
 #import "FLPurchaseManager.h"
 #import "FLFavoritesTableViewController.h"
+#import "AppDelegate.h"
 
 #define FLEKSY_DIRECT_TOUCH 1
 

@@ -14,21 +14,40 @@
 #import "FileManager.h"
 #import "VariousUtilities.h"
 #import "VariousUtilities2.h"
+#import "AppDelegate.h"
 
 @implementation FLKeyboardView
+{
+  
+  FLPoint keymapABC[KEY_MAX_VALUE];
+  FLPoint keymapSymbolsA[KEY_MAX_VALUE];
+  FLPoint keymapSymbolsB[KEY_MAX_VALUE];
+  
+  BOOL keymapArePreloaded;
+
+}
 
 SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardView);
 
 - (void) setKeymaps:(FLPoint[FLKeyboardID_NUMBER_OF_KEYBOARDS][KEY_MAX_VALUE]) keymap {
-
+  
   [imageViewABC      setKeys:keymap[FLKeyboardID_QWERTY_UPPER]];
   [imageViewSymbolsA setKeys:keymap[FLKeyboardID_NUMBERS]];
-  [imageViewSymbolsB setKeys:keymap[FLKeyboardID_SYMBOLS]];
+  [imageViewSymbolsB setKeys:keymap[FLKeyboardID_NUMBERS]];
   
   [self disableQWERTYextraKeys];
   [self reset];
   
   loadedKeyboardFile = YES;
+  
+  for (int i = 0; i < KEY_MAX_VALUE; i++) {
+    keymapABC[i] = keymap[FLKeyboardID_QWERTY_UPPER][i];
+    keymapSymbolsA[i] = keymap[FLKeyboardID_NUMBERS][i];
+    keymapSymbolsA[i] = keymap[FLKeyboardID_NUMBERS][i];
+  }
+  
+  keymapArePreloaded = YES;
+
 }
 
 
@@ -52,9 +71,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardView);
   if (self = [super initWithFrame:frame view1:imageViewABC view2A:imageViewSymbolsA view2B:imageViewSymbolsB]) {
     
     extraKeysBgView = [[UIView alloc] init];
-    //TODO: Theme Vanilla
-    //extraKeysBgView.backgroundColor = [UIColor blackColor];
-    extraKeysBgView.backgroundColor = FLWhiteColor;
+    extraKeysBgView.backgroundColor = FLEKSYTHEME.extraKeysBgView_backgroundColor;
     [self addSubview:extraKeysBgView];
     [self sendSubviewToBack:extraKeysBgView];
     
@@ -62,15 +79,35 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardView);
     
     //capsLock = NO;
     //self.backgroundColor = FacebookBlue;
-    //TODO: Theme Vanilla
-    //self.backgroundColor = [UIColor blackColor];
-    self.backgroundColor = FLWhiteColor;
-
+    self.backgroundColor = FLEKSYTHEME.fleksyKeyboard_backgroundColor;
     
     shortcutKeysLetters = @"@.#$(:/5";
     shortcutKeysNumbers = @"@.#$(:/,";
+    
+    keymapArePreloaded = NO;
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleThemeDidChange:) name:FleksyThemeDidChangeNotification object:nil];
   }
   return self;
+}
+
+#pragma mark - FLTheme Notification Handlers
+
+- (void)handleThemeDidChange:(NSNotification *)aNote {
+  NSLog(@"handleThemeDidChange = %@", aNote);
+  extraKeysBgView.backgroundColor = FLEKSYTHEME.extraKeysBgView_backgroundColor;
+  self.backgroundColor = FLEKSYTHEME.fleksyKeyboard_backgroundColor;
+  
+  if (keymapArePreloaded) {
+//    [imageViewABC      setKeys:keymapABC];
+//    [imageViewSymbolsA setKeys:keymapSymbolsA];
+//    [imageViewSymbolsB setKeys:keymapSymbolsB];
+//    
+//    [self disableQWERTYextraKeys];
+//    [self reset];
+  }
+
+  [self setNeedsLayout];
 }
 
 - (id) init {
