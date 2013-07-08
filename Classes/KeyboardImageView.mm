@@ -305,42 +305,6 @@
   }
 }
 
-- (void) setKeysWithKeypoints { // :(CGPoint[]) theKeyPoints {
-    
-//  keyLabels = [[NSMutableDictionary alloc] init];
-//  keyPopupLabels = [[NSMutableDictionary alloc] init];
-  
-  [keyLabels removeAllObjects];
-  [keyPopupLabels removeAllObjects];
-  
-  for (int c = 0; c < KEY_MAX_VALUE; c++) {
-    
-    NSNumber* key = [NSNumber numberWithChar:c];
-    CGPoint point = CGPointMake(keyPoints[c].x, keyPoints[c].y);
-    if (point.x != -1 || point.y != -1) {
-      
-      FLChar existing = [self getNearestCharForPoint:point];
-      //CGPoint p = [self getKeyboardPointForChar:existing];
-      UILabel* existingLabel = [keyLabels objectForKey:[NSNumber numberWithChar:existing]];
-      
-      if (existingLabel) {
-        //NSString* temp = [[NSString alloc] initWithBytes:&c length:1 encoding:NSISOLatin1StringEncoding];
-        //NSLog(@"will not create new label %@, we already have %c (%d)", temp, existing, existing);
-      } else {
-        
-        UILabel* label = [self createLabelForChar:c atPoint:point popup:NO];
-        [keyLabels setObject:label forKey:key];
-        [self addSubview:label];
-        
-        UILabel* popupLabel = [self createLabelForChar:c atPoint:point popup:YES];
-        [keyPopupLabels setObject:popupLabel forKey:key];
-      }
-    }
-  }
-  
-  [self handleThemeDidChange:nil];
-}
-
 
 - (void) addButtonCentroid:(CGPoint) point color:(UIColor*) color {
   int size = 26;
