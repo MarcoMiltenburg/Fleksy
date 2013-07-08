@@ -16,7 +16,7 @@
 #import "VariousUtilities2.h"
 #include "FleksyUtilities.h"
 #import <QuartzCore/QuartzCore.h>
-#import "AppDelegate.h"
+#import "FLThemeManager.h"
 
 #define LABEL_FONT_SIZE (deviceIsPad() ? 44 : 30)
 #define POPUP_WIDTH  (2*LABEL_FONT_SIZE)

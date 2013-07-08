@@ -22,9 +22,9 @@
 #include <string>
 
 #import <PatternRecognizer/Platform.h>
-#import "FLTheme.h"
+
 #import "FleksyAppMainViewController.h"
-#import "AppDelegate+Theme.h"
+
 
 
 //#define APP_STORE_LINK1 @"http://itunes.apple.com/us/app/fleksy/id520337246"
@@ -53,7 +53,7 @@ float distributionFunction(float x);
 
 @implementation AppDelegate
 
-@synthesize theme = _theme;
+//@synthesize themeManager = _themeManager;
 
 float distributionFunction(float x) {
   
@@ -226,7 +226,7 @@ float distributionFunction(float x) {
   
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleThemeDidChange:) name:FleksyThemeDidChangeNotification object:nil];
   
-  self.theme = [self themeWithHandler:self withType:FLThemeTypeNormal];
+  self.themeManager = [FLThemeManager sharedManager];
   
   NSDictionary* settings = [FileManager settings];
   if (!settings) {
@@ -299,6 +299,7 @@ float distributionFunction(float x) {
 - (void)handleThemeDidChange:(NSNotification *)aNote {
   NSLog(@"handleThemeDidChange = %@", aNote);
   window.backgroundColor = FLEKSYTHEME.window_backgroundColor;
+  // TODO: This does not appear to have an effect...
   [window makeKeyAndVisible];
   //[window setNeedsLayout];
 }

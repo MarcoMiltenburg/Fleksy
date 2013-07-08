@@ -22,7 +22,7 @@
 #import <QuartzCore/QuartzCore.h>
 
 #import <Foundation/NSObjCRuntime.h>
-#import "AppDelegate.h"
+#import "FLThemeManager.h"
 
 @implementation FLKeyboardContainerView
 

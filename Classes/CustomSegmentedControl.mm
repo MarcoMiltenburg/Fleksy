@@ -9,7 +9,7 @@
 #import "CustomSegmentedControl.h"
 #import "VariousUtilities.h"
 #import "Settings.h"
-#import "AppDelegate.h"
+#import "FLThemeManager.h"
 
 #define SEGMENTS_N 13
 #define TAG_NO_TRAILING_SPACE 0

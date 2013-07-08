@@ -9,7 +9,7 @@
 #import "FleksyTextView.h"
 #import "VariousUtilities.h"
 #import "Settings.h"
-#import "AppDelegate.h"
+#import "FLThemeManager.h"
 
 @implementation FleksyTextView
 
@@ -35,10 +35,7 @@
     
     //id<UIApplicationDelegate> appDelegate = [[UIApplication sharedApplication] delegate];
     //textView.backgroundColor = ((AppDelegate *)appDelegate).theme.textView_backgroundColor;
-    
-    textView.backgroundColor = ((AppDelegate *)(id<UIApplicationDelegate>)[[UIApplication sharedApplication] delegate]).theme.textView_backgroundColor;
-
-    
+        
     textView.backgroundColor = FLEKSYTHEME.textView_backgroundColor;
     
     textView.textColor = FLEKSYTHEME.textView_textColor;

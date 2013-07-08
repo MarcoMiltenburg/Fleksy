@@ -17,20 +17,6 @@ typedef enum {
   FLThemeTypeIOS7,
 } FLThemeType;
 
-
-@protocol FLThemeChangeHandler <NSObject>
-/**
- *
- * Indicate that the theme has changed
- * Whichever class handles theme changes shall send this message to whichever object holds the theme object
- *
- */
-- (void)themeDidChange:(FLThemeType)newTheme;
-
-@end
-
-#define FLEKSYTHEME ((AppDelegate *)(id<UIApplicationDelegate>)[[UIApplication sharedApplication] delegate]).theme
-
 @interface FLTheme : NSObject
 /**
  * Initialize the theme. 
@@ -40,7 +26,6 @@ typedef enum {
  */
 + (id)theme;
 
-@property (assign, nonatomic) id<FLThemeChangeHandler> handler;
 @property (        nonatomic) FLThemeType currentThemeType;
 
 @property (strong, nonatomic) UIColor *window_backgroundColor;
@@ -67,10 +52,6 @@ typedef enum {
 
 
 @end
-
-#pragma mark - Notificaition
-
-extern NSString * const FleksyThemeDidChangeNotification;
 
 #pragma mark - Color Definitions
 

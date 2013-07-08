@@ -137,7 +137,8 @@ static FleksyKeyboard* instance = nil;
   FLEKSY_APP_SETTING_THEME                     = [[VariousUtilities getSettingNamed:@"FLEKSY_APP_SETTING_THEME" fromSettings:settings] intValue];
 
   if (FLEKSYTHEME.currentThemeType != FLEKSY_APP_SETTING_THEME) {
-    [FLEKSYTHEME.handler themeDidChange:(FLThemeType)FLEKSY_APP_SETTING_THEME];
+    //[FLEKSYTHEME.handler themeDidChange:(FLThemeType)FLEKSY_APP_SETTING_THEME];
+    [[FLThemeManager sharedManager].handler themeDidChange:(FLThemeType)FLEKSY_APP_SETTING_THEME];
   }
   
   //NSLog(@"FleksyKeyboard handleSettingsChanged: %@", settings);

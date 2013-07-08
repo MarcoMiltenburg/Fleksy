@@ -8,8 +8,6 @@
 
 #import "FLTheme.h"
 
-NSString * const FleksyThemeDidChangeNotification = @"FleksyThemeDidChangeNotification";
-
 @implementation FLTheme
 
 + (id)theme {

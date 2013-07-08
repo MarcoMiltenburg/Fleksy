@@ -14,7 +14,7 @@
 #import "FileManager.h"
 #import "VariousUtilities.h"
 #import "VariousUtilities2.h"
-#import "AppDelegate.h"
+#import "FLThemeManager.h"
 
 @implementation FLKeyboardView
 {

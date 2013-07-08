@@ -2,7 +2,7 @@
 //#import "FleksyAppMainViewController.h"
 #import "FleksyKeyboard.h"
 #import "FleksyTextView.h"
-#import "FLTheme.h"
+#import "FLThemeManager.h"
 
 @class FleksyAppMainViewController;
 
@@ -19,14 +19,14 @@
   
   BOOL lastKnownVoiceOverState;
   
-  FLTheme *_theme;
+  FLThemeManager *_themeManager;
 }
 
 - (void) setProximityMonitoringEnabled:(BOOL) b;
 - (void) speakCurrentText;
 
 @property (readonly) FleksyAppMainViewController* fleksyAppViewController;
-@property (strong, nonatomic) FLTheme *theme;
+@property (strong, nonatomic) FLThemeManager *themeManager;
 
 //@property (readonly) BOOL loading;
 
