@@ -129,6 +129,7 @@
 		61FCFEE61788E55F00F41988 /* FLThemeVanilla.m in Sources */ = {isa = PBXBuildFile; fileRef = 61FCFEE51788E55F00F41988 /* FLThemeVanilla.m */; };
 		61FCFEEC17890CDA00F41988 /* FLThemeNightLight.m in Sources */ = {isa = PBXBuildFile; fileRef = 61FCFEEB17890CDA00F41988 /* FLThemeNightLight.m */; };
 		61FCFEEF178A3E3700F41988 /* FLThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 61FCFEEE178A3E3700F41988 /* FLThemeManager.m */; };
+		61FCFEF2178A4D4300F41988 /* FLThemeMidnight.m in Sources */ = {isa = PBXBuildFile; fileRef = 61FCFEF1178A4D4300F41988 /* FLThemeMidnight.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -363,6 +364,8 @@
 		61FCFEEB17890CDA00F41988 /* FLThemeNightLight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLThemeNightLight.m; sourceTree = "<group>"; };
 		61FCFEED178A3E3700F41988 /* FLThemeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLThemeManager.h; sourceTree = "<group>"; };
 		61FCFEEE178A3E3700F41988 /* FLThemeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLThemeManager.m; sourceTree = "<group>"; };
+		61FCFEF0178A4D4300F41988 /* FLThemeMidnight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLThemeMidnight.h; sourceTree = "<group>"; };
+		61FCFEF1178A4D4300F41988 /* FLThemeMidnight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLThemeMidnight.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -902,6 +905,8 @@
 				61FCFEE51788E55F00F41988 /* FLThemeVanilla.m */,
 				61FCFEEA17890CDA00F41988 /* FLThemeNightLight.h */,
 				61FCFEEB17890CDA00F41988 /* FLThemeNightLight.m */,
+				61FCFEF0178A4D4300F41988 /* FLThemeMidnight.h */,
+				61FCFEF1178A4D4300F41988 /* FLThemeMidnight.m */,
 			);
 			name = Themes;
 			sourceTree = "<group>";
@@ -1101,6 +1106,7 @@
 				61FCFEE61788E55F00F41988 /* FLThemeVanilla.m in Sources */,
 				61FCFEEC17890CDA00F41988 /* FLThemeNightLight.m in Sources */,
 				61FCFEEF178A3E3700F41988 /* FLThemeManager.m in Sources */,
+				61FCFEF2178A4D4300F41988 /* FLThemeMidnight.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

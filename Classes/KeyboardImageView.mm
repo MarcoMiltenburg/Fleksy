@@ -18,6 +18,8 @@
 #import <QuartzCore/QuartzCore.h>
 #import "FLThemeManager.h"
 
+#import "FLTypingController_iOS.h"
+
 #define LABEL_FONT_SIZE (deviceIsPad() ? 44 : 30)
 #define POPUP_WIDTH  (2*LABEL_FONT_SIZE)
 #define POPUP_HEIGHT 70
@@ -279,6 +281,82 @@
   NSLog(@"handleThemeDidChange = %@", aNote);
   homeRowStripe.backgroundColor = FLEKSYTHEME.keyboardImageView_homeStripeBackgroundColor;
   [self setNeedsLayout];
+  
+  if (keyLabels && keyPopupLabels) {
+        
+    // This is preferable to having individual keys listenting and then sending multiple notification to be handled by each keyLabel.
+    
+//    float size = LABEL_FONT_SIZE * 2;
+//    BOOL popup = NO;
+    
+//    [self setKeysWithKeypoints];
+    
+    for (KSLabel *keyLabel in [keyLabels allValues]) {
+      
+//      if (!deviceIsPad()) {
+//        keyLabel.outlineColor = FLEKSYTHEME.keyboardImageView_label_outlineColor;
+//        keyLabel.outlineWidth = FLEKSYTHEME.keyboardImageView_label_outlineWidth;
+//      }
+//      
+//      keyLabel.font = popup ? [UIFont fontWithName:@"HelveticaNeue-Bold" size:size] : [UIFont fontWithName:@"HelveticaNeue-Bold" size:size/*+12*/];
+//      keyLabel.frame = CGRectMake(0, 0, [keyLabel.font lineHeight], [keyLabel.font lineHeight]);
+//      
+//      keyLabel.textColor = popup ? FLEKSYTHEME.keyboardImageView_label_textColorForPopup : FLEKSYTHEME.keyboardImageView_label_textColor; //[UIColor lightGrayColor];
+      
+      [keyLabel setNeedsLayout];
+    }
+    
+//    popup = YES;
+    
+    for (KSLabel *keyLabel in [keyPopupLabels allValues]) {
+//      if (!deviceIsPad()) {
+//        keyLabel.outlineColor = FLEKSYTHEME.keyboardImageView_label_outlineColor;
+//        keyLabel.outlineWidth = FLEKSYTHEME.keyboardImageView_label_outlineWidth;
+//      }
+//      
+//      keyLabel.font = popup ? [UIFont fontWithName:@"HelveticaNeue-Bold" size:size] : [UIFont fontWithName:@"HelveticaNeue-Bold" size:size/*+12*/];
+//      keyLabel.frame = CGRectMake(0, 0, [keyLabel.font lineHeight], [keyLabel.font lineHeight]);
+//      
+//      keyLabel.textColor = popup ? FLEKSYTHEME.keyboardImageView_label_textColorForPopup : FLEKSYTHEME.keyboardImageView_label_textColor; //[UIColor lightGrayColor];
+      
+      [keyLabel setNeedsLayout];
+
+    }
+  }
+}
+
+- (void) setKeysWithKeypoints { // :(CGPoint[]) theKeyPoints {
+    
+//  keyLabels = [[NSMutableDictionary alloc] init];
+//  keyPopupLabels = [[NSMutableDictionary alloc] init];
+  
+  [keyLabels removeAllObjects];
+  [keyPopupLabels removeAllObjects];
+  
+  for (int c = 0; c < KEY_MAX_VALUE; c++) {
+    
+    NSNumber* key = [NSNumber numberWithChar:c];
+    CGPoint point = CGPointMake(keyPoints[c].x, keyPoints[c].y);
+    if (point.x != -1 || point.y != -1) {
+      
+      FLChar existing = [self getNearestCharForPoint:point];
+      //CGPoint p = [self getKeyboardPointForChar:existing];
+      UILabel* existingLabel = [keyLabels objectForKey:[NSNumber numberWithChar:existing]];
+      
+      if (existingLabel) {
+        //NSString* temp = [[NSString alloc] initWithBytes:&c length:1 encoding:NSISOLatin1StringEncoding];
+        //NSLog(@"will not create new label %@, we already have %c (%d)", temp, existing, existing);
+      } else {
+        
+        UILabel* label = [self createLabelForChar:c atPoint:point popup:NO];
+        [keyLabels setObject:label forKey:key];
+        [self addSubview:label];
+        
+        UILabel* popupLabel = [self createLabelForChar:c atPoint:point popup:YES];
+        [keyPopupLabels setObject:popupLabel forKey:key];
+      }
+    }
+  }
 }
 
 

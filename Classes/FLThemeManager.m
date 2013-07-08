@@ -9,6 +9,7 @@
 #import "FLThemeManager.h"
 #import "FLThemeVanilla.h"
 #import "FLThemeNightLight.h"
+#import "FLThemeMidnight.h"
 
 NSString * const FleksyThemeDidChangeNotification = @"FleksyThemeDidChangeNotification";
 
@@ -72,6 +73,10 @@ static FLThemeManager *themeManager;
       
     case FLThemeTypeNightLight:
       self.currentTheme = [self newTheme:@"FLThemeNightLight" withHandler:self withType:FLThemeTypeNightLight];
+      break;
+      
+    case FLThemeTypeMidnight:
+      self.currentTheme = [self newTheme:@"FLThemeMidnight" withHandler:self withType:FLThemeTypeMidnight];
       break;
       
     default:

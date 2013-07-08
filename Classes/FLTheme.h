@@ -14,6 +14,7 @@ typedef enum {
   FLThemeTypeNormal,
   FLThemeTypeVanilla,
   FLThemeTypeNightLight,
+  FLThemeTypeMidnight,
   FLThemeTypeIOS7,
 } FLThemeType;
 

@@ -1,29 +1,26 @@
 //
-//  FLTheme.m
+//  FLThemeMidnight.m
 //  iFleksy
 //
-//  Created by Vince Mansel on 7/6/13.
+//  Created by Vince Mansel on 7/7/13.
 //  Copyright (c) 2013 Syntellia Inc. All rights reserved.
 //
 
-#import "FLTheme.h"
+#import "FLThemeMidnight.h"
 
-@implementation FLTheme
+@implementation FLThemeMidnight
 
-+ (id)theme {
-  return [[self alloc] init];
-}
 
 - (UIColor *)window_backgroundColor {
-  return FLEKSY_TEXTVIEW_COLOR;
+  return FLBlackColor;
 }
 
 - (UIColor *)textView_backgroundColor {
-  return FLEKSY_TEXTVIEW_COLOR;
+  return FLBlackColor;
 }
 
 - (UIColor *)textView_textColor {
-  return FLBlackColor;
+  return FLeksyColor;
 }
 
 - (UIColor *)actionButton_imageView_backgroundColor {
@@ -47,7 +44,7 @@
 }
 
 - (UIColor *)customSegmentedControl_selectedTextColor {
-  return FLWhiteColor;
+  return FLeksyColor;
 }
 
 - (UIColor *)customSegmentedControl_selectedBackgroundColor {
@@ -59,7 +56,8 @@
 }
 
 - (UIColor *)keyboardImageView_keyLabelColor {
-  return FLWhiteColor;
+  //return FLWhiteColor;
+  return FLeksyColor;
 }
 
 - (UIColor *)keyboardImageView_homeStripeBackgroundColor {
@@ -75,11 +73,13 @@
 }
 
 - (UIColor *)keyboardImageView_label_textColor {
-  return FLWhiteColor;
+  //return FLWhiteColor;
+  return FLeksyColor;
 }
 
 - (UIColor *)keyboardImageView_label_textColorForPopup {
-  return FLWhiteColor;
+//  return FLWhiteColor;
+  return FLeksyColor;
 }
 
 - (UIColor *)keyboardImageView_touchTrace_backgroundColor {
@@ -89,6 +89,5 @@
 - (CGFloat)keyboardImageView_touchTrace_alpha {
   return 0.2;
 }
-
 
 @end
