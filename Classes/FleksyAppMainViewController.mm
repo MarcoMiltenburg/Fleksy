@@ -18,6 +18,7 @@
 #import "IASKAppSettingsViewController.h"
 #import "IASKSettingsReader.h"
 #import "FLThemeManager.h"
+#import "FLColdWar.h"
 
 //#define APP_STORE_LINK @"http://itunes.apple.com/us/app/fleksy/id520337246?mt=8&uo=4"
 #define IOS_DEVICE_REVIEW_LINK @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=520337246"
@@ -1257,6 +1258,8 @@
 - (void) showMenu {
   
   [TestFlight passCheckpoint:@"showMenu"];
+  
+  if (purchaseManager.previousRuns > 50 || UIAccessibilityIsVoiceOverRunning()) { [FLColdWar yay]; }
   
   if ([textView.text length] > 0) {
     [self showActionMainMenu];
