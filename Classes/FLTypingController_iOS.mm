@@ -1457,9 +1457,15 @@ NSString* ___getAbsolutePath(NSString* filepath, NSString* languagePack) {
       }
     }
     
-    [self popPreviousTokenWithNotify:YES];
-    
+    NSString* poppedToken = [self popPreviousTokenWithNotify:YES];
     NSString* lastWord = [[self lastWord] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    
+    if ([poppedToken rangeOfString:@" "].length > 0) {
+      poppedToken = [poppedToken commonPrefixWithString:lastWord options:0];
+      NSLog(@"remaining popped token: %@", poppedToken);
+      if (poppedToken.length > 0) { [self pushPreviousToken:poppedToken notify:YES]; }
+    }
+    
     NSString* compare = [self peekPreviousToken];
     
     NSLog(@"lastWord: %@, compare: %@", lastWord, compare);
