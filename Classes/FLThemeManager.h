@@ -33,6 +33,6 @@
 
 @end
 
-#pragma mark - Notificaition
+#pragma mark - Notification
 
 extern NSString * const FleksyThemeDidChangeNotification;
