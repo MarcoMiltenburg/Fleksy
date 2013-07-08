@@ -1,7 +1,10 @@
 #import <UIKit/UIKit.h>
-#import "FleksyAppMainViewController.h"
+//#import "FleksyAppMainViewController.h"
 #import "FleksyKeyboard.h"
 #import "FleksyTextView.h"
+#import "FLThemeManager.h"
+
+@class FleksyAppMainViewController;
 
 #define LOAD_SERVER YES
 
@@ -15,13 +18,16 @@
   NSTimer* loadingTimer;
   
   BOOL lastKnownVoiceOverState;
+  
+  FLThemeManager *_themeManager;
 }
 
 - (void) setProximityMonitoringEnabled:(BOOL) b;
 - (void) speakCurrentText;
 
 @property (readonly) FleksyAppMainViewController* fleksyAppViewController;
-//@property (readonly) BOOL loading;
+@property (strong, nonatomic) FLThemeManager *themeManager;
 
+//@property (readonly) BOOL loading;
 
 @end

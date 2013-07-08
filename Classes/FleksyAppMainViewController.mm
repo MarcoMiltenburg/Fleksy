@@ -17,6 +17,7 @@
 #import <AudioToolbox/AudioToolbox.h>
 #import "IASKAppSettingsViewController.h"
 #import "IASKSettingsReader.h"
+#import "FLThemeManager.h"
 
 //#define APP_STORE_LINK @"http://itunes.apple.com/us/app/fleksy/id520337246?mt=8&uo=4"
 #define IOS_DEVICE_REVIEW_LINK @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=520337246"
@@ -47,7 +48,9 @@
 
 @interface FleksyAppMainViewController () <IASKSettingsDelegate, UIPopoverControllerDelegate>
 {
-    IASKAppSettingsViewController *appSettingsViewController;
+  IASKAppSettingsViewController *appSettingsViewController;
+  UINavigationController *favoritesNavigationController;
+  BOOL isExecutedWithFavorites;
 }
 
 @property (nonatomic, retain) IASKAppSettingsViewController *appSettingsViewController;
@@ -72,6 +75,25 @@
 }
 
 #pragma mark IASKAppSettingsViewControllerDelegate protocol
+
+- (void)settingsViewController:(IASKAppSettingsViewController*)sender buttonTappedForSpecifier:(IASKSpecifier*)specifier {
+  NSLog(@" Launching Favorites Setup: %s", __PRETTY_FUNCTION__);
+  FLFavoritesTableViewController *favTVC = [[FLFavoritesTableViewController alloc] initWithStyle:UITableViewStylePlain withMode:FL_FavoritesTVC_Mode_Settings];
+  favTVC.propertyType = (FL_PropertyType)(FL_PropertyType_PhoneNumber | FL_PropertyType_EmailAddress);
+  [self reloadFavorites];
+  favTVC.favorites = favorites;
+  favTVC.favoritesDelegate = self;
+  favTVC.title = @"Setup Favorites";
+  
+  if (favoritesNavigationController) {
+    favoritesNavigationController = nil;
+  }
+  favoritesNavigationController = [[UINavigationController alloc] init];
+  
+  [favoritesNavigationController addChildViewController:favTVC];
+  
+  [sender presentViewController:favoritesNavigationController animated:YES completion:NULL];
+}
 
 - (void)settingsViewControllerDidEnd:(IASKAppSettingsViewController*)sender {
 	
@@ -242,15 +264,17 @@
 ////////////////////////////////////////////////////////////////////////////
 
 
+#pragma mark - Keyboard Support Methods
+
 - (void) hideKeyboard {
   
   //we now (DIRECT_TOUCH) avoid resigning the keyboard, otherwise we always need 1 initial tap to "activate" it...
   //problem still exists at the very beginning of app launch
   
   //MyAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, string);
-
+  
   //return;
- 
+  
   NSLog(@"hideKeyboard");
   [textView resignFirstResponder];
 }
@@ -267,6 +291,8 @@
   }
   
 }
+
+#pragma mark - Email and Messaging Support
 
 - (NSString*) getMessageFooter {
   if (FLEKSY_APP_SETTING_SMS_REPLY_TO && FLEKSY_APP_SETTING_SMS_REPLY_TO.length) {
@@ -307,12 +333,21 @@
   return result;
 }
 
+#pragma mark - Local Utility Methods
 
 - (void) resetState {
   textView.text = @"";
   [[FLTypingController_iOS sharedFLTypingController_iOS] sendPrepareNextCandidates];
   [[FLKeyboardContainerView sharedFLKeyboardContainerView] reset];
 }
+
+- (void) copyText {
+  [[FLKeyboardContainerView sharedFLKeyboardContainerView].typingController.diagnostics sendWithComment:@"ACTION_COPY"];
+  UIPasteboard* pasteboard = [UIPasteboard generalPasteboard];
+  [pasteboard setString:textView.text];
+}
+
+#pragma mark - Menus
 
 - (void) dismissInitialMainMenu {
   [initialMainMenu dismissWithClickedButtonIndex:100 animated:!deviceIsPad()];
@@ -336,12 +371,6 @@
 
 - (void) showInitialMainMenu {
   [self performSelectorOnMainThread:@selector(_showInitialMainMenu) withObject:nil waitUntilDone:NO];
-}
-
-- (void) copyText {
-  [[FLKeyboardContainerView sharedFLKeyboardContainerView].typingController.diagnostics sendWithComment:@"ACTION_COPY"];
-  UIPasteboard* pasteboard = [UIPasteboard generalPasteboard];
-  [pasteboard setString:textView.text];
 }
 
 - (void) _showActionMainMenu {
@@ -501,7 +530,14 @@
   smsController.messageComposeDelegate = self;
   smsController.body = [NSString stringWithFormat:@"%@\n%@", text, [self getMessageFooter]];
   smsController.recipients = [NSArray arrayWithObjects:recipient, nil];
-  [self presentViewController:smsController animated:YES completion:nil];
+  
+  if (isExecutedWithFavorites) {
+    [favoritesNavigationController presentViewController:smsController animated:YES completion:nil];
+    isExecutedWithFavorites = NO;
+  }
+  else {
+    [self presentViewController:smsController animated:YES completion:nil];
+  }
   //[self presentModalViewController:smsController animated:NO];
 }
 
@@ -560,7 +596,14 @@
   }
   
   [mailController setMessageBody:text isHTML:html];
-  [self presentViewController:mailController animated:YES completion:nil];
+  
+  if (isExecutedWithFavorites) {
+    [favoritesNavigationController presentViewController:mailController animated:YES completion:nil];
+    isExecutedWithFavorites = NO;
+  }
+  else {
+    [self presentViewController:mailController animated:YES completion:nil];
+  }
 }
 
 - (void) sendInAppMailTo:(NSString*) recipient useText:(NSString*) useText subjectPrefix:(NSString*) subjectPrefix {
@@ -602,6 +645,64 @@
 - (void) menu_fleksy_web {
   [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://fleksy.com"]];  
 }
+
+#pragma mark - FLFavoritesTVCDelegateProtocol Method
+
+- (void)dismissFavoritesTVC {
+  [favoritesNavigationController dismissViewControllerAnimated:YES completion:NULL];
+}
+
+- (void)selectedFavorite:(NSString *)favoriteString {
+  NSLog(@" Send text or email to: %@", favoriteString);
+  
+  [self sendTo:favoriteString];
+  
+  //[self dismissFavoritesTVC];
+  //favoritesNavigationController = nil;
+}
+
+#pragma mark - FLFavoritesTableViewController Notification Handlers
+
+- (void)handleFavoritesWillUpdate:(NSNotification *)aNotification {
+  NSLog(@" aNotification = %@", aNotification);
+}
+
+- (void)handleFavoritesDidUpdate:(NSNotification *)aNotification {
+  NSLog(@" aNotification = %@", aNotification);
+  
+  favorites = [[(NSDictionary *)[aNotification userInfo] objectForKey:FleksyFavoritesKey] mutableCopy];
+  
+  [self updateFavoriteStorage:favorites];
+}
+
+- (void)updateFavoriteStorage:(NSMutableArray *)myFavorites {
+  
+  //Serialize the Favorites Array to a comma seperated string
+
+  NSString *localSpeedDialCache = [favorites componentsJoinedByString:@","];
+  
+  // TODO: handleSettingsChange keeps same list in place because it is out of sync until final Done of Settings.
+  // So favorites and FLEKSY_APP_SETTING_SPEED_DIAL_1 both are changed in other classes and methods, so keep local cache
+  //  to reflect changes while user is still in the Settings.
+  
+  [[NSUserDefaults standardUserDefaults] setObject:localSpeedDialCache
+                                            forKey:@"FLEKSY_APP_SETTING_SPEED_DIAL_1"];
+  
+  FLEKSY_APP_SETTING_SPEED_DIAL_1 = localSpeedDialCache;
+  
+  [[NSUbiquitousKeyValueStore defaultStore] synchronize];
+  [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+#pragma mark - FLTheme Notification Handlers
+
+- (void)handleThemeDidChange:(NSNotification *)aNote {
+  NSLog(@"handleThemeDidChange = %@", aNote);
+  actionButton.imageView.backgroundColor = FLEKSYTHEME.actionButton_imageView_backgroundColor;
+  [self.view setNeedsLayout];
+}
+
+#pragma mark - Menu Instructions
 
 - (void) showDetailedInstructions:(BOOL) fromAlert {
   
@@ -974,7 +1075,7 @@
 
 // Called when a button is clicked. The view will be automatically dismissed after this call returns
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-  //NSLog(@"clickedButtonAtIndex: %d, firstOtherButtonIndex: %d, cancelButtonIndex: %d", buttonIndex, actionSheet.firstOtherButtonIndex, actionSheet.cancelButtonIndex);
+  //NSLog(@" 999999999 clickedButtonAtIndex: %d, firstOtherButtonIndex: %d, cancelButtonIndex: %d", buttonIndex, actionSheet.firstOtherButtonIndex, actionSheet.cancelButtonIndex);
 }
 
 - (void)actionSheet:(UIActionSheet*) actionSheet didDismissWithButtonIndex:(NSInteger) buttonIndex {
@@ -1044,10 +1145,29 @@
     
     } else if ([buttonTitle isEqualToString:@"We love feedback!"]) {
       [self sendFeedback];
+    } else if ([buttonTitle hasPrefix:@"Favorites"]) {
       
-    } else if ([buttonTitle hasPrefix:@"Send to"]) {
-      NSString* recipient = [[buttonTitle componentsSeparatedByString:@"Send to "] objectAtIndex:1];
-      [self sendTo:recipient];
+      isExecutedWithFavorites = YES;
+      
+      FLFavoritesTableViewController *favTVC = [[FLFavoritesTableViewController alloc] initWithStyle:UITableViewStylePlain];
+      favTVC.propertyType = (FL_PropertyType)(FL_PropertyType_PhoneNumber | FL_PropertyType_EmailAddress);
+      [self reloadFavorites];
+      favTVC.favorites = favorites;
+      favTVC.favoritesDelegate = self;
+      favTVC.title = @"Favorites";
+      
+      if (favoritesNavigationController) {
+        favoritesNavigationController = nil;
+      }
+      favoritesNavigationController = [[UINavigationController alloc] init];
+      
+      [favoritesNavigationController addChildViewController:favTVC];
+      
+      [self presentViewController:favoritesNavigationController animated:YES completion:NULL];
+
+//    } else if ([buttonTitle hasPrefix:@"Send to"]) {
+//      NSString* recipient = [[buttonTitle componentsSeparatedByString:@"Send to "] objectAtIndex:1];
+//      [self sendTo:recipient];
       
     } else if ([buttonTitle hasPrefix:@"Reply to"]) {
       NSString* recipient = [[buttonTitle componentsSeparatedByString:@"Reply to "] objectAtIndex:1];
@@ -1217,6 +1337,9 @@
     [actionMainMenu2 addButtonWithTitle:[NSString stringWithFormat:@"Reply to %@", self->replyTo]];
   }
   
+  // Put Favorites at the top
+  [actionMainMenu2 addButtonWithTitle:[NSString stringWithFormat:@"Favorites"]];
+  
   //now add rest
   for (int i = 0; i < actionMainMenuPlain.numberOfButtons; i++) {
     NSString* title = [actionMainMenuPlain buttonTitleAtIndex:i];
@@ -1224,13 +1347,6 @@
     
     if (i == actionMainMenuPlain.cancelButtonIndex) {
       actionMainMenu2.cancelButtonIndex = index;
-    }
-    
-    if ([title isEqualToString:@"Copy & Clear"]) {
-      //first add favorites
-      for (NSString* newButtonTitle in favorites) {
-        [actionMainMenu2 addButtonWithTitle:[NSString stringWithFormat:@"Send to %@", newButtonTitle]];
-      }
     }
   }
   actionMainMenu = actionMainMenu2;
@@ -1337,71 +1453,6 @@
 #endif
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    
-    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-      
-      purchaseManager = [[FLPurchaseManager alloc] initWithListener:self];
-      
-      NSString* log = [NSString stringWithFormat:@"Full version: %d, previousRuns/10: %d", purchaseManager.fullVersion, purchaseManager.previousRuns / 10];
-      [TestFlight passCheckpoint:log];
-      [TestFlight passCheckpoint:[NSString stringWithFormat:@"VoiceOver: %d", UIAccessibilityIsVoiceOverRunning()]];
-      
-      //    UITapGestureRecognizer* singleTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTap:)];
-      //    singleTapRecognizer.delaysTouchesBegan = YES;
-      //    [singleTapRecognizer requireGestureRecognizerToFail:tripleTapRecognizer];
-      //    [tripleClickView addGestureRecognizer:singleTapRecognizer];
-
-      
-      UIImage* image = [UIImage imageNamed:@"menu_blue.png"];
-      float scale = deviceIsPad() ? 2 : 1;
-      float buttonSize = 80 * scale;
-      actionButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, buttonSize, buttonSize)]; //this will be the hit area
-      
-      float insetX = buttonSize * 0.3;
-      float insetY = insetX;
-      actionButton.contentEdgeInsets = UIEdgeInsetsMake(insetY, insetX, insetY, insetX);
-      
-      [actionButton setImage:image forState:UIControlStateNormal];
-      actionButton.showsTouchWhenHighlighted = YES;
-      //actionButton.backgroundColor = [UIColor redColor];
-      actionButton.imageView.backgroundColor = [UIColor clearColor]; //FLEKSY_TEXTVIEW_COLOR;
-      actionButton.accessibilityLabel = @"Action";
-      actionButton.accessibilityHint = @"Double tap for menu";
-      [actionButton addTarget:self action:@selector(showMenu) forControlEvents:UIControlEventTouchUpInside];
-      
-      //actionButton.transform = CGAffineTransformMakeScale(2, 2);
-      
-      
-      // we need to do this to ensure glow effect can be on top of the imageView
-      // we wouldn't need to do this if we used setBackgroundImage instead of setImage,
-      // but then contentEdgeInsets wouldn't apply
-      [actionButton.imageView.superview sendSubviewToBack:actionButton.imageView];
-      
-      lastShowedInitMenu = 0;
-      lastShowedActionMenu = 0;
-      self->replyTo = nil;
-      
-      [self recreatePlainMenus];
-      actionMainMenu = actionMainMenuPlain;
-      
-      favorites = [[NSMutableArray alloc] init];
-      [self reloadFavorites];
-      
-      //self.wantsFullScreenLayout = YES;
-      
-      shownTutorial = NO;
-      
-      NSLog(@"self.disablesAutomaticKeyboardDismissal: %d", self.disablesAutomaticKeyboardDismissal);
-      
-      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
-      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardClicked:) name:FLEKSY_KEYBOARD_CLICKED_NOTIFICATION object:nil];
-      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showMenu) name:FLEKSY_MENU_INVOKED_NOTIFICATION object:nil];
-    }
-    return self;
-}
-
 - (BOOL) disablesAutomaticKeyboardDismissal {
   NSLog(@"disablesAutomaticKeyboardDismissal CALLED");
   return YES;
@@ -1485,7 +1536,10 @@
   NSLog(@"FleksyAppMainViewController didReceiveMemoryWarning");
   [super didReceiveMemoryWarning];
   // Release any cached data, images, etc that aren't in use.
-    self.appSettingsViewController = nil;
+  self.appSettingsViewController = nil;
+  
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+  favoritesNavigationController = nil;
 }
 
 
@@ -1528,6 +1582,77 @@
 
 #pragma mark - View lifecycle
 
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+  
+  if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
+    
+    purchaseManager = [[FLPurchaseManager alloc] initWithListener:self];
+    
+    NSString* log = [NSString stringWithFormat:@"Full version: %d, previousRuns/10: %d", purchaseManager.fullVersion, purchaseManager.previousRuns / 10];
+    [TestFlight passCheckpoint:log];
+    [TestFlight passCheckpoint:[NSString stringWithFormat:@"VoiceOver: %d", UIAccessibilityIsVoiceOverRunning()]];
+    
+    //    UITapGestureRecognizer* singleTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTap:)];
+    //    singleTapRecognizer.delaysTouchesBegan = YES;
+    //    [singleTapRecognizer requireGestureRecognizerToFail:tripleTapRecognizer];
+    //    [tripleClickView addGestureRecognizer:singleTapRecognizer];
+    
+    
+    UIImage* image = [UIImage imageNamed:@"menu_blue.png"];
+    float scale = deviceIsPad() ? 2 : 1;
+    float buttonSize = 80 * scale;
+    actionButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, buttonSize, buttonSize)]; //this will be the hit area
+    
+    float insetX = buttonSize * 0.3;
+    float insetY = insetX;
+    actionButton.contentEdgeInsets = UIEdgeInsetsMake(insetY, insetX, insetY, insetX);
+    
+    [actionButton setImage:image forState:UIControlStateNormal];
+    actionButton.showsTouchWhenHighlighted = YES;
+    //actionButton.backgroundColor = [UIColor redColor];
+    actionButton.imageView.backgroundColor = FLEKSYTHEME.actionButton_imageView_backgroundColor;
+    actionButton.accessibilityLabel = @"Action";
+    actionButton.accessibilityHint = @"Double tap for menu";
+    [actionButton addTarget:self action:@selector(showMenu) forControlEvents:UIControlEventTouchUpInside];
+    
+    //actionButton.transform = CGAffineTransformMakeScale(2, 2);
+    
+    
+    // we need to do this to ensure glow effect can be on top of the imageView
+    // we wouldn't need to do this if we used setBackgroundImage instead of setImage,
+    // but then contentEdgeInsets wouldn't apply
+    [actionButton.imageView.superview sendSubviewToBack:actionButton.imageView];
+    
+    lastShowedInitMenu = 0;
+    lastShowedActionMenu = 0;
+    self->replyTo = nil;
+    
+    [self recreatePlainMenus];
+    actionMainMenu = actionMainMenuPlain;
+    
+    favorites = [[NSMutableArray alloc] init];
+    [self reloadFavorites];
+        
+    //self.wantsFullScreenLayout = YES;
+    
+    shownTutorial = NO;
+    
+    NSLog(@"self.disablesAutomaticKeyboardDismissal: %d", self.disablesAutomaticKeyboardDismissal);
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardClicked:) name:FLEKSY_KEYBOARD_CLICKED_NOTIFICATION object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showMenu) name:FLEKSY_MENU_INVOKED_NOTIFICATION object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleFavoritesWillUpdate:) name:FleksyFavoritesWillUpdateNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleFavoritesDidUpdate:) name:FleksyFavoritesDidUpdateNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleThemeDidChange:) name:FleksyThemeDidChangeNotification object:nil];
+
+  }
+  return self;
+}
+
 /*
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView
@@ -1539,6 +1664,46 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+#ifndef RELEASE
+  NSLog(@"Favorites before strip: %@", favorites);
+  NSLog(@"SPEED DIAL before strip: %@", FLEKSY_APP_SETTING_SPEED_DIAL_1);
+  
+  favorites = [self testStripFavoritesOfNames:[favorites mutableCopy]];
+  
+  NSLog(@"Favorites after strip: %@", favorites);
+  NSLog(@"SPEED DIAL after strip: %@", FLEKSY_APP_SETTING_SPEED_DIAL_1);
+  
+  [self updateFavoriteStorage:favorites];
+#endif
+  
+  NSLog(@"Favorites before magic: %@", favorites);
+  NSLog(@"SPEED DIAL before magic: %@", FLEKSY_APP_SETTING_SPEED_DIAL_1);
+  
+  favorites = [FLFavoritesTableViewController automaticReplenisherForFavorites:[favorites mutableCopy]];
+  
+  NSLog(@"Favorites after magic: %@", favorites);
+  NSLog(@"SPEED DIAL after magic: %@", FLEKSY_APP_SETTING_SPEED_DIAL_1);
+  
+  [self updateFavoriteStorage:favorites];
+  
+  NSLog(@"Favorites after update: %@", favorites);
+  NSLog(@"SPEED DIAL after update: %@", FLEKSY_APP_SETTING_SPEED_DIAL_1);
+
+
+}
+
+- (NSMutableArray *)testStripFavoritesOfNames:(NSMutableArray *)myFavorites {
+    
+  // Convert  {Sam_Jones:a1@b1.com,Tiny_Tim:222-333-4444} to {a1b1.com, 222-333-4444}
+  for (int i = 0; i < [myFavorites count]; i++) {
+    NSString *favString = [myFavorites objectAtIndex:i];
+    NSArray *components = [favString componentsSeparatedByString:@":"];
+    if ([components count] > 1) {
+      [myFavorites replaceObjectAtIndex:i withObject:components[1]];
+    }
+  }
+  return myFavorites;
 }
 
 
@@ -1547,6 +1712,8 @@
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
+
+#pragma mark - Orientation and Rotation Support
 
 - (BOOL) shouldAutorotate {
   

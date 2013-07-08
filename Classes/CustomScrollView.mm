@@ -8,6 +8,7 @@
 
 #import "CustomScrollView.h"
 #import "Settings.h"
+#import "FLTheme.h"
 
 #define USE_ZOOM_OUT_EFFECT YES
 
@@ -48,11 +49,11 @@
     
     self.multipleTouchEnabled = YES;
     self.clipsToBounds = NO; //for top row key popups
+    
   }
   
   return self;
 }
-
 
 //override this to only allow pan if drag began at the very bottom of our view
 //NOTE: this only receives the starting touch events, not the moving ones, so 

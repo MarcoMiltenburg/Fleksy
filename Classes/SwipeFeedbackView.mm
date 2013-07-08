@@ -9,6 +9,7 @@
 #import "SwipeFeedbackView.h"
 #import "UITouchManager.h"
 #import "MathFunctions.h"
+#import "FLThemeManager.h"
 
 
 @implementation SwipeFeedbackView
@@ -43,7 +44,7 @@
                         delay:0.2
                       options: UIViewAnimationOptionCurveEaseIn
                    animations:^{
-                     self.backgroundColor = [UIColor clearColor];
+                     self.backgroundColor = FLClearColor;
                    }
                    completion:^(BOOL finished){
                      //even though this might be off screen, when we switch from portrait to landscape
@@ -63,8 +64,10 @@
   
   staticSubview.hidden = NO;
   staticSubview.frame = CGRectMake(0, 0, width, height);
-  staticSubview.backgroundColor  = [UIColor colorWithWhite:1 alpha:0.35];
-  self.backgroundColor = padding ? [UIColor clearColor] : [UIColor clearColor];
+  //TODO: Theme Vanilla
+  staticSubview.backgroundColor  = FLEKSYTHEME.swipeFeedbackView_staticSubview_backgroundColor;
+
+  self.backgroundColor = padding ? FLClearColor : FLClearColor;
   
 //  switch (direction) {
 //    case UISwipeGestureRecognizerDirectionRight:

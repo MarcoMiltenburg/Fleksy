@@ -9,6 +9,7 @@
 #import "FleksyTextView.h"
 #import "VariousUtilities.h"
 #import "Settings.h"
+#import "FLThemeManager.h"
 
 @implementation FleksyTextView
 
@@ -28,8 +29,16 @@
     //this helps by ommiting a "dimmed. textfield" statement but value is still read back
     //textView.isAccessibilityElement = NO;
     //textView.textColor = [UIColor whiteColor];
-    textView.backgroundColor = FLEKSY_TEXTVIEW_COLOR;
-    textView.textColor = [UIColor blackColor];
+    
+//    id<UIApplicationDelegate> appDelegate = [[UIApplication sharedApplication] delegate];
+//    textView.backgroundColor = ((AppDelegate *)appDelegate).theme.textView_backgroundColor;
+    
+    //id<UIApplicationDelegate> appDelegate = [[UIApplication sharedApplication] delegate];
+    //textView.backgroundColor = ((AppDelegate *)appDelegate).theme.textView_backgroundColor;
+        
+    textView.backgroundColor = FLEKSYTHEME.textView_backgroundColor;
+    
+    textView.textColor = FLEKSYTHEME.textView_textColor;
     textView.delegate = self;
     
     // dont clip, looks ugly when there is top padding and text has scrolled
@@ -67,9 +76,21 @@
     cursorMoves = 0;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(voiceOverStatusChanged:) name:UIAccessibilityVoiceOverStatusChanged object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleThemeDidChange:) name:FleksyThemeDidChangeNotification object:nil];
   }
   return self;
 }
+
+#pragma mark - FLTheme Notification Handlers
+
+- (void)handleThemeDidChange:(NSNotification *)aNote {
+  NSLog(@"handleThemeDidChange = %@", aNote);
+  textView.backgroundColor = FLEKSYTHEME.textView_backgroundColor;
+  textView.textColor = FLEKSYTHEME.textView_textColor;
+  [self setNeedsLayout];
+}
+
 
 - (void) setInputView:(FleksyKeyboard*) _customInputView {
   customInputView = _customInputView;

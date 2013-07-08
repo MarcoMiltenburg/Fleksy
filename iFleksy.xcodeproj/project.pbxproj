@@ -117,6 +117,19 @@
 		617DACC01715DCA5009D93CB /* FleksyListenerImplC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 617DACBF1715DCA5009D93CB /* FleksyListenerImplC.cpp */; };
 		61D2EA97170BA5BB00DA7639 /* UIView+MainThreadCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = 61D2EA96170BA5BB00DA7639 /* UIView+MainThreadCheck.m */; };
 		61DA86551701F24500EE52C5 /* IconRounded.png in Resources */ = {isa = PBXBuildFile; fileRef = 61DA86541701F24500EE52C5 /* IconRounded.png */; };
+		61EDA3991784E0BD00C5CC52 /* FLFavoritesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 61EDA3981784E0BD00C5CC52 /* FLFavoritesTableViewController.m */; };
+		61EDA3A61784E0DC00C5CC52 /* ABContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 61EDA39C1784E0DC00C5CC52 /* ABContact.m */; };
+		61EDA3A71784E0DC00C5CC52 /* ABContactsHelper+EmailSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 61EDA39E1784E0DC00C5CC52 /* ABContactsHelper+EmailSearch.m */; };
+		61EDA3A81784E0DC00C5CC52 /* ABContactsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 61EDA3A01784E0DC00C5CC52 /* ABContactsHelper.m */; };
+		61EDA3A91784E0DC00C5CC52 /* ABGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 61EDA3A21784E0DC00C5CC52 /* ABGroup.m */; };
+		61EDA3AA1784E0DC00C5CC52 /* ABStandin.m in Sources */ = {isa = PBXBuildFile; fileRef = 61EDA3A41784E0DC00C5CC52 /* ABStandin.m */; };
+		61EDA3AD1784E0F700C5CC52 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61EDA3AB1784E0F700C5CC52 /* AddressBook.framework */; };
+		61EDA3AE1784E0F700C5CC52 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61EDA3AC1784E0F700C5CC52 /* AddressBookUI.framework */; };
+		61FCFEE21788E19000F41988 /* FLTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 61FCFEE11788E19000F41988 /* FLTheme.m */; };
+		61FCFEE61788E55F00F41988 /* FLThemeVanilla.m in Sources */ = {isa = PBXBuildFile; fileRef = 61FCFEE51788E55F00F41988 /* FLThemeVanilla.m */; };
+		61FCFEEC17890CDA00F41988 /* FLThemeNightLight.m in Sources */ = {isa = PBXBuildFile; fileRef = 61FCFEEB17890CDA00F41988 /* FLThemeNightLight.m */; };
+		61FCFEEF178A3E3700F41988 /* FLThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 61FCFEEE178A3E3700F41988 /* FLThemeManager.m */; };
+		61FCFEF2178A4D4300F41988 /* FLThemeMidnight.m in Sources */ = {isa = PBXBuildFile; fileRef = 61FCFEF1178A4D4300F41988 /* FLThemeMidnight.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -328,6 +341,31 @@
 		61D2EA95170BA5BB00DA7639 /* UIView+MainThreadCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MainThreadCheck.h"; sourceTree = "<group>"; };
 		61D2EA96170BA5BB00DA7639 /* UIView+MainThreadCheck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MainThreadCheck.m"; sourceTree = "<group>"; };
 		61DA86541701F24500EE52C5 /* IconRounded.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IconRounded.png; sourceTree = "<group>"; };
+		61EDA3971784E0BD00C5CC52 /* FLFavoritesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLFavoritesTableViewController.h; sourceTree = "<group>"; };
+		61EDA3981784E0BD00C5CC52 /* FLFavoritesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLFavoritesTableViewController.m; sourceTree = "<group>"; };
+		61EDA39B1784E0DC00C5CC52 /* ABContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABContact.h; sourceTree = "<group>"; };
+		61EDA39C1784E0DC00C5CC52 /* ABContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABContact.m; sourceTree = "<group>"; };
+		61EDA39D1784E0DC00C5CC52 /* ABContactsHelper+EmailSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ABContactsHelper+EmailSearch.h"; sourceTree = "<group>"; };
+		61EDA39E1784E0DC00C5CC52 /* ABContactsHelper+EmailSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ABContactsHelper+EmailSearch.m"; sourceTree = "<group>"; };
+		61EDA39F1784E0DC00C5CC52 /* ABContactsHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABContactsHelper.h; sourceTree = "<group>"; };
+		61EDA3A01784E0DC00C5CC52 /* ABContactsHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABContactsHelper.m; sourceTree = "<group>"; };
+		61EDA3A11784E0DC00C5CC52 /* ABGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABGroup.h; sourceTree = "<group>"; };
+		61EDA3A21784E0DC00C5CC52 /* ABGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABGroup.m; sourceTree = "<group>"; };
+		61EDA3A31784E0DC00C5CC52 /* ABStandin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABStandin.h; sourceTree = "<group>"; };
+		61EDA3A41784E0DC00C5CC52 /* ABStandin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABStandin.m; sourceTree = "<group>"; };
+		61EDA3A51784E0DC00C5CC52 /* ABWrappers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABWrappers.h; sourceTree = "<group>"; };
+		61EDA3AB1784E0F700C5CC52 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		61EDA3AC1784E0F700C5CC52 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		61FCFEE01788E19000F41988 /* FLTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLTheme.h; sourceTree = "<group>"; };
+		61FCFEE11788E19000F41988 /* FLTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLTheme.m; sourceTree = "<group>"; };
+		61FCFEE41788E55F00F41988 /* FLThemeVanilla.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLThemeVanilla.h; sourceTree = "<group>"; };
+		61FCFEE51788E55F00F41988 /* FLThemeVanilla.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLThemeVanilla.m; sourceTree = "<group>"; };
+		61FCFEEA17890CDA00F41988 /* FLThemeNightLight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLThemeNightLight.h; sourceTree = "<group>"; };
+		61FCFEEB17890CDA00F41988 /* FLThemeNightLight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLThemeNightLight.m; sourceTree = "<group>"; };
+		61FCFEED178A3E3700F41988 /* FLThemeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLThemeManager.h; sourceTree = "<group>"; };
+		61FCFEEE178A3E3700F41988 /* FLThemeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLThemeManager.m; sourceTree = "<group>"; };
+		61FCFEF0178A4D4300F41988 /* FLThemeMidnight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLThemeMidnight.h; sourceTree = "<group>"; };
+		61FCFEF1178A4D4300F41988 /* FLThemeMidnight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLThemeMidnight.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -335,6 +373,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61EDA3AD1784E0F700C5CC52 /* AddressBook.framework in Frameworks */,
+				61EDA3AE1784E0F700C5CC52 /* AddressBookUI.framework in Frameworks */,
 				6139A842170A0A4200FBDB02 /* libz.dylib in Frameworks */,
 				2E6965AF16C1E7F50018ACA9 /* Accounts.framework in Frameworks */,
 				2ECA1F48162362B30070F437 /* Twitter.framework in Frameworks */,
@@ -441,6 +481,8 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				61EDA3AB1784E0F700C5CC52 /* AddressBook.framework */,
+				61EDA3AC1784E0F700C5CC52 /* AddressBookUI.framework */,
 				2E68687D12026BA200AC7F4F /* libobjc.A.dylib */,
 				2EC8F8E716372EBC0088B5F8 /* libsqlite3.dylib */,
 				2E6965AE16C1E7F50018ACA9 /* Accounts.framework */,
@@ -525,6 +567,8 @@
 		2E896DC914BAC9F60098FD4F /* Client */ = {
 			isa = PBXGroup;
 			children = (
+				61FCFEE31788E53100F41988 /* Themes */,
+				61EDA3961784E08D00C5CC52 /* Favorites_AddressBook */,
 				617DACBE1715DC78009D93CB /* FleksyAPI_Testing */,
 				2E1EA2231656E27800B5177E /* GestureTestbed */,
 				2EDC76A714BC337500B248AF /* App */,
@@ -822,6 +866,51 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
+		61EDA3961784E08D00C5CC52 /* Favorites_AddressBook */ = {
+			isa = PBXGroup;
+			children = (
+				61EDA39A1784E0DC00C5CC52 /* ABWrappers */,
+				61EDA3971784E0BD00C5CC52 /* FLFavoritesTableViewController.h */,
+				61EDA3981784E0BD00C5CC52 /* FLFavoritesTableViewController.m */,
+			);
+			name = Favorites_AddressBook;
+			sourceTree = "<group>";
+		};
+		61EDA39A1784E0DC00C5CC52 /* ABWrappers */ = {
+			isa = PBXGroup;
+			children = (
+				61EDA39B1784E0DC00C5CC52 /* ABContact.h */,
+				61EDA39C1784E0DC00C5CC52 /* ABContact.m */,
+				61EDA39D1784E0DC00C5CC52 /* ABContactsHelper+EmailSearch.h */,
+				61EDA39E1784E0DC00C5CC52 /* ABContactsHelper+EmailSearch.m */,
+				61EDA39F1784E0DC00C5CC52 /* ABContactsHelper.h */,
+				61EDA3A01784E0DC00C5CC52 /* ABContactsHelper.m */,
+				61EDA3A11784E0DC00C5CC52 /* ABGroup.h */,
+				61EDA3A21784E0DC00C5CC52 /* ABGroup.m */,
+				61EDA3A31784E0DC00C5CC52 /* ABStandin.h */,
+				61EDA3A41784E0DC00C5CC52 /* ABStandin.m */,
+				61EDA3A51784E0DC00C5CC52 /* ABWrappers.h */,
+			);
+			path = ABWrappers;
+			sourceTree = "<group>";
+		};
+		61FCFEE31788E53100F41988 /* Themes */ = {
+			isa = PBXGroup;
+			children = (
+				61FCFEED178A3E3700F41988 /* FLThemeManager.h */,
+				61FCFEEE178A3E3700F41988 /* FLThemeManager.m */,
+				61FCFEE01788E19000F41988 /* FLTheme.h */,
+				61FCFEE11788E19000F41988 /* FLTheme.m */,
+				61FCFEE41788E55F00F41988 /* FLThemeVanilla.h */,
+				61FCFEE51788E55F00F41988 /* FLThemeVanilla.m */,
+				61FCFEEA17890CDA00F41988 /* FLThemeNightLight.h */,
+				61FCFEEB17890CDA00F41988 /* FLThemeNightLight.m */,
+				61FCFEF0178A4D4300F41988 /* FLThemeMidnight.h */,
+				61FCFEF1178A4D4300F41988 /* FLThemeMidnight.m */,
+			);
+			name = Themes;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1007,6 +1096,17 @@
 				61D2EA97170BA5BB00DA7639 /* UIView+MainThreadCheck.m in Sources */,
 				617DACC01715DCA5009D93CB /* FleksyListenerImplC.cpp in Sources */,
 				2E92321D171778E70047AB76 /* UIView+Extensions.mm in Sources */,
+				61EDA3991784E0BD00C5CC52 /* FLFavoritesTableViewController.m in Sources */,
+				61EDA3A61784E0DC00C5CC52 /* ABContact.m in Sources */,
+				61EDA3A71784E0DC00C5CC52 /* ABContactsHelper+EmailSearch.m in Sources */,
+				61EDA3A81784E0DC00C5CC52 /* ABContactsHelper.m in Sources */,
+				61EDA3A91784E0DC00C5CC52 /* ABGroup.m in Sources */,
+				61EDA3AA1784E0DC00C5CC52 /* ABStandin.m in Sources */,
+				61FCFEE21788E19000F41988 /* FLTheme.m in Sources */,
+				61FCFEE61788E55F00F41988 /* FLThemeVanilla.m in Sources */,
+				61FCFEEC17890CDA00F41988 /* FLThemeNightLight.m in Sources */,
+				61FCFEEF178A3E3700F41988 /* FLThemeManager.m in Sources */,
+				61FCFEF2178A4D4300F41988 /* FLThemeMidnight.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

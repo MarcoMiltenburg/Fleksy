@@ -19,6 +19,7 @@
 #import "VariousUtilities.h"
 #import "UIView+Extensions.h"
 #import <QuartzCore/QuartzCore.h>
+#import "FleksyAppMainViewController.h"
 
 //#import "/usr/include/objc/objc-runtime.h"
 
@@ -135,6 +136,10 @@ static FleksyKeyboard* instance = nil;
   FLEKSY_APP_SETTING_LANGUAGE_PACK             =  [VariousUtilities getSettingNamed:@"FLEKSY_APP_SETTING_LANGUAGE_PACK" fromSettings:settings];
   FLEKSY_APP_SETTING_THEME                     = [[VariousUtilities getSettingNamed:@"FLEKSY_APP_SETTING_THEME" fromSettings:settings] intValue];
 
+  if (FLEKSYTHEME.currentThemeType != FLEKSY_APP_SETTING_THEME) {
+    //[FLEKSYTHEME.handler themeDidChange:(FLThemeType)FLEKSY_APP_SETTING_THEME];
+    [[FLThemeManager sharedManager].handler themeDidChange:(FLThemeType)FLEKSY_APP_SETTING_THEME];
+  }
   
   //NSLog(@"FleksyKeyboard handleSettingsChanged: %@", settings);
   
@@ -498,7 +503,7 @@ static FleksyKeyboard* instance = nil;
   
   // vertical align bottom
   keyboardContainerView.frame = CGRectMake(0, self.bounds.size.height - self.activeHeight - SPACEBAR_HEIGHT, self.bounds.size.width, self.activeHeight /*+ SPACEBAR_HEIGHT*/ /* comment out +SH to allow spacebar at the bottom */);
-  keyboardContainerView.backgroundColor = [UIColor clearColor];
+  keyboardContainerView.backgroundColor = FLClearColor;
   
   if (FLEKSY_APP_SETTING_SPACE_BUTTON) {
     if (!spacebar.superview) {
@@ -687,7 +692,7 @@ static FleksyKeyboard* instance = nil;
 
 - (void) restoreKeyboardSize {
   [[NSNotificationCenter defaultCenter] postNotificationName:UIKeyboardWillChangeFrameNotification object:self];
-  self.backgroundColor = [UIColor clearColor];
+  self.backgroundColor = FLClearColor;
   CGRect rect = self.frame;
   //CGRect rect = self.accessibilityFrame;
   self.frame = CGRectMake(rect.origin.x, rect.origin.y + enlarge_height, rect.size.width, rect.size.height - enlarge_height);

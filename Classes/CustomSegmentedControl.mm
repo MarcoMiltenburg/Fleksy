@@ -9,6 +9,7 @@
 #import "CustomSegmentedControl.h"
 #import "VariousUtilities.h"
 #import "Settings.h"
+#import "FLThemeManager.h"
 
 #define SEGMENTS_N 13
 #define TAG_NO_TRAILING_SPACE 0
@@ -24,11 +25,9 @@
       self.vertical = vertical;
       
       //defaultBackgroundColor = [UIColor clearColor];
-      selectedBackgroundColor = [UIColor clearColor]; //[UIColor darkGrayColor];
-      defaultTextColor = [UIColor colorWithWhite:0.55 alpha:1];
-      //TODO: Theme Vanilla
-      //selectedTextColor = vertical ? [UIColor clearColor] : [UIColor whiteColor];
-      selectedTextColor = vertical ? [UIColor clearColor] : FLeksyColor;
+      selectedBackgroundColor = FLEKSYTHEME.customSegmentedControl_selectedBackgroundColor;
+      defaultTextColor = FLEKSYTHEME.customSegmentedControl_defaultTextColor;
+      selectedTextColor = vertical ? FLClearColor : FLEKSYTHEME.customSegmentedControl_selectedTextColor;
       
       //defaultTextColor = [UIColor clearColor];
       //selectedTextColor = [UIColor clearColor];
@@ -57,7 +56,7 @@
         UITextField* label = [[UITextField alloc] init];
         label.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
         label.userInteractionEnabled = NO;
-        label.backgroundColor = [UIColor clearColor];
+        label.backgroundColor = FLClearColor;
         label.textColor = defaultTextColor;
         label.textAlignment = NSTextAlignmentCenter; // UITextAlignmentCenter;
         label.font = textFont;
@@ -66,8 +65,22 @@
       }
       
       [self clear];
+      
+      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleThemeDidChange:) name:FleksyThemeDidChangeNotification object:nil];
     }
     return self;
+}
+
+#pragma mark - FLTheme Notification Handlers
+
+- (void)handleThemeDidChange:(NSNotification *)aNote {
+  NSLog(@"handleThemeDidChange = %@", aNote);
+  
+  selectedBackgroundColor = FLEKSYTHEME.customSegmentedControl_selectedBackgroundColor;
+  defaultTextColor = FLEKSYTHEME.customSegmentedControl_defaultTextColor;
+  selectedTextColor = self.vertical ? FLClearColor : FLEKSYTHEME.customSegmentedControl_selectedTextColor;
+  
+  [self setNeedsLayout];
 }
 
 - (void) resetCurrentLabel {
