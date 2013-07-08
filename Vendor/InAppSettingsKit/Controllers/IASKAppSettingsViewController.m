@@ -597,7 +597,7 @@ CGRect IASKCGRectSwap(CGRect rect);
 //TODO: HACK HERE!!!! since the value is a string, it is chosen over the specifier.title, so just force it for now.
     NSLog(@" CELL TEXT = %@ from %@ should be %@", cell.textLabel.text, [self.settingsReader titleForStringId:value], specifier.title);
 
-    if ([specifier.title isEqualToString:@"Favorites"]) {
+    if ([specifier.title isEqualToString:@"Setup Favorites"]) {
       cell.textLabel.text = specifier.title;
     }
     else {

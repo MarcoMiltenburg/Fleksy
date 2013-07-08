@@ -83,7 +83,7 @@
   [self reloadFavorites];
   favTVC.favorites = favorites;
   favTVC.favoritesDelegate = self;
-  favTVC.title = @"Favorites Setup";
+  favTVC.title = @"Setup Favorites";
   
   if (favoritesNavigationController) {
     favoritesNavigationController = nil;
@@ -1145,7 +1145,7 @@
     
     } else if ([buttonTitle isEqualToString:@"We love feedback!"]) {
       [self sendFeedback];
-    } else if ([buttonTitle hasPrefix:@"Send to Favorites"]) {
+    } else if ([buttonTitle hasPrefix:@"Favorites"]) {
       
       isExecutedWithFavorites = YES;
       
@@ -1337,6 +1337,9 @@
     [actionMainMenu2 addButtonWithTitle:[NSString stringWithFormat:@"Reply to %@", self->replyTo]];
   }
   
+  // Put Favorites at the top
+  [actionMainMenu2 addButtonWithTitle:[NSString stringWithFormat:@"Favorites"]];
+  
   //now add rest
   for (int i = 0; i < actionMainMenuPlain.numberOfButtons; i++) {
     NSString* title = [actionMainMenuPlain buttonTitleAtIndex:i];
@@ -1344,16 +1347,6 @@
     
     if (i == actionMainMenuPlain.cancelButtonIndex) {
       actionMainMenu2.cancelButtonIndex = index;
-    }
-    
-    if ([title isEqualToString:@"Copy & Clear"]) {
-      //first add favorites
-      //Only add the "Send to Favorites Button"
-//      for (NSString* newButtonTitle in favorites) {
-//        [actionMainMenu2 addButtonWithTitle:[NSString stringWithFormat:@"Send to %@", newButtonTitle]];
-//      }
-      [actionMainMenu2 addButtonWithTitle:[NSString stringWithFormat:@"Send to Favorites"]];
-
     }
   }
   actionMainMenu = actionMainMenu2;

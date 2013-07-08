@@ -122,7 +122,8 @@ ABAddressBookRef addressBook;
 
   }
   
-  self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveTapped:)];
+  //self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBar target:self action:@selector(backTapped:)];
+  self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleDone  target:self action:@selector(backTapped:)];
 #else
   // TODO: Bill's Layout - /Users/vince/Dropbox/Documentation/iOS Fleksy Development/iFleksy_UI_Design/mockup 003.jpg
   
@@ -154,7 +155,7 @@ ABAddressBookRef addressBook;
   }
 }
 
-- (void)saveTapped:(id)sender {
+- (void)backTapped:(id)sender {
   
   if ([self.favoritesDelegate respondsToSelector:@selector(dismissFavoritesTVC)]) {
     [self.favoritesDelegate dismissFavoritesTVC];

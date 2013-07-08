@@ -568,7 +568,7 @@
 			isa = PBXGroup;
 			children = (
 				61FCFEE31788E53100F41988 /* Themes */,
-				61EDA3961784E08D00C5CC52 /* AddressBook */,
+				61EDA3961784E08D00C5CC52 /* Favorites_AddressBook */,
 				617DACBE1715DC78009D93CB /* FleksyAPI_Testing */,
 				2E1EA2231656E27800B5177E /* GestureTestbed */,
 				2EDC76A714BC337500B248AF /* App */,
@@ -866,14 +866,14 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
-		61EDA3961784E08D00C5CC52 /* AddressBook */ = {
+		61EDA3961784E08D00C5CC52 /* Favorites_AddressBook */ = {
 			isa = PBXGroup;
 			children = (
 				61EDA39A1784E0DC00C5CC52 /* ABWrappers */,
 				61EDA3971784E0BD00C5CC52 /* FLFavoritesTableViewController.h */,
 				61EDA3981784E0BD00C5CC52 /* FLFavoritesTableViewController.m */,
 			);
-			name = AddressBook;
+			name = Favorites_AddressBook;
 			sourceTree = "<group>";
 		};
 		61EDA39A1784E0DC00C5CC52 /* ABWrappers */ = {
