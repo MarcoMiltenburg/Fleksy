@@ -24,14 +24,12 @@
 				<real>0</real>
 				<integer>1</integer>
 				<string>2</string>
-				<string>3</string>
 			</array>
 			<key>Titles</key>
 			<array>
 				<string>Dark Side</string>
 				<string>Vanilla</string>
-				<string>Night Light</string>
-				<string>Midnight</string>
+				<string>Contrast</string>
 			</array>
 			<key>DefaultValue</key>
 			<integer>0</integer>
