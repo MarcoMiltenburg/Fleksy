@@ -55,7 +55,8 @@
 }
 
 - (UIColor *)keyboardImageView_keyLabelColor {
-  return FLBlackColor;
+  //return FLBlackColor;
+  return self.keyboardImageView_label_textColor;
 }
 
 - (UIColor *)keyboardImageView_homeStripeBackgroundColor {
@@ -71,7 +72,8 @@
 }
 
 - (UIColor *)keyboardImageView_label_textColor {
-  return FLBlackColor;
+  //return FLBlackColor;
+  return [UIColor colorWithWhite:0.2 alpha:1];
 }
 
 - (UIColor *)keyboardImageView_label_textColorForPopup {
