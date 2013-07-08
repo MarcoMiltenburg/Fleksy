@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Syntellia. All rights reserved.
 //
 
-#if FLEKSY_API_TESTING 
+//#if FLEKSY_API_TESTING
 
 #ifndef __FleksySample1__FleksyListenerImplC__
 #define __FleksySample1__FleksyListenerImplC__
@@ -39,6 +39,6 @@ private:
   int composingStart = 0;
 };
 
-#endif /* defined(__FleksySample1__FleksyListenerImplC__) */
+//#endif /* defined(__FleksySample1__FleksyListenerImplC__) */
 
 #endif

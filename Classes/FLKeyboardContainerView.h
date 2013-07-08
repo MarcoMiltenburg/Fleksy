@@ -55,10 +55,6 @@
 
   // TODO: FleksyAPI Testing
   //FLTypingController* typingControllerGeneric;
-#if FLEKSY_API_TESTING 
-  FleksyListenerImplC* fleksyListener;
-  FleksyAPI* fleksyApi;
-#endif
   
   FLKeyboardView* keyboard;
   FLSuggestionsView* suggestionsView;

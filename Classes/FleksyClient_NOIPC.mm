@@ -56,8 +56,8 @@ NSString* getAbsolutePath(NSString* filepath, NSString* languagePack);
 - (id) init {
   
   if (self = [super init]) {
-    EmptyOutputInterface e = EmptyOutputInterface();
-    self.fleksyAPI = new FleksyAPI(e);
+    EmptyOutputInterface* e = new EmptyOutputInterface();
+    self.fleksyAPI = new FleksyAPI(*e);
     
     NSString* apiVersion = [NSString stringWithCString:self.fleksyAPI->getVersion().c_str() encoding:NSASCIIStringEncoding];
     NSLog(@"%@", apiVersion);

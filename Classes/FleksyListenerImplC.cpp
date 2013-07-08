@@ -1,5 +1,5 @@
 
-#if FLEKSY_API_TESTING
+//#if FLEKSY_API_TESTING
 
 #include "FleksyListenerImplC.h"
 
@@ -21,7 +21,7 @@ void FleksyListenerImplC::onSetComposingText(const FLString text){
   
   composingStart = composingEnd;
 
-  printf(" ***** FleksyAPI Testing :SCREEN:<%s> \n", state.text.c_str());
+  //printf(" ***** FleksyAPI Testing :SCREEN:<%s> \n", state.text.c_str());
 }
 
 void FleksyListenerImplC::onSetComposingRegion(int start, int end){
@@ -38,4 +38,4 @@ FLExternalEditorState FleksyListenerImplC::onRequestEditorState(){
   return state;
 }
 
-#endif
+//#endif

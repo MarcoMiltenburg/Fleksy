@@ -88,29 +88,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardContainerView);
     
     [self addSubview:topShadowView];
     [self sendSubviewToBack:topShadowView];
-
-#if FLEKSY_API_TESTING  
-    // TODO: FleksyAPI Testing
-  
-    NSLog(@" ***** FleksyAPI Testing: START of Loading");
-    
-    fleksyListener = new FleksyListenerImplC();
-    fleksyApi = new FleksyAPI(*fleksyListener);
-
-    // TODO: FleksyAPI Testing
-    
-    //NSLog(@" ***** FleksyAPI Testing: START of Loading");
-    
-    //fleksyListener = new FleksyListenerImplC();
-    //fleksyApi = new FleksyAPI(*fleksyListener);
-    
-    //fleksyApi = typingController.fleksyClient->fleksyAPI;
-    
-    NSLog(@" ***** FleksyAPI Testing: END of Loading");
-#endif
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleThemeDidChange:) name:FleksyThemeDidChangeNotification object:nil];
-
   }
 
   return self;
@@ -246,6 +224,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardContainerView);
   }
 }
 
+- (FleksyAPI*) getFleksyAPI {
+  return [FLKeyboardContainerView sharedFLKeyboardContainerView].typingController.fleksyClient.fleksyAPI;
+}
+
 - (void) processTouchPoint:(CGPoint) point precise:(BOOL) precise character:(unichar) c {
  
   NSLog(@"processTouchPoint %d", c);
@@ -261,7 +243,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardContainerView);
     //typingControllerGeneric->sendCharacter(*s, point.x, point.y, 0);
 #if FLEKSY_API_TESTING     
     NSLog(@" ***** FleksyAPI Testing: START api->sendTap");
-    fleksyApi->sendTap(point.x, point.y);
+    [self getFleksyAPI]->sendTap(point.x, point.y);
     NSLog(@" ***** FleksyAPI Testing: END api->sendTap");    
 #endif
     if ([FLKeyboardView sharedFLKeyboardView]->keyboard->isalpha(c)) {
@@ -287,14 +269,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardContainerView);
     [[FLKeyboardView sharedFLKeyboardView] resetWithActiveView:[FLKeyboardView sharedFLKeyboardView]->imageViewABC];
   }
   
+#if FLEKSY_API_TESTING
+  NSLog(@" ***** FleksyAPI Testing: START api->space");
+  [self getFleksyAPI]->space();
+  NSLog(@" ***** FleksyAPI Testing: END api->space");
+#endif
+  
   [typingController nonLetterCharInput:' ' autocorrectionType:keyboard.activeView.tag == FLKeyboardID_QWERTY_UPPER ? kAutocorrectionChangeAndSuggest : kAutocorrectionNone];
   [feedbackView swipeRecognized:UISwipeGestureRecognizerDirectionRight padding:![suggestionsView isHidden] || ![suggestionsViewSymbols isHidden]];  
   //typingControllerGeneric->swipeRight();
-#if FLEKSY_API_TESTING 
-  NSLog(@" ***** FleksyAPI Testing: START api->space");
-  fleksyApi->space();
-  NSLog(@" ***** FleksyAPI Testing: END api->space");
-#endif
 }
 
 - (void) handleSwipeDirection:(UISwipeGestureRecognizerDirection) direction fromTouch:(UITouch*) touch caller:(NSString*) caller {
@@ -326,7 +309,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardContainerView);
     //typingControllerGeneric->backspace();
 #if FLEKSY_API_TESTING 
     NSLog(@" ***** FleksyAPI Testing: START api->backspace");
-    fleksyApi->backspace();
+    [self getFleksyAPI]->backspace();
     NSLog(@" ***** FleksyAPI Testing: END api->backspace");
 #endif
   }
@@ -339,7 +322,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardContainerView);
       //typingControllerGeneric->swipeUp();
 #if FLEKSY_API_TESTING 
       NSLog(@" ***** FleksyAPI Testing: START api->previousSuggestion");
-      fleksyApi->previousSuggestion();
+      [self getFleksyAPI]->previousSuggestion();
       NSLog(@" ***** FleksyAPI Testing: END api->previousSuggestion");
 #endif
     }
@@ -353,7 +336,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardContainerView);
       //typingControllerGeneric->swipeDown();
 #if FLEKSY_API_TESTING 
       NSLog(@" ***** FleksyAPI Testing: START api->nextSuggestion");
-      fleksyApi->nextSuggestion();
+      [self getFleksyAPI]->nextSuggestion();
       NSLog(@" ***** FleksyAPI Testing: END api->nextSuggestion");
 #endif
     }
