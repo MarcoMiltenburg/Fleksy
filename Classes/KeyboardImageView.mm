@@ -195,10 +195,6 @@
     size *= 2;
   //}
   KSLabel* label = [[KSLabel alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
-  if (!deviceIsPad()) {
-    label.outlineColor = FLEKSYTHEME.keyboardImageView_label_outlineColor;
-    label.outlineWidth = FLEKSYTHEME.keyboardImageView_label_outlineWidth;
-  }
   
   if (c == '\n') {
     label.text = NEWLINE_UI_CHAR;
@@ -212,7 +208,6 @@
   label.font = popup ? [UIFont fontWithName:@"HelveticaNeue-Bold" size:size] : [UIFont fontWithName:@"HelveticaNeue-Bold" size:size/*+12*/];
   label.frame = CGRectMake(0, 0, [label.font lineHeight], [label.font lineHeight]);
   
-  label.textColor = popup ? FLEKSYTHEME.keyboardImageView_label_textColorForPopup : FLEKSYTHEME.keyboardImageView_label_textColor; //[UIColor lightGrayColor];
   label.textAlignment = NSTextAlignmentCenter; // UITextAlignmentCenter;
   label.backgroundColor = FLClearColor;
   //label.alpha = 0.5;
@@ -279,48 +274,33 @@
 
 - (void)handleThemeDidChange:(NSNotification *)aNote {
   NSLog(@"handleThemeDidChange = %@", aNote);
-  homeRowStripe.backgroundColor = FLEKSYTHEME.keyboardImageView_homeStripeBackgroundColor;
-  [self setNeedsLayout];
+  
+  if (!FLEKSY_APP_SETTING_SPACE_BUTTON) {
+    homeRowStripe.backgroundColor = FLEKSYTHEME.keyboardImageView_homeStripeBackgroundColor;
+  } else {
+    //TODO (Clean up) This displays a "fun" strip of fleksyBalls in the homeRow if SPACE_BUTTON enabled only.
+    homeRowStripe.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Icon.png"]];
+  }
   
   if (keyLabels && keyPopupLabels) {
         
-    // This is preferable to having individual keys listenting and then sending multiple notification to be handled by each keyLabel.
-    
-//    float size = LABEL_FONT_SIZE * 2;
-//    BOOL popup = NO;
-    
-//    [self setKeysWithKeypoints];
-    
+  // This is preferable to having individual keys listenting and then sending multiple notification to be handled by each keyLabel.
+
     for (KSLabel *keyLabel in [keyLabels allValues]) {
-      
-//      if (!deviceIsPad()) {
-//        keyLabel.outlineColor = FLEKSYTHEME.keyboardImageView_label_outlineColor;
-//        keyLabel.outlineWidth = FLEKSYTHEME.keyboardImageView_label_outlineWidth;
-//      }
-//      
-//      keyLabel.font = popup ? [UIFont fontWithName:@"HelveticaNeue-Bold" size:size] : [UIFont fontWithName:@"HelveticaNeue-Bold" size:size/*+12*/];
-//      keyLabel.frame = CGRectMake(0, 0, [keyLabel.font lineHeight], [keyLabel.font lineHeight]);
-//      
-//      keyLabel.textColor = popup ? FLEKSYTHEME.keyboardImageView_label_textColorForPopup : FLEKSYTHEME.keyboardImageView_label_textColor; //[UIColor lightGrayColor];
-      
-      [keyLabel setNeedsLayout];
+      if (!deviceIsPad()) {
+        keyLabel.outlineColor = FLEKSYTHEME.keyboardImageView_label_outlineColor;
+        keyLabel.outlineWidth = FLEKSYTHEME.keyboardImageView_label_outlineWidth;
+      }
+      keyLabel.textColor = FLEKSYTHEME.keyboardImageView_label_textColor; //[UIColor lightGrayColor];
     }
     
-//    popup = YES;
     
     for (KSLabel *keyLabel in [keyPopupLabels allValues]) {
-//      if (!deviceIsPad()) {
-//        keyLabel.outlineColor = FLEKSYTHEME.keyboardImageView_label_outlineColor;
-//        keyLabel.outlineWidth = FLEKSYTHEME.keyboardImageView_label_outlineWidth;
-//      }
-//      
-//      keyLabel.font = popup ? [UIFont fontWithName:@"HelveticaNeue-Bold" size:size] : [UIFont fontWithName:@"HelveticaNeue-Bold" size:size/*+12*/];
-//      keyLabel.frame = CGRectMake(0, 0, [keyLabel.font lineHeight], [keyLabel.font lineHeight]);
-//      
-//      keyLabel.textColor = popup ? FLEKSYTHEME.keyboardImageView_label_textColorForPopup : FLEKSYTHEME.keyboardImageView_label_textColor; //[UIColor lightGrayColor];
-      
-      [keyLabel setNeedsLayout];
-
+      if (!deviceIsPad()) {
+        keyLabel.outlineColor = FLEKSYTHEME.keyboardImageView_label_outlineColor;
+        keyLabel.outlineWidth = FLEKSYTHEME.keyboardImageView_label_outlineWidth;
+      }
+      keyLabel.textColor = FLEKSYTHEME.keyboardImageView_label_textColorForPopup; //[UIColor lightGrayColor];
     }
   }
 }
@@ -357,6 +337,8 @@
       }
     }
   }
+  
+  [self handleThemeDidChange:nil];
 }
 
 
@@ -410,21 +392,14 @@
   
   if (_keys['Q'].x != -1) {
     homeRowStripe = [[UIView alloc] init];
-    if (!FLEKSY_APP_SETTING_SPACE_BUTTON) {
-
-      homeRowStripe.backgroundColor = FLEKSYTHEME.keyboardImageView_homeStripeBackgroundColor;
-
-    }
-    else  {
-        //TODO (Clean up) This displays a "fun" strip of fleksyBalls in the homeRow if SPACE_BUTTON enabled only.
-        homeRowStripe.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Icon.png"]];
-    }
     [self addSubview:homeRowStripe];
     [self sendSubviewToBack:homeRowStripe];
   } else {
     homeRowStripe = nil;
   }
+
   
+  [self handleThemeDidChange:nil];
   
   
   ///////////////////////////////////////////////
