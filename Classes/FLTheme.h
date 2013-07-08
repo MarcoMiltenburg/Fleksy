@@ -51,10 +51,12 @@ typedef enum {
 @property (strong, nonatomic) UIColor *keyboardImageView_touchTrace_backgroundColor;
 @property (        nonatomic) CGFloat  keyboardImageView_touchTrace_alpha;
 
-
+@property (strong, nonatomic) UIColor *swipeFeedbackView_staticSubview_backgroundColor;
 @end
 
 #pragma mark - Color Definitions
+
+// http://www.tayloredmktg.com/rgb/
 
 #define FLEKSY_TEXTVIEW_COLOR [UIColor colorWithRed:0.929 green:0.925 blue:0.878 alpha:1]
 #define FacebookBlue [UIColor colorWithRed:0.23 green:0.35 blue:0.59 alpha:1]
@@ -66,9 +68,17 @@ typedef enum {
 
 #define FLWhiteColor [UIColor colorWithWhite:1.0 alpha:1.0]
 #define FLSuggestionWhiteColor [UIColor colorWithWhite:0.55 alpha:1.0]
+#define FLSwipeFeedbackWhiteColor [UIColor colorWithWhite:1 alpha:0.35]
+//Light Gray	211-211-211	d3d3d3
+#define FLSwipeFeedbackLightGrayColor [UIColor colorWithRed:(211.0/255.0) green:(211.0/255.0) blue:(211.0/255.0) alpha:0.35]
+#define FLSwipeFeedbackGrayColor [UIColor colorWithRed:(190.0/255.0) green:(190.0/255.0) blue:(190.0/255.0) alpha:0.35]
+#define FLSwipeFeedbackLightSlateGrayColor [UIColor colorWithRed:(119.0/255.0) green:(136.0/255.0) blue:(153.0/255.0) alpha:0.35]
+
 #define FLDarkSideWhite [UIColor colorWithWhite:1 alpha:0.2]
 
 #define FLLightGrayColor [UIColor lightGrayColor]
+#define FLGrayColor [UIColor grayColor];
+#define FLDarkGrayColor [UIColor darkGrayColor]
 #define FLClearColor [UIColor clearColor]
 
 

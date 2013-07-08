@@ -9,7 +9,7 @@
 #import "SwipeFeedbackView.h"
 #import "UITouchManager.h"
 #import "MathFunctions.h"
-#import "AppDelegate.h"
+#import "FLThemeManager.h"
 
 
 @implementation SwipeFeedbackView
@@ -64,7 +64,9 @@
   
   staticSubview.hidden = NO;
   staticSubview.frame = CGRectMake(0, 0, width, height);
-  staticSubview.backgroundColor  = [UIColor colorWithWhite:1 alpha:0.35];
+  //TODO: Theme Vanilla
+  staticSubview.backgroundColor  = FLEKSYTHEME.swipeFeedbackView_staticSubview_backgroundColor;
+
   self.backgroundColor = padding ? FLClearColor : FLClearColor;
   
 //  switch (direction) {

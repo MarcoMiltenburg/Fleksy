@@ -90,5 +90,8 @@
   return 0.2;
 }
 
+- (UIColor *)swipeFeedbackView_staticSubview_backgroundColor {
+  return FLSwipeFeedbackWhiteColor;
+}
 
 @end
