@@ -58,7 +58,11 @@ typedef enum {
 
 // http://www.tayloredmktg.com/rgb/
 
-#define FLEKSY_TEXTVIEW_COLOR [UIColor colorWithRed:0.929 green:0.925 blue:0.878 alpha:1]
+//FSA15FLVars_Colour_WHITE_ = [AndroidGraphicsColor rgbWithInt:225 withInt:225 withInt:225];
+#define FleksyWhiteColor [UIColor colorWithRed:(225.0/255.0) green:(225.0/255.0) blue:(225.0/255.0) alpha:1.0]
+
+//#define FLEKSY_TEXTVIEW_COLOR [UIColor colorWithRed:0.929 green:0.925 blue:0.878 alpha:1]
+#define FLEKSY_TEXTVIEW_COLOR FleksyWhiteColor
 #define FacebookBlue [UIColor colorWithRed:0.23 green:0.35 blue:0.59 alpha:1]
 
 //FSA15FLVars_Colour_FLBLACK_ = [AndroidGraphicsColor rgbWithInt:25 withInt:25 withInt:25];

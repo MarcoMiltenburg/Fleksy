@@ -82,6 +82,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardContainerView);
     topShadowView.layer.shadowOffset = CGSizeMake(0, -4);
     topShadowView.layer.shadowRadius = 4;
     topShadowView.layer.shadowOpacity = 0.3;
+    // TODO: This crashes on launch since color returns a nil
+    //topShadowView.layer.shadowColor = FLEKSYTHEME.topShadowView_layer_shadowColor;
     topShadowView.layer.shadowColor = [FLeksyColor CGColor];
     
     [self addSubview:topShadowView];
