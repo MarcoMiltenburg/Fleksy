@@ -187,6 +187,7 @@
   }
   else {
     [[[UIAlertView alloc] initWithTitle:@"Vote YES for Syntellia" message:@"We need your help. We are featured by the Wall Street Journal Startup of the Year. Click View All and Vote Yes for Syntellia!" delegate:handleQuestionaireLink cancelButtonTitle:@"Later" otherButtonTitles:@"OK", nil] show];
+    [FLColdWar yay];
   }
   _userHasVisitedQuestionaireLink = YES;
   FLEKSY_APP_CACHE_WSJ_QUESTIONAIRE = _userHasVisitedQuestionaireLink;
