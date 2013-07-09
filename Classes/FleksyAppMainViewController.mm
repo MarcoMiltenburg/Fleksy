@@ -784,6 +784,26 @@
   [self.view setNeedsLayout];
 }
 
+#pragma mark kIASKAppSettingChanged Notification Handler
+
+- (void)handle_kIASKAppSettingChanged:aNote {
+  NSLog(@"handle_kIASKAppSettingChanged = %@", aNote);
+  
+  NSDictionary *userInfo = [aNote userInfo];
+  
+  FLThemeType themeType = (FLThemeType)[[userInfo objectForKey:@"FLEKSY_APP_SETTING_THEME"] intValue];
+  
+  NSLog(@" themeType = %d", themeType);
+  
+  [[NSUserDefaults standardUserDefaults] setObject:@(themeType) forKey:@"FLEKSY_APP_SETTING_THEME"];
+  [[NSUserDefaults standardUserDefaults] synchronize];
+  [[NSUbiquitousKeyValueStore defaultStore] synchronize];
+
+  
+  [self dismissModalViewControllerAnimated:YES];
+}
+
+
 #pragma mark - Menu Instructions
 
 - (void) showDetailedInstructions:(BOOL) fromAlert {
@@ -1742,6 +1762,9 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleThemeDidChange:) name:FleksyThemeDidChangeNotification object:nil];
 
     _userHasVisitedQuestionaireLink = [[NSUserDefaults standardUserDefaults] boolForKey:@"FLEKSY_APP_CACHE_WSJ_QUESTIONAIRE"];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handle_kIASKAppSettingChanged:) name:kIASKAppSettingChanged object:nil];
+    //kIASKAppSettingChanged
   }
   return self;
 }

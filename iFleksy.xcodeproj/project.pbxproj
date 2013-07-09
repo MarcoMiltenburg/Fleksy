@@ -458,7 +458,6 @@
 				12B760AD17027C0800451CB5 /* libFleksyStatic.a */,
 				2EA3E84416964AA200BC54A4 /* MultipartSpeechSynthesizer.h */,
 				2EA3E84516964AA200BC54A4 /* MultipartSpeechSynthesizer.mm */,
-				2E7EBFDC1676BDB500DAB9BB /* SynthesizeSingleton.h */,
 				2EEA161A15BE124900C04187 /* Fleksy.entitlements */,
 				2E7EBFB41676BBA900DAB9BB /* iFleksyInfo.plist */,
 				080E96DDFE201D6D7F000001 /* Classes */,
@@ -796,6 +795,7 @@
 		6139A840170A0A0F00FBDB02 /* zip */ = {
 			isa = PBXGroup;
 			children = (
+				2E7EBFDC1676BDB500DAB9BB /* SynthesizeSingleton.h */,
 				6139A846170A0CB800FBDB02 /* minizip */,
 				6139A843170A0C9E00FBDB02 /* SSZipArchive.h */,
 				6139A844170A0C9E00FBDB02 /* SSZipArchive.mm */,
