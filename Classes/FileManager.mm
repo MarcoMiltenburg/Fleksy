@@ -17,6 +17,69 @@
 
 SYNTHESIZE_SINGLETON_FOR_CLASS(FileManager);
 
+- (BOOL)fileExists:(NSString *)file {
+  
+  NSString* filepath;
+  if ([file hasPrefix:@"/"]) {
+    filepath = file;
+  } else {
+    filepath = [NSString stringWithFormat:@"%@/%@", [FileManager runningAsApp] ? [[VariousUtilities theBundle] bundlePath] : fleksyPath, file];
+  }
+  
+  NSLog(@" filepath exist is %@", filepath);
+  return [[NSFileManager defaultManager] fileExistsAtPath:filepath];
+
+}
+
+- (BOOL)deleteFile:(NSString *)file {
+  
+  NSString* filepath;
+  if ([file hasPrefix:@"/"]) {
+    filepath = file;
+  } else {
+    filepath = [NSString stringWithFormat:@"%@/%@", [FileManager runningAsApp] ? [[VariousUtilities theBundle] bundlePath] : fleksyPath, file];
+  }
+  
+  NSLog(@" filepath delete is %@", filepath);
+  NSError *error;
+
+  // NSFilePosixPermissions
+  NSLog(@"Attributes of Item Settings file: %@", [[NSFileManager defaultManager] attributesOfItemAtPath:filepath error:&error]);
+  /* 2013-07-08 20:26:58.387 FleksyDev[1035:907] Attributes of Item Settings file: {
+   NSFileCreationDate = "2013-07-08 20:52:51 +0000";
+   NSFileExtensionHidden = 0;
+   NSFileGroupOwnerAccountID = 501;
+   NSFileGroupOwnerAccountName = mobile;
+   NSFileModificationDate = "2013-07-08 20:52:51 +0000";
+   NSFileOwnerAccountID = 501;
+   NSFileOwnerAccountName = mobile;
+   NSFilePosixPermissions = 420;
+   NSFileProtectionKey = NSFileProtectionNone;
+   NSFileReferenceCount = 1;
+   NSFileSize = 6108;
+   NSFileSystemFileNumber = 6104799;
+   NSFileSystemNumber = 16777218;
+   NSFileType = NSFileTypeRegular;
+   */
+  
+  if (![[NSFileManager defaultManager] setAttributes:[NSDictionary dictionaryWithObject:@(777) forKey:NSFilePosixPermissions] ofItemAtPath:filepath error:&error]) {
+    NSLog(@"Could not change permission of Settings file: %@", error);
+  }
+  
+  error = nil;
+  
+  NSLog(@"Attributes of Item Settings file: %@", [[NSFileManager defaultManager] attributesOfItemAtPath:filepath error:&error]);
+
+  BOOL isDeleted = [[NSFileManager defaultManager] removeItemAtPath:filepath error:&error];
+  
+  if (!isDeleted) {
+    NSLog(@"Error: Cannot delete file: %@", error);
+  }
+
+  return isDeleted;
+}
+
+
 - (NSData*) dataWithContentsOfFile:(NSString*) filepath logErrors:(BOOL) logErrors {
   NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"http://localhost:%d%@", WEB_SERVER_PORT, filepath]];
   NSData* data = nil;
@@ -198,8 +261,20 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FileManager);
   
   NSMutableDictionary* result = [[NSMutableDictionary alloc] init];
   
+  //first fetch all the previous values from old Settings file
+  
+  if ([[FileManager sharedFileManager] fileExists:@"Settings.bundle/Root.plist"]) {
+    [FileManager addSettingsFromFile:@"Settings.bundle/Root.plist" toDictionary:result];
+    
+    NSLog(@" result from old Settings = %@", result);
+    
+    // Now delete it forever
+    
+    [[FileManager sharedFileManager] deleteFile:@"Settings.bundle/Root.plist"];
+  }
+  
   //first fetch all the default values
-  [FileManager addSettingsFromFile:@"Settings.bundle/Root.plist" toDictionary:result];
+  [FileManager addSettingsFromFile:@"InAppSettings.bundle/Root.inApp.plist" toDictionary:result];
   
   //now the hidden preferences
   [FileManager addSettingsFromFile:@"Settings_HIDDEN.bundle/Root.plist" toDictionary:result];

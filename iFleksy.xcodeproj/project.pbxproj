@@ -28,7 +28,6 @@
 		2E52C3ED14C10DA9009AB01B /* FeedbackRecognizer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2E52C3EC14C10DA9009AB01B /* FeedbackRecognizer.mm */; };
 		2E58FE29172F2BF80015CE02 /* resourceArchive-en-US.jet in Resources */ = {isa = PBXBuildFile; fileRef = 2E58FE27172F2BF80015CE02 /* resourceArchive-en-US.jet */; };
 		2E58FE2A172F2BF80015CE02 /* resourceArchive-es-ES.jet in Resources */ = {isa = PBXBuildFile; fileRef = 2E58FE28172F2BF80015CE02 /* resourceArchive-es-ES.jet */; };
-		2E5D0C0C13A1AAD3009E2361 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2E5D0C0B13A1AAD3009E2361 /* Settings.bundle */; };
 		2E63D06815F56CAD00837586 /* CircleUIView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2E63D06715F56CAD00837586 /* CircleUIView.mm */; };
 		2E63D07015F670A900837586 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E63D06F15F670A900837586 /* CoreText.framework */; };
 		2E68687E12026BA200AC7F4F /* libobjc.A.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E68687D12026BA200AC7F4F /* libobjc.A.dylib */; };
@@ -115,6 +114,7 @@
 		6139A851170A0CB800FBDB02 /* mztools.c in Sources */ = {isa = PBXBuildFile; fileRef = 6139A84A170A0CB800FBDB02 /* mztools.c */; };
 		6139A852170A0CB800FBDB02 /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = 6139A84C170A0CB800FBDB02 /* unzip.c */; };
 		6139A853170A0CB800FBDB02 /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = 6139A84E170A0CB800FBDB02 /* zip.c */; };
+		61703A76178BA00F00571628 /* InAppSettings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 61703A75178BA00F00571628 /* InAppSettings.bundle */; };
 		617DACC01715DCA5009D93CB /* FleksyListenerImplC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 617DACBF1715DCA5009D93CB /* FleksyListenerImplC.cpp */; };
 		61D2EA97170BA5BB00DA7639 /* UIView+MainThreadCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = 61D2EA96170BA5BB00DA7639 /* UIView+MainThreadCheck.m */; };
 		61DA86551701F24500EE52C5 /* IconRounded.png in Resources */ = {isa = PBXBuildFile; fileRef = 61DA86541701F24500EE52C5 /* IconRounded.png */; };
@@ -173,7 +173,6 @@
 		2E52C3EC14C10DA9009AB01B /* FeedbackRecognizer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = FeedbackRecognizer.mm; path = Classes/FeedbackRecognizer.mm; sourceTree = "<group>"; };
 		2E58FE27172F2BF80015CE02 /* resourceArchive-en-US.jet */ = {isa = PBXFileReference; lastKnownFileType = file; name = "resourceArchive-en-US.jet"; path = "submodules/FleksySDK-compiled/ios/FleksySDKResources/encrypted/resourceArchive-en-US.jet"; sourceTree = SOURCE_ROOT; };
 		2E58FE28172F2BF80015CE02 /* resourceArchive-es-ES.jet */ = {isa = PBXFileReference; lastKnownFileType = file; name = "resourceArchive-es-ES.jet"; path = "submodules/FleksySDK-compiled/ios/FleksySDKResources/encrypted/resourceArchive-es-ES.jet"; sourceTree = SOURCE_ROOT; };
-		2E5D0C0B13A1AAD3009E2361 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		2E63D06615F56CAD00837586 /* CircleUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleUIView.h; sourceTree = "<group>"; };
 		2E63D06715F56CAD00837586 /* CircleUIView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CircleUIView.mm; sourceTree = "<group>"; };
 		2E63D06F15F670A900837586 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
@@ -339,6 +338,7 @@
 		6139A84D170A0CB800FBDB02 /* unzip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unzip.h; sourceTree = "<group>"; };
 		6139A84E170A0CB800FBDB02 /* zip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = zip.c; sourceTree = "<group>"; };
 		6139A84F170A0CB800FBDB02 /* zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zip.h; sourceTree = "<group>"; };
+		61703A75178BA00F00571628 /* InAppSettings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = InAppSettings.bundle; sourceTree = "<group>"; };
 		617DACBF1715DCA5009D93CB /* FleksyListenerImplC.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FleksyListenerImplC.cpp; sourceTree = "<group>"; };
 		617DACC11715DCAF009D93CB /* FleksyListenerImplC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FleksyListenerImplC.h; sourceTree = "<group>"; };
 		61D2EA95170BA5BB00DA7639 /* UIView+MainThreadCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MainThreadCheck.h"; sourceTree = "<group>"; };
@@ -824,10 +824,10 @@
 		6140D02C171F2361006458B2 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				61703A75178BA00F00571628 /* InAppSettings.bundle */,
 				2E7EBFDB1676BDB500DAB9BB /* Settings.h */,
 				2E7EBFDA1676BDB500DAB9BB /* Settings.mm */,
 				2E961B1F154E24C80061C37D /* Settings_HIDDEN.bundle */,
-				2E5D0C0B13A1AAD3009E2361 /* Settings.bundle */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -968,7 +968,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2E5D0C0C13A1AAD3009E2361 /* Settings.bundle in Resources */,
 				2E961B20154E24C80061C37D /* Settings_HIDDEN.bundle in Resources */,
 				2E3F6E90155A214B001BE187 /* Default.png in Resources */,
 				2E3F6E91155A214E001BE187 /* Default@2x.png in Resources */,
@@ -987,6 +986,7 @@
 				6116464F170259100093E29F /* instructions in Resources */,
 				2E58FE29172F2BF80015CE02 /* resourceArchive-en-US.jet in Resources */,
 				2E58FE2A172F2BF80015CE02 /* resourceArchive-es-ES.jet in Resources */,
+				61703A76178BA00F00571628 /* InAppSettings.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

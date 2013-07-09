@@ -23,5 +23,7 @@
 + (BOOL) runningAsApp;
 + (NSURL*) URLForResource:(NSString*) name withExtension:(NSString*) ext subdirectory:(NSString*) subdirectory;
 + (NSData*) contentsOfFile:(NSString*) file;
+- (BOOL) deleteFile:(NSString *) file;
+- (BOOL) fileExists:(NSString *) file;
 
 @end
