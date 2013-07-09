@@ -82,23 +82,35 @@ ABAddressBookRef addressBook;
     _favorites = favorites;
 }
 
-- (id)initWithStyle:(UITableViewStyle)style withMode:(FL_FavoritesTVC_Mode)aMode
+- (id)initWithStyle:(UITableViewStyle)style withMode:(FL_FavoritesTVC_Mode)aMode withFavorites:(NSMutableArray *)favorites
 {
   self = [super initWithStyle:style];
   if (self) {
     _operatingMode = aMode;
-    [FLFavoritesTableViewController checkAddressBookAuthorization];
+    _favorites = favorites;
+    
+//    [FLFavoritesTableViewController checkAddressBookAuthorizationWithCompletion:^{
+//      _favorites = [FLFavoritesTableViewController automaticReplenisherForFavorites:_favorites];
+//    }];
+
+    //[FLFavoritesTableViewController checkAddressBookAuthorization];
   }
   return self;
 }
 
-- (id)initWithStyle:(UITableViewStyle)style
+- (id)initWithStyle:(UITableViewStyle)style withFavorites:(NSMutableArray *)favorites
 {
   self = [super initWithStyle:style];
   if (self) {
     _operatingMode = FL_FavoritesTVC_Mode_Operate;
     _propertyType = FL_PropertyType_EmailAndPhone;
-    [FLFavoritesTableViewController checkAddressBookAuthorization];
+    _favorites = favorites;
+    
+//    [FLFavoritesTableViewController checkAddressBookAuthorizationWithCompletion:^{
+//      _favorites = [FLFavoritesTableViewController automaticReplenisherForFavorites:_favorites];
+//    }];
+
+    //[FLFavoritesTableViewController checkAddressBookAuthorization];
   }
   return self;
 }
@@ -140,7 +152,10 @@ ABAddressBookRef addressBook;
 #pragma mark - Navigation Controller Action Method
 
 - (void)addFavorite:(id)sender {
-  [FLFavoritesTableViewController checkAddressBookAuthorization];
+//  [FLFavoritesTableViewController checkAddressBookAuthorization];
+//  [FLFavoritesTableViewController checkAddressBookAuthorizationWithCompletion:^{
+//    _favorites = [FLFavoritesTableViewController automaticReplenisherForFavorites:_favorites];
+//  }];
   if (self.propertyType == FL_PropertyType_EmailAddress) {
     [self showPickerEmail:sender];
   }
@@ -295,40 +310,84 @@ ABAddressBookRef addressBook;
 + (void)checkAddressBookAuthorization {
   CFErrorRef error = NULL;
   
-  switch (ABAddressBookGetAuthorizationStatus()){
-    case kABAuthorizationStatusAuthorized:{
-      addressBook = ABAddressBookCreateWithOptions(NULL, &error);
-      /* Do your work and once you are finished ... */
-      if (addressBook != NULL){
-        CFRelease(addressBook);
-      }
-      break;
-    }
-    case kABAuthorizationStatusDenied:{
-      [[self class] displayMessage:kDenied];
-      break;
-    }
-    case kABAuthorizationStatusNotDetermined:{
-      addressBook = ABAddressBookCreateWithOptions(NULL, &error);
-      ABAddressBookRequestAccessWithCompletion
-      (addressBook, ^(bool granted, CFErrorRef error) {
-        if (granted){
-          NSLog(@"Access was granted");
-        } else {
-          NSLog(@"Access was not granted");
-        }
+  if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusNotDetermined) {
+    switch (ABAddressBookGetAuthorizationStatus()){
+      case kABAuthorizationStatusAuthorized:{
+        addressBook = ABAddressBookCreateWithOptions(NULL, &error);
+        /* Do your work and once you are finished ... */
         if (addressBook != NULL){
           CFRelease(addressBook);
         }
-      });
-      break;
-    }
-    case kABAuthorizationStatusRestricted:{
-      [[self class] displayMessage:kRestricted];
-      break;
+        break;
+      }
+      case kABAuthorizationStatusDenied:{
+        [[self class] displayMessage:kDenied];
+        break;
+      }
+      case kABAuthorizationStatusNotDetermined:{
+        addressBook = ABAddressBookCreateWithOptions(NULL, &error);
+        ABAddressBookRequestAccessWithCompletion
+        (addressBook, ^(bool granted, CFErrorRef error) {
+          if (granted){
+            NSLog(@"Access was granted");
+          } else {
+            NSLog(@"Access was not granted");
+          }
+          if (addressBook != NULL){
+            CFRelease(addressBook);
+          }
+        });
+        break;
+      }
+      case kABAuthorizationStatusRestricted:{
+        [[self class] displayMessage:kRestricted];
+        break;
+      }
     }
   }
 }
+
++ (void)checkAddressBookAuthorizationWithCompletion:(void (^)(void))success {
+  CFErrorRef error = NULL;
+  
+  if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusNotDetermined) {
+    switch (ABAddressBookGetAuthorizationStatus()){
+      case kABAuthorizationStatusAuthorized:{
+        addressBook = ABAddressBookCreateWithOptions(NULL, &error);
+        /* Do your work and once you are finished ... */
+        if (addressBook != NULL){
+          CFRelease(addressBook);
+        }
+        break;
+      }
+      case kABAuthorizationStatusDenied:{
+        [[self class] displayMessage:kDenied];
+        break;
+      }
+      case kABAuthorizationStatusNotDetermined:{
+        addressBook = ABAddressBookCreateWithOptions(NULL, &error);
+        ABAddressBookRequestAccessWithCompletion
+        (addressBook, ^(bool granted, CFErrorRef error) {
+          if (granted){
+            NSLog(@"Access was granted");
+            success();
+          } else {
+            NSLog(@"Access was not granted");
+          }
+          if (addressBook != NULL){
+            CFRelease(addressBook);
+          }
+        });
+        break;
+      }
+      case kABAuthorizationStatusRestricted:{
+        [[self class] displayMessage:kRestricted];
+        break;
+      }
+    }
+  }
+}
+
 
 + (void) displayMessage:(NSString *)paramMessage{
   [[[UIAlertView alloc] initWithTitle:nil

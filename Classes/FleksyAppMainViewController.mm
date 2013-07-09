@@ -121,23 +121,28 @@
 
 - (void)settingsViewController:(IASKAppSettingsViewController*)sender buttonTappedForSpecifier:(IASKSpecifier*)specifier {
   NSLog(@" Launching Favorites Setup: %s", __PRETTY_FUNCTION__);
-  FLFavoritesTableViewController *favTVC = [[FLFavoritesTableViewController alloc] initWithStyle:UITableViewStylePlain withMode:FL_FavoritesTVC_Mode_Settings];
-  favTVC.propertyType = (FL_PropertyType)(FL_PropertyType_PhoneNumber | FL_PropertyType_EmailAddress);
+  //FLFavoritesTableViewController *favTVC = [[FLFavoritesTableViewController alloc] initWithStyle:UITableViewStylePlain withMode:FL_FavoritesTVC_Mode_Settings];
+  
+  NSLog(@"Favorites BEFORE = %@", favorites);
   [self reloadFavorites];
+  NSLog(@"Favorites AFTER = %@", favorites);
+
+  FLFavoritesTableViewController *favTVC = [[FLFavoritesTableViewController alloc] initWithStyle:UITableViewStylePlain withMode:FL_FavoritesTVC_Mode_Settings withFavorites:favorites];
+  favTVC.propertyType = (FL_PropertyType)(FL_PropertyType_PhoneNumber | FL_PropertyType_EmailAddress);
   favTVC.favoritesDelegate = self;
   favTVC.title = @"Setup Favorites";
   
-  [FLFavoritesTableViewController automaticReplenisherForFavorites:favorites];
+  //[FLFavoritesTableViewController automaticReplenisherForFavorites:favorites];
   
   if (favoritesNavigationController) {
     favoritesNavigationController = nil;
   }
-  else {
-    // Only replinish after a re-launch, just in case
-    favorites = [FLFavoritesTableViewController automaticReplenisherForFavorites:favorites];
-  }
+//  else {
+//    // Only replinish after a re-launch, just in case
+//    favorites = [FLFavoritesTableViewController automaticReplenisherForFavorites:favorites];
+//  }
   
-  favTVC.favorites = favorites;
+  //favTVC.favorites = favorites;
   
   favoritesNavigationController = [[UINavigationController alloc] init];
   
@@ -1262,21 +1267,27 @@
       
       isExecutedWithFavorites = YES;
       
-      FLFavoritesTableViewController *favTVC = [[FLFavoritesTableViewController alloc] initWithStyle:UITableViewStylePlain];
-      favTVC.propertyType = (FL_PropertyType)(FL_PropertyType_PhoneNumber | FL_PropertyType_EmailAddress);
+      //FLFavoritesTableViewController *favTVC = [[FLFavoritesTableViewController alloc] initWithStyle:UITableViewStylePlain withMode:FL_FavoritesTVC_Mode_Operate];
+      
+      NSLog(@"Favorites BEFORE = %@", favorites);
       [self reloadFavorites];
+      NSLog(@"Favorites AFTER = %@", favorites);
+      
+      FLFavoritesTableViewController *favTVC = [[FLFavoritesTableViewController alloc] initWithStyle:UITableViewStylePlain withMode:FL_FavoritesTVC_Mode_Operate withFavorites:favorites];
+      favTVC.propertyType = (FL_PropertyType)(FL_PropertyType_PhoneNumber | FL_PropertyType_EmailAddress);
+      //[self reloadFavorites];
       favTVC.favoritesDelegate = self;
       favTVC.title = @"Favorites";
       
       if (favoritesNavigationController) {
         favoritesNavigationController = nil;
       }
-      else {
-        // Only replinish after a re-launch, just in case
-        favorites = [FLFavoritesTableViewController automaticReplenisherForFavorites:favorites];
-      }
-      
-      favTVC.favorites = favorites;
+//      else {
+//        // Only replinish after a re-launch, just in case
+//        favorites = [FLFavoritesTableViewController automaticReplenisherForFavorites:favorites];
+//      }
+//      
+//      favTVC.favorites = favorites;
 
       favoritesNavigationController = [[UINavigationController alloc] init];
       
@@ -1816,16 +1827,28 @@
   NSLog(@"Favorites before magic: %@", favorites);
   NSLog(@"SPEED DIAL before magic: %@", FLEKSY_APP_SETTING_SPEED_DIAL_1);
   
-  [FLFavoritesTableViewController checkAddressBookAuthorization];
-  favorites = [FLFavoritesTableViewController automaticReplenisherForFavorites:[favorites mutableCopy]];
+    [FLFavoritesTableViewController checkAddressBookAuthorizationWithCompletion:^{
+      favorites = [FLFavoritesTableViewController automaticReplenisherForFavorites:[favorites mutableCopy]];
+      
+      NSLog(@"Favorites after magic: %@", favorites);
+      NSLog(@"SPEED DIAL after magic: %@", FLEKSY_APP_SETTING_SPEED_DIAL_1);
+      
+      [self updateFavoriteStorage:favorites];
+      
+      NSLog(@"Favorites after update: %@", favorites);
+      NSLog(@"SPEED DIAL after update: %@", FLEKSY_APP_SETTING_SPEED_DIAL_1);
+
+    }];
   
-  NSLog(@"Favorites after magic: %@", favorites);
-  NSLog(@"SPEED DIAL after magic: %@", FLEKSY_APP_SETTING_SPEED_DIAL_1);
+//  favorites = [FLFavoritesTableViewController automaticReplenisherForFavorites:[favorites mutableCopy]];
   
-  [self updateFavoriteStorage:favorites];
-  
-  NSLog(@"Favorites after update: %@", favorites);
-  NSLog(@"SPEED DIAL after update: %@", FLEKSY_APP_SETTING_SPEED_DIAL_1);
+//  NSLog(@"Favorites after magic: %@", favorites);
+//  NSLog(@"SPEED DIAL after magic: %@", FLEKSY_APP_SETTING_SPEED_DIAL_1);
+//  
+//  [self updateFavoriteStorage:favorites];
+//  
+//  NSLog(@"Favorites after update: %@", favorites);
+//  NSLog(@"SPEED DIAL after update: %@", FLEKSY_APP_SETTING_SPEED_DIAL_1);
 
 }
 

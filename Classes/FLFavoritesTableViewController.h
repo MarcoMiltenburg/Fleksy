@@ -41,8 +41,11 @@ typedef enum {
 @property (nonatomic) FL_FavoritesTVC_Mode operatingMode;
 
 
-- (id)initWithStyle:(UITableViewStyle)style withMode:(FL_FavoritesTVC_Mode)mode;
+- (id)initWithStyle:(UITableViewStyle)style withMode:(FL_FavoritesTVC_Mode)aMode withFavorites:(NSMutableArray *)favorites;
+//- (id)initWithStyle:(UITableViewStyle)style withMode:(FL_FavoritesTVC_Mode)mode;
 + (void)checkAddressBookAuthorization;
++ (void)checkAddressBookAuthorizationWithCompletion:(void (^)(void))success;
+
 + (NSMutableArray *)automaticReplenisherForFavorites:(NSMutableArray *)myFavorites;
 
 /**
