@@ -74,7 +74,7 @@
 #pragma mark - FLTheme Notification Handlers
 
 - (void)handleThemeDidChange:(NSNotification *)aNote {
-  NSLog(@"handleThemeDidChange = %@", aNote);
+  NSLog(@"%s = %@", __PRETTY_FUNCTION__, aNote);
   
   selectedBackgroundColor = FLEKSYTHEME.customSegmentedControl_selectedBackgroundColor;
   defaultTextColor = FLEKSYTHEME.customSegmentedControl_defaultTextColor;

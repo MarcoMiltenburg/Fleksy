@@ -98,6 +98,7 @@ ABAddressBookRef addressBook;
   if (self) {
     _operatingMode = FL_FavoritesTVC_Mode_Operate;
     _propertyType = FL_PropertyType_EmailAndPhone;
+    [FLFavoritesTableViewController checkAddressBookAuthorization];
   }
   return self;
 }

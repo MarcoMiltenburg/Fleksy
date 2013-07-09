@@ -94,7 +94,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardView);
 #pragma mark - FLTheme Notification Handlers
 
 - (void)handleThemeDidChange:(NSNotification *)aNote {
-  NSLog(@"handleThemeDidChange = %@", aNote);
+  NSLog(@"%s = %@", __PRETTY_FUNCTION__, aNote);
   extraKeysBgView.backgroundColor = FLEKSYTHEME.extraKeysBgView_backgroundColor;
   self.backgroundColor = FLEKSYTHEME.fleksyKeyboard_backgroundColor;
   

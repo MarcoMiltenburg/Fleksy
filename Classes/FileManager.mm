@@ -289,7 +289,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FileManager);
     NSLog(@"Could not get changed preferences, will just use defaults from Settings.bundle/Root.plist");
   }
   
-  //NSLogGreenBackground(@"settings(%d):\n%@", [result count], result);
+  NSLog(@"settings(%d):\n%@", [result count], result);
   
   return result;
 }

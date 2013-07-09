@@ -297,7 +297,7 @@ float distributionFunction(float x) {
 #pragma mark - FLTheme Notification Handlers
 
 - (void)handleThemeDidChange:(NSNotification *)aNote {
-  NSLog(@"handleThemeDidChange = %@", aNote);
+  NSLog(@"%s = %@", __PRETTY_FUNCTION__, aNote);
   window.backgroundColor = FLEKSYTHEME.window_backgroundColor;
   // TODO: This does not appear to have an effect...
   [window makeKeyAndVisible];

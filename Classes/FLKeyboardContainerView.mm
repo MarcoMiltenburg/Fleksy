@@ -97,7 +97,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardContainerView);
 #pragma mark - FLTheme Notification Handlers
 
 - (void)handleThemeDidChange:(NSNotification *)aNote {
-  NSLog(@"handleThemeDidChange = %@", aNote);
+  NSLog(@"%s = %@", __PRETTY_FUNCTION__, aNote);
   topShadowView.backgroundColor = FLEKSYTHEME.topShadowView_backgroundColor;
   [self setNeedsLayout];
 }

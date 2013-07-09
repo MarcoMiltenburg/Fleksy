@@ -124,13 +124,21 @@
   FLFavoritesTableViewController *favTVC = [[FLFavoritesTableViewController alloc] initWithStyle:UITableViewStylePlain withMode:FL_FavoritesTVC_Mode_Settings];
   favTVC.propertyType = (FL_PropertyType)(FL_PropertyType_PhoneNumber | FL_PropertyType_EmailAddress);
   [self reloadFavorites];
-  favTVC.favorites = favorites;
   favTVC.favoritesDelegate = self;
   favTVC.title = @"Setup Favorites";
+  
+  [FLFavoritesTableViewController automaticReplenisherForFavorites:favorites];
   
   if (favoritesNavigationController) {
     favoritesNavigationController = nil;
   }
+  else {
+    // Only replinish after a re-launch, just in case
+    favorites = [FLFavoritesTableViewController automaticReplenisherForFavorites:favorites];
+  }
+  
+  favTVC.favorites = favorites;
+  
   favoritesNavigationController = [[UINavigationController alloc] init];
   
   [favoritesNavigationController addChildViewController:favTVC];
@@ -761,7 +769,7 @@
   
   //Serialize the Favorites Array to a comma seperated string
 
-  NSString *localSpeedDialCache = [favorites componentsJoinedByString:@","];
+  NSString *localSpeedDialCache = [myFavorites componentsJoinedByString:@","];
   
   // TODO: handleSettingsChange keeps same list in place because it is out of sync until final Done of Settings.
   // So favorites and FLEKSY_APP_SETTING_SPEED_DIAL_1 both are changed in other classes and methods, so keep local cache
@@ -779,7 +787,7 @@
 #pragma mark - FLTheme Notification Handlers
 
 - (void)handleThemeDidChange:(NSNotification *)aNote {
-  NSLog(@"handleThemeDidChange = %@", aNote);
+  NSLog(@"%s = %@", __PRETTY_FUNCTION__, aNote);
   actionButton.imageView.backgroundColor = FLEKSYTHEME.actionButton_imageView_backgroundColor;
   [self.view setNeedsLayout];
 }
@@ -1257,13 +1265,19 @@
       FLFavoritesTableViewController *favTVC = [[FLFavoritesTableViewController alloc] initWithStyle:UITableViewStylePlain];
       favTVC.propertyType = (FL_PropertyType)(FL_PropertyType_PhoneNumber | FL_PropertyType_EmailAddress);
       [self reloadFavorites];
-      favTVC.favorites = favorites;
       favTVC.favoritesDelegate = self;
       favTVC.title = @"Favorites";
       
       if (favoritesNavigationController) {
         favoritesNavigationController = nil;
       }
+      else {
+        // Only replinish after a re-launch, just in case
+        favorites = [FLFavoritesTableViewController automaticReplenisherForFavorites:favorites];
+      }
+      
+      favTVC.favorites = favorites;
+
       favoritesNavigationController = [[UINavigationController alloc] init];
       
       [favoritesNavigationController addChildViewController:favTVC];
@@ -1780,6 +1794,12 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
+ 
+  // First time: favorites may not be properly loaded
+  
+  if ([favorites count] == 0 && [FLEKSY_APP_SETTING_SPEED_DIAL_1 length] > 0) {
+    [self reloadFavorites];
+  }
 
 #ifndef RELEASE
   NSLog(@"Favorites before strip: %@", favorites);
@@ -1796,6 +1816,7 @@
   NSLog(@"Favorites before magic: %@", favorites);
   NSLog(@"SPEED DIAL before magic: %@", FLEKSY_APP_SETTING_SPEED_DIAL_1);
   
+  [FLFavoritesTableViewController checkAddressBookAuthorization];
   favorites = [FLFavoritesTableViewController automaticReplenisherForFavorites:[favorites mutableCopy]];
   
   NSLog(@"Favorites after magic: %@", favorites);
@@ -1805,7 +1826,6 @@
   
   NSLog(@"Favorites after update: %@", favorites);
   NSLog(@"SPEED DIAL after update: %@", FLEKSY_APP_SETTING_SPEED_DIAL_1);
-
 
 }
 

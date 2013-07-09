@@ -273,7 +273,7 @@
 #pragma mark - FLTheme Notification Handlers
 
 - (void)handleThemeDidChange:(NSNotification *)aNote {
-  NSLog(@"handleThemeDidChange = %@", aNote);
+  NSLog(@"%s = %@", __PRETTY_FUNCTION__, aNote);
   
   if (!FLEKSY_APP_SETTING_SPACE_BUTTON) {
     homeRowStripe.backgroundColor = FLEKSYTHEME.keyboardImageView_homeStripeBackgroundColor;

@@ -33,15 +33,13 @@
 			<string>Keyboard Theme</string>
 			<key>Values</key>
 			<array>
-				<real>0</real>
+				<integer>0</integer>
 				<integer>1</integer>
-				<string>2</string>
 			</array>
 			<key>Titles</key>
 			<array>
 				<string>Darkside</string>
 				<string>Vanilla</string>
-				<string>Contrast</string>
 			</array>
 			<key>DefaultValue</key>
 			<integer>0</integer>

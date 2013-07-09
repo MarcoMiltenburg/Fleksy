@@ -85,7 +85,7 @@
 #pragma mark - FLTheme Notification Handlers
 
 - (void)handleThemeDidChange:(NSNotification *)aNote {
-  NSLog(@"handleThemeDidChange = %@", aNote);
+  NSLog(@"%s = %@", __PRETTY_FUNCTION__, aNote);
   textView.backgroundColor = FLEKSYTHEME.textView_backgroundColor;
   textView.textColor = FLEKSYTHEME.textView_textColor;
   [self setNeedsLayout];
