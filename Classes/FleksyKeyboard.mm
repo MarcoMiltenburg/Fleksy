@@ -135,6 +135,8 @@ static FleksyKeyboard* instance = nil;
   FLEKSY_APP_SETTING_SPACE_BUTTON              = [[VariousUtilities getSettingNamed:@"FLEKSY_APP_SETTING_SPACE_BUTTON" fromSettings:settings] boolValue];
   FLEKSY_APP_SETTING_LANGUAGE_PACK             =  [VariousUtilities getSettingNamed:@"FLEKSY_APP_SETTING_LANGUAGE_PACK" fromSettings:settings];
   FLEKSY_APP_SETTING_THEME                     = [[VariousUtilities getSettingNamed:@"FLEKSY_APP_SETTING_THEME" fromSettings:settings] intValue];
+  // Only saved locally, not across devices
+  //FLEKSY_APP_CACHE_WSJ_QUESTIONAIRE          = [[VariousUtilities getSettingNamed:@"FLEKSY_APP_CACHE_WSJ_QUESTIONAIRE" fromSettings:settings] boolValue];
 
   if (FLEKSYTHEME.currentThemeType != FLEKSY_APP_SETTING_THEME) {
     //[FLEKSYTHEME.handler themeDidChange:(FLThemeType)FLEKSY_APP_SETTING_THEME];

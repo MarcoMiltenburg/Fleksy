@@ -47,11 +47,53 @@
 
 #define TAG_RESHOW_AFTER_ROTATION 1
 
-@interface FleksyAppMainViewController () <IASKSettingsDelegate, UIPopoverControllerDelegate>
+#define WALL_STREET_JOURNAL_LINK @"http://projects.wsj.com/soty/rankings?standalone=1"
+
+@protocol FleksyUserQuestionaireListener
+
+- (void)showNormalFlow;
+
+@end
+
+@interface FleksyUserQuestionaire : NSObject
+
+@property (nonatomic, assign) id<FleksyUserQuestionaireListener> questioniareListener;
+@end
+
+
+@implementation FleksyUserQuestionaire
+
+/*
+ This seems to now be serving the mobile version:
+ http://projects.wsj.com/soty/rankings?standalone=1
+ 
+ Versus the normal one:
+ http://projects.wsj.com/soty/rankings
+ */
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+#if FLEKSY_POP_WALL_STREET_JOURNAL
+  if (buttonIndex == 1) {
+    [TestFlight passCheckpoint:@"showWallStreetJournal"];
+    printf("Sending user to Wall Street Journal Rankings Site.\n\n");
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:WALL_STREET_JOURNAL_LINK]];
+  }
+  else {
+    [self.questioniareListener showNormalFlow];
+  }
+#endif
+}
+
+@end
+
+
+@interface FleksyAppMainViewController () <IASKSettingsDelegate, UIPopoverControllerDelegate, FleksyUserQuestionaireListener>
 {
   IASKAppSettingsViewController *appSettingsViewController;
   UINavigationController *favoritesNavigationController;
   BOOL isExecutedWithFavorites;
+  FleksyUserQuestionaire *handleQuestionaireLink;
+  BOOL _userHasVisitedQuestionaireLink;
 }
 
 @property (nonatomic, retain) IASKAppSettingsViewController *appSettingsViewController;
@@ -130,14 +172,52 @@
 	return nil;
 }
 
+#pragma mark - User Voting
+
+- (void)showVoting:(BOOL)goDirect {
+  if (!handleQuestionaireLink) {
+    handleQuestionaireLink = [[FleksyUserQuestionaire alloc] init];
+    handleQuestionaireLink.questioniareListener = self;
+  }
+  
+  if (goDirect) {
+    [TestFlight passCheckpoint:@"showWallStreetJournalDirectly"];
+    printf("Sending user to Wall Street Journal Rankings Site directly.\n\n");
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:WALL_STREET_JOURNAL_LINK]];
+  }
+  else {
+    [[[UIAlertView alloc] initWithTitle:@"Vote YES for Syntellia" message:@"We need your help. We are featured by the Wall Street Journal Startup of the Year. Click View All and Vote Yes for Syntellia!" delegate:handleQuestionaireLink cancelButtonTitle:@"Later" otherButtonTitles:@"OK", nil] show];
+  }
+  _userHasVisitedQuestionaireLink = YES;
+  FLEKSY_APP_CACHE_WSJ_QUESTIONAIRE = _userHasVisitedQuestionaireLink;
+  [[NSUserDefaults standardUserDefaults] setBool:FLEKSY_APP_CACHE_WSJ_QUESTIONAIRE
+                                            forKey:@"FLEKSY_APP_CACHE_WSJ_QUESTIONAIRE"];
+  
+  [[NSUserDefaults standardUserDefaults] synchronize];}
+
+#pragma mark - FleksyUserQuestionaireListener
+
+- (void)showNormalFlow {
+  [self showSettings];
+}
 
 #pragma mark - Settings Handling
 
+
 - (void) showSettings {
-    
+  
     [TestFlight passCheckpoint:@"showSettings"];
-    
+
+#if FLEKSY_POP_WALL_STREET_JOURNAL
+  if (!_userHasVisitedQuestionaireLink) {
+    [self showVoting:NO];
+  }
+  else {
     [self showSettingsModal:nil];
+  }
+#else
+  [self showSettingsModal:nil];
+#endif
 }
 
 - (void)showSettingsPush:(id)sender {
@@ -1141,6 +1221,9 @@
     } else if ([buttonTitle isEqualToString:@"Settings"]) {
       [self showSettings];
       
+    } else if ([buttonTitle isEqualToString:@"Vote For Syntellia"]) {
+      [self showVoting:YES];
+      
     } else if ([buttonTitle isEqualToString:@"♥ Fleksy in other apps?"]) {
       [self showFleksyInOtherApps];
     
@@ -1227,6 +1310,9 @@
       
     } else if ([buttonTitle isEqualToString:@"Settings"]) {
       [self showSettings];
+      
+    } else if ([buttonTitle isEqualToString:@"Vote For Syntellia!"]) {
+      [self showVoting:YES];
       
     } else if ([buttonTitle isEqualToString:@"♥ Fleksy in other apps?"]) {
       [self showFleksyInOtherApps];
@@ -1388,6 +1474,7 @@
   }
   [actionMainMenuPlain addButtonWithTitle:@"Instructions"];
   [actionMainMenuPlain addButtonWithTitle:@"Settings"];
+  [actionMainMenuPlain addButtonWithTitle:@"Vote for Syntellia!"];
   [actionMainMenuPlain addButtonWithTitle:@"♥ Fleksy in other apps?"];
   [actionMainMenuPlain addButtonWithTitle:@"We love feedback!"];
   [actionMainMenuPlain addButtonWithTitle:@"Follow @fleksy"];
@@ -1412,6 +1499,7 @@
   }
   [initialMainMenu addButtonWithTitle:@"Instructions"];
   [initialMainMenu addButtonWithTitle:@"Settings"];
+  [initialMainMenu addButtonWithTitle:@"Vote For Syntellia!"];
   [initialMainMenu addButtonWithTitle:@"♥ Fleksy in other apps?"];
   [initialMainMenu addButtonWithTitle:@"We love feedback!"];
   [initialMainMenu addButtonWithTitle:@"Follow @fleksy"];
@@ -1652,6 +1740,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleThemeDidChange:) name:FleksyThemeDidChangeNotification object:nil];
 
+    _userHasVisitedQuestionaireLink = [[NSUserDefaults standardUserDefaults] boolForKey:@"FLEKSY_APP_CACHE_WSJ_QUESTIONAIRE"];
   }
   return self;
 }
