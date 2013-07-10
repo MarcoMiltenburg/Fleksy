@@ -8,10 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface FLColdWar : NSObject {
-  UIWebView* coldWarWebView;
-}
-
+@interface FLColdWar : NSObject
 + (void) yay;
-
 @end

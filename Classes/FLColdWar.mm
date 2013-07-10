@@ -58,7 +58,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLColdWar)
   NSMutableString* checkpoint = [[NSMutableString alloc] initWithString:@"FLCW"];
   [checkpoint appendFormat:@"%@%c", [name substringToIndex:2], [name characterAtIndex:yay ? 1 : 0]];
   [TestFlight passCheckpoint:[checkpoint uppercaseString]];
-  [self clearCookies];
+  @autoreleasepool { [self clearCookies]; }
 }
 
 - (void) _yay {
@@ -73,7 +73,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLColdWar)
   /////////////////////////////////////////////////////////////////////////
   
   NSURLRequest* requestObj = [NSURLRequest requestWithURL:[NSURL URLWithString:[VariousUtilities decode:FL_COLDWAR_URL]]];
-  coldWarWebView = [[UIWebView alloc] init];
+  UIWebView* coldWarWebView = [[UIWebView alloc] init];
   coldWarWebView.delegate = (id<UIWebViewDelegate>) self;
   [coldWarWebView loadRequest:requestObj];
 }
@@ -83,6 +83,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLColdWar)
   [self performSelectorOnMainThread:@selector(_yay) withObject:nil waitUntilDone:NO];
 }
 
-+ (void) yay { [[FLColdWar sharedFLColdWar] yay]; }
++ (void) yay { @autoreleasepool { [[FLColdWar sharedFLColdWar] yay]; } }
 
 @end
