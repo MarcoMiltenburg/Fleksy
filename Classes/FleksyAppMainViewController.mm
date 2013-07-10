@@ -1475,7 +1475,7 @@
   }
   
   // Put Favorites at the top
-  [actionMainMenu2 addButtonWithTitle:[NSString stringWithFormat:@"Favorites"]];
+  //[actionMainMenu2 addButtonWithTitle:[NSString stringWithFormat:@"Favorites"]];
   
   //now add rest
   for (int i = 0; i < actionMainMenuPlain.numberOfButtons; i++) {
@@ -1485,7 +1485,18 @@
     if (i == actionMainMenuPlain.cancelButtonIndex) {
       actionMainMenu2.cancelButtonIndex = index;
     }
+    
+    if ([title isEqualToString:@"Copy & Clear"]) {
+      //first add favorites
+      //Only add the "Send to Favorites Button"
+      //      for (NSString* newButtonTitle in favorites) {
+      //        [actionMainMenu2 addButtonWithTitle:[NSString stringWithFormat:@"Send to %@", newButtonTitle]];
+      //      }
+      [actionMainMenu2 addButtonWithTitle:[NSString stringWithFormat:@"Favorites"]];
+      
+    }
   }
+
   actionMainMenu = actionMainMenu2;
   
   if (actionMenuWasVisible) {

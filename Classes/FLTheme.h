@@ -76,7 +76,7 @@ typedef enum {
 //Light Gray	211-211-211	d3d3d3
 #define FLSwipeFeedbackLightGrayColor [UIColor colorWithRed:(211.0/255.0) green:(211.0/255.0) blue:(211.0/255.0) alpha:0.35]
 #define FLSwipeFeedbackGrayColor [UIColor colorWithRed:(190.0/255.0) green:(190.0/255.0) blue:(190.0/255.0) alpha:0.35]
-#define FLSwipeFeedbackLightSlateGrayColor [UIColor colorWithRed:(119.0/255.0) green:(136.0/255.0) blue:(153.0/255.0) alpha:0.35]
+#define FLSwipeFeedbackLightSlateGrayColor [UIColor colorWithRed:(119.0/255.0) green:(136.0/255.0) blue:(153.0/255.0) alpha:0.2]
 
 #define FLDarkSideWhite [UIColor colorWithWhite:1 alpha:0.2]
 

@@ -47,7 +47,7 @@
 }
 
 - (UIColor *)customSegmentedControl_selectedTextColor {
-  return FLWhiteColor;
+  return FLeksyColor;
 }
 
 - (UIColor *)customSegmentedControl_selectedBackgroundColor {
