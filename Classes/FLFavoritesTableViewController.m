@@ -350,6 +350,14 @@ ABAddressBookRef addressBook;
 + (void)checkAddressBookAuthorizationWithCompletion:(void (^)(void))success {
   CFErrorRef error = NULL;
   
+  float featureVersion = 6.0;
+  
+  if ([[[UIDevice currentDevice] systemVersion] floatValue] < featureVersion)
+  {
+    NSLog(@"Not Running in IOS-6: Cannot use Address Book Frameworks.");
+    return;
+  }
+  
   if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusNotDetermined) {
     switch (ABAddressBookGetAuthorizationStatus()){
       case kABAuthorizationStatusAuthorized:{
