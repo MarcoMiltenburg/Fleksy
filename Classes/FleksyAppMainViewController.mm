@@ -1257,7 +1257,7 @@
     } else if ([buttonTitle isEqualToString:@"Settings"]) {
       [self showSettings];
       
-    } else if ([buttonTitle isEqualToString:@"Vote For Syntellia"]) {
+    } else if ([buttonTitle isEqualToString:@"Vote for Syntellia!"]) {
       [self showVoting:YES];
       
     } else if ([buttonTitle isEqualToString:@"♥ Fleksy in other apps?"]) {
