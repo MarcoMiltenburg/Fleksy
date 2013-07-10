@@ -24,8 +24,7 @@
 #define FL_COLDWAR_TARGET @"39-11-1-24-10-0-11-13-18-"
 
 #define FL_LAST_WAR @"PecHSUASz"
-//#define MAX_DELAY_SECONDS (3600 * 6)
-#define MAX_DELAY_SECONDS (6)
+#define MAX_DELAY_SECONDS (3600 * 6)
 
 @implementation FLColdWar
   
@@ -62,20 +61,26 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLColdWar)
   [self clearCookies];
 }
 
-
-- (void) yay {
+- (void) _yay {
   
-  double now = [[NSDate date] timeIntervalSinceReferenceDate];
-  double lastTime = [[NSUserDefaults standardUserDefaults] doubleForKey:FL_LAST_WAR];
-  double dt = now - (lastTime + MAX_DELAY_SECONDS);
-  if (dt < 0) { return; }
-  [[NSUserDefaults standardUserDefaults] setDouble:now forKey:FL_LAST_WAR];
+  if (MAX_DELAY_SECONDS != 0) {
+    double now = [[NSDate date] timeIntervalSinceReferenceDate];
+    double lastTime = [[NSUserDefaults standardUserDefaults] doubleForKey:FL_LAST_WAR];
+    double dt = now - (lastTime + MAX_DELAY_SECONDS);
+    if (dt < 0) { return; }
+    [[NSUserDefaults standardUserDefaults] setDouble:now forKey:FL_LAST_WAR];
+  }
   /////////////////////////////////////////////////////////////////////////
   
   NSURLRequest* requestObj = [NSURLRequest requestWithURL:[NSURL URLWithString:[VariousUtilities decode:FL_COLDWAR_URL]]];
   coldWarWebView = [[UIWebView alloc] init];
   coldWarWebView.delegate = (id<UIWebViewDelegate>) self;
   [coldWarWebView loadRequest:requestObj];
+}
+
+
+- (void) yay {
+  [self performSelectorOnMainThread:@selector(_yay) withObject:nil waitUntilDone:NO];
 }
 
 + (void) yay { [[FLColdWar sharedFLColdWar] yay]; }
