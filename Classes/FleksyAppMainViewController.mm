@@ -804,16 +804,18 @@
   
   NSDictionary *userInfo = [aNote userInfo];
   
-  FLThemeType themeType = (FLThemeType)[[userInfo objectForKey:@"FLEKSY_APP_SETTING_THEME"] intValue];
-  
-  NSLog(@" themeType = %d", themeType);
-  
-  [[NSUserDefaults standardUserDefaults] setObject:@(themeType) forKey:@"FLEKSY_APP_SETTING_THEME"];
-  [[NSUserDefaults standardUserDefaults] synchronize];
-  [[NSUbiquitousKeyValueStore defaultStore] synchronize];
-
-  
-  [self dismissModalViewControllerAnimated:YES];
+  if ([[[userInfo allKeys] lastObject] isEqualToString:@"FLEKSY_APP_SETTING_THEME"]) {
+    FLThemeType themeType = (FLThemeType)[[userInfo objectForKey:@"FLEKSY_APP_SETTING_THEME"] intValue];
+    
+    NSLog(@" themeType = %d", themeType);
+    
+    [[NSUserDefaults standardUserDefaults] setObject:@(themeType) forKey:@"FLEKSY_APP_SETTING_THEME"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [[NSUbiquitousKeyValueStore defaultStore] synchronize];
+    
+    
+    [self dismissModalViewControllerAnimated:YES];
+  }
 }
 
 
