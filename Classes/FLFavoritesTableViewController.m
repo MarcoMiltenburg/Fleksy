@@ -192,7 +192,9 @@ ABAddressBookRef addressBook;
   ABPeoplePickerNavigationController *picker = [[ABPeoplePickerNavigationController alloc] init];
   picker.peoplePickerDelegate = self;
   
-  [picker setDisplayedProperties: [NSArray arrayWithObjects:@(kABPersonEmailProperty), @(kABPersonPhoneProperty), nil]];
+  // TODO: IDEA for debugging [#52935597], chagne the order of properties...
+  
+  [picker setDisplayedProperties: [NSArray arrayWithObjects:@(kABPersonPhoneProperty), @(kABPersonEmailProperty), nil]];
   picker.navigationBar.topItem.prompt = @"Choose contact to add to Fleksy favorites";
   
   [self presentViewController:picker animated:YES completion:nil];
@@ -253,7 +255,22 @@ ABAddressBookRef addressBook;
   
   [favString appendString:@":"];
   
+  NSLog(@" %s => BEFORE person = %@, property = %d, identifier = %d", __PRETTY_FUNCTION__, person, property, identifier);
+  
   NSArray *array = [ABContact arrayForProperty:property inRecord:person];
+  
+  NSLog(@" %s => AFTER person = %@, property = %d, identifier = %d", __PRETTY_FUNCTION__, person, property, identifier);
+  NSLog(@" array = %@", array);
+  
+  if (identifier >= [array count]) {
+    NSLog(@" Error: Record is malformed. Make a favorite save and optionally indicate to user.");
+//    [[[UIAlertView alloc] initWithTitle:@"Contact Issue" message:@"A property of the contact was saved to your favorites. In the Contacts app, please Share Contact with email to yourself, then Create New Contact" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+    
+    // TODO: Decrementing the identifier value handles the situation correctly. 
+
+    identifier--;
+  }
+  
   propertyString = (NSString *)[array objectAtIndex:identifier];
   [favString appendString:propertyString];
   

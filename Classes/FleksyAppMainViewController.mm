@@ -126,6 +126,9 @@
   NSLog(@"Favorites BEFORE = %@", favorites);
   [self reloadFavorites];
   NSLog(@"Favorites AFTER = %@", favorites);
+  
+  favorites = [FLFavoritesTableViewController automaticReplenisherForFavorites:[favorites mutableCopy]];
+  [self updateFavoriteStorage:favorites];
 
   FLFavoritesTableViewController *favTVC = [[FLFavoritesTableViewController alloc] initWithStyle:UITableViewStylePlain withMode:FL_FavoritesTVC_Mode_Settings withFavorites:favorites];
   favTVC.propertyType = (FL_PropertyType)(FL_PropertyType_PhoneNumber | FL_PropertyType_EmailAddress);
@@ -1275,9 +1278,12 @@
       [self reloadFavorites];
       NSLog(@"Favorites AFTER = %@", favorites);
       
+      favorites = [FLFavoritesTableViewController automaticReplenisherForFavorites:[favorites mutableCopy]];
+      [self updateFavoriteStorage:favorites];
+      
       FLFavoritesTableViewController *favTVC = [[FLFavoritesTableViewController alloc] initWithStyle:UITableViewStylePlain withMode:FL_FavoritesTVC_Mode_Operate withFavorites:favorites];
       favTVC.propertyType = (FL_PropertyType)(FL_PropertyType_PhoneNumber | FL_PropertyType_EmailAddress);
-      //[self reloadFavorites];
+
       favTVC.favoritesDelegate = self;
       favTVC.title = @"Favorites";
       
