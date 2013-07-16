@@ -747,6 +747,8 @@
 #pragma mark - FLFavoritesTVCDelegateProtocol Method
 
 - (void)dismissFavoritesTVC {
+  NSLog(@"dismissFavoritesTVC");
+  isExecutedWithFavorites = NO;
   [favoritesNavigationController dismissViewControllerAnimated:YES completion:NULL];
 }
 
