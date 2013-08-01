@@ -246,7 +246,9 @@ ABAddressBookRef addressBook;
   NSString *firstName = (__bridge_transfer NSString*)ABRecordCopyValue(person, kABPersonFirstNameProperty);
   NSString *lastName = (__bridge_transfer NSString*)ABRecordCopyValue(person, kABPersonLastNameProperty);
   
-  [favString appendString:firstName];
+  if (firstName) {
+    [favString appendString:firstName];
+  }
   
   if (lastName) {
     [favString appendString:@"_"];
@@ -603,7 +605,12 @@ ABAddressBookRef addressBook;
     
     
     if ([nameComponents count] == 2) {
-      contact = [[ABContactsHelper contactsMatchingName:nameComponents[0] andName:nameComponents[1]] lastObject];
+      if (nameComponents[0]) {
+        contact = [[ABContactsHelper contactsMatchingName:nameComponents[0] andName:nameComponents[1]] lastObject];
+      }
+      else {
+        contact = [[ABContactsHelper contactsMatchingName:nameComponents[1]] lastObject];
+      }
     }
     else {
       contact = [[ABContactsHelper contactsMatchingName:nameComponents[0]] lastObject];
@@ -815,6 +822,7 @@ shouldPerformDefaultActionForPerson:(ABRecordRef)person
       //Fix up the Fleksy favorite with a name
       
       replenishedFavorite = [FLFavoritesTableViewController replinishFavoritesWithContact:contact selectedFavorite:selectedFavorite];
+      NSLog(@" automaticReplenisherForFavorites: favoriteIndex = %d, selectedFavorite = %@, replenishedFavorite = %@", favoriteIndex, selectedFavorite, replenishedFavorite);
       [returnFavorites replaceObjectAtIndex:favoriteIndex withObject:replenishedFavorite];
     }
     else {
@@ -832,7 +840,11 @@ shouldPerformDefaultActionForPerson:(ABRecordRef)person
   NSString *firstName = contact.firstname;
   NSString *lastName = contact.lastname;
   
-  NSMutableString *replacementFavString = [firstName mutableCopy];
+  NSMutableString *replacementFavString = [[NSString string] mutableCopy];
+  
+  if (firstName) {
+    [replacementFavString appendString:firstName];
+  }
   if (lastName) {
     [replacementFavString appendString:@"_"];
     [replacementFavString appendString:lastName];
