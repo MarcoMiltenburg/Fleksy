@@ -270,7 +270,8 @@ ABAddressBookRef addressBook;
     
     // TODO: Decrementing the identifier value handles the situation correctly. 
 
-    identifier--;
+    //identifier--;
+    identifier = [array count] - 1;
   }
   
   propertyString = (NSString *)[array objectAtIndex:identifier];
