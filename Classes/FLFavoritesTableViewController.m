@@ -739,11 +739,12 @@ ABAddressBookRef addressBook;
     NSLog(@"ARRAY = %@", array);
     NSLog(@"%@", [array objectAtIndex:identifierForValue]);
     
-    NSLog(@" personeViewControlley array currentCellString = %@", self.currentCellString);
+    NSLog(@" personViewControlley array currentCellString = %@", self.currentCellString);
     
     [self replinishFavoritesWithContact:[ABContact contactWithRecord:person] selectedCellString:[array objectAtIndex:identifierForValue] atIndexPath:self.currentIndexPath];
-    //NSLog(@" personeViewController favCell.textLabel.text = %@", favCell.textLabel.text);
-    NSLog(@" personeViewController favString = %@", [array objectAtIndex:identifierForValue]);
+    //NSLog(@" personViewController favCell.textLabel.text = %@", favCell.textLabel.text);
+    NSLog(@" personViewController favString = %@", [array objectAtIndex:identifierForValue]);
+    [personViewController.navigationController popViewControllerAnimated:YES];
   }
   else
   {
@@ -753,6 +754,7 @@ ABAddressBookRef addressBook;
     NSLog(@" personeViewController object currentCellString = %@", self.currentCellString);
 #pragma unused(object)
   }
+  NSLog(@" personViewController returning now");
   return NO;
 }
 
