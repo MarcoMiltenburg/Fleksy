@@ -487,7 +487,12 @@ ABAddressBookRef addressBook;
   NSArray* nameComponents = [components[0] componentsSeparatedByString:@"_"];
   
   if ([nameComponents count] == 2) {
-    cell.textLabel.text = [self cellTextFromString:[NSString stringWithFormat:@"%@ %@", nameComponents[0], nameComponents[1]]];
+    if (![nameComponents[0] isEqualToString:[NSString string]]) {
+      cell.textLabel.text = [self cellTextFromString:[NSString stringWithFormat:@"%@ %@", nameComponents[0], nameComponents[1]]];
+    }
+    else {
+      cell.textLabel.text = nameComponents[1];
+    }
   }
   else {
     cell.textLabel.text = nameComponents[0];
@@ -605,7 +610,7 @@ ABAddressBookRef addressBook;
     
     
     if ([nameComponents count] == 2) {
-      if (nameComponents[0]) {
+      if (![nameComponents[0] isEqualToString:[NSString string]]) {
         contact = [[ABContactsHelper contactsMatchingName:nameComponents[0] andName:nameComponents[1]] lastObject];
       }
       else {
