@@ -127,6 +127,13 @@
   [self reloadFavorites];
   NSLog(@"Favorites AFTER = %@", favorites);
   
+  float featureVersion = 6.0;
+  if ([[[UIDevice currentDevice] systemVersion] floatValue] < featureVersion)
+  {
+    NSLog(@"Not Running in IOS-6: Cannot use Address Book Frameworks.");
+    return;
+  }
+  
   favorites = [FLFavoritesTableViewController automaticReplenisherForFavorites:[favorites mutableCopy]];
   [self updateFavoriteStorage:favorites];
 
