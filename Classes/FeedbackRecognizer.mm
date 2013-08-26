@@ -423,10 +423,10 @@
 }
 
 - (void) startHover {
-#if !FLEKSY_SDK
+
   AppDelegate* appDelegate = (AppDelegate*) [UIApplication sharedApplication].delegate;
   [appDelegate setProximityMonitoringEnabled:NO];
-#endif
+
   hoverMode = YES;
   lastChar = 0;
   pendingChar = 0;
@@ -441,10 +441,10 @@
   //cancel NATO version of char
   [NSObject cancelPreviousPerformRequestsWithTarget:self];
   [NSObject cancelPreviousPerformRequestsWithTarget:nato];
-#if !FLEKSY_SDK
+
   AppDelegate* appDelegate = (AppDelegate*) [UIApplication sharedApplication].delegate;
   [appDelegate setProximityMonitoringEnabled:YES];
-#endif
+
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
