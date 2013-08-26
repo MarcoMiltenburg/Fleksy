@@ -332,7 +332,7 @@
     
     NSNumber* key = [NSNumber numberWithChar:c];
     CGPoint point = CGPointMake(keyPoints[c].x, keyPoints[c].y);
-    if (point.x != -1 || point.y != -1) {
+    if (!FLPointEqualToPoint(point, FLPointInvalid)) {
       
       FLChar existing = [self getNearestCharForPoint:point];
       //CGPoint p = [self getKeyboardPointForChar:existing];
@@ -354,7 +354,7 @@
   }
   
   
-  if (_keys['Q'].x != -1) {
+  if (!FLPointEqualToPoint(_keys['Q'], FLPointInvalid)) {
     homeRowStripe = [[UIView alloc] init];
     [self addSubview:homeRowStripe];
     [self sendSubviewToBack:homeRowStripe];
@@ -652,7 +652,7 @@
 }
 
 - (BOOL) keyIsEnabled:(FLChar) c {
-  return keyPoints[c].x != -1 || keyPoints[c].y != -1;
+  return (!FLPointEqualToPoint(keyPoints[c], FLPointInvalid));
 }
 
 - (void) highlightKeysForWord:(NSString*) wordString {
