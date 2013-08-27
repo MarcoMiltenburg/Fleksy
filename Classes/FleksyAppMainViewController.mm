@@ -463,7 +463,6 @@
   if (FLEKSY_APP_SETTING_EMAIL_REPLY_TO && FLEKSY_APP_SETTING_EMAIL_REPLY_TO.length) {
     [result appendFormat:@"</br>reply://%@", FLEKSY_APP_SETTING_EMAIL_REPLY_TO];
   }
-  [result appendString:@"</br></br>"];
   return result;
 }
 
@@ -727,6 +726,7 @@
   
   if (signature) {
     text = [NSString stringWithFormat:@"%@</br></br>%@", text, [self getEmailFooter]];
+    text = [text stringByReplacingOccurrencesOfString:@"\n" withString:@"</br>"];
   }
   
   [mailController setMessageBody:text isHTML:html];
