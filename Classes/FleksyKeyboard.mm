@@ -349,6 +349,7 @@ static FleksyKeyboard* instance = nil;
       [[FLKeyboardView sharedFLKeyboardView].panGestureRecognizer addTarget:self action:@selector(handlePanGesture:)];
     } else {
       [FLKeyboardView sharedFLKeyboardView].panGestureRecognizer.enabled = NO;
+      [FLKeyboardView sharedFLKeyboardView].scrollEnabled = NO;
     }
     //[feedbackRecognizer requireGestureRecognizerToFail:[FLKeyboardView sharedFLKeyboardView].panGestureRecognizer];
     //[longPressRecognizer requireGestureRecognizerToFail:[Keyboard sharedKeyboard].panGestureRecognizer];
