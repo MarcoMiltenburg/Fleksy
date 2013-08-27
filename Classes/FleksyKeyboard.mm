@@ -137,6 +137,7 @@ static FleksyKeyboard* instance = nil;
   FLEKSY_APP_SETTING_THEME                     = [[VariousUtilities getSettingNamed:@"FLEKSY_APP_SETTING_THEME" fromSettings:settings] intValue];
   // Only saved locally, not across devices
   //FLEKSY_APP_CACHE_WSJ_QUESTIONAIRE          = [[VariousUtilities getSettingNamed:@"FLEKSY_APP_CACHE_WSJ_QUESTIONAIRE" fromSettings:settings] boolValue];
+  FLEKSY_APP_SETTING_COPY_ON_EXIT              = [[VariousUtilities getSettingNamed:@"FLEKSY_APP_SETTING_COPY_ON_EXIT" fromSettings:settings] boolValue];
 
   if (FLEKSYTHEME.currentThemeType != FLEKSY_APP_SETTING_THEME) {
     //[FLEKSYTHEME.handler themeDidChange:(FLThemeType)FLEKSY_APP_SETTING_THEME];

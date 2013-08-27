@@ -605,7 +605,9 @@ float distributionFunction(float x) {
   [[FLKeyboardContainerView sharedFLKeyboardContainerView].suggestionsView cancelAllSpellingRequests];
   [VariousUtilities stopSpeaking];
   
-  [fleksyAppViewController copyText];
+  if (FLEKSY_APP_SETTING_COPY_ON_EXIT) {
+    [fleksyAppViewController copyText];
+  }
 }
 
 - (void)applicationWillEnterForeground:(UIApplication*)application {

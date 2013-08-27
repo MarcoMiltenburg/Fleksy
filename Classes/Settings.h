@@ -169,6 +169,8 @@ extern NSString* FLEKSY_APP_SETTING_LANGUAGE_PACK;
 extern int FLEKSY_APP_SETTING_THEME;
 // Only saved locally, not across devices
 extern bool FLEKSY_APP_CACHE_WSJ_QUESTIONAIRE;
+extern bool FLEKSY_APP_SETTING_COPY_ON_EXIT;
+
 
 //extern bool FLEKSY_CORE_SETTING_USE_SEARCH_FILTER;
 
