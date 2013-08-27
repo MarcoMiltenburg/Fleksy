@@ -53,7 +53,7 @@ int unix_lat(int size, int count, BOOL parent);
 int tcp_lat(int size, int count, BOOL parent);
 
 @interface DummyInterface : NSObject 
-- (id)setRate:(float)arg1;
+- (void)setRate:(float)arg1;
 - (float)rate;
 - (float)minimumRate;
 - (float)maximumRate;
@@ -406,7 +406,9 @@ BOOL isRingerMuted() {
   @autoreleasepool {
     
     if (newSpeechEngine) {
-      [speechEngine speakUtterance:[NSClassFromString(@"AVSpeechUtterance") speechUtteranceWithString:string]];
+      id utterance = [NSClassFromString(@"AVSpeechUtterance") speechUtteranceWithString:string];
+      [utterance setRate:0.5*FLEKSY_APP_SETTING_SPEAKING_RATE]; // need to scale down on iOS 7 for some reason
+      [speechEngine speakUtterance:utterance];
       return;
     }
     // seems to be 0.5 to 4.0
