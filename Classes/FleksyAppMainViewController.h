@@ -68,6 +68,7 @@
 - (void) setTextView:(FleksyTextView*) _textView;
 - (BOOL) shouldSpeakText;
 - (CGRect) keyboardFrameForOrientation:(UIInterfaceOrientation) orientation;
+- (void) copyText;
 
 @property (readonly) FLPurchaseManager* purchaseManager;
 

@@ -604,6 +604,8 @@ float distributionFunction(float x) {
   //NSLog(@"applicationWillResignActive, lastKnownVoiceOverState: %d", lastKnownVoiceOverState);
   [[FLKeyboardContainerView sharedFLKeyboardContainerView].suggestionsView cancelAllSpellingRequests];
   [VariousUtilities stopSpeaking];
+  
+  [fleksyAppViewController copyText];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication*)application {
