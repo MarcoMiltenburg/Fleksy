@@ -163,7 +163,7 @@ static FleksyKeyboard* instance = nil;
   
   //self.exclusiveTouch = YES;
   
-#if !FLEKSY_SDK
+
   AppDelegate* appDelegate = (AppDelegate*) [UIApplication sharedApplication].delegate;
   NSString* newFavorites = FLEKSY_APP_SETTING_SPEED_DIAL_1;
   if (![newFavorites isEqualToString:oldFavorites]) {
@@ -173,7 +173,7 @@ static FleksyKeyboard* instance = nil;
     //NSLog(@"favorites didn't change");
   }
   [appDelegate setProximityMonitoringEnabled:FLEKSY_APP_SETTING_RAISE_TO_SPEAK];
-#endif
+
   
   //  if (FLEKSY_APP_SETTING_TOUCH_HOME) {
   //    [kbView->homeButtonTouchRecognizer start];
@@ -260,7 +260,7 @@ static FleksyKeyboard* instance = nil;
     //    //rotor.delegate = (id<UIGestureRecognizerDelegate>) self;
     //    [self addGestureRecognizer:rotor];
     
-    if (!FLEKSY_SDK && FLEKSY_FULLSCREEN) {
+    if (FLEKSY_FULLSCREEN) {
       
       actionRecognizer2Up = [[MySwipeGestureRecognizer alloc] initWithTarget:self action:@selector(twoFingerSwipeUp:)];
       actionRecognizer2Up.numberOfTouchesRequired = 2;
@@ -612,16 +612,16 @@ static FleksyKeyboard* instance = nil;
   //NSLog(@"responder text3: <%@>", [responder textInRange:[responder textRangeFromPosition:responder.beginningOfDocument toPosition:responder.endOfDocument]]);
   
   
-#if FLEKSY_SDK
-  //NSLog(@"responder: %@, %@", [testView class], testView.subviews);
-  if ([responder isKindOfClass:NSClassFromString(@"UIWebBrowserView")]) {
-    UIView* testView = (UIView*) responder;
-    UIView* testSubView = [testView.subviews objectAtIndex:0];
-    //NSLog(@"testSubView: %@", testSubView);
-    responder = [[testSubView performSelector:@selector(selection)] performSelector:@selector(document)];
-    //NSLog(@"new responder: %@", responder);
-  }
-#endif
+//#if FLEKSY_SDK
+//  //NSLog(@"responder: %@, %@", [testView class], testView.subviews);
+//  if ([responder isKindOfClass:NSClassFromString(@"UIWebBrowserView")]) {
+//    UIView* testView = (UIView*) responder;
+//    UIView* testSubView = [testView.subviews objectAtIndex:0];
+//    //NSLog(@"testSubView: %@", testSubView);
+//    responder = [[testSubView performSelector:@selector(selection)] performSelector:@selector(document)];
+//    //NSLog(@"new responder: %@", responder);
+//  }
+//#endif
   
   
   UITextRange* range = [responder selectedTextRange];

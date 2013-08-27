@@ -42,6 +42,7 @@
 - (CGPoint) getKeyboardPointForChar:(FLChar) c {
   
   //c = FleksyUtilities::toupper(c);
+  
   //NSLog(@"getKeyboardPointForChar: %d, toupper: %d", c, FleksyUtilities::toupper(c));
   
   assert(c >= 0 && c < KEY_MAX_VALUE);
