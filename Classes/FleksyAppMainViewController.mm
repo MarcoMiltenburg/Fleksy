@@ -91,6 +91,7 @@
 {
   IASKAppSettingsViewController *appSettingsViewController;
   UINavigationController *favoritesNavigationController;
+  UINavigationController *signatureNavigationController;
   BOOL isExecutedWithFavorites;
   FleksyUserQuestionaire *handleQuestionaireLink;
   BOOL _userHasVisitedQuestionaireLink;
@@ -120,9 +121,20 @@
 #pragma mark IASKAppSettingsViewControllerDelegate protocol
 
 - (void)settingsViewController:(IASKAppSettingsViewController*)sender buttonTappedForSpecifier:(IASKSpecifier*)specifier {
-  NSLog(@" Launching Favorites Setup: %s", __PRETTY_FUNCTION__);
+  
+  NSString *specifierKey = [specifier key];
+  NSLog(@" Launching Favorites Setup with specifier key %@ :: %s", specifierKey, __PRETTY_FUNCTION__);
   //FLFavoritesTableViewController *favTVC = [[FLFavoritesTableViewController alloc] initWithStyle:UITableViewStylePlain withMode:FL_FavoritesTVC_Mode_Settings];
   
+  if ([specifierKey isEqualToString:@"FLEKSY_APP_SETTING_SPEED_DIAL_1"]) {
+    [self handleFavoritesForSettingsViewController:sender];
+  }
+  else if ([specifierKey isEqualToString:@"FLEKSY_APP_SETTING_EMAIL_SIGNATURE"]) {
+    [self handleSignatureForSettingsViewController:sender];
+  }
+}
+
+- (void)handleFavoritesForSettingsViewController:(IASKAppSettingsViewController*)sender {
   NSLog(@"Favorites BEFORE = %@", favorites);
   [self reloadFavorites];
   NSLog(@"Favorites AFTER = %@", favorites);
@@ -136,7 +148,7 @@
   
   favorites = [FLFavoritesTableViewController automaticReplenisherForFavorites:[favorites mutableCopy]];
   [self updateFavoriteStorage:favorites];
-
+  
   FLFavoritesTableViewController *favTVC = [[FLFavoritesTableViewController alloc] initWithStyle:UITableViewStylePlain withMode:FL_FavoritesTVC_Mode_Settings withFavorites:favorites];
   favTVC.propertyType = (FL_PropertyType)(FL_PropertyType_PhoneNumber | FL_PropertyType_EmailAddress);
   favTVC.favoritesDelegate = self;
@@ -147,10 +159,10 @@
   if (favoritesNavigationController) {
     favoritesNavigationController = nil;
   }
-//  else {
-//    // Only replinish after a re-launch, just in case
-//    favorites = [FLFavoritesTableViewController automaticReplenisherForFavorites:favorites];
-//  }
+  //  else {
+  //    // Only replinish after a re-launch, just in case
+  //    favorites = [FLFavoritesTableViewController automaticReplenisherForFavorites:favorites];
+  //  }
   
   //favTVC.favorites = favorites;
   
@@ -159,6 +171,23 @@
   [favoritesNavigationController addChildViewController:favTVC];
   
   [sender presentViewController:favoritesNavigationController animated:YES completion:NULL];
+}
+
+- (void)handleSignatureForSettingsViewController:(IASKAppSettingsViewController*)sender {
+  NSLog(@"Signature BEFORE = %@", FLEKSY_APP_SETTING_EMAIL_SIGNATURE);
+  
+  FLSignatureViewController *sigTVC = [[FLSignatureViewController alloc] initWithSignature:FLEKSY_APP_SETTING_EMAIL_SIGNATURE];
+  sigTVC.signatureDelegate = self;
+  sigTVC.title = @"Edit Signature";
+    
+  if (signatureNavigationController) {
+    signatureNavigationController = nil;
+  }
+  
+  signatureNavigationController = [[UINavigationController alloc] init];
+  [signatureNavigationController addChildViewController:sigTVC];
+  
+  [sender presentViewController:signatureNavigationController animated:YES completion:NULL];
 }
 
 - (void)settingsViewControllerDidEnd:(IASKAppSettingsViewController*)sender {
@@ -800,6 +829,43 @@
   [[NSUbiquitousKeyValueStore defaultStore] synchronize];
   [[NSUserDefaults standardUserDefaults] synchronize];
 }
+
+#pragma mark - FLSignatureVCDelegateProtocol Method
+
+- (void)dismissSignatureVC {
+  NSLog(@"dismissSignatureVC");
+  [signatureNavigationController dismissViewControllerAnimated:YES completion:NULL];
+}
+
+#pragma mark - FLSignatureViewController Notification Handlers
+
+- (void)handleSignatureWillUpdate:(NSNotification *)aNotification {
+  NSLog(@" aNotification = %@", aNotification);
+}
+
+- (void)handleSignatureDidUpdate:(NSNotification *)aNotification {
+  NSLog(@" aNotification = %@", aNotification);
+  
+  NSString *signature = [[(NSDictionary *)[aNotification userInfo] objectForKey:FleksySignatureKey] mutableCopy];
+  
+  [self updateSignatureStorage:signature];
+}
+
+- (void)updateSignatureStorage:(NSString *)mySignature {
+  
+  // TODO: handleSettingsChange keeps same list in place because it is out of sync until final Done of Settings.
+  // So favorites and FLEKSY_APP_SETTING_SPEED_DIAL_1 both are changed in other classes and methods, so keep local cache
+  //  to reflect changes while user is still in the Settings.
+  
+  [[NSUserDefaults standardUserDefaults] setObject:mySignature
+                                            forKey:@"FLEKSY_APP_SETTING_EMAIL_SIGNATURE"];
+  
+  FLEKSY_APP_SETTING_EMAIL_SIGNATURE = mySignature;
+  
+  [[NSUbiquitousKeyValueStore defaultStore] synchronize];
+  [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 
 #pragma mark - FLTheme Notification Handlers
 
@@ -1818,6 +1884,10 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handle_kIASKAppSettingChanged:) name:kIASKAppSettingChanged object:nil];
     //kIASKAppSettingChanged
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleSignatureWillUpdate:) name:FleksySignatureWillUpdateNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleSignatureDidUpdate:) name:FleksySignatureDidUpdateNotification object:nil];
+
   }
   return self;
 }

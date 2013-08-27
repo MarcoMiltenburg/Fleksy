@@ -116,6 +116,7 @@
 		6139A853170A0CB800FBDB02 /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = 6139A84E170A0CB800FBDB02 /* zip.c */; };
 		61703A76178BA00F00571628 /* InAppSettings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 61703A75178BA00F00571628 /* InAppSettings.bundle */; };
 		617DACC01715DCA5009D93CB /* FleksyListenerImplC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 617DACBF1715DCA5009D93CB /* FleksyListenerImplC.cpp */; };
+		61BF37CA17CC3ACE0093F7F3 /* FLSignatureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 61BF37C917CC3ACC0093F7F3 /* FLSignatureViewController.m */; };
 		61D2EA97170BA5BB00DA7639 /* UIView+MainThreadCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = 61D2EA96170BA5BB00DA7639 /* UIView+MainThreadCheck.m */; };
 		61DA86551701F24500EE52C5 /* IconRounded.png in Resources */ = {isa = PBXBuildFile; fileRef = 61DA86541701F24500EE52C5 /* IconRounded.png */; };
 		61EDA3991784E0BD00C5CC52 /* FLFavoritesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 61EDA3981784E0BD00C5CC52 /* FLFavoritesTableViewController.m */; };
@@ -341,6 +342,8 @@
 		61703A75178BA00F00571628 /* InAppSettings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = InAppSettings.bundle; sourceTree = "<group>"; };
 		617DACBF1715DCA5009D93CB /* FleksyListenerImplC.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FleksyListenerImplC.cpp; sourceTree = "<group>"; };
 		617DACC11715DCAF009D93CB /* FleksyListenerImplC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FleksyListenerImplC.h; sourceTree = "<group>"; };
+		61BF37C817CC3ACA0093F7F3 /* FLSignatureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FLSignatureViewController.h; path = GestureTestbed/FLSignatureViewController.h; sourceTree = "<group>"; };
+		61BF37C917CC3ACC0093F7F3 /* FLSignatureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FLSignatureViewController.m; path = GestureTestbed/FLSignatureViewController.m; sourceTree = "<group>"; };
 		61D2EA95170BA5BB00DA7639 /* UIView+MainThreadCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MainThreadCheck.h"; sourceTree = "<group>"; };
 		61D2EA96170BA5BB00DA7639 /* UIView+MainThreadCheck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MainThreadCheck.m"; sourceTree = "<group>"; };
 		61DA86541701F24500EE52C5 /* IconRounded.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IconRounded.png; sourceTree = "<group>"; };
@@ -569,6 +572,7 @@
 		2E896DC914BAC9F60098FD4F /* Client */ = {
 			isa = PBXGroup;
 			children = (
+				61BF37CB17CC3CFB0093F7F3 /* Email SIgnature */,
 				61FCFEE31788E53100F41988 /* Themes */,
 				61EDA3961784E08D00C5CC52 /* Favorites_AddressBook */,
 				617DACBE1715DC78009D93CB /* FleksyAPI_Testing */,
@@ -853,6 +857,15 @@
 			name = FleksyAPI_Testing;
 			sourceTree = "<group>";
 		};
+		61BF37CB17CC3CFB0093F7F3 /* Email SIgnature */ = {
+			isa = PBXGroup;
+			children = (
+				61BF37C817CC3ACA0093F7F3 /* FLSignatureViewController.h */,
+				61BF37C917CC3ACC0093F7F3 /* FLSignatureViewController.m */,
+			);
+			name = "Email SIgnature";
+			sourceTree = "<group>";
+		};
 		61D2EA98170BA5E400DA7639 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -1113,6 +1126,7 @@
 				61FCFEEF178A3E3700F41988 /* FLThemeManager.m in Sources */,
 				61FCFEF2178A4D4300F41988 /* FLThemeMidnight.m in Sources */,
 				2E79F5B9178B85790040975B /* FLColdWar.mm in Sources */,
+				61BF37CA17CC3ACE0093F7F3 /* FLSignatureViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

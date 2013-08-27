@@ -600,6 +600,9 @@ CGRect IASKCGRectSwap(CGRect rect);
     if ([specifier.title isEqualToString:@"Setup Favorites"]) {
       cell.textLabel.text = specifier.title;
     }
+    else if ([specifier.title isEqualToString:@"Edit Signature"]) {
+      cell.textLabel.text = specifier.title;
+    }
     else {
       cell.textLabel.text = [value isKindOfClass:[NSString class]] ? [self.settingsReader titleForStringId:value] : specifier.title;
     }

@@ -169,16 +169,12 @@
 			<string>PSToggleSwitchSpecifier</string>
 		</dict>
 		<dict>
-			<key>AutocorrectionType</key>
-			<string>No</string>
-			<key>DefaultValue</key>
-			<string>Typed with Fleksy</string>
 			<key>Type</key>
-			<string>PSTextFieldSpecifier</string>
-			<key>Title</key>
-			<string>Signature</string>
+			<string>IASKButtonSpecifier</string>
 			<key>Key</key>
 			<string>FLEKSY_APP_SETTING_EMAIL_SIGNATURE</string>
+			<key>Title</key>
+			<string>Edit Signature</string>
 		</dict>
 		<dict>
 			<key>Title</key>

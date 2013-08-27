@@ -17,11 +17,13 @@
 #import "FLPurchaseManager.h"
 #import "FLFavoritesTableViewController.h"
 #import "AppDelegate.h"
+#import "FLSignatureViewController.h"
 
 #define FLEKSY_DIRECT_TOUCH 1
 
 @interface FleksyAppMainViewController : UIViewController<UIActionSheetDelegate, MFMessageComposeViewControllerDelegate, MFMailComposeViewControllerDelegate,
-                                                          FLPurchaseListener, UIWebViewDelegate, UITextViewDelegate, FLFavoritesTVCDelegateProtocol> {
+                                                          FLPurchaseListener, UIWebViewDelegate, UITextViewDelegate, FLFavoritesTVCDelegateProtocol,
+                                                          FLSignatureVCDelegate> {
 
   FleksyTextView* textView;
   UIActionSheet* initialMainMenu;
