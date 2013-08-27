@@ -35,11 +35,15 @@
 			<array>
 				<integer>0</integer>
 				<integer>1</integer>
+				<integer>2</integer>
+				<integer>3</integer>
 			</array>
 			<key>Titles</key>
 			<array>
 				<string>Darkside</string>
 				<string>Vanilla</string>
+				<string>Contrast</string>
+				<string>Midnight</string>
 			</array>
 			<key>DefaultValue</key>
 			<integer>0</integer>
