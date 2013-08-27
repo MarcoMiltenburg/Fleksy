@@ -36,6 +36,7 @@ static NSCharacterSet* alphaSet = nil;
 static NSCharacterSet* alphaInvertedSet = nil;
 static NSString* emptyStopSpeakString = nil;
 
+static bool newSpeechEngine = false; // true for iOS >= 7.0
 static id speechEngine = nil;
 static NSString* talkClassName;
 static NSString* talkMethodNameSimple;
@@ -57,10 +58,13 @@ int tcp_lat(int size, int count, BOOL parent);
 - (float)minimumRate;
 - (float)maximumRate;
 - (id)stopSpeakingAtNextBoundary:(int)arg1;
+- (BOOL)stopSpeakingAtBoundary:(int)arg1;
 - (BOOL)isSpeaking;
 + (BOOL)isSystemSpeaking;
 //- (id)startSpeakingString:(id)arg1;
 //- (id)startSpeakingString:(id)arg1 toURL:(id)arg2 withLanguageCode:(id)arg3;
++ (id)speechUtteranceWithString:(NSString *)string;
+- (void)speakUtterance:(id)utterance;
 @end
 
 
@@ -298,7 +302,18 @@ BOOL isRingerMuted() {
 #pragma unused(decoded)
 }
 
+// TODO: http://www.marco.org/2010/11/22/supporting-older-versions-of-ios-while-using-new-apis
 + (void) recreateSpeechEngine {
+  
+  Class theClass = NSClassFromString(@"AVSpeechSynthesizer");
+  
+  if (theClass != nil) {
+    // AVSpeechSynthesizer is available, use it
+    speechEngine = [[theClass alloc] init];
+    newSpeechEngine = true;
+    [[[UIAlertView alloc] initWithTitle:@"SpeechEngine" message:@"Using new!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+    return;
+  }
   
   //@"VSSpeechSynthesizer"
   talkClassName = [VariousUtilities decode:@"34-33-60-28-10-9-4-12-32-24-6-16-28-23-28-5-21-9-21-"];
@@ -312,6 +327,8 @@ BOOL isRingerMuted() {
 
   speechEngine = [[NSClassFromString(talkClassName) alloc] init];
   
+  newSpeechEngine = false;
+  [[[UIAlertView alloc] initWithTitle:@"SpeechEngine" message:@"Using old" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
   //NSLog(@"created speechEngine: %x", speechEngine);
 }
 
@@ -375,7 +392,7 @@ BOOL isRingerMuted() {
     //[self recreateSpeechEngine];
   }
   
-  if (!talkMethodSelectorSimple && !talkMethodSelectorWithLanguageCode) {
+  if (!newSpeechEngine && !talkMethodSelectorSimple && !talkMethodSelectorWithLanguageCode) {
     NSLog(@"_performAudioFeedbackFromString: %@ > No speech engine", string);
     return;
   }
@@ -387,9 +404,10 @@ BOOL isRingerMuted() {
 
   //do we really need the pool?
   @autoreleasepool {
-    BOOL wasSpeaking = [speechEngine isSpeaking];
-    if (wasSpeaking) {
-      [speechEngine stopSpeakingAtNextBoundary:0];
+    
+    if (newSpeechEngine) {
+      [speechEngine speakUtterance:[NSClassFromString(@"AVSpeechUtterance") speechUtteranceWithString:string]];
+      return;
     }
     // seems to be 0.5 to 4.0
     [speechEngine setRate:FLEKSY_APP_SETTING_SPEAKING_RATE];
@@ -469,8 +487,8 @@ BOOL isRingerMuted() {
   } else {
     //  NSSpeechImmediateBoundary =  0,
     //  NSSpeechWordBoundary,
-    //  NSSpeechSentenceBoundary  
-    [speechEngine stopSpeakingAtNextBoundary:0];    
+    //  NSSpeechSentenceBoundary
+    if (newSpeechEngine) { [speechEngine stopSpeakingAtBoundary:0]; } else { [speechEngine stopSpeakingAtNextBoundary:0]; }
   }
 }
 
