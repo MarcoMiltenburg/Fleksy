@@ -56,7 +56,7 @@ NSString * const FleksySignatureKey = @"FleksySignatureKey";
   [self.view addSubview:textView];
   
   self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(handleSave:)];
-  self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(handleAction:)];
+  self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemUndo target:self action:@selector(handleUndo:)];
   
 }
 
@@ -80,9 +80,9 @@ NSString * const FleksySignatureKey = @"FleksySignatureKey";
   [self.signatureDelegate dismissSignatureVC];
 }
 
-- (void)handleAction:(id)sender {
+- (void)handleUndo:(id)sender {
   
-  NSLog(@"Get the text from the Fleksy Text View and Paste in");
+  [textView setText:self.signature];
 }
 
 @end
