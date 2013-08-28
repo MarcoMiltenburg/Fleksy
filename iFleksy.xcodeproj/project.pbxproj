@@ -359,6 +359,8 @@
 		61EDA3A51784E0DC00C5CC52 /* ABWrappers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABWrappers.h; sourceTree = "<group>"; };
 		61EDA3AB1784E0F700C5CC52 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		61EDA3AC1784E0F700C5CC52 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		61EF789C17CEBBA1008FBCDA /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
+		61EF789D17CEBBA1008FBCDA /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
 		61FCFEE01788E19000F41988 /* FLTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLTheme.h; sourceTree = "<group>"; };
 		61FCFEE11788E19000F41988 /* FLTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLTheme.m; sourceTree = "<group>"; };
 		61FCFEE41788E55F00F41988 /* FLThemeVanilla.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLThemeVanilla.h; sourceTree = "<group>"; };
@@ -784,6 +786,8 @@
 		6139A83C170A070000FBDB02 /* TestFlight */ = {
 			isa = PBXGroup;
 			children = (
+				61EF789C17CEBBA1008FBCDA /* TestFlight+AsyncLogging.h */,
+				61EF789D17CEBBA1008FBCDA /* TestFlight+ManualSessions.h */,
 				6139A83D170A070000FBDB02 /* libTestFlight.a */,
 				6139A83E170A070000FBDB02 /* TestFlight.h */,
 			);
@@ -1258,7 +1262,7 @@
 				CODE_SIGN_ENTITLEMENTS = Fleksy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				DEPLOYMENT_POSTPROCESSING = YES;
-				FL_BUILDINFO_BUILD_NUMBER = 366;
+				FL_BUILDINFO_BUILD_NUMBER = 369;
 				FL_VERSION_EXTRA = "";
 				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)\"";
 				GCC_PREFIX_HEADER = iFleksy_Prefix.pch;
