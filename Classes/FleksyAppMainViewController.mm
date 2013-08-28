@@ -1148,7 +1148,7 @@
 
 
 - (NSString*) subjectFromText:(NSString*) text {
-  int maxChars = 50;
+  int maxChars = 100;
   NSMutableString* result = [[NSMutableString alloc] init];
   NSRange range = [text rangeOfCharacterFromSet:[NSCharacterSet characterSetWithCharactersInString:@"\n.?!"]];
   if (range.length > 0 && range.location <= maxChars) {
@@ -1161,7 +1161,6 @@
         break;
       }
       [result appendString:component];
-      [result appendString:@" "];
     }
   }
   return result;
