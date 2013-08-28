@@ -127,9 +127,15 @@
   //FLFavoritesTableViewController *favTVC = [[FLFavoritesTableViewController alloc] initWithStyle:UITableViewStylePlain withMode:FL_FavoritesTVC_Mode_Settings];
   
   if ([specifierKey isEqualToString:@"FLEKSY_APP_SETTING_SPEED_DIAL_1"]) {
+    
+    [TestFlight passCheckpoint:@"setupFavorites"];
+
     [self handleFavoritesForSettingsViewController:sender];
   }
   else if ([specifierKey isEqualToString:@"FLEKSY_APP_SETTING_EMAIL_SIGNATURE"]) {
+    
+    [TestFlight passCheckpoint:@"editSignature"];
+
     [self handleSignatureForSettingsViewController:sender];
   }
 }
