@@ -351,7 +351,7 @@
   
   for (UITouch* touch in touches) {
     
-    NSLog(@" - ended %p, cancelled: %d, recognizers: %@", touch, touch.phase == UITouchPhaseCancelled, touch.gestureRecognizers);
+    //NSLog(@" - ended %p, cancelled: %d, recognizers: %@", touch, touch.phase == UITouchPhaseCancelled, touch.gestureRecognizers);
     
     if (self.hoverMode) {
       [self updateHoverChar:touch];

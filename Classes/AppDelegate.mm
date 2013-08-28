@@ -608,6 +608,10 @@ float distributionFunction(float x) {
   if (FLEKSY_APP_SETTING_COPY_ON_EXIT) {
     [fleksyAppViewController copyText];
   }
+  
+  if (FLEKSY_APP_SETTING_SAVE_TEXT_BUFFER) {
+    [fleksyAppViewController saveText];
+  }
 }
 
 - (void)applicationWillEnterForeground:(UIApplication*)application {
@@ -664,6 +668,11 @@ float distributionFunction(float x) {
 
 - (void) applicationWillTerminate:(UIApplication *) application {
   NSLog(@"%@", @"applicationWillTerminate");
+  
+  if (FLEKSY_APP_SETTING_SAVE_TEXT_BUFFER) {
+    [fleksyAppViewController saveText];
+  }
+  
   [[NSUserDefaults standardUserDefaults] synchronize];
 }
 

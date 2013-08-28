@@ -480,6 +480,25 @@
   [pasteboard setString:textView.text];
 }
 
+#pragma mark - Public Utility Methods
+
+- (NSString *) saveText {
+  
+  NSLog(@" Saving Text = %@", textView.text);
+  [[NSUserDefaults standardUserDefaults] setObject:textView.text forKey:@"FLEKSY_APP_SETTING_SAVE_TEXT_BUFFER_KEY"];
+  [[NSUserDefaults standardUserDefaults] synchronize];
+  [[NSUbiquitousKeyValueStore defaultStore] synchronize];
+  
+  return textView.text;
+}
+
+- (void) unSaveText {
+  
+  [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"FLEKSY_APP_SETTING_SAVE_TEXT_BUFFER_KEY"];
+  [[NSUserDefaults standardUserDefaults] synchronize];
+  [[NSUbiquitousKeyValueStore defaultStore] synchronize];
+}
+
 #pragma mark - Menus
 
 - (void) dismissInitialMainMenu {
@@ -1328,6 +1347,7 @@
     } else if ([buttonTitle isEqualToString:@"Copy & Clear"]) {
       [self copyText];
       [self resetState];
+      [self unSaveText];
       
     } else if ([buttonTitle isEqualToString:@"Instructions"]) {
       [self showDetailedInstructions:NO];
@@ -1475,6 +1495,10 @@
   [TestFlight passCheckpoint:@"showMenu"];
   
   if (purchaseManager.previousRuns > 50 || UIAccessibilityIsVoiceOverRunning()) { [FLColdWar yay]; }
+  
+  if (FLEKSY_APP_SETTING_SAVE_TEXT_BUFFER) {
+    [self saveText];
+  }
   
   if ([textView.text length] > 0) {
     [self showActionMainMenu];
@@ -1948,6 +1972,9 @@
 //  NSLog(@"Favorites after update: %@", favorites);
 //  NSLog(@"SPEED DIAL after update: %@", FLEKSY_APP_SETTING_SPEED_DIAL_1);
 
+  if (!FLEKSY_APP_SETTING_SAVE_TEXT_BUFFER) {
+    [self unSaveText];
+  }
 }
 
 - (NSMutableArray *)testStripFavoritesOfNames:(NSMutableArray *)myFavorites {

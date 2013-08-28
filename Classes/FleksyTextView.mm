@@ -285,8 +285,11 @@
   return YES;
 }
 
-- (void) textViewDidBeginEditing:(UITextView *)textView {
+- (void) textViewDidBeginEditing:(UITextView *)aTextView {
   NSLog(@"textViewDidBeginEditing");
+  if (FLEKSY_APP_SETTING_SAVE_TEXT_BUFFER) {
+    [aTextView setText:[[NSUserDefaults standardUserDefaults] objectForKey:@"FLEKSY_APP_SETTING_SAVE_TEXT_BUFFER_KEY"]];
+  }
 }
 
 - (void) textViewDidEndEditing:(UITextView *)textView {

@@ -69,6 +69,8 @@
 - (BOOL) shouldSpeakText;
 - (CGRect) keyboardFrameForOrientation:(UIInterfaceOrientation) orientation;
 - (void) copyText;
+- (NSString *)saveText;
+- (void) unSaveText;
 
 @property (readonly) FLPurchaseManager* purchaseManager;
 

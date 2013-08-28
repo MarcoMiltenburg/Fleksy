@@ -12,6 +12,14 @@
 #import "UITouchManager.h"
 #import "VariousUtilities.h"
 #import "Settings.h"
+#import "AppDelegate.h"
+#import "FleksyAppMainViewController.h"
+
+@interface UISwipeAndHoldGestureRecognizer  ()
+{
+  int swipeCount;
+}
+@end
 
 @implementation UISwipeAndHoldGestureRecognizer
 
@@ -66,6 +74,8 @@
     [self setRepeatDelay:DEFAULT_DELAY repeatInterval:DEFAULT_INTERVAL forDirection:UISwipeGestureRecognizerDirectionUp];
     
     [self reset];
+    
+    swipeCount = 0;
   }
   return self;
 }
@@ -131,6 +141,15 @@
 }
 
 - (void) swipeFired:(SWIPE_RECOGNIZER_CLASS*) swipeRecognizer; {
+  
+  if (FLEKSY_APP_SETTING_SAVE_TEXT_BUFFER && (swipeCount++ == FLEKSY_EVENT_COUNT_FOR_AUTO_SAVE)) {
+    NSLog(@"  *** AUTO-SAVE **** AUTO-SAVE *** ");
+    
+    AppDelegate* appDelegate = (AppDelegate*) [UIApplication sharedApplication].delegate;
+    
+    [[appDelegate fleksyAppViewController] performSelectorOnMainThread:@selector(saveText) withObject:nil waitUntilDone:NO];
+    swipeCount = 0;
+  }
   
   NSLog(@"swipeFired, direction: %@, state: %@, numberOfTouches: %d", [UIGestureUtilities getDirectionString:swipeRecognizer.direction], [UIGestureUtilities getStateString:swipeRecognizer.state], swipeRecognizer.numberOfTouches);
   
