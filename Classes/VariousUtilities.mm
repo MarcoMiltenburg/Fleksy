@@ -311,7 +311,7 @@ BOOL isRingerMuted() {
     // AVSpeechSynthesizer is available, use it
     speechEngine = [[theClass alloc] init];
     newSpeechEngine = true;
-    [[[UIAlertView alloc] initWithTitle:@"SpeechEngine" message:@"Using new!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+    //[[[UIAlertView alloc] initWithTitle:@"SpeechEngine" message:@"Using new!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
     return;
   }
   
@@ -328,7 +328,7 @@ BOOL isRingerMuted() {
   speechEngine = [[NSClassFromString(talkClassName) alloc] init];
   
   newSpeechEngine = false;
-  [[[UIAlertView alloc] initWithTitle:@"SpeechEngine" message:@"Using old" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+  //[[[UIAlertView alloc] initWithTitle:@"SpeechEngine" message:@"Using old" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
   //NSLog(@"created speechEngine: %x", speechEngine);
 }
 
