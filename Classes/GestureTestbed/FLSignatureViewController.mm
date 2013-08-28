@@ -7,6 +7,7 @@
 //
 
 #import "FLSignatureViewController.h"
+#import "VariousUtilities.h"
 
 @interface FLSignatureViewController ()
 {
@@ -51,7 +52,15 @@ NSString * const FleksySignatureKey = @"FleksySignatureKey";
   
   textView = [[UITextView alloc] initWithFrame:self.view.frame];
   
+  if (self.signature == nil) {
+    self.signature = @"Typed With Fleksy";
+  }
+  
   [textView setText:self.signature];
+  
+  float extra = deviceIsPad() ? 1.5 : 1;
+  
+  [textView setFont:[UIFont fontWithName:@"HelveticaNeue" size:20.0 * extra]];
   
   [self.view addSubview:textView];
   
