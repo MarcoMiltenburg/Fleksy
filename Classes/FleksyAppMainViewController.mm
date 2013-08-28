@@ -2171,6 +2171,22 @@
 - (void) setTextView:(FleksyTextView*) _textView {
   NSLog(@"setTextView");
   self->textView = _textView;
+  self->textView.fleksyTextViewDelegate = self;
+}
+
+#pragma mark - FleksyTextViewDelegate Protocol Method
+
+- (void) textViewDidBeginEditing:(UITextView *)aTextView {
+  NSLog(@"FleksyAppMainViewController textViewDidBeginEditing");
+  if (FLEKSY_APP_SETTING_SAVE_TEXT_BUFFER && [aTextView.text length] != 0) { // Case: First time setting is turned on
+    [self saveText];
+  }
+  else if (FLEKSY_APP_SETTING_SAVE_TEXT_BUFFER) { // Case: App relaunch
+    [aTextView setText:[[NSUserDefaults standardUserDefaults] objectForKey:@"FLEKSY_APP_SETTING_SAVE_TEXT_BUFFER_KEY"]];
+  }
+  else {
+    [self unSaveText];
+  }
 
 }
 

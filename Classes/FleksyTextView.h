@@ -12,6 +12,12 @@
 
 /// [UIColor colorWithRed:1 green:1 blue:0.7 alpha:1];
 
+@protocol FleksyTextViewDelegate <NSObject>
+
+- (void) textViewDidBeginEditing:(UITextView *)aTextView;
+
+@end
+
 @interface FleksyTextView : UIView <UITextViewDelegate> {
   FleksyKeyboard* customInputView;
   MyTextView* textView;
@@ -26,5 +32,6 @@
 - (void) setInputView:(FleksyKeyboard*) customInputView;
 
 @property (nonatomic,copy) NSString *text;
+@property (nonatomic, assign) id<FleksyTextViewDelegate> fleksyTextViewDelegate;
 
 @end

@@ -22,7 +22,7 @@
 #define FLEKSY_DIRECT_TOUCH 1
 
 @interface FleksyAppMainViewController : UIViewController<UIActionSheetDelegate, MFMessageComposeViewControllerDelegate, MFMailComposeViewControllerDelegate,
-                                                          FLPurchaseListener, UIWebViewDelegate, UITextViewDelegate, FLFavoritesTVCDelegateProtocol,
+                                                          FLPurchaseListener, UIWebViewDelegate, FleksyTextViewDelegate, FLFavoritesTVCDelegateProtocol,
                                                           FLSignatureVCDelegate> {
 
   FleksyTextView* textView;

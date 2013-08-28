@@ -286,10 +286,9 @@
 }
 
 - (void) textViewDidBeginEditing:(UITextView *)aTextView {
-  NSLog(@"textViewDidBeginEditing");
-  if (FLEKSY_APP_SETTING_SAVE_TEXT_BUFFER) {
-    [aTextView setText:[[NSUserDefaults standardUserDefaults] objectForKey:@"FLEKSY_APP_SETTING_SAVE_TEXT_BUFFER_KEY"]];
-  }
+  NSLog(@"[FleksyTextView textViewDidBeginEditing");
+  // Forward this delegation to the client of the FleksyTextView that owns the external interface to the textView
+  [self.fleksyTextViewDelegate textViewDidBeginEditing:aTextView];
 }
 
 - (void) textViewDidEndEditing:(UITextView *)textView {
