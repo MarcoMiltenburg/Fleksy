@@ -487,7 +487,7 @@
   NSLog(@" Saving Text = %@", textView.text);
   [[NSUserDefaults standardUserDefaults] setObject:textView.text forKey:@"FLEKSY_APP_SETTING_SAVE_TEXT_BUFFER_KEY"];
   [[NSUserDefaults standardUserDefaults] synchronize];
-  [[NSUbiquitousKeyValueStore defaultStore] synchronize];
+  // Do not save to iCloud
   
   return textView.text;
 }
@@ -496,7 +496,7 @@
   
   [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"FLEKSY_APP_SETTING_SAVE_TEXT_BUFFER_KEY"];
   [[NSUserDefaults standardUserDefaults] synchronize];
-  [[NSUbiquitousKeyValueStore defaultStore] synchronize];
+  // Do not save to iCloud
 }
 
 #pragma mark - Menus
