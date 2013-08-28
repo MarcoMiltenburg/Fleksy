@@ -1149,6 +1149,8 @@
 
 - (NSString*) subjectFromText:(NSString*) text {
   int maxChars = 100;
+  NSLog(@"subjectFromText:<%@>",text);
+  
   NSMutableString* result = [[NSMutableString alloc] init];
   NSRange range = [text rangeOfCharacterFromSet:[NSCharacterSet characterSetWithCharactersInString:@"\n.?!"]];
   if (range.length > 0 && range.location <= maxChars) {
@@ -1161,8 +1163,13 @@
         break;
       }
       [result appendString:component];
+      if (result.length + component.length + 1 < text.length) {
+        [result appendString:@" "];
+      }
+      NSLog(@"  interim result:<%@>",result);
     }
   }
+  NSLog(@"    final result:<%@>",result);
   return result;
 }
 
@@ -1535,6 +1542,8 @@
 - (void) voiceOverStatusChanged:(NSNotification*) notification {
   
   BOOL voiceover = UIAccessibilityIsVoiceOverRunning();
+  
+  //[FLKeyboardContainerView sharedFLKeyboardContainerView].typingController.fleksyClient.fleksyAPI->setBlindMode(voiceover);
   
   //NSLog(@"voiceOverStatusChanged: %d", voiceover);
   
