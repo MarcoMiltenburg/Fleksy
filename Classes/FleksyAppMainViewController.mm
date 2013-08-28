@@ -1533,7 +1533,7 @@
   
   BOOL voiceover = UIAccessibilityIsVoiceOverRunning();
   
-  //[FLKeyboardContainerView sharedFLKeyboardContainerView].typingController.fleksyClient.fleksyAPI->setBlindMode(voiceover);
+  [FLKeyboardContainerView sharedFLKeyboardContainerView].typingController.fleksyClient.fleksyAPI->setBlindMode(voiceover);
   
   //NSLog(@"voiceOverStatusChanged: %d", voiceover);
   
