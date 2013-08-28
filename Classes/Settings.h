@@ -93,7 +93,7 @@
 #define TestFlightLog(fmt,...) TFLog(fmt,##__VA_ARGS__)
 #endif
 
-#define FLEKSY_POP_WALL_STREET_JOURNAL 1
+#define FLEKSY_POP_QUESTIONAIRE 0
 
 #define FLEKSY_USE_SOCKETS 0
 #define FLEKSY_RUN_SERVER 0
@@ -168,7 +168,7 @@ extern bool FLEKSY_APP_SETTING_SPACE_BUTTON;
 extern NSString* FLEKSY_APP_SETTING_LANGUAGE_PACK;
 extern int FLEKSY_APP_SETTING_THEME;
 // Only saved locally, not across devices
-extern bool FLEKSY_APP_CACHE_WSJ_QUESTIONAIRE;
+extern bool FLEKSY_APP_CACHE_QUESTIONAIRE;
 extern bool FLEKSY_APP_SETTING_COPY_ON_EXIT;
 extern bool FLEKSY_APP_SETTING_SAVE_TEXT_BUFFER;
 
