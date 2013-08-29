@@ -33,7 +33,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardView);
   
   [imageViewABC      setKeys:keymap[FLKeyboardID_QWERTY_UPPER]];
   [imageViewSymbolsA setKeys:keymap[FLKeyboardID_NUMBERS]];
-  [imageViewSymbolsB setKeys:keymap[FLKeyboardID_NUMBERS]];
+  [imageViewSymbolsB setKeys:keymap[FLKeyboardID_SYMBOLS]];
   
   [self disableQWERTYextraKeys];
   [self reset];
@@ -43,7 +43,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardView);
   for (int i = 0; i < KEY_MAX_VALUE; i++) {
     keymapABC[i] = keymap[FLKeyboardID_QWERTY_UPPER][i];
     keymapSymbolsA[i] = keymap[FLKeyboardID_NUMBERS][i];
-    keymapSymbolsA[i] = keymap[FLKeyboardID_NUMBERS][i];
+    keymapSymbolsB[i] = keymap[FLKeyboardID_SYMBOLS][i];
   }
   
   keymapArePreloaded = YES;
