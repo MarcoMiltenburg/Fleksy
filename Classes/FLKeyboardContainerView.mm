@@ -520,7 +520,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardContainerView);
   //if (timeSinceLastActivation > 0.5) {
     //[self toggleLettersNumbers];
     lastActivationPointTap = CFAbsoluteTimeGetCurrent();
+
+  if ([[[UIDevice currentDevice] systemVersion] floatValue] < 7.0)
+  {
     [[NSNotificationCenter defaultCenter] postNotificationName:FLEKSY_KEYBOARD_CLICKED_NOTIFICATION object:nil];
+  }
+
   //} else {
   //  NSLog(@"ignoring too fast handleActivationPointTap");
   //}

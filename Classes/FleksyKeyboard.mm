@@ -160,7 +160,12 @@ static FleksyKeyboard* instance = nil;
   //self.accessibilityTraits |= UIAccessibilityTraitAdjustable;
   //  self.accessibilityLabel = @"Fleksy keyboard";
   //  self.accessibilityHint = @"You don't need to wait for feedback for every letter";
-  self.accessibilityHint = FLEKSY_ACTIVATE_KEYBOARD_WARNING;
+  
+  if ([[[UIDevice currentDevice] systemVersion] floatValue] < 7.0)
+  {
+    self.accessibilityHint = FLEKSY_ACTIVATE_KEYBOARD_WARNING;
+  }
+  
   //self.accessibilityViewIsModal = YES;
   // END DIRECT TOUCH
   
