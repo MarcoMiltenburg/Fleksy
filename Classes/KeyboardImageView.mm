@@ -206,7 +206,15 @@
   } else {
     label.text = [[NSString alloc] initWithBytes:&c length:1 encoding:NSISOLatin1StringEncoding];
   }
-  label.font = popup ? [UIFont fontWithName:@"HelveticaNeue-Bold" size:size] : [UIFont fontWithName:@"HelveticaNeue-Bold" size:size/*+12*/];
+  
+  float featureVersion = 7.0;
+  if ([[[UIDevice currentDevice] systemVersion] floatValue] >= featureVersion)
+  {
+    label.font = popup ? [UIFont fontWithName:@"HelveticaNeue" size:size] : [UIFont fontWithName:@"HelveticaNeue" size:size/*+12*/];
+  }
+  else {
+    label.font = popup ? [UIFont fontWithName:@"HelveticaNeue-Bold" size:size] : [UIFont fontWithName:@"HelveticaNeue-Bold" size:size/*+12*/];
+  }
   label.frame = CGRectMake(0, 0, [label.font lineHeight], [label.font lineHeight]);
   
   label.textAlignment = NSTextAlignmentCenter; // UITextAlignmentCenter;
