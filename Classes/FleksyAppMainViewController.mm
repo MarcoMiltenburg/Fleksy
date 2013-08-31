@@ -462,7 +462,9 @@
 - (void) copyText {
   [[FLKeyboardContainerView sharedFLKeyboardContainerView].typingController.diagnostics sendWithComment:@"ACTION_COPY"];
   UIPasteboard* pasteboard = [UIPasteboard generalPasteboard];
-  [pasteboard setString:textView.text];
+  if (textView.text != NULL && [textView.text isKindOfClass:[NSString class]]) {
+    [pasteboard setString:textView.text];
+  }
 }
 
 #pragma mark - Public Utility Methods
