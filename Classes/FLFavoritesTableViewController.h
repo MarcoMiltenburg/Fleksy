@@ -42,20 +42,20 @@ typedef enum {
 
 
 - (id)initWithStyle:(UITableViewStyle)style withMode:(FL_FavoritesTVC_Mode)aMode withFavorites:(NSMutableArray *)favorites;
-//- (id)initWithStyle:(UITableViewStyle)style withMode:(FL_FavoritesTVC_Mode)mode;
 + (void)checkAddressBookAuthorization;
 + (void)checkAddressBookAuthorizationWithCompletion:(void (^)(void))success;
 
 + (NSMutableArray *)automaticReplenisherForFavorites:(NSMutableArray *)myFavorites;
 
 /**
- * @notification FleksyFavoritesWillUpdateNotification, FleksyFavoritesDidUpdateNotification
+ * @notification FleksyFavoritesWillUpdateNotification, FleksyFavoritesDidUpdateNotification, FleksyFavoritesDidFinishAutomaticReplinishNotification
  *
+ *  Note: These notifications may be called on a background thread.
  */
 
 extern NSString * const FleksyFavoritesWillUpdateNotification;
 extern NSString * const FleksyFavoritesDidUpdateNotification;
 extern NSString * const FleksyFavoritesKey;
-
+extern NSString * const FleksyFavoritesDidFinishAutomaticReplinishNotification;
 
 @end

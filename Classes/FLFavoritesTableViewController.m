@@ -67,6 +67,7 @@
 NSString * const FleksyFavoritesWillUpdateNotification = @"FleksyFavoritesWillUpdateNotification";
 NSString * const FleksyFavoritesDidUpdateNotification  = @"FleksyFavoritesDidUpdateNotification";
 NSString * const FleksyFavoritesKey                    = @"FleksyFavoritesKey";
+NSString * const FleksyFavoritesDidFinishAutomaticReplinishNotification  = @"FleksyFavoritesDidFinishAutomaticReplinishNotification";
 
 NSString *const kDenied = @"Access to address book is denied.\nYou can authorize access in Privacy Settings.";
 NSString *const kRestricted = @"Access to address book is restricted";
@@ -89,28 +90,18 @@ ABAddressBookRef addressBook;
     _operatingMode = aMode;
     _favorites = favorites;
     
-//    [FLFavoritesTableViewController checkAddressBookAuthorizationWithCompletion:^{
-//      _favorites = [FLFavoritesTableViewController automaticReplenisherForFavorites:_favorites];
-//    }];
+    [FLFavoritesTableViewController checkAddressBookAuthorizationWithCompletion:^{
+      
+      [[NSNotificationCenter defaultCenter] postNotificationName:FleksyFavoritesWillUpdateNotification object:self userInfo:[NSDictionary dictionaryWithObject:[self.favorites copy] forKey:FleksyFavoritesKey]];
+      
+      _favorites = [FLFavoritesTableViewController automaticReplenisherForFavorites:_favorites];
+      
+      [[NSNotificationCenter defaultCenter] postNotificationName:FleksyFavoritesDidFinishAutomaticReplinishNotification object:self userInfo:[NSDictionary dictionaryWithObject:[self.favorites copy] forKey:FleksyFavoritesKey]];
+      
+      [[NSNotificationCenter defaultCenter] postNotificationName:FleksyFavoritesDidUpdateNotification object:self userInfo:[NSDictionary dictionaryWithObject:[self.favorites copy] forKey:FleksyFavoritesKey]];
+    }];
 
-    //[FLFavoritesTableViewController checkAddressBookAuthorization];
-  }
-  return self;
-}
 
-- (id)initWithStyle:(UITableViewStyle)style withFavorites:(NSMutableArray *)favorites
-{
-  self = [super initWithStyle:style];
-  if (self) {
-    _operatingMode = FL_FavoritesTVC_Mode_Operate;
-    _propertyType = FL_PropertyType_EmailAndPhone;
-    _favorites = favorites;
-    
-//    [FLFavoritesTableViewController checkAddressBookAuthorizationWithCompletion:^{
-//      _favorites = [FLFavoritesTableViewController automaticReplenisherForFavorites:_favorites];
-//    }];
-
-    //[FLFavoritesTableViewController checkAddressBookAuthorization];
   }
   return self;
 }
@@ -137,6 +128,8 @@ ABAddressBookRef addressBook;
   
   //self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBar target:self action:@selector(backTapped:)];
   self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleDone  target:self action:@selector(backTapped:)];
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleFavoritesDidFinishAutomaticReplinish:) name:FleksyFavoritesDidFinishAutomaticReplinishNotification object:nil];
 #else
   // TODO: Bill's Layout - /Users/vince/Dropbox/Documentation/iOS Fleksy Development/iFleksy_UI_Design/mockup 003.jpg
   
@@ -149,13 +142,21 @@ ABAddressBookRef addressBook;
   // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - FleksyFavoritesDidFinishAutomaticReplinishNotification Handler 
+
+- (void)handleFavoritesDidFinishAutomaticReplinish:(NSNotification *)aNotification {
+  NSLog(@"handleFavoritesDidFinishAutomaticReplinish = %@", aNotification);
+  if([NSThread isMainThread] == NO) {
+    [self performSelectorOnMainThread:_cmd withObject:aNotification waitUntilDone:NO];
+    return;
+  }
+  [self.tableView reloadData];
+}
+
 #pragma mark - Navigation Controller Action Method
 
 - (void)addFavorite:(id)sender {
-//  [FLFavoritesTableViewController checkAddressBookAuthorization];
-//  [FLFavoritesTableViewController checkAddressBookAuthorizationWithCompletion:^{
-//    _favorites = [FLFavoritesTableViewController automaticReplenisherForFavorites:_favorites];
-//  }];
+
   if (self.propertyType == FL_PropertyType_EmailAddress) {
     [self showPickerEmail:sender];
   }
@@ -385,11 +386,13 @@ ABAddressBookRef addressBook;
         /* Do your work and once you are finished ... */
         if (addressBook != NULL){
           CFRelease(addressBook);
+          NSLog(@" checkAddressBookAuthorizationWithCompletion: AUTHORIZED");
         }
         break;
       }
       case kABAuthorizationStatusDenied:{
         [[self class] displayMessage:kDenied];
+        NSLog(@" checkAddressBookAuthorizationWithCompletion: DENIED");
         break;
       }
       case kABAuthorizationStatusNotDetermined:{
@@ -397,10 +400,10 @@ ABAddressBookRef addressBook;
         ABAddressBookRequestAccessWithCompletion
         (addressBook, ^(bool granted, CFErrorRef error) {
           if (granted){
-            NSLog(@"Access was granted");
+            NSLog(@" checkAddressBookAuthorizationWithCompletion: Access was granted");
             success();
           } else {
-            NSLog(@"Access was not granted");
+            NSLog(@" checkAddressBookAuthorizationWithCompletion: Access was not granted");
           }
           if (addressBook != NULL){
             CFRelease(addressBook);
@@ -410,6 +413,27 @@ ABAddressBookRef addressBook;
       }
       case kABAuthorizationStatusRestricted:{
         [[self class] displayMessage:kRestricted];
+        NSLog(@" checkAddressBookAuthorizationWithCompletion: RESTRICTED");
+        break;
+      }
+    }
+  }
+  else {
+    switch (ABAddressBookGetAuthorizationStatus()){
+      case kABAuthorizationStatusAuthorized:{
+        NSLog(@" checkAddressBookAuthorizationWithCompletion: ALREADY AUTHORIZED");
+        break;
+      }
+      case kABAuthorizationStatusDenied:{
+        NSLog(@" checkAddressBookAuthorizationWithCompletion: ALREADY DENIED");
+        break;
+      }
+      case kABAuthorizationStatusNotDetermined:{
+        NSLog(@" checkAddressBookAuthorizationWithCompletion: ALREADY DENIED");
+        break;
+      }
+      case kABAuthorizationStatusRestricted:{
+        NSLog(@" checkAddressBookAuthorizationWithCompletion: ALREADY RESTRICTED");
         break;
       }
     }
