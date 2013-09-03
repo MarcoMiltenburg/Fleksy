@@ -901,6 +901,16 @@
     
     [self dismissModalViewControllerAnimated:YES];
   }
+  else if ([[[userInfo allKeys] lastObject] isEqualToString:@"FLEKSY_APP_SETTING_COPY_ON_EXIT"]) {
+
+    // FORCE THE SETTING CHANGE: since this is an **in-menu** change that has to be reflected right after the Settings Done button is tapped.
+
+    FLEKSY_APP_SETTING_COPY_ON_EXIT = [[[aNote userInfo] objectForKey:@"FLEKSY_APP_SETTING_COPY_ON_EXIT"] boolValue];;
+    
+    [self recreatePlainActionMenuWithTitle:ACTION_MENU_TITLE];
+    actionMainMenu = actionMainMenuPlain;
+
+  }
 }
 
 
@@ -1308,11 +1318,6 @@
     } else if (buttonIndex == 200) {
       //dismiss for orientation event, will show again right away
       
-//    } else if ([buttonTitle isEqualToString:@"Clear"]) {
-//      [self resetState];
-//      [self voiceOverSpeak:@"Text cleared"];
-//      //[self performSelector:@selector(showInitialMainMenu) withObject:nil afterDelay:1.2];
-//      
     } else if ([buttonTitle isEqualToString:UPGRADE_FULL_VERSION_TITLE]) {
       [purchaseManager askUpgradeToFullVersion];
     } else if ([buttonTitle isEqualToString:RESTORE_FULL_VERSION_TITLE]) {
@@ -1341,7 +1346,12 @@
     } else if ([buttonTitle isEqualToString:@"Copy & Clear"]) {
       [self copyText];
       [self resetState];
-      
+     
+    } else if ([buttonTitle isEqualToString:@"Clear"]) {
+      [self resetState];
+//      [self voiceOverSpeak:@"Text cleared"];
+//      [self performSelector:@selector(showInitialMainMenu) withObject:nil afterDelay:1.2];
+
     } else if ([buttonTitle isEqualToString:@"Instructions"]) {
       [self showDetailedInstructions:NO];
       
@@ -1575,7 +1585,7 @@
       actionMainMenu2.cancelButtonIndex = index;
     }
     
-    if ([title isEqualToString:@"Copy & Clear"]) {
+    if ([title isEqualToString:@"Copy & Clear"] || [title isEqualToString:@"Clear"]) {
       //first add favorites
       //Only add the "Send to Favorites Button"
       //      for (NSString* newButtonTitle in favorites) {
@@ -1600,7 +1610,16 @@
     [actionMainMenuPlain addButtonWithTitle:UPGRADE_FULL_VERSION_TITLE];
     [actionMainMenuPlain addButtonWithTitle:RESTORE_FULL_VERSION_TITLE];
   } else {
-    [actionMainMenuPlain addButtonWithTitle:@"Copy & Clear"];
+    
+    NSLog(@"FLEKSY_APP_SETTING_COPY_ON_EXIT = %d", FLEKSY_APP_SETTING_COPY_ON_EXIT);
+    if (FLEKSY_APP_SETTING_COPY_ON_EXIT == YES) {
+      NSLog(@"Setting BUTTON: Clear");
+      [actionMainMenuPlain addButtonWithTitle:@"Clear"];
+    }
+    else {
+      NSLog(@"Setting BUTTON: Copy & Clear");
+      [actionMainMenuPlain addButtonWithTitle:@"Copy & Clear"];
+    }
     [actionMainMenuPlain addButtonWithTitle:@"Email"];
     [actionMainMenuPlain addButtonWithTitle:@"Message"];
     
@@ -1636,7 +1655,6 @@
   
   //[actionMainMenuPlain addButtonWithTitle:@"Rate us"];
 }
-
 
 - (void) recreatePlainMenus {
   
@@ -1866,12 +1884,12 @@
     lastShowedActionMenu = 0;
     self->replyTo = nil;
     
-    [self recreatePlainMenus];
-    actionMainMenu = actionMainMenuPlain;
+//    [self recreatePlainMenus];
+//    actionMainMenu = actionMainMenuPlain;
+//    
+//    favorites = [[NSMutableArray alloc] init];
+//    [self reloadFavorites];
     
-    favorites = [[NSMutableArray alloc] init];
-    [self reloadFavorites];
-        
     //self.wantsFullScreenLayout = YES;
     
     shownTutorial = NO;
@@ -1907,10 +1925,15 @@
 }
 */
 
-
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
+  
+  [self recreatePlainMenus];
+  actionMainMenu = actionMainMenuPlain;
+  
+  favorites = [[NSMutableArray alloc] init];
+  [self reloadFavorites];
  
   // First time: favorites may not be properly loaded
   

@@ -210,7 +210,7 @@
 			<key>Key</key>
 			<string>FLEKSY_APP_SETTING_COPY_ON_EXIT</string>
 			<key>Title</key>
-			<string>Auto-Copy and Clear</string>
+			<string>Auto-Copy &amp; Clear</string>
 			<key>Type</key>
 			<string>PSToggleSwitchSpecifier</string>
 		</dict>
