@@ -455,6 +455,7 @@
 
 - (void) resetState {
   textView.text = @"";
+  [self unSaveText];
   [[FLTypingController_iOS sharedFLTypingController_iOS] sendPrepareNextCandidates];
   [[FLKeyboardContainerView sharedFLKeyboardContainerView] reset];
 }
@@ -1340,7 +1341,6 @@
     } else if ([buttonTitle isEqualToString:@"Copy & Clear"]) {
       [self copyText];
       [self resetState];
-      [self unSaveText];
       
     } else if ([buttonTitle isEqualToString:@"Instructions"]) {
       [self showDetailedInstructions:NO];

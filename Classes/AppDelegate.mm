@@ -608,7 +608,6 @@ float distributionFunction(float x) {
   if (FLEKSY_APP_SETTING_COPY_ON_EXIT) {
     [fleksyAppViewController copyText];
     [fleksyAppViewController resetState];
-    [fleksyAppViewController unSaveText];
   }
   
   if (FLEKSY_APP_SETTING_SAVE_TEXT_BUFFER) {
