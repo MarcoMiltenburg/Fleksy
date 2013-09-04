@@ -18,6 +18,7 @@
 #import "IASKAppSettingsViewController.h"
 #import "IASKSettingsReader.h"
 #import "FLThemeManager.h"
+#import "FLNavigationController.h"
 
 //#define APP_STORE_LINK @"http://itunes.apple.com/us/app/fleksy/id520337246?mt=8&uo=4"
 #define IOS_DEVICE_REVIEW_LINK @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=520337246"
@@ -255,17 +256,18 @@
   }
 #else
   [self showSettingsModal:nil];
+
 #endif
 }
 
 - (void)showSettingsPush:(id)sender {
 	[self.appSettingsViewController setShowCreditsFooter:NO];   // Uncomment to not display InAppSettingsKit credits for creators.
-	self.appSettingsViewController.showDoneButton = NO;
+	self.appSettingsViewController.showDoneButton = YES;
 	[self.navigationController pushViewController:self.appSettingsViewController animated:YES];
 }
 
 - (void)showSettingsModal:(id)sender {
-  UINavigationController *aNavController = [[UINavigationController alloc] initWithRootViewController:self.appSettingsViewController];
+  FLNavigationController *aNavController = [[FLNavigationController alloc] initWithRootViewController:self.appSettingsViewController];
   [self.appSettingsViewController setShowCreditsFooter:NO];   // Uncomment to not display InAppSettingsKit credits for creators.
   self.appSettingsViewController.showDoneButton = YES;  
   [self presentViewController:aNavController animated:YES completion:nil];
@@ -2021,7 +2023,7 @@
         break;
     }
   }
-  //NSLog(@"1231234 supportedInterfaceOrientations, FLEKSY_APP_SETTING_LOCK_ORIENTATION: %d, result: %d", FLEKSY_APP_SETTING_LOCK_ORIENTATION, result);
+  NSLog(@"123123 supportedInterfaceOrientations, FLEKSY_APP_SETTING_LOCK_ORIENTATION: %d, result: %d", FLEKSY_APP_SETTING_LOCK_ORIENTATION, result);
   return result;
 }
 

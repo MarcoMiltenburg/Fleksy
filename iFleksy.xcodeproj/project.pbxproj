@@ -126,6 +126,7 @@
 		61EDA3AA1784E0DC00C5CC52 /* ABStandin.m in Sources */ = {isa = PBXBuildFile; fileRef = 61EDA3A41784E0DC00C5CC52 /* ABStandin.m */; };
 		61EDA3AD1784E0F700C5CC52 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61EDA3AB1784E0F700C5CC52 /* AddressBook.framework */; };
 		61EDA3AE1784E0F700C5CC52 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61EDA3AC1784E0F700C5CC52 /* AddressBookUI.framework */; };
+		61EF78A017D7E3BC008FBCDA /* FLNavigationController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 61EF789F17D7E3BB008FBCDA /* FLNavigationController.mm */; };
 		61FCFEE21788E19000F41988 /* FLTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 61FCFEE11788E19000F41988 /* FLTheme.m */; };
 		61FCFEE61788E55F00F41988 /* FLThemeVanilla.m in Sources */ = {isa = PBXBuildFile; fileRef = 61FCFEE51788E55F00F41988 /* FLThemeVanilla.m */; };
 		61FCFEEC17890CDA00F41988 /* FLThemeNightLight.m in Sources */ = {isa = PBXBuildFile; fileRef = 61FCFEEB17890CDA00F41988 /* FLThemeNightLight.m */; };
@@ -361,6 +362,8 @@
 		61EDA3AC1784E0F700C5CC52 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		61EF789C17CEBBA1008FBCDA /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
 		61EF789D17CEBBA1008FBCDA /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
+		61EF789E17D7E3BB008FBCDA /* FLNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLNavigationController.h; sourceTree = "<group>"; };
+		61EF789F17D7E3BB008FBCDA /* FLNavigationController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FLNavigationController.mm; sourceTree = "<group>"; };
 		61FCFEE01788E19000F41988 /* FLTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLTheme.h; sourceTree = "<group>"; };
 		61FCFEE11788E19000F41988 /* FLTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLTheme.m; sourceTree = "<group>"; };
 		61FCFEE41788E55F00F41988 /* FLThemeVanilla.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLThemeVanilla.h; sourceTree = "<group>"; };
@@ -679,6 +682,8 @@
 				2EE7C88F15BDE30700307235 /* FLPurchaseManager.mm */,
 				2E804A4814AE69C900E0EC59 /* FleksyAppMainViewController.h */,
 				2E804A4914AE69C900E0EC59 /* FleksyAppMainViewController.mm */,
+				61EF789E17D7E3BB008FBCDA /* FLNavigationController.h */,
+				61EF789F17D7E3BB008FBCDA /* FLNavigationController.mm */,
 			);
 			name = App;
 			sourceTree = "<group>";
@@ -1125,6 +1130,7 @@
 				61FCFEEF178A3E3700F41988 /* FLThemeManager.m in Sources */,
 				61FCFEF2178A4D4300F41988 /* FLThemeMidnight.m in Sources */,
 				61BF37CA17CC3ACE0093F7F3 /* FLSignatureViewController.mm in Sources */,
+				61EF78A017D7E3BC008FBCDA /* FLNavigationController.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
