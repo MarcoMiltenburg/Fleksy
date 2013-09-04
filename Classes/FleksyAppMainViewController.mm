@@ -82,8 +82,8 @@
 @interface FleksyAppMainViewController () <IASKSettingsDelegate, UIPopoverControllerDelegate, FleksyUserQuestionaireListener>
 {
   IASKAppSettingsViewController *appSettingsViewController;
-  UINavigationController *favoritesNavigationController;
-  UINavigationController *signatureNavigationController;
+  FLNavigationController *favoritesNavigationController;
+  FLNavigationController *signatureNavigationController;
   BOOL isExecutedWithFavorites;
   FleksyUserQuestionaire *handleQuestionaireLink;
   BOOL _userHasVisitedQuestionaireLink;
@@ -153,8 +153,7 @@
     favoritesNavigationController = nil;
   }
   
-  favoritesNavigationController = [[UINavigationController alloc] init];
-  
+  favoritesNavigationController = [[FLNavigationController alloc] init];
   [favoritesNavigationController addChildViewController:favTVC];
   
   [sender presentViewController:favoritesNavigationController animated:YES completion:NULL];
@@ -171,7 +170,7 @@
     signatureNavigationController = nil;
   }
   
-  signatureNavigationController = [[UINavigationController alloc] init];
+  signatureNavigationController = [[FLNavigationController alloc] init];
   [signatureNavigationController addChildViewController:sigTVC];
   
   [sender presentViewController:signatureNavigationController animated:YES completion:NULL];
@@ -1393,8 +1392,7 @@
         favoritesNavigationController = nil;
       }
 
-      favoritesNavigationController = [[UINavigationController alloc] init];
-      
+      favoritesNavigationController = [[FLNavigationController alloc] init];
       [favoritesNavigationController addChildViewController:favTVC];
       
       [self presentViewController:favoritesNavigationController animated:YES completion:NULL];
