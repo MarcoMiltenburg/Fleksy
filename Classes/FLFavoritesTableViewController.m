@@ -10,6 +10,7 @@
 #import "ABWrappers.h"
 #import "ABContactsHelper+EmailSearch.h"
 #import "Settings.h"
+#import "FLPeoplePickerNavigationController.h"
 
 @interface FLFavoritesTableViewCell : UITableViewCell
 
@@ -190,7 +191,7 @@ ABAddressBookRef addressBook;
 #pragma mark - ABPeoplePickerNavigationController Drivers
 
 - (void) showPickerEmailAndPhone:(id)sender {
-  ABPeoplePickerNavigationController *picker = [[ABPeoplePickerNavigationController alloc] init];
+  FLPeoplePickerNavigationController *picker = [[FLPeoplePickerNavigationController alloc] init];
   picker.peoplePickerDelegate = self;
   
   // TODO: IDEA for debugging [#52935597], chagne the order of properties...
@@ -203,7 +204,7 @@ ABAddressBookRef addressBook;
 
 - (void)showPickerPhone:(id)sender {
   
-  ABPeoplePickerNavigationController *picker = [[ABPeoplePickerNavigationController alloc] init];
+  FLPeoplePickerNavigationController *picker = [[FLPeoplePickerNavigationController alloc] init];
   picker.peoplePickerDelegate = self;
   picker.navigationBar.topItem.prompt = @"Choose contact to add to phone favorites";
   
@@ -214,7 +215,7 @@ ABAddressBookRef addressBook;
 
 
 - (void)showPickerEmail:(id)sender {
-  ABPeoplePickerNavigationController *picker = [[ABPeoplePickerNavigationController alloc] init];
+  FLPeoplePickerNavigationController *picker = [[FLPeoplePickerNavigationController alloc] init];
   picker.peoplePickerDelegate = self;
   picker.navigationBar.topItem.prompt = @"Choose contact to add to email favorites";
   
@@ -225,18 +226,18 @@ ABAddressBookRef addressBook;
 
 #pragma mark - ABPeoplePickerNavigationControllerDelegate Methods
 
-- (void)peoplePickerNavigationControllerDidCancel:(ABPeoplePickerNavigationController *)peoplePicker {
+- (void)peoplePickerNavigationControllerDidCancel:(FLPeoplePickerNavigationController *)peoplePicker {
   [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
-- (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person {
+- (BOOL)peoplePickerNavigationController:(FLPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person {
   //[self displayPerson:person];
   //[self dismissViewControllerAnimated:YES completion:NULL];
   
   return YES;
 }
 
-- (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier {
+- (BOOL)peoplePickerNavigationController:(FLPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier {
   
   // Guaranteed to only be working with e-mail and phone here
   [self dismissViewControllerAnimated:YES completion:nil];
