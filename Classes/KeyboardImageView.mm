@@ -207,7 +207,7 @@
     label.text = [[NSString alloc] initWithBytes:&c length:1 encoding:NSISOLatin1StringEncoding];
   }
   
-  float featureVersion = 7.0;
+  float featureVersion = 6.0;
   if ([[[UIDevice currentDevice] systemVersion] floatValue] >= featureVersion)
   {
     label.font = popup ? [UIFont fontWithName:@"HelveticaNeue" size:size] : [UIFont fontWithName:@"HelveticaNeue" size:size/*+12*/];
