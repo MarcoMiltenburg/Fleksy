@@ -1159,7 +1159,10 @@
         break;
       }
       [result appendString:component];
-      if (result.length + component.length + 1 < text.length) {
+      
+      
+      NSLog(@" result.length = %d component.length + 1 = %d <> text.length = %d", result.length, component.length+1, text.length);
+      if (result.length < text.length - 1) {
         [result appendString:@" "];
       }
       NSLog(@"  interim result:<%@>",result);
@@ -1493,7 +1496,7 @@
 - (void) showMenu {
   
   [TestFlight passCheckpoint:@"showMenu"];
-  
+             
   //if (purchaseManager.previousRuns > 50 || UIAccessibilityIsVoiceOverRunning()) { [FLColdWar yay]; }
   
   if (FLEKSY_APP_SETTING_SAVE_TEXT_BUFFER) {
