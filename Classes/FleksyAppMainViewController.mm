@@ -468,6 +468,12 @@
   }
 }
 
+- (void)pasteText {
+  UIPasteboard* pasteboard = [UIPasteboard generalPasteboard];
+  NSLog(@"pasteText from PasteBoard: %@", pasteboard.string);
+  textView.text = pasteboard.string;
+}
+
 #pragma mark - Public Utility Methods
 
 - (NSString *) saveText {
@@ -907,9 +913,7 @@
 
     FLEKSY_APP_SETTING_COPY_ON_EXIT = [[[aNote userInfo] objectForKey:@"FLEKSY_APP_SETTING_COPY_ON_EXIT"] boolValue];;
     
-    [self recreatePlainActionMenuWithTitle:ACTION_MENU_TITLE];
-    actionMainMenu = actionMainMenuPlain;
-
+    [self recreatePlainMenus];
   }
 }
 
@@ -1455,6 +1459,10 @@
 //    } else if ([buttonTitle isEqualToString:@"Vote For Syntellia!"]) {
 //      [self showVoting:YES];
       
+      
+    } else if ([buttonTitle isEqualToString:@"Paste"]) {
+      [self pasteText];
+      
     } else if ([buttonTitle isEqualToString:@"♥ Fleksy in other apps?"]) {
       [self showFleksyInOtherApps];
       
@@ -1611,15 +1619,7 @@
     [actionMainMenuPlain addButtonWithTitle:RESTORE_FULL_VERSION_TITLE];
   } else {
     
-    NSLog(@"FLEKSY_APP_SETTING_COPY_ON_EXIT = %d", FLEKSY_APP_SETTING_COPY_ON_EXIT);
-    if (FLEKSY_APP_SETTING_COPY_ON_EXIT == YES) {
-      NSLog(@"Setting BUTTON: Clear");
-      [actionMainMenuPlain addButtonWithTitle:@"Clear"];
-    }
-    else {
-      NSLog(@"Setting BUTTON: Copy & Clear");
-      [actionMainMenuPlain addButtonWithTitle:@"Copy & Clear"];
-    }
+    [actionMainMenuPlain addButtonWithTitle:@"Copy & Clear"];
     [actionMainMenuPlain addButtonWithTitle:@"Email"];
     [actionMainMenuPlain addButtonWithTitle:@"Message"];
     
@@ -1666,6 +1666,11 @@
   [initialMainMenu addButtonWithTitle:@"Instructions"];
   [initialMainMenu addButtonWithTitle:@"Settings"];
 //  [initialMainMenu addButtonWithTitle:@"Vote For Syntellia!"];
+  
+  if (FLEKSY_APP_SETTING_COPY_ON_EXIT) {
+    [initialMainMenu addButtonWithTitle:@"Paste"];
+  }
+  
   [initialMainMenu addButtonWithTitle:@"♥ Fleksy in other apps?"];
   [initialMainMenu addButtonWithTitle:@"We love feedback!"];
   [initialMainMenu addButtonWithTitle:@"Follow @fleksy"];
