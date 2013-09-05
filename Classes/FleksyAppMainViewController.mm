@@ -259,16 +259,10 @@
 #endif
 }
 
-- (void)showSettingsPush:(id)sender {
-	[self.appSettingsViewController setShowCreditsFooter:NO];   // Uncomment to not display InAppSettingsKit credits for creators.
-	self.appSettingsViewController.showDoneButton = YES;
-	[self.navigationController pushViewController:self.appSettingsViewController animated:YES];
-}
-
 - (void)showSettingsModal:(id)sender {
   FLNavigationController *aNavController = [[FLNavigationController alloc] initWithRootViewController:self.appSettingsViewController];
   [self.appSettingsViewController setShowCreditsFooter:NO];   // Uncomment to not display InAppSettingsKit credits for creators.
-  self.appSettingsViewController.showDoneButton = YES;  
+  self.appSettingsViewController.showDoneButton = YES;
   [self presentViewController:aNavController animated:YES completion:nil];
 }
 
@@ -680,6 +674,7 @@
     [self resetState];
   }
   
+  // Note: Calling [self dismissControllerAndShowKeyboard] would only dismiss the iOS keyboard on Cancel of Message
   [self dismissViewControllerAnimated:YES completion:^{[self showKeyboard];}];
 
   //see bug above. http://stackoverflow.com/questions/9927337/mfmessagecomposeviewcontroller-not-properly-displayed
@@ -762,7 +757,8 @@
     [self resetState];
   }
   
-  [self dismissControllerAndShowKeyboard];
+  [self dismissControllerAndShowKeyboard]; 
+
 }
 
 
@@ -780,7 +776,9 @@
 - (void)dismissFavoritesTVC {
   NSLog(@"dismissFavoritesTVC");
   isExecutedWithFavorites = NO;
-  [favoritesNavigationController dismissViewControllerAnimated:YES completion:^{[self showKeyboard];}];
+  //[favoritesNavigationController dismissViewControllerAnimated:YES completion:^{[self showKeyboard];}];
+  [favoritesNavigationController dismissViewControllerAnimated:YES completion:NULL];
+  [self showKeyboard];
 }
 
 - (void)selectedFavorite:(NSString *)favoriteString {
@@ -897,7 +895,9 @@
 
 - (void)dismissControllerAndShowKeyboard {
   //has to be animated: http://stackoverflow.com/questions/7821617/dismissmodalviewcontrolleranimated-and-dismissviewcontrolleranimated-crashing
-  [self dismissViewControllerAnimated:YES completion:^{[self showKeyboard];}];
+  //[self dismissViewControllerAnimated:YES completion:^{[self showKeyboard];}];
+  [self dismissViewControllerAnimated:YES completion:NULL];
+  [self showKeyboard];
 }
 
 
@@ -1317,9 +1317,11 @@
 
       
     } else if ([buttonTitle isEqualToString:@"Email"]) {
+      [actionButton removeFromSuperview];
       [self sendInAppMailTo:nil useText:textView.text];
       
     } else if ([buttonTitle isEqualToString:@"Message"]) {
+      [actionButton removeFromSuperview];
       [self sendInAppSMS:nil text:textView.text];
     
     } else if ([buttonTitle isEqualToString:BUTTON_TITLE_POST_TO_TWITTER]) {
@@ -1341,10 +1343,13 @@
       [self showKeyboard];
      
     } else if ([buttonTitle isEqualToString:@"Instructions"]) {
+      [actionButton removeFromSuperview];
       [self showDetailedInstructions:NO];
       
     } else if ([buttonTitle isEqualToString:@"Settings"]) {
+      [actionButton removeFromSuperview];
       [self showSettings];
+      
       
 //    } else if ([buttonTitle isEqualToString:@"Vote for Syntellia!"]) {
 //      [self showVoting:YES];
@@ -1353,9 +1358,10 @@
       [self showFleksyInOtherApps];
     
     } else if ([buttonTitle isEqualToString:@"We love feedback!"]) {
+      [actionButton removeFromSuperview];
       [self sendFeedback];
     } else if ([buttonTitle hasPrefix:@"Favorites"]) {
-      
+      [actionButton removeFromSuperview];
       isExecutedWithFavorites = YES;
       
       NSLog(@"Favorites BEFORE = %@", favorites);
@@ -1382,6 +1388,7 @@
 //      [self sendTo:recipient];
       
     } else if ([buttonTitle hasPrefix:@"Reply to"]) {
+      [actionButton removeFromSuperview];
       NSString* recipient = [[buttonTitle componentsSeparatedByString:@"Reply to "] objectAtIndex:1];
       [self setReplyTo:nil];
       [self sendTo:recipient];
@@ -1404,7 +1411,8 @@
         [alert show];
       
       } else {
-        
+        [actionButton removeFromSuperview];
+
         [TestFlight passCheckpoint:@"ExportDictionary"];
         
         NSString* contents2 = [[contents stringByReplacingOccurrencesOfString:@"\n" withString:@":"] stringByReplacingOccurrencesOfString:@"\t" withString:@"_"];
@@ -1438,9 +1446,11 @@
       [purchaseManager checkRestoreToFullVersion];
     
     } else if ([buttonTitle isEqualToString:@"Instructions"]) {
+      [actionButton removeFromSuperview];
       [self showDetailedInstructions:NO];
       
     } else if ([buttonTitle isEqualToString:@"Settings"]) {
+      [actionButton removeFromSuperview];
       [self showSettings];
       
 //    } else if ([buttonTitle isEqualToString:@"Vote For Syntellia!"]) {
@@ -1455,6 +1465,7 @@
       [self showFleksyInOtherApps];
       
     } else if ([buttonTitle isEqualToString:@"We love feedback!"]) {
+      [actionButton removeFromSuperview];
       [self sendFeedback];
       
     } else if ([buttonTitle isEqualToString:@"Follow @fleksy"]) {
@@ -1740,7 +1751,7 @@
 
 
 - (void) keyboardWillHide:(id) notification {
-  [actionButton removeFromSuperview];
+  //[actionButton removeFromSuperview];
 }
 
 
