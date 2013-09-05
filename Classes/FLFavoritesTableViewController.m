@@ -231,8 +231,6 @@ ABAddressBookRef addressBook;
 }
 
 - (BOOL)peoplePickerNavigationController:(FLPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person {
-  //[self displayPerson:person];
-  //[self dismissViewControllerAnimated:YES completion:NULL];
   
   return YES;
 }

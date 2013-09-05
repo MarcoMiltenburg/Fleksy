@@ -183,7 +183,7 @@
   NSLog(@"%s: sender = %@", __PRETTY_FUNCTION__, sender);
     
   [textView.inputView performSelector:@selector(handleSettingsChanged:) withObject:nil];
-  [self dismissModalViewControllerAnimated:YES];
+  [self dismissControllerAndShowKeyboard];
 }
 
 //optional
@@ -270,27 +270,6 @@
   [self.appSettingsViewController setShowCreditsFooter:NO];   // Uncomment to not display InAppSettingsKit credits for creators.
   self.appSettingsViewController.showDoneButton = YES;  
   [self presentViewController:aNavController animated:YES completion:nil];
-}
-
-- (void)showSettingsPopover:(id)sender {
-    
-    // Popovers cannot be presented from a view which does not have a window.
-	if(self.currentPopoverController) {
-        [self dismissCurrentPopover];
-		return;
-	}
-    
-	self.appSettingsViewController.showDoneButton = NO;
-	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:self.appSettingsViewController] ;
-	UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:navController];
-	popover.delegate = self;
-	[popover presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionUp animated:NO];
-	self.currentPopoverController = popover;
-}
-
-- (void) dismissCurrentPopover {
-	[self.currentPopoverController dismissPopoverAnimated:YES];
-	self.currentPopoverController = nil;
 }
 
 #pragma mark - Twitter Support
@@ -405,7 +384,8 @@
   //return;
   
   if (!textView.isFirstResponder) {
-    [textView becomeFirstResponder];
+    //[textView becomeFirstResponder];
+    [textView makeReady];
   } else {
     [textView reloadInputViews];
   }
@@ -502,7 +482,7 @@
 }
 
 - (void) _showInitialMainMenu {
-  //[self hideKeyboard];
+  [self hideKeyboard];
   initialMainMenu.title = INITIAL_MENU_TITLE;
   
   if (deviceIsPad()) {
@@ -521,7 +501,7 @@
 }
 
 - (void) _showActionMainMenu {
-  //[self hideKeyboard];
+  [self hideKeyboard];
   if (UIAccessibilityIsVoiceOverRunning()) {
     actionMainMenu.title = [NSString stringWithFormat:@"%@", textView.text];
   }
@@ -562,7 +542,7 @@
 
 - (void) dismissActionMainMenu {
   [actionMainMenu dismissWithClickedButtonIndex:100 animated:!deviceIsPad()];
-  //[self showKeyboard];
+  [self showKeyboard];
 }
 
 + (NSString*) friendlyServiceNameForServiceType:(NSString*) serviceType {
@@ -594,6 +574,7 @@
   // serviceType string will be nil if the Social framework is not found and will be used to indicate Twitter
   if (!serviceType || [serviceType isEqualToString:SLServiceTypeTwitter] || [serviceType isEqualToString:SLServiceTypeSinaWeibo]) {
     if (text.length > 140) {
+      [self showKeyboard];
       UIAlertView* tmp = [[UIAlertView alloc] initWithTitle:@"Text is too long" message:
                           [NSString stringWithFormat:@"Your text is %d characters longer than the 140 character limit for %@",
                            text.length - 140, [FleksyAppMainViewController friendlyServiceNameForServiceType:serviceType]] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -608,8 +589,8 @@
     if (result == SLComposeViewControllerResultDone) {
       [self resetState];
     }
-    [self dismissViewControllerAnimated:YES completion:nil];
-    [textView makeReady];
+    
+    [self dismissControllerAndShowKeyboard];
   };
 
   
@@ -621,6 +602,7 @@
     //if ([TWTweetComposeViewController canSendTweet]) {
     viewController = [[TWTweetComposeViewController alloc] init];
   } else {
+    [self showKeyboard];
     NSLog(@"No framework found to post to Twitter");
   }
   
@@ -629,6 +611,7 @@
     [viewController performSelector:@selector(setCompletionHandler:) withObject:completionHandler];
     [self presentViewController:viewController animated:YES completion:nil];
   } else {
+    [self showKeyboard];
     [[[UIAlertView alloc] initWithTitle:@"Connection error" message:@"Please ensure an account is set up" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
   }
 }
@@ -698,7 +681,6 @@
   }
   
   [self dismissViewControllerAnimated:YES completion:^{[self showKeyboard];}];
-  //[self dismissModalViewControllerAnimated:NO];
 
   //see bug above. http://stackoverflow.com/questions/9927337/mfmessagecomposeviewcontroller-not-properly-displayed
   if ([self doSMSbugWorkaround]) {
@@ -780,8 +762,7 @@
     [self resetState];
   }
   
-  //has to be animated: http://stackoverflow.com/questions/7821617/dismissmodalviewcontrolleranimated-and-dismissviewcontrolleranimated-crashing
-  [self dismissViewControllerAnimated:YES completion:^{[self showKeyboard];}];
+  [self dismissControllerAndShowKeyboard];
 }
 
 
@@ -806,9 +787,6 @@
   NSLog(@" Send text or email to: %@", favoriteString);
   
   [self sendTo:favoriteString];
-  
-  //[self dismissFavoritesTVC];
-  //favoritesNavigationController = nil;
 }
 
 #pragma mark - FLFavoritesTableViewController Notification Handlers
@@ -904,9 +882,8 @@
     [[NSUserDefaults standardUserDefaults] setObject:@(themeType) forKey:@"FLEKSY_APP_SETTING_THEME"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [[NSUbiquitousKeyValueStore defaultStore] synchronize];
-    
-    
-    [self dismissModalViewControllerAnimated:YES];
+  
+    [self dismissControllerAndShowKeyboard];
   }
   else if ([[[userInfo allKeys] lastObject] isEqualToString:@"FLEKSY_APP_SETTING_COPY_ON_EXIT"]) {
 
@@ -916,6 +893,11 @@
     
     [self recreatePlainMenus];
   }
+}
+
+- (void)dismissControllerAndShowKeyboard {
+  //has to be animated: http://stackoverflow.com/questions/7821617/dismissmodalviewcontrolleranimated-and-dismissviewcontrolleranimated-crashing
+  [self dismissViewControllerAnimated:YES completion:^{[self showKeyboard];}];
 }
 
 
@@ -1125,11 +1107,12 @@
 
 - (void) dismissInstructions {
   BOOL showBasicAlert = instructionsController.view.tag == 10;
-  [self dismissViewControllerAnimated:YES completion:^{
-    if (showBasicAlert) {
-      [self showBasicInstructions];
-    }
-  }];
+  [self dismissControllerAndShowKeyboard];
+  
+  if (showBasicAlert) {
+    // TODO: May show to fast, perhaps wait.... ?
+    [self showBasicInstructions];
+  }
   instructionsController = nil;
 }
 
@@ -1196,6 +1179,7 @@
       [self clearDefaultsAndCloud];
     }
   } else if (alertView == self->fleksyInOtherApps) {
+    [self showKeyboard];
     if (buttonIndex == 1) {
       [self writeAppStoreReview];
     } else if (buttonIndex == 2) {
@@ -1354,12 +1338,8 @@
     } else if ([buttonTitle isEqualToString:@"Copy & Clear"]) {
       [self copyText];
       [self resetState];
+      [self showKeyboard];
      
-    } else if ([buttonTitle isEqualToString:@"Clear"]) {
-      [self resetState];
-//      [self voiceOverSpeak:@"Text cleared"];
-//      [self performSelector:@selector(showInitialMainMenu) withObject:nil afterDelay:1.2];
-
     } else if ([buttonTitle isEqualToString:@"Instructions"]) {
       [self showDetailedInstructions:NO];
       
@@ -1407,9 +1387,11 @@
       [self sendTo:recipient];
       
     } else if ([buttonTitle isEqualToString:@"Follow @fleksy"]) {
+      [self showKeyboard];
       [self menu_fleksy_twitter];
     
     } else if ([buttonTitle isEqualToString:@"Visit fleksy.com"]) {
+      [self showKeyboard];
       [self menu_fleksy_web];
       
     } else if ([buttonTitle isEqualToString:@"Export dictionary"]) {
@@ -1418,6 +1400,7 @@
       if (!contents || !contents.length) {
         
         UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Export dictionary" message:@"Dictionary is empty" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [self showKeyboard];
         [alert show];
       
       } else {
@@ -1435,6 +1418,7 @@
       [self recreatePlainMenus];
       [self reloadFavorites];
       [VariousUtilities performAudioFeedbackFromString:@"Cleared NSUserDefaults"];
+      [self showKeyboard];
       
     } else {
       NSLog(@"ERROR! unknown buttonIndex: %d, buttonTitle: %@", buttonIndex, buttonTitle);
@@ -1465,6 +1449,7 @@
       
     } else if ([buttonTitle isEqualToString:@"Paste"]) {
       [self pasteText];
+      [self showKeyboard];
       
     } else if ([buttonTitle isEqualToString:@"♥ Fleksy in other apps?"]) {
       [self showFleksyInOtherApps];
@@ -1474,8 +1459,10 @@
       
     } else if ([buttonTitle isEqualToString:@"Follow @fleksy"]) {
       [self menu_fleksy_twitter];
+      [self showKeyboard];
       
     } else if ([buttonTitle isEqualToString:@"Visit fleksy.com"]) {
+      [self showKeyboard];
       [self menu_fleksy_web];
     
     } else {
