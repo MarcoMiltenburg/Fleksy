@@ -780,7 +780,7 @@
 - (void)dismissFavoritesTVC {
   NSLog(@"dismissFavoritesTVC");
   isExecutedWithFavorites = NO;
-  [favoritesNavigationController dismissViewControllerAnimated:YES completion:NULL];
+  [favoritesNavigationController dismissViewControllerAnimated:YES completion:^{[self showKeyboard];}];
 }
 
 - (void)selectedFavorite:(NSString *)favoriteString {
