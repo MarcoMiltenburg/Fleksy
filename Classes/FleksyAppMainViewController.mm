@@ -1325,6 +1325,7 @@
       [self sendInAppSMS:nil text:textView.text];
     
     } else if ([buttonTitle isEqualToString:BUTTON_TITLE_POST_TO_TWITTER]) {
+      [actionButton removeFromSuperview];
       NSString* serviceType = nil;
       if (NSClassFromString(@"SLComposeViewController")) {
         serviceType = SLServiceTypeTwitter;
@@ -1332,9 +1333,11 @@
       [self postToSocialService:serviceType text:textView.text];
       
     } else if ([buttonTitle isEqualToString:BUTTON_TITLE_POST_TO_FACEBOOK]) {
+      [actionButton removeFromSuperview];
       [self postToSocialService:SLServiceTypeFacebook text:textView.text];
       
     } else if ([buttonTitle isEqualToString:BUTTON_TITLE_POST_TO_WEIBO]) {
+      [actionButton removeFromSuperview]; 
       [self postToSocialService:SLServiceTypeSinaWeibo text:textView.text];
       
     } else if ([buttonTitle isEqualToString:@"Copy & Clear"]) {
