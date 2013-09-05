@@ -138,7 +138,9 @@ static FleksyKeyboard* instance = nil;
   // Only saved locally, not across devices
   //FLEKSY_APP_CACHE_QUESTIONAIRE          = [[VariousUtilities getSettingNamed:@"FLEKSY_APP_CACHE_QUESTIONAIRE" fromSettings:settings] boolValue];
   FLEKSY_APP_SETTING_COPY_ON_EXIT              = [[VariousUtilities getSettingNamed:@"FLEKSY_APP_SETTING_COPY_ON_EXIT" fromSettings:settings] boolValue];
-  FLEKSY_APP_SETTING_SAVE_TEXT_BUFFER          = [[VariousUtilities getSettingNamed:@"FLEKSY_APP_SETTING_SAVE_TEXT_BUFFER" fromSettings:settings] boolValue];
+  //FLEKSY_APP_SETTING_SAVE_TEXT_BUFFER          = [[VariousUtilities getSettingNamed:@"FLEKSY_APP_SETTING_SAVE_TEXT_BUFFER" fromSettings:settings] boolValue];
+  FLEKSY_APP_SETTING_SAVE_TEXT_BUFFER          = YES; // ALWAYS ON
+
   
 
   if (FLEKSYTHEME.currentThemeType != FLEKSY_APP_SETTING_THEME) {
