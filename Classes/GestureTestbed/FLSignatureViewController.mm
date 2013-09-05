@@ -34,9 +34,7 @@ NSString * const FleksySignatureKey = @"FleksySignatureKey";
   
   self = [super initWithNibName:nil bundle:nil];
   if (self) {
-    
     _signature = aSignature;
-    
   }
   return self;
 }
@@ -51,6 +49,7 @@ NSString * const FleksySignatureKey = @"FleksySignatureKey";
 	// Do any additional setup after loading the view.
   
   textView = [[UITextView alloc] initWithFrame:self.view.frame];
+  textView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
   
   if (self.signature == nil) {
     self.signature = @"Typed With Fleksy";
