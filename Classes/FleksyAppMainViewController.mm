@@ -106,6 +106,8 @@
 		appSettingsViewController.delegate = self;
 //		BOOL enabled = [[NSUserDefaults standardUserDefaults] boolForKey:@"AutoConnect"];
 //		appSettingsViewController.hiddenKeys = enabled ? nil : [NSSet setWithObjects:@"AutoConnectLogin", @"AutoConnectPassword", nil];
+    
+    appSettingsViewController.hiddenKeys = deviceIsPad() ? [NSSet setWithObject:@"FLEKSY_APP_SETTING_LOCK_ORIENTATION"] : nil;
 	}
 	return appSettingsViewController;
 }
