@@ -17,6 +17,8 @@
 			<string>FLEKSY_APP_SETTING_SPEED_DIAL_1</string>
 			<key>Title</key>
 			<string>Setup Favorites</string>
+			<key>IASKTextAlignment</key>
+			<string>IASKUITextAlignmentLeft</string>
 		</dict>
 		<dict>
 			<key>Type</key>
@@ -171,6 +173,8 @@
 			<string>FLEKSY_APP_SETTING_EMAIL_SIGNATURE</string>
 			<key>Title</key>
 			<string>Edit Signature</string>
+			<key>IASKTextAlignment</key>
+			<string>IASKUITextAlignmentLeft</string>
 		</dict>
 		<dict>
 			<key>Title</key>
