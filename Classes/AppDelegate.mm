@@ -117,15 +117,50 @@ float distributionFunction(float x) {
       string = [string stringByReplacingOccurrencesOfString:@"_ADD_WORDS:" withString:@""];
       int wordsAdded = 0;
       for (NSString* wordString in [string componentsSeparatedByString:@":"]) {
-        NSString* word = [[wordString componentsSeparatedByString:@"_"] objectAtIndex:0];
+        NSString* wordToAddRemove = [[wordString componentsSeparatedByString:@"_"] objectAtIndex:0];
         //double frequency = [[[wordString componentsSeparatedByString:@"_"] objectAtIndex:1] doubleValue];
-        if (FLAddWordResultAdded == [[FLTypingController_iOS sharedFLTypingController_iOS].fleksyClient addedUserWord:word frequency:FLEKSY_USER_WORD_FREQUENCY]) {
-          wordsAdded++;
+        
+        FLAddWordResult result = [[FLTypingController_iOS sharedFLTypingController_iOS].fleksyClient addedUserWord:wordToAddRemove frequency:FLEKSY_USER_WORD_FREQUENCY];
+        
+        switch (result) {
+            
+          case FLAddWordResultAdded:
+            
+            NSLog(@"Added word %@ to memory", wordToAddRemove);
+            if ([[FLTypingController_iOS sharedFLTypingController_iOS].fleksyClient.userDictionary addWord:wordToAddRemove frequency:FLEKSY_USER_WORD_FREQUENCY notifyListener:NO]) {
+              NSLog(@"Added %@ to dictionary", wordToAddRemove);
+              wordsAdded++;
+            } else {
+              NSLog(@"Error adding %@ to dictionary", wordToAddRemove);
+            }
+            break;
+            
+          case FLAddWordResultExists:
+            NSLog(@"%@ already exists in dictionary", wordToAddRemove);
+            break;
+            
+          case FLAddWordResultTooLong:
+            NSLog(@"%@ is too long, could not add to dictionary", wordToAddRemove);
+            break;
+            
+          case FLAddWordResultWordIsBlacklisted:
+            NSLog(@"%@ is blacklisted, could not add to dictionary", wordToAddRemove);
+            break;
+            
+          default:
+            NSString* s = [NSString stringWithFormat:@"Could not add word %@, some error occurred (%d)", wordToAddRemove, result];
+            NSLog(@"%@", s);
+            break;
         }
+        
       }
-      [VariousUtilities performAudioFeedbackFromString:[NSString stringWithFormat:@"Added %d new words", wordsAdded]];
+      NSString* s = [NSString stringWithFormat:@"Added %d words to dictionary", wordsAdded];
+      [VariousUtilities performAudioFeedbackFromString:s];
+      NSLog(@"%@", s);
+      [[[UIAlertView alloc] initWithTitle:@"Import" message:s delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+
     }
-      
+    
     return YES;
   }
   return NO;

@@ -467,6 +467,8 @@ BOOL isRingerMuted() {
 
 + (void) performAudioFeedbackFromString:(NSString*) string {
   //[self performSelectorInBackground:@selector(_startSpeakingString_OLD:) withObject:string];
+  
+  NSLog(@" STRING TO SPEAK: %@", string);
   [self _performAudioFeedbackFromString:string];
 }
 
