@@ -632,6 +632,9 @@
     NSLog(@"![MFMessageComposeViewController canSendText]");
     //[self voiceOverSpeak:@"Could not send message"];
     //[self voiceOverStatusChangedWithDelay:2];
+    [self showKeyboard];
+    [[[UIAlertView alloc] initWithTitle:@"Message Error" message:@"Configure Settings > Messages in the iOS Settings App before using this action."
+                               delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
     return;
   }
   
