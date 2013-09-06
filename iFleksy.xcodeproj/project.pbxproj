@@ -81,6 +81,7 @@
 		2EDB469011DA95B40057E60D /* FLTypingController_iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2EDB468F11DA95B40057E60D /* FLTypingController_iOS.mm */; };
 		2EE39C2E161279E600B88B2E /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EE39C2D161279E600B88B2E /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		2EE7C89015BDE30700307235 /* FLPurchaseManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2EE7C88F15BDE30700307235 /* FLPurchaseManager.mm */; };
+		6100745217DA6D0F00C29460 /* FLSignatureViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6100745117DA6D0F00C29460 /* FLSignatureViewController.mm */; };
 		6116464F170259100093E29F /* instructions in Resources */ = {isa = PBXBuildFile; fileRef = 6116464E170259100093E29F /* instructions */; };
 		6139A7F1170A06BE00FBDB02 /* AFHTTPClient.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6139A7DD170A06BE00FBDB02 /* AFHTTPClient.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		6139A7F2170A06BE00FBDB02 /* AFHTTPRequestOperation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6139A7DF170A06BE00FBDB02 /* AFHTTPRequestOperation.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -115,7 +116,6 @@
 		6139A853170A0CB800FBDB02 /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = 6139A84E170A0CB800FBDB02 /* zip.c */; };
 		61703A76178BA00F00571628 /* InAppSettings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 61703A75178BA00F00571628 /* InAppSettings.bundle */; };
 		617DACC01715DCA5009D93CB /* FleksyListenerImplC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 617DACBF1715DCA5009D93CB /* FleksyListenerImplC.cpp */; };
-		61BF37CA17CC3ACE0093F7F3 /* FLSignatureViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 61BF37C917CC3ACC0093F7F3 /* FLSignatureViewController.mm */; };
 		61D2EA97170BA5BB00DA7639 /* UIView+MainThreadCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = 61D2EA96170BA5BB00DA7639 /* UIView+MainThreadCheck.m */; };
 		61DA86551701F24500EE52C5 /* IconRounded.png in Resources */ = {isa = PBXBuildFile; fileRef = 61DA86541701F24500EE52C5 /* IconRounded.png */; };
 		61EDA3991784E0BD00C5CC52 /* FLFavoritesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 61EDA3981784E0BD00C5CC52 /* FLFavoritesTableViewController.m */; };
@@ -273,6 +273,8 @@
 		2EE7C88E15BDE30700307235 /* FLPurchaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPurchaseManager.h; sourceTree = "<group>"; };
 		2EE7C88F15BDE30700307235 /* FLPurchaseManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FLPurchaseManager.mm; sourceTree = "<group>"; };
 		2EEA161A15BE124900C04187 /* Fleksy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Fleksy.entitlements; sourceTree = "<group>"; };
+		6100745017DA6D0F00C29460 /* FLSignatureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLSignatureViewController.h; sourceTree = "<group>"; };
+		6100745117DA6D0F00C29460 /* FLSignatureViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FLSignatureViewController.mm; sourceTree = "<group>"; };
 		6116464E170259100093E29F /* instructions */ = {isa = PBXFileReference; lastKnownFileType = folder; path = instructions; sourceTree = "<group>"; };
 		6139A7DC170A06BE00FBDB02 /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
 		6139A7DD170A06BE00FBDB02 /* AFHTTPClient.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AFHTTPClient.mm; sourceTree = "<group>"; };
@@ -341,8 +343,6 @@
 		61703A75178BA00F00571628 /* InAppSettings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = InAppSettings.bundle; sourceTree = "<group>"; };
 		617DACBF1715DCA5009D93CB /* FleksyListenerImplC.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FleksyListenerImplC.cpp; sourceTree = "<group>"; };
 		617DACC11715DCAF009D93CB /* FleksyListenerImplC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FleksyListenerImplC.h; sourceTree = "<group>"; };
-		61BF37C817CC3ACA0093F7F3 /* FLSignatureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FLSignatureViewController.h; path = GestureTestbed/FLSignatureViewController.h; sourceTree = "<group>"; };
-		61BF37C917CC3ACC0093F7F3 /* FLSignatureViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = FLSignatureViewController.mm; path = GestureTestbed/FLSignatureViewController.mm; sourceTree = "<group>"; };
 		61D2EA95170BA5BB00DA7639 /* UIView+MainThreadCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MainThreadCheck.h"; sourceTree = "<group>"; };
 		61D2EA96170BA5BB00DA7639 /* UIView+MainThreadCheck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MainThreadCheck.m"; sourceTree = "<group>"; };
 		61DA86541701F24500EE52C5 /* IconRounded.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IconRounded.png; sourceTree = "<group>"; };
@@ -867,8 +867,8 @@
 		61BF37CB17CC3CFB0093F7F3 /* Email SIgnature */ = {
 			isa = PBXGroup;
 			children = (
-				61BF37C817CC3ACA0093F7F3 /* FLSignatureViewController.h */,
-				61BF37C917CC3ACC0093F7F3 /* FLSignatureViewController.mm */,
+				6100745017DA6D0F00C29460 /* FLSignatureViewController.h */,
+				6100745117DA6D0F00C29460 /* FLSignatureViewController.mm */,
 			);
 			name = "Email SIgnature";
 			sourceTree = "<group>";
@@ -1134,9 +1134,9 @@
 				61FCFEEC17890CDA00F41988 /* FLThemeNightLight.m in Sources */,
 				61FCFEEF178A3E3700F41988 /* FLThemeManager.m in Sources */,
 				61FCFEF2178A4D4300F41988 /* FLThemeMidnight.m in Sources */,
-				61BF37CA17CC3ACE0093F7F3 /* FLSignatureViewController.mm in Sources */,
 				61EF78A017D7E3BC008FBCDA /* FLNavigationController.mm in Sources */,
 				61EF78A317D7F16D008FBCDA /* FLPeoplePickerNavigationController.mm in Sources */,
+				6100745217DA6D0F00C29460 /* FLSignatureViewController.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
