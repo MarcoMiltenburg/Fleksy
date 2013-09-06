@@ -148,7 +148,7 @@ float distributionFunction(float x) {
             break;
             
           default:
-            NSLog(@"Could not add word %@, some error occurred (%d)", wordToAddRemove, result]);
+            NSLog(@"Could not add word %@, some error occurred (%d)", wordToAddRemove, result);
             break;
         }
         

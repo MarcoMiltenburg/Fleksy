@@ -631,6 +631,7 @@
   //Note: no sim card installed popup is visually "under" our menu (bug)
   
   if (![MFMessageComposeViewController canSendText]) {
+    [VariousUtilities performAudioFeedbackFromString:@"Could not send text message"];
     NSLog(@"![MFMessageComposeViewController canSendText]");
     //[self voiceOverSpeak:@"Could not send message"];
     //[self voiceOverStatusChangedWithDelay:2];
@@ -696,8 +697,13 @@
   //[[FLKeyboardContainerView sharedFLKeyboardContainerView].typingController.diagnostics sendWithComment:@"ACTION_MAIL"];
   
 	if (![MFMailComposeViewController canSendMail]) {
+    NSLog(@"![MFMessageComposeViewController canSendMail]");
     [VariousUtilities performAudioFeedbackFromString:@"Could not send mail"];
     //[self voiceOverStatusChangedWithDelay:2];
+    
+    [self showKeyboard];
+    [[[UIAlertView alloc] initWithTitle:@"Email Error" message:@"Enable a Mail account before using this action."
+                               delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
     return;
   }
   
