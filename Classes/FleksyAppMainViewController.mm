@@ -79,7 +79,7 @@
 @end
 
 
-@interface FleksyAppMainViewController () <IASKSettingsDelegate, UIPopoverControllerDelegate, FleksyUserQuestionaireListener>
+@interface FleksyAppMainViewController () <IASKSettingsDelegate, FleksyUserQuestionaireListener>
 {
   IASKAppSettingsViewController *appSettingsViewController;
   FLNavigationController *favoritesNavigationController;
@@ -90,7 +90,6 @@
 }
 
 @property (nonatomic, retain) IASKAppSettingsViewController *appSettingsViewController;
-@property (nonatomic) UIPopoverController* currentPopoverController;
 
 @end
 
