@@ -148,8 +148,7 @@ float distributionFunction(float x) {
             break;
             
           default:
-            NSString* s = [NSString stringWithFormat:@"Could not add word %@, some error occurred (%d)", wordToAddRemove, result];
-            NSLog(@"%@", s);
+            NSLog(@"Could not add word %@, some error occurred (%d)", wordToAddRemove, result]);
             break;
         }
         
