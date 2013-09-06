@@ -63,9 +63,7 @@ NSString * const FleksySignatureKey = @"FleksySignatureKey";
   
   [self.view addSubview:textView];
   
-  self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(handleSave:)];
-  self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemUndo target:self action:@selector(handleUndo:)];
-  
+  self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleDone target:self action:@selector(handleSave:)];
 }
 
 - (void)didReceiveMemoryWarning
@@ -86,11 +84,6 @@ NSString * const FleksySignatureKey = @"FleksySignatureKey";
                                                       object:self userInfo:[NSDictionary dictionaryWithObject:[self.signature copy] forKey:FleksySignatureKey]];
   
   [self.signatureDelegate dismissSignatureVC];
-}
-
-- (void)handleUndo:(id)sender {
-  
-  [textView setText:self.signature];
 }
 
 @end

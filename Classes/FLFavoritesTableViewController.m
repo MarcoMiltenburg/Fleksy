@@ -127,7 +127,6 @@ ABAddressBookRef addressBook;
 
   }
   
-  //self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBar target:self action:@selector(backTapped:)];
   self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleDone  target:self action:@selector(backTapped:)];
   
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleFavoritesDidFinishAutomaticReplinish:) name:FleksyFavoritesDidFinishAutomaticReplinishNotification object:nil];
