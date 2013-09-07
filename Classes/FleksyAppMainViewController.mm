@@ -1960,7 +1960,7 @@
     [self reloadFavorites];
   }
 
-#ifndef RELEASE
+#if 0
   NSLog(@"Favorites before strip: %@", favorites);
   NSLog(@"SPEED DIAL before strip: %@", FLEKSY_APP_SETTING_SPEED_DIAL_1);
   
@@ -1971,6 +1971,13 @@
   
   [self updateFavoriteStorage:favorites];
 #endif
+  
+  NSString* test = [[NSUserDefaults standardUserDefaults] objectForKey:@"FLEKSY_APP_SETTING_SPEED_DIAL_1"];
+  if (test == nil) {
+    NSLog(@"Found nil FLEKSY_APP_SETTING_SPEED_DIAL_1, setting to empty string to prevent magic crash\n");
+    [[NSUserDefaults standardUserDefaults] setObject:@""
+                                              forKey:@"FLEKSY_APP_SETTING_SPEED_DIAL_1"];
+  }
 
   if (!FLEKSY_APP_SETTING_SAVE_TEXT_BUFFER) {
     [self unSaveText];
