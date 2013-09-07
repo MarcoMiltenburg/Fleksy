@@ -236,7 +236,7 @@
   
   self.state = UIGestureRecognizerStateBegan;
   
-  printf("  touchesBegan.TOUCHES = %s", touches.description.UTF8String);
+  NSLog(@"  touchesBegan.TOUCHES = %@", touches.description);
   
   //can choose if we want a small delay to eliminate some popups on quick swipes
   for (UITouch* touch in touches) {

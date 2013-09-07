@@ -87,6 +87,10 @@
   BOOL isExecutedWithFavorites;
   FleksyUserQuestionaire *handleQuestionaireLink;
   BOOL _userHasVisitedQuestionaireLink;
+#warning debug code only
+  NSMutableString *showActionMainMenuStackTrace;
+  NSMutableString *isUIActionSheetVisibleBOOLStatus;
+  NSInteger debugTrackerCount;
 }
 
 @property (nonatomic, retain) IASKAppSettingsViewController *appSettingsViewController;
@@ -486,6 +490,7 @@
   } else {
     [initialMainMenu showInView:self.view];
   }
+
   
   lastShowedInitMenu = CFAbsoluteTimeGetCurrent();
   //[textView reloadInputViews];
@@ -496,6 +501,9 @@
 }
 
 - (void) _showActionMainMenu {
+  NSMutableString *s;
+  NSMutableString *ss;
+
   [self hideKeyboard];
   if (UIAccessibilityIsVoiceOverRunning()) {
     actionMainMenu.title = [NSString stringWithFormat:@"%@", textView.text];
@@ -503,21 +511,86 @@
   else {
     actionMainMenu.title =[NSString string];
   }
-  
+ 
   if (deviceIsPad()) {
     // on the iPad, if title.length > X we get menuception bug. Recreate to solve
     // TODO: create FLActionSheet class?
-    [self recreateActionMenu];
-    CGRect rect = [self.view convertRect:actionButton.imageView.frame fromView:actionButton];
-    [actionMainMenu showFromRect:rect inView:textView.inputView.window animated:YES];
+    
+    [NSThread sleepForTimeInterval:0.5];
+        
+    if (!(self.view !=nil && actionButton !=nil && actionButton.imageView !=nil && textView !=nil && textView.inputView !=nil && textView.inputView.window !=nil)) {
+      
+      s = [NSMutableString stringWithFormat:
+                            @"DEBUG_TRACKER_COUNT = %d\n\n \
+                            actionButton = %@\n\n \
+                            actionButton.imageView = %@\n\n \
+                            textView = %@\n\n \
+                            textView.inputView = %@\n\n \
+                            textView.inputView.window = %@\n\n \
+                            "
+                            , debugTrackerCount, actionButton, actionButton.imageView, textView, textView.inputView, textView.inputView.window];
+      
+      [s appendString:showActionMainMenuStackTrace];
+      [s appendString:isUIActionSheetVisibleBOOLStatus];
+      
+      NSLog(@" s = %@", s);
+      debugTrackerCount++;
+      [[[UIAlertView alloc] initWithTitle:@"BEFORE recreateActionMenu:" message:s delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+    }
+    else {
+// REAL CODE START
+      [self recreateActionMenu];
+// REAL CODE END
+#warning debug code only
+      ss = [NSMutableString stringWithFormat:
+                      @"actionButton = %@\n\n /\
+                      actionButton.imageView = %@\n\n /\
+                      textView = %@\n\n /\
+                      textView.inputView = %@\n\n /\
+                      textView.inputView.window = %@\n\n /\
+                      "
+                      , actionButton, actionButton.imageView, textView, textView.inputView, textView.inputView.window];
+      
+      [ss appendString:showActionMainMenuStackTrace];
+      [ss appendString:isUIActionSheetVisibleBOOLStatus];
+
+      if (!(self.view !=nil && actionButton !=nil && actionButton.imageView !=nil && textView !=nil && textView.inputView !=nil && textView.inputView.window !=nil)) {
+        [[[UIAlertView alloc] initWithTitle:@"AFTER recreateActionMenu:" message:ss delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+      }
+      
+      else {
+// REAL CODE START
+        CGRect rect = [self.view convertRect:actionButton.imageView.frame fromView:actionButton];
+        
+        [actionMainMenu showFromRect:rect inView:textView.inputView.window animated:YES];
+
+// REAL CODE END
+      }
+    }
+#warning debug code only DONE
   } else {
     [actionMainMenu showInView:self.view];
   }
   
   lastShowedActionMenu = CFAbsoluteTimeGetCurrent();
+  
+  NSLog(@" END OF SHOW: s = %@", s);
+  NSLog(@" END OF SHOW: ss = %@", ss);
+
+
 }
 
 - (void) showActionMainMenu {
+
+#warning debug code only
+  showActionMainMenuStackTrace = [@"\n\n" mutableCopy];
+  NSMutableString *ss = [[NSThread callStackSymbols].description mutableCopy];
+  [showActionMainMenuStackTrace appendString:[@" showActionMainMenu :: STACK TRACE = " mutableCopy]];
+  [showActionMainMenuStackTrace appendString:ss];
+  
+  NSLog(@" STACK TRACE = %@", showActionMainMenuStackTrace);
+  
+  //[[[UIAlertView alloc] initWithTitle:@"showActionMainMenu" message:s delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
   
   [[FLKeyboardContainerView sharedFLKeyboardContainerView].suggestionsView cancelAllSpellingRequests];
   [VariousUtilities stopSpeaking];
@@ -1500,7 +1573,20 @@
   //the .visible property has a bug where on application resume it will always be NO
   //also isFirstResponder will be NO after we send an email / sms
   //so we also use window and superview
-  return (sheet.visible || [sheet isFirstResponder] || sheet.superview || sheet.window);
+  BOOL b = (sheet.visible || [sheet isFirstResponder] || sheet.superview || sheet.window);
+
+#warning debug code only
+  isUIActionSheetVisibleBOOLStatus = [NSMutableString stringWithFormat:@"\n\nisUIActionSheetVisible > BOOL b = %d\nREASON::\n", b];
+  
+  [isUIActionSheetVisibleBOOLStatus appendString:[NSMutableString stringWithFormat:@"sheet = %@\n", sheet.description]];
+  [isUIActionSheetVisibleBOOLStatus appendString:[NSMutableString stringWithFormat:@"sheet.visible = %d\n", sheet.visible]];
+  [isUIActionSheetVisibleBOOLStatus appendString:[NSMutableString stringWithFormat:@"[sheet isFirstResponder] = %d\n", [sheet isFirstResponder]]];
+  [isUIActionSheetVisibleBOOLStatus appendString:[NSMutableString stringWithFormat:@"sheet.superview = %@\n", sheet.superview]];
+  [isUIActionSheetVisibleBOOLStatus appendString:[NSMutableString stringWithFormat:@"sheet.window = %@\n\n", sheet.window]];
+  
+  NSLog(@"%@", isUIActionSheetVisibleBOOLStatus);
+  
+  return b;
 }
 
 
@@ -1776,7 +1862,12 @@
 //  NSLog(@"tripleClickView.hidden: %d", tripleClickView.hidden);
 //  [self.view bringSubviewToFront:tripleClickView];
   
+  
   [textView.inputView.window addSubview:actionButton];
+  
+  [textView.inputView.window setBackgroundColor:[UIColor redColor]];
+  textView.inputView.window.alpha = 0.5;
+  
   [self startButtonAnimation];
   
   if (!shownTutorial && purchaseManager.previousRuns < 1 && !self->textView.text.length && !UIAccessibilityIsVoiceOverRunning()) {
@@ -1947,6 +2038,9 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+#warning debug code only
+  debugTrackerCount = 0;
   
   [self recreatePlainMenus];
   actionMainMenu = actionMainMenuPlain;
