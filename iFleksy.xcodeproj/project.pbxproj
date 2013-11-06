@@ -1199,6 +1199,7 @@
 				OTHER_LDFLAGS = "\"-all_load\"";
 				PRODUCT_NAME = "Fleksy Beta";
 				PROVISIONING_PROFILE = "";
+				SDKROOT = iphoneos6.1;
 				SEPARATE_STRIP = YES;
 				STRIP_INSTALLED_PRODUCT = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1231,6 +1232,7 @@
 				OTHER_LDFLAGS = "\"-all_load\"";
 				PRODUCT_NAME = FleksyDev;
 				PROVISIONING_PROFILE = "";
+				SDKROOT = iphoneos6.1;
 				SEPARATE_STRIP = YES;
 				STRIP_INSTALLED_PRODUCT = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1293,6 +1295,7 @@
 				);
 				OTHER_LDFLAGS = "\"-all_load\"";
 				PROVISIONING_PROFILE = "";
+				SDKROOT = iphoneos6.1;
 				SEPARATE_STRIP = YES;
 				STRIP_INSTALLED_PRODUCT = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1356,6 +1359,7 @@
 				OTHER_LDFLAGS = "\"-all_load\"";
 				PRODUCT_NAME = FleksyBETA;
 				PROVISIONING_PROFILE = "";
+				SDKROOT = iphoneos6.1;
 				SEPARATE_STRIP = YES;
 				STRIP_INSTALLED_PRODUCT = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
