@@ -692,10 +692,6 @@ float distributionFunction(float x) {
 }
 
 
-
-- (void) accelerometer:(UIAccelerometer *) accelerometer didAccelerate:(UIAcceleration *) acceleration {
-}
-
 - (void) applicationDidReceiveMemoryWarning:(UIApplication *) application {
   TestFlightLog(@"%@", @"applicationDidReceiveMemoryWarning");
   [TestFlight passCheckpoint:@"applicationDidReceiveMemoryWarning"];
