@@ -580,9 +580,9 @@ float distributionFunction(float x) {
   }
 #endif
   
-  if ([self checkForFleksyLibraryExpiration]) {
-    return;
-  }
+//  if ([self checkForFleksyLibraryExpiration]) {
+//    return;
+//  }
   
   [self applicationDidFinishLaunching:application loadServer:LOAD_SERVER];
 }
@@ -653,9 +653,9 @@ float distributionFunction(float x) {
   NSLog(@"applicationWillEnterForeground");
   [customInputView performSelector:@selector(handleSettingsChanged:) withObject:nil];
   
-  if ([self checkForFleksyLibraryExpiration]) {
-    return;
-  }
+//  if ([self checkForFleksyLibraryExpiration]) {
+//    return;
+//  }
   
   //[fleksyAppViewController.view setNeedsLayout];
 }
