@@ -150,7 +150,7 @@
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
-		1D6058910D05DD3D006BFB54 /* FleksyDev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FleksyDev.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D6058910D05DD3D006BFB54 /* FleksyVIDev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FleksyVIDev.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		28FD15070DC6FC5B0079059D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		29B97316FDCFA39411CA2CEA /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
@@ -452,7 +452,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1D6058910D05DD3D006BFB54 /* FleksyDev.app */,
+				1D6058910D05DD3D006BFB54 /* FleksyVIDev.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -957,7 +957,7 @@
 			);
 			name = iFleksy;
 			productName = OpenGL1;
-			productReference = 1D6058910D05DD3D006BFB54 /* FleksyDev.app */;
+			productReference = 1D6058910D05DD3D006BFB54 /* FleksyVIDev.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1153,7 +1153,7 @@
 				CLANG_WARN_EMPTY_BODY = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				FL_BUILD_NUMBER = "${FL_BUILDINFO_BUILD_NUMBER}";
-				FL_BUNDLE_ID = FleksyBETA;
+				FL_BUNDLE_ID = FleksyVIBETA;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"RELEASE=1",
 					"FL_BUILD_FOR_TESTFLIGHT=1",
@@ -1167,7 +1167,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
-				PRODUCT_NAME = Fleksy;
+				PRODUCT_NAME = FleksyVI;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
@@ -1197,7 +1197,7 @@
 					"\"$(SRCROOT)/Vendor/TestFlight\"",
 				);
 				OTHER_LDFLAGS = "\"-all_load\"";
-				PRODUCT_NAME = "Fleksy Beta";
+				PRODUCT_NAME = "FleksyVI Beta";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SEPARATE_STRIP = YES;
@@ -1230,7 +1230,7 @@
 					"\"$(SRCROOT)/Vendor/TestFlight\"",
 				);
 				OTHER_LDFLAGS = "\"-all_load\"";
-				PRODUCT_NAME = FleksyDev;
+				PRODUCT_NAME = FleksyVIDev;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SEPARATE_STRIP = YES;
@@ -1249,7 +1249,7 @@
 				CLANG_WARN_EMPTY_BODY = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				FL_BUILD_NUMBER = "${FL_BUILDINFO_BUILD_NUMBER}";
-				FL_BUNDLE_ID = Fleksy;
+				FL_BUNDLE_ID = FleksyVI;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"RELEASE=1",
 					"FL_BUILD_FOR_APP_STORE=1",
@@ -1263,7 +1263,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
-				PRODUCT_NAME = Fleksy;
+				PRODUCT_NAME = FleksyVI;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
@@ -1313,7 +1313,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				FL_BUILD_NUMBER = "${FL_BUILDINFO_BUILD_NUMBER}";
-				FL_BUNDLE_ID = FleksyBETA;
+				FL_BUNDLE_ID = FleksyVIBETA;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"FL_BUILD_FOR_BETA=1",
@@ -1326,7 +1326,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
-				PRODUCT_NAME = Fleksy;
+				PRODUCT_NAME = FleksyVI;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -1357,7 +1357,7 @@
 					"\"$(SRCROOT)/Vendor/TestFlight\"",
 				);
 				OTHER_LDFLAGS = "\"-all_load\"";
-				PRODUCT_NAME = FleksyBETA;
+				PRODUCT_NAME = FleksyVIBETA;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SEPARATE_STRIP = YES;
@@ -1377,7 +1377,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				FL_BUILD_NUMBER = "${FL_BUILDINFO_BUILD_NUMBER}";
-				FL_BUNDLE_ID = FleksyDEV;
+				FL_BUNDLE_ID = FleksyVIDEV;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"FL_BUILD_FOR_DEVELOPMENT=1",
@@ -1390,7 +1390,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
-				PRODUCT_NAME = Fleksy;
+				PRODUCT_NAME = FleksyVI;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				STRIP_INSTALLED_PRODUCT = NO;
