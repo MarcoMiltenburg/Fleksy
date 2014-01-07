@@ -66,15 +66,6 @@
 
 ////////////////////// BETA TESTING //////////////////////
 
-#define FLEKSY_EXPIRES !FL_BUILD_FOR_APPSTORE
-#if FLEKSY_EXPIRES
-#define FLEKSY_EXPIRES_YEAR 2013
-#define FLEKSY_EXPIRES_MONTH 12
-#define FLEKSY_EXPIRES_DAY 15
-#define FLEKSY_EXPIRES_HOUR 12
-#define FLEKSY_EXPIRES_MINUTE 0
-#endif
-
 ////////////////////// DEVELOPMENT LOGGING //////////////////////
 
 #ifdef RELEASE
