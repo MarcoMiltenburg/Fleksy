@@ -532,45 +532,6 @@ float distributionFunction(float x) {
 //}
 
 
-#if FLEKSY_EXPIRES
-
-- (NSDate*) getMagic {
-  NSCalendar* gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-  [gregorian setLocale:[NSLocale currentLocale]];
-  NSDateComponents* components = [[NSDateComponents alloc] init];
-  [components setYear:FLEKSY_EXPIRES_YEAR];
-  [components setMonth:FLEKSY_EXPIRES_MONTH];
-  [components setDay:FLEKSY_EXPIRES_DAY];
-  [components setHour:FLEKSY_EXPIRES_HOUR];
-  [components setMinute:FLEKSY_EXPIRES_MINUTE];
-  NSDate* result = [gregorian dateFromComponents:components];
-  return result;
-}
-
-- (BOOL) magicOK {
-  NSDate* now = [NSDate date];
-  NSDate* magic = [self getMagic];
-  NSTimeInterval interval = [now timeIntervalSinceDate:magic];
-  NSLog(@"now:   %@", now);
-  NSLog(@"magic: %@", magic);
-  NSLog(@"interval: %6f", interval);
-  return interval < 0;
-}
-
-#endif
-
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-#if FLEKSY_EXPIRES
-  if (![self magicOK]) {
-    exit(0);
-  }
-#endif
-#if FLEKSY_LIBRARY_EXPIRES
-  printf("Sending user to the AppStore\n\n");
-  [[UIApplication sharedApplication] openURL:[NSURL URLWithString:APP_STORE_LINK]];
-#endif
-}
-
 - (void) applicationDidFinishLaunching:(UIApplication *) application {
   [self applicationDidFinishLaunching:application loadServer:LOAD_SERVER];
 }
