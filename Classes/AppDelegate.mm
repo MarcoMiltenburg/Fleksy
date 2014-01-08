@@ -572,40 +572,7 @@ float distributionFunction(float x) {
 }
 
 - (void) applicationDidFinishLaunching:(UIApplication *) application {
-  
-//#if FLEKSY_EXPIRES
-//  if (![self magicOK]) {
-//    [[[UIAlertView alloc] initWithTitle:@"Beta expired" message:@"Your beta of Fleksy has expired!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-//    return;
-//  }
-//#endif
-  
-//  if ([self checkForFleksyLibraryExpiration]) {
-//    return;
-//  }
-  
   [self applicationDidFinishLaunching:application loadServer:LOAD_SERVER];
-}
-
-
-- (BOOL)checkForFleksyLibraryExpiration {
-#if FLEKSY_LIBRARY_EXPIRES
-  
-  NSLog(@" Now: <%f> Expires <%f>\n", [[NSDate date] timeIntervalSince1970], (float)EXPIRATION_DATE_IN_SECONDS);
-  
-  NSDate *expireDate = [NSDate dateWithTimeIntervalSince1970:EXPIRATION_DATE_IN_SECONDS];
-  NSDate *currentDate = [NSDate date];
-  
-  NSLog(@"Current Date: %s \nExpiration Date: %s \n", currentDate.description.UTF8String, expireDate.description.UTF8String);
-  
-  if ([currentDate timeIntervalSince1970] > EXPIRATION_DATE_IN_SECONDS){ // The Past
-    [[[UIAlertView alloc] initWithTitle:@"Fleksy Update" message:@"There are new features on the AppStore. Update now!" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil] show];
-    
-    return YES;
-  }
-#pragma unused(expireDate)
-#endif
-  return NO;
 }
 
 -(void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
