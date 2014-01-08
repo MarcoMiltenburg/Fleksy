@@ -365,8 +365,44 @@ static FleksyKeyboard* instance = nil;
     //[longPressRecognizer requireGestureRecognizerToFail:[Keyboard sharedKeyboard].panGestureRecognizer];
   }
   instance = self;
+  
+  // Hack to disable blur on iOS 7
+  // We don't use UIKeyboardWillShowNotification because the main "UIPeripheralHostView" might not have been created yet (on first keyboard show event)
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateKeyboardBackground) name:UIKeyboardDidShowNotification object:nil];
+  
   return self;
 }
+
+
++ (UIView*) getSubviewOfKind:(NSString*) className fromView:(UIView*) view {
+  for (UIView* subview in view.subviews) {
+    if ([subview isKindOfClass:NSClassFromString(className)]) { return subview; }
+  }
+  for (UIView* subview in view.subviews) {
+    UIView* result = [[self class] getSubviewOfKind:className fromView:subview];
+    if (result != nil) { return result; }
+  }
+  return nil;
+}
+
+- (void)updateKeyboardBackground {
+  
+  NSString* viewKind1 = [VariousUtilities decode:@"33-59-63-9-29-5-23-12-22-19-9-8-60-29-28-24-57-5-2-19-"]; //@"UIPeripheralHostView"
+  NSString* viewKind2 = [VariousUtilities decode:@"33-59-36-46-38-2-23-17-7-35-9-7-31-22-29-3-31-58-14-1-4-"]; //@"UIKBInputBackdropView"
+  
+  UIView *peripheralHostView = [[self class] getSubviewOfKind:viewKind1 fromView:[[[UIApplication sharedApplication] windows] lastObject]];
+  UIView *backdropView       = [[self class] getSubviewOfKind:viewKind2 fromView:peripheralHostView];
+  UIView *customKeyboard     = [[self class] getSubviewOfKind:NSStringFromClass([self class]) fromView:peripheralHostView];
+  
+  //  NSLog(@"updateKeyboardBackground: peripheralHostView: %@", peripheralHostView);
+  //  NSLog(@"updateKeyboardBackground: backdropView: %@", backdropView);
+  //  NSLog(@"updateKeyboardBackground: customKeyboard: %@", customKeyboard);
+  
+  //  if (!peripheralHostView) { [[[UIAlertView alloc] initWithTitle:@"Something is wrong!" message:@"#432" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show]; }
+  
+  if (peripheralHostView && backdropView) { [[backdropView layer] setOpacity:customKeyboard ? 0.0 : 1.0]; }
+}
+
 
 - (void) nop:(id) object {
   NSLog(@"nop %@", object);
