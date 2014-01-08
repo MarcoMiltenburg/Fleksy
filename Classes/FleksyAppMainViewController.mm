@@ -1197,6 +1197,10 @@
     } else {
       NSLog(@"button %u", buttonIndex);
     }
+  } else if (alertView == self->blindAppAlert) {
+    if (buttonIndex == 1) {
+      [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://fleksy.com/app"]];
+    }
   }
 }
 
@@ -1696,8 +1700,9 @@
   
 #if !TARGET_IPHONE_SIMULATOR
   if (purchaseManager.previousRuns < 1 && !UIAccessibilityIsVoiceOverRunning()) {
-    blindAppAlert = [[UIAlertView alloc] initWithTitle:@"Happy Typing!"
-                                               message:@"\nThousands of sighted and blind users enjoy typing with Fleksy.\n\nClose your eyes and try typing! :)" delegate:nil cancelButtonTitle:@"Cool!" otherButtonTitles:nil];
+    blindAppAlert = [[UIAlertView alloc] initWithTitle:@"Warning!"
+                                               message:@"\nThis version of Fleksy is intended for VoiceOver users. If you are not visually impaired you should download the non-VoiceOver version"
+                                              delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:@"Download", nil];
   
   NSLog(@"%s BEFORE blindAppAlert",__PRETTY_FUNCTION__);
   
