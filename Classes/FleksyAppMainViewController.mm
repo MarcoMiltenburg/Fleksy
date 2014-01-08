@@ -97,6 +97,10 @@
 
 @synthesize appSettingsViewController;
 
+- (BOOL)prefersStatusBarHidden {
+  return YES;
+}
+
 #pragma mark - Settings
 
 - (IASKAppSettingsViewController*)appSettingsViewController {

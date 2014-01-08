@@ -49,19 +49,19 @@
 //#define APP_STORE 0
 
 #ifdef FL_BUILD_FOR_DEVELOPMENT
-#define FLEKSY_PRODUCT_NAME @"FleksyDev"
+#define FLEKSY_PRODUCT_NAME @"FleksyVIDev"
 #endif
 
 #ifdef FL_BUILD_FOR_BETA
-#define FLEKSY_PRODUCT_NAME @"FleksyBETA"
+#define FLEKSY_PRODUCT_NAME @"FleksyVIBETA"
 #endif
 
 #ifdef FL_BUILD_FOR_TESTFLIGHT
-#define FLEKSY_PRODUCT_NAME @"Fleksy Beta"
+#define FLEKSY_PRODUCT_NAME @"FleksyVI Beta"
 #endif
 
 #ifdef FL_BUILD_FOR_APP_STORE
-#define FLEKSY_PRODUCT_NAME @"Fleksy"
+#define FLEKSY_PRODUCT_NAME @"FleksyVI"
 #endif
 
 ////////////////////// BETA TESTING //////////////////////
