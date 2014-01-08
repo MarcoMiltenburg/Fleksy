@@ -7,7 +7,6 @@
 
 #import "FleksyKeyboard.h"
 #import <UIKit/UIResponder.h>
-#import "HookingUtilities.h"
 #import "FileManager.h"
 #import "UITouchManager.h"
 #import "AppDelegate.h"
@@ -31,7 +30,6 @@
 #import "FLTouchEventInterceptor.h"
 #endif
 
-static BOOL webviewSupportEnabled = NO;
 static FleksyKeyboard* instance = nil;
 
 @interface FleksyKeyboard (Private)
@@ -922,18 +920,6 @@ static FleksyKeyboard* instance = nil;
   self->hasFinishedLoading = NO;
   [keyboardContainerView.typingController forceLoad];
 }
-
-+ (void) enableFleksyForWebViews {
-  if (webviewSupportEnabled) {
-    NSLog(@"webview support already enabled");
-    return;
-  }
-  [[HookingUtilities sharedHookingUtilities] swapMethodNamed:@"inputView" inClassNamed:@"UIWebBrowserView" withCustomMethodNamed:@"UIWebBrowserView_inputView" inClassNamed:@"FleksyKeyboard"];
-  [[HookingUtilities sharedHookingUtilities] swapMethodNamed:@"inputAccessoryView" inClassNamed:@"UIWebBrowserView" withCustomMethodNamed:@"UIWebBrowserView_inputAccessoryView" inClassNamed:@"FleksyKeyboard"];
-  webviewSupportEnabled = YES;
-  NSLog(@"webview support enabled");
-}
-
 
 //- (void) setListener:(id<FleksyKeyboardListener>) theListener {
 //  listener = theListener;

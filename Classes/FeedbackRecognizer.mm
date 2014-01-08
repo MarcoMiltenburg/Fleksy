@@ -231,6 +231,7 @@
 
 - (void) touchesBegan:(NSSet *) touches withEvent:(UIEvent *) event {
   //NSLog(@"touches began FeedbackRecognizer! %d", [touches count]);
+  for (UITouch* touch : touches) { [touch updateInTouchManager]; }
   
   [[FLKeyboardContainerView sharedFLKeyboardContainerView].suggestionsView cancelAllSpellingRequests];
   
@@ -304,6 +305,7 @@
 
 - (void) touchesMoved:(NSSet *) touches withEvent:(UIEvent *) event {
   //NSLog(@"touches moved FeedbackRecognizer! %d", [touches count]);
+  for (UITouch* touch : touches) { [touch updateInTouchManager]; }
   
   self.state = UIGestureRecognizerStateChanged;
   
@@ -398,6 +400,7 @@
   }
   [self touchesEnded:touches];
   
+  for (UITouch* touch : touches) { [touch updateInTouchManager]; }
   //self.state = UIGestureRecognizerStateEnded;
 }
 
@@ -415,6 +418,7 @@
   }
   
   [self touchesEnded:touches];
+  for (UITouch* touch : touches) { [touch updateInTouchManager]; }
   //[self.nextResponder touchesCancelled:touches withEvent:event];
 }
 

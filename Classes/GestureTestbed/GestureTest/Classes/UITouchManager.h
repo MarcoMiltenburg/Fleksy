@@ -47,6 +47,7 @@ typedef enum {
 @property (readonly) NSTimeInterval timeSinceTouchdown;
 - (CGPoint) initialLocationInView:(UIView*) view;
 - (float) distanceSinceStartInView:(UIView*) view;
+- (void) updateInTouchManager;
 #if UITOUCH_STORE_PATH
 @property (readonly) NSArray* path;
 #endif
@@ -63,16 +64,12 @@ typedef enum {
 + (UITouchManager*) sharedUITouchManager;
 
 - (void) checkTouch:(UITouch*) touch forEndTimestamp:(NSTimeInterval) timestamp;
-- (NSMutableArray*) removeTouch:(UITouch*) touch fromDealloc:(BOOL) fromDealloc;
+- (NSMutableArray*) removeTouch:(UITouch*) touch;
 
 @property (readonly) NSMutableDictionary* touchWindows;
 @property (readonly) NSMutableDictionary* touchPaths;
 @property (readonly) NSMutableDictionary* touchTags;
 @property (readonly) NSMutableDictionary* touchDidFeedbacks;
 @property (readwrite) NSTimeInterval lastTouchTimestamp;
-
-@property (readonly) IMP UITouch_setTimestampImplementation;
-@property (readonly) IMP UITouch_setLocationImplementation;
-@property (readonly) IMP UITouch_dealloc;
 
 @end

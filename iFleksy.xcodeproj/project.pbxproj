@@ -20,7 +20,6 @@
 		2E146A9C1559EE7F00B4A734 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E146A9B1559EE7F00B4A734 /* AudioToolbox.framework */; };
 		2E1E745415C871BB0029E761 /* MyTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E1E745315C871BB0029E761 /* MyTextView.m */; };
 		2E24C0D01473ED010056B137 /* FleksyKeyboard.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2E24C0CF1473ED010056B137 /* FleksyKeyboard.mm */; };
-		2E24C0D314740D0F0056B137 /* HookingUtilities.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2E24C0D214740D0E0056B137 /* HookingUtilities.mm */; };
 		2E42CBE611D5456900409C5E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E42CBE511D5456800409C5E /* CoreGraphics.framework */; };
 		2E4727AF14F8A78E00416BF4 /* CustomSegmentedControl.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2E4727AE14F8A78E00416BF4 /* CustomSegmentedControl.mm */; };
 		2E52C3ED14C10DA9009AB01B /* FeedbackRecognizer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2E52C3EC14C10DA9009AB01B /* FeedbackRecognizer.mm */; };
@@ -29,7 +28,6 @@
 		2E63D06815F56CAD00837586 /* CircleUIView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2E63D06715F56CAD00837586 /* CircleUIView.mm */; };
 		2E63D07015F670A900837586 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E63D06F15F670A900837586 /* CoreText.framework */; };
 		2E68687E12026BA200AC7F4F /* libobjc.A.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E68687D12026BA200AC7F4F /* libobjc.A.dylib */; };
-		2E6965A816C07A010018ACA9 /* UITouchManagerHooks.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2E6965A716C07A010018ACA9 /* UITouchManagerHooks.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		2E6965AC16C1967B0018ACA9 /* menu_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E6965AA16C1967B0018ACA9 /* menu_blue.png */; };
 		2E6965AF16C1E7F50018ACA9 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E6965AE16C1E7F50018ACA9 /* Accounts.framework */; };
 		2E7404FF165D9CCD00C8B2C9 /* FleksyClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E7404FE165D9CCD00C8B2C9 /* FleksyClient.cpp */; };
@@ -179,8 +177,6 @@
 		2E1E745215C871BA0029E761 /* MyTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTextView.h; sourceTree = "<group>"; };
 		2E1E745315C871BB0029E761 /* MyTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTextView.m; sourceTree = "<group>"; };
 		2E24C0CF1473ED010056B137 /* FleksyKeyboard.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FleksyKeyboard.mm; sourceTree = "<group>"; };
-		2E24C0D114740D0E0056B137 /* HookingUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HookingUtilities.h; path = Classes/HookingUtilities.h; sourceTree = "<group>"; };
-		2E24C0D214740D0E0056B137 /* HookingUtilities.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = HookingUtilities.mm; path = Classes/HookingUtilities.mm; sourceTree = "<group>"; };
 		2E42CBE511D5456800409C5E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		2E4727AD14F8A78E00416BF4 /* CustomSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomSegmentedControl.h; sourceTree = "<group>"; };
 		2E4727AE14F8A78E00416BF4 /* CustomSegmentedControl.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CustomSegmentedControl.mm; sourceTree = "<group>"; };
@@ -195,8 +191,6 @@
 		2E63D06F15F670A900837586 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		2E662BAA1548DEF100643ECA /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		2E68687D12026BA200AC7F4F /* libobjc.A.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libobjc.A.dylib; path = usr/lib/libobjc.A.dylib; sourceTree = SDKROOT; };
-		2E6965A716C07A010018ACA9 /* UITouchManagerHooks.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = UITouchManagerHooks.mm; sourceTree = "<group>"; };
-		2E6965A916C07A8D0018ACA9 /* UITouchManagerHooks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITouchManagerHooks.h; sourceTree = "<group>"; };
 		2E6965AA16C1967B0018ACA9 /* menu_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_blue.png; sourceTree = "<group>"; };
 		2E6965AE16C1E7F50018ACA9 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		2E7404FD165D9CCD00C8B2C9 /* FleksyClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FleksyClient.h; sourceTree = "<group>"; };
@@ -577,8 +571,6 @@
 				2EAC83B616D6C73400D44A29 /* UILongPressGestureRecognizer2.mm */,
 				2EC4E84C166D3314009D3E39 /* UITouchManager.h */,
 				2EC4E84D166D3314009D3E39 /* UITouchManager.mm */,
-				2E6965A916C07A8D0018ACA9 /* UITouchManagerHooks.h */,
-				2E6965A716C07A010018ACA9 /* UITouchManagerHooks.mm */,
 			);
 			name = GestureTestbed;
 			path = GestureTestbed/GestureTest/Classes;
@@ -945,8 +937,6 @@
 			children = (
 				2E7EBFE11676BF2800DAB9BB /* FileManager.h */,
 				2E7EBFE21676BF2800DAB9BB /* FileManager.mm */,
-				2E24C0D114740D0E0056B137 /* HookingUtilities.h */,
-				2E24C0D214740D0E0056B137 /* HookingUtilities.mm */,
 				2E8500881588363E00FF6A4B /* DiagnosticsManager.h */,
 				2E8500891588363E00FF6A4B /* DiagnosticsManager.mm */,
 				2E7EBFDE1676BEF400DAB9BB /* VariousUtilities.h */,
@@ -1139,7 +1129,6 @@
 				2EDB469011DA95B40057E60D /* FLTypingController_iOS.mm in Sources */,
 				2EBF199011EAF9AC00C7B0F1 /* FLSuggestionsView.mm in Sources */,
 				2E24C0D01473ED010056B137 /* FleksyKeyboard.mm in Sources */,
-				2E24C0D314740D0F0056B137 /* HookingUtilities.mm in Sources */,
 				2E9138C114A543B200186EB6 /* CustomScrollView.mm in Sources */,
 				2E804A4A14AE69CA00E0EC59 /* FleksyAppMainViewController.mm in Sources */,
 				2E896DC714BAC9EA0098FD4F /* FleksyClient_IPC.mm in Sources */,
@@ -1172,7 +1161,6 @@
 				1887E3A3168901B400A8A111 /* KSLabel.m in Sources */,
 				2EC0B6D5168CE0B1005AD155 /* StringConversion.mm in Sources */,
 				2EA3E84616964AA200BC54A4 /* MultipartSpeechSynthesizer.mm in Sources */,
-				2E6965A816C07A010018ACA9 /* UITouchManagerHooks.mm in Sources */,
 				2EAC83B716D6C73400D44A29 /* UILongPressGestureRecognizer2.mm in Sources */,
 				2E9A140A16DC36F200E9726B /* MyTextChecker.mm in Sources */,
 				6139A7F1170A06BE00FBDB02 /* AFHTTPClient.mm in Sources */,

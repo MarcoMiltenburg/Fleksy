@@ -8,13 +8,6 @@
 
 #import "UITouchManager.h"
 #import "SynthesizeSingleton.h"
-#import "MathFunctions.h"
-#import "HookingUtilities.h"
-
-#import <objc/runtime.h>
-
-#define SET_LOCATION_METHOD @"_setLocationInWindow:resetPrevious:"
-#define SET_TIMESTAMP_METHOD @"setTimestamp:"
 
 @implementation PathPoint
 
@@ -38,10 +31,6 @@
 
 @synthesize location, timestamp, notificationTime, phase;
 
-@end
-
-@interface UITouch (Private)
-//@property int phase;
 @end
 
 @implementation UITouchManager
@@ -69,23 +58,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UITouchManager)
     touchPaths        = [[NSMutableDictionary alloc] init];
 #endif
     
-    [[HookingUtilities sharedHookingUtilities] swapMethodNamed:SET_LOCATION_METHOD inClassNamed:@"UITouch"
-                                         withCustomMethodNamed:SET_LOCATION_METHOD inClassNamed:@"UITouchManagerHooks"];
-    
-    [[HookingUtilities sharedHookingUtilities] swapMethodNamed:SET_TIMESTAMP_METHOD inClassNamed:@"UITouch"
-                                         withCustomMethodNamed:SET_TIMESTAMP_METHOD inClassNamed:@"UITouchManagerHooks"];
-    
-    [[HookingUtilities sharedHookingUtilities] swapMethodNamed:@"dealloc"       inClassNamed:@"UITouch"
-                                         withCustomMethodNamed:@"customDealloc" inClassNamed:@"UITouchManagerHooks"];
-    
-    
-    UITouch_setLocationImplementation  = [[HookingUtilities sharedHookingUtilities] originalMethodNamed:SET_LOCATION_METHOD  inClass:[UITouch class]];
-    UITouch_setTimestampImplementation = [[HookingUtilities sharedHookingUtilities] originalMethodNamed:SET_TIMESTAMP_METHOD inClass:[UITouch class]];
-    UITouch_dealloc                    = [[HookingUtilities sharedHookingUtilities] originalMethodNamed:@"dealloc"    inClass:[UITouch class]];
-    
-//    NSLog(@"UITouch_setLocationImplementation: %p", UITouch_setLocationImplementation);
-//    NSLog(@"UITouch_setTimestampImplementation: %p", UITouch_setTimestampImplementation);
-//    NSLog(@"UITouch_dealloc: %p", UITouch_dealloc);
   }
   return self;
 }
@@ -116,13 +88,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UITouchManager)
 }
 
 
-- (NSMutableArray*) removeTouch:(UITouch*) touch fromDealloc:(BOOL) fromDealloc {
+- (NSMutableArray*) removeTouch:(UITouch*) touch {
   
   //NSLog(@"removeTouch: %p", touch);
   
   NSValue* key = [NSValue valueWithPointer:(const void*) touch];
   if (self.touchTags.count > 300) {
-    NSLog(@"removeTouch %p fromDealloc: %d, knows: %p, count: %d", touch, fromDealloc, [self.touchTags objectForKey:key], self.touchTags.count);
+    NSLog(@"removeTouch %p knows: %p, count: %d", touch, [self.touchTags objectForKey:key], self.touchTags.count);
   }
   //seems that this line alone is enough to cause extra release messages to be sent. ARC, __bridged ??
   //UITouch* touch = (UITouch*) self;
@@ -161,8 +133,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UITouchManager)
   return firstPoint.location;
 }
 
-@synthesize UITouch_setTimestampImplementation, UITouch_setLocationImplementation, UITouch_dealloc;
-
 @synthesize touchWindows, touchPaths, touchTags, touchDidFeedbacks;
 
 @synthesize lastTouchTimestamp;
@@ -182,12 +152,41 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UITouchManager)
   return self.timestamp - [UITouchManager initialTimestampForTouch:self];
 }
 
-//- (void) removeFromTouchManager {
-//  [[UITouchManager sharedUITouchManager] removeTouch:self fromDealloc:NO];
-//}
+- (void) updateInTouchManager {
+  
+  if (self.phase == UITouchPhaseBegan) {
+    
+    NSValue* key = [NSValue valueWithPointer:(const void*) self];
+    
+    [UITouchManager initTouch:self];
+    [UITouchManager sharedUITouchManager].lastTouchTimestamp = self.timestamp;
+    [[UITouchManager sharedUITouchManager].touchWindows setObject:self.window forKey:key];
+    
+    
+#if UITOUCH_STORE_PATH
+    NSMutableArray* path = [[NSMutableArray alloc] init];
+    [[UITouchManager sharedUITouchManager].touchPaths setObject:path forKey:key];
+#endif
+    
+  }
+  
+#if UITOUCH_STORE_PATH
+  
+  [[UITouchManager sharedUITouchManager] checkTouch:self forEndTimestamp:self.timestamp];
+  
+  //we need to do this here as well as in _setLocationInWindow. _setLocationInWindow might (or will) not be called on ended/cancelled,
+  // and here the location is not yet updated. Lifecycle seems to be set time/location, time/location, ... time on end
+  if (self.phase == UITouchPhaseEnded || self.phase == UITouchPhaseCancelled) {
+    [[UITouchManager sharedUITouchManager] removeTouch:self];
+  }
+#endif
+  
+
+}
+
 
 //takes about 35 usec on iPhone4S
-- (CGPoint) initialLocationInView:(UIView*) view {  
+- (CGPoint) initialLocationInView:(UIView*) view {
   //NSLog(@"UITouch %08x CALL: initialLocationInView: %@", self, view);
   CGPoint initialWindowLocation = [UITouchManager initialLocationForTouch:self];
   //NSLog(@"UITouch %08x: initialWindowLocation: %@, self.window: %@", self, NSStringFromCGPoint(initialWindowLocation), self.window);
@@ -202,6 +201,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UITouchManager)
   }
   CGPoint result = [theWindow convertPoint:initialWindowLocation toView:view];
   return result;
+}
+
+#define FLEKSY_SMALL_VALUE 0.0001f
+
+static float distanceOfPoints(CGPoint p1, CGPoint p2) {
+  float dx = p1.x - p2.x;
+  float dy = p1.y - p2.y;
+  float result = hypotf(dx, dy);
+  return((fabsf(result) < FLEKSY_SMALL_VALUE ) ? 0.0f : result);
 }
 
 - (float) distanceSinceStartInView:(UIView*) view {
@@ -225,7 +233,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UITouchManager)
 - (UITouchType) tag {
   NSNumber* number = [[UITouchManager sharedUITouchManager].touchTags objectForKey:[NSValue valueWithPointer:(const void*)self]];
   if (!number) {
-    [NSException raise:@"UITouch.tag" format:@"not found, touch: %@", self];
+    //[NSException raise:@"UITouch.tag" format:@"not found, touch: %@", self];
+    //TODO: Re-visit TouchManagager tag == nil
+    NSLog(@" Would throw NSException raise: UITouch.tag format: not found, touch: %@", self);
   }
   return (UITouchType) [number intValue];
 }
@@ -242,6 +252,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UITouchManager)
   }
   return [number boolValue];
 }
+
+
 
 
 @end

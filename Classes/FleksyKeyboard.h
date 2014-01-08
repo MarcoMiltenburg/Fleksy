@@ -19,9 +19,6 @@
 // Will initiate the loading of the dictionary. Clients that wish to do this asynchronously (non-blocking) should use performSelectorInBackground
 - (void) startLoading;
 
-// Enable experimental UIWebView support
-+ (void) enableFleksyForWebViews;
-
 // The current height of the keyboard
 @property (readonly) float activeHeight;
 @property (readonly) float visualHeight;

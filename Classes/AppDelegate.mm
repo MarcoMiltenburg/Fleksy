@@ -13,8 +13,6 @@
 
 #import "FileManager.h"
 
-#import "HookingUtilities.h"
-
 #import "UIRotorRecognizer.h"
 #import <QuartzCore/QuartzCore.h>
 #include "Crashlytics/Crashlytics.h"
@@ -383,7 +381,6 @@ float distributionFunction(float x) {
   
   [self voiceOverStatusChanged:nil];
   
-  //[FleksyKeyboard enableFleksyForWebViews];
   [self startLoadingProgressTimer];
   
   // Require load on mainThread, i.e. UIKit objects.
