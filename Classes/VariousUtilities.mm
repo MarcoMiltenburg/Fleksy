@@ -32,6 +32,8 @@
 static int logs = 0;
 static float totalLogTime = 0;
 
+#define USE_PRIVATE_TEXT_TO_SPEECH 0
+
 static NSCharacterSet* alphaSet = nil;
 static NSCharacterSet* alphaInvertedSet = nil;
 static NSString* emptyStopSpeakString = nil;
@@ -315,6 +317,7 @@ BOOL isRingerMuted() {
     return;
   }
   
+#if USE_PRIVATE_TEXT_TO_SPEECH
   //@"VSSpeechSynthesizer"
   talkClassName = [VariousUtilities decode:@"34-33-60-28-10-9-4-12-32-24-6-16-28-23-28-5-21-9-21-"];
   //@"startSpeakingString:"
@@ -326,7 +329,9 @@ BOOL isRingerMuted() {
   //NSLog(@"talkClassMethod: %@/%@/%@", talkClassName, talkMethodNameSimple, talkMethodNameWithLanguageCode);
 
   speechEngine = [[NSClassFromString(talkClassName) alloc] init];
-  
+#else
+  speechEngine = nil;
+#endif
   newSpeechEngine = false;
   //[[[UIAlertView alloc] initWithTitle:@"SpeechEngine" message:@"Using old" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
   //NSLog(@"created speechEngine: %x", speechEngine);
@@ -411,6 +416,7 @@ BOOL isRingerMuted() {
       [speechEngine speakUtterance:utterance];
       return;
     }
+#if USE_PRIVATE_TEXT_TO_SPEECH
     // seems to be 0.5 to 4.0
     [speechEngine setRate:FLEKSY_APP_SETTING_SPEAKING_RATE];
     //NSLog(@"speechEngine rate: in %.3f, out %.3f minmax:<%.3f, %.3f>", rate, [speechEngine rate], [speechEngine minimumRate], [speechEngine maximumRate]);
@@ -459,7 +465,7 @@ BOOL isRingerMuted() {
     //[inv setArgument:&nilObject atIndex:3];
     [inv setArgument:&preferredLanguage atIndex:4];
     [inv invoke];
-    
+#endif
     
     //NSLog(@" > speak: %@ wasSpeaking: %d", string, wasSpeaking);
   }
@@ -616,7 +622,7 @@ BOOL isRingerMuted() {
 }
 
 + (void) vibrate {
-  notify_post("com.booleanmagic.HapticPro.pressed");
+  //notify_post("com.booleanmagic.HapticPro.pressed");
 }
 
 + (void) playTock {
