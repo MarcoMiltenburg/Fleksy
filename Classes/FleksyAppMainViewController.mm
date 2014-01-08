@@ -20,8 +20,7 @@
 #import "FLThemeManager.h"
 #import "FLNavigationController.h"
 
-//#define APP_STORE_LINK @"http://itunes.apple.com/us/app/fleksy/id520337246?mt=8&uo=4"
-#define IOS_DEVICE_REVIEW_LINK @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=520337246"
+#define IOS_DEVICE_REVIEW_LINK @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=793539091"
 
 #define IOS_LIMITATIONS_LINK @"http://fleksy.com/iOS-integration"
 

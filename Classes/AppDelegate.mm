@@ -25,15 +25,11 @@
 
 #import "FleksyAppMainViewController.h"
 
-
-
-//#define APP_STORE_LINK1 @"http://itunes.apple.com/us/app/fleksy/id520337246"
-//#define APP_STORE_LINK2 @"http://itunes.com/apps/fleksy"
 // Generic itunes link on the device
-#define APP_STORE_LINK @"itms-apps://itunes.apple.com/app/id520337246"
+#define APP_STORE_LINK @"itms-apps://itunes.apple.com/app/id793539091"
 
 // TODO: Do AppStore Lookup and parse to inform user of update:
-// http://itunes.apple.com/lookup?id=520337246
+// http://itunes.apple.com/lookup?id=793539091
 // http://charcoaldesign.co.uk/source/cocoa#iversion
 // https://github.com/nicklockwood/iVersion
 
