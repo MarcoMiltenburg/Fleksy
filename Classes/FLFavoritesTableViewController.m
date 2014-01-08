@@ -77,6 +77,10 @@ ABAddressBookRef addressBook;
 
 @implementation FLFavoritesTableViewController
 
+- (BOOL)prefersStatusBarHidden {
+  return YES;
+}
+
 @synthesize favorites = _favorites;
 @synthesize propertyType = _propertyType;
 

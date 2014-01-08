@@ -52,6 +52,10 @@ CGRect IASKCGRectSwap(CGRect rect);
 
 @implementation IASKAppSettingsViewController
 
+- (BOOL)prefersStatusBarHidden {
+  return YES;
+}
+
 @synthesize delegate = _delegate;
 @synthesize viewList = _viewList;
 @synthesize settingsReader = _settingsReader;
