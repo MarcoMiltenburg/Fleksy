@@ -22,10 +22,7 @@
 
 #define IOS_DEVICE_REVIEW_LINK @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=793539091"
 
-#define IOS_LIMITATIONS_LINK @"http://fleksy.com/iOS-integration"
-
-#define APPLE_EMAIL_SUBJECT @"Integration of Fleksy in iOS"
-#define APPLE_EMAIL_TEXT @"Dear Apple,\n\nI understand that due to current limitations on iOS, developers and users cannot change the standard keyboard.\n\nI have been using the new Fleksy keyboard on my iDevice and I wanted to voice my desire to have it as an available keyboard for system-wide usage.\n\nFleksy makes typing easy, fast and forgiving, without requiring the user to learn a new way of typing. I think it would make a great addition to iOS and would make using my device an even more fun, productive and satisfying experience. Here's the <a href=\"http://fleksy.com/?apple\">website</a>.\n\nI hope you will take this into consideration and bring Happy Typing to your devices!\n\nSincerely,\nHappy Fleksy user"
+#define IOS_LIMITATIONS_LINK @"http://fleksy.com/sdkVI"
 
 #define APP_STORE_LINK_TWITTER  @""
 #define APP_STORE_LINK_SMS      @""
@@ -401,7 +398,7 @@
 }
 
 - (NSString*) fleksyAppLink {
-  return [NSString stringWithFormat:@"<a href=\"%@\">Fleksy</a>", @"http://fleksy.com/app"];
+  return [NSString stringWithFormat:@"<a href=\"%@\">Fleksy</a>", @"http://fleksy.com/appVI"];
 }
 
 - (NSString*) makeFleksyLinksForText:(NSString*) text evenLowercase:(BOOL) evenLowercase {
@@ -1196,7 +1193,6 @@
     if (buttonIndex == 1) {
       [self writeAppStoreReview];
     } else if (buttonIndex == 2) {
-      //[self sendEmailToApple];
       [self readMoreAboutLimitations];
     } else {
       NSLog(@"button %u", buttonIndex);
@@ -1230,21 +1226,6 @@
   [TestFlight passCheckpoint:@"readMoreAboutLimitations"];
   
   [[UIApplication sharedApplication] openURL:[NSURL URLWithString:IOS_LIMITATIONS_LINK]];
-}
-
-- (void) sendEmailToApple {
-  NSArray* recipients;
-  if (UIAccessibilityIsVoiceOverRunning()) {
-    recipients = [NSArray arrayWithObjects:@"accessibility@apple.com", @"tcook@apple.com", nil];
-  } else {
-    recipients = [NSArray arrayWithObjects:@"tcook@apple.com", @"accessibility@apple.com", nil];
-  }
-  NSArray* cc = [NSArray arrayWithObject:@"integrate@fleksy.com"];
-  
-  NSString* text = [self makeFleksyLinksForText:APPLE_EMAIL_TEXT evenLowercase:NO];
-  text = [text stringByReplacingOccurrencesOfString:@"iDevice" withString:[UIDevice currentDevice].model];
-  
-  [self sendInAppMailTo:recipients cc:cc text:text subject:APPLE_EMAIL_SUBJECT signature:NO];
 }
 
 - (void) writeAppStoreReview {
@@ -1288,7 +1269,7 @@
       [subjectPrefixString appendString:@":: "];
     }
     
-    [self sendInAppMailTo:@"feedback@fleksy.com" useText:textView.text subjectPrefix:subjectPrefixString];
+    [self sendInAppMailTo:@"feedbackVI@fleksy.com" useText:textView.text subjectPrefix:subjectPrefixString];
   } else {
     [VariousUtilities performAudioFeedbackFromString:@"Thank you. Your feedback has been submitted"];
   }
