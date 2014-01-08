@@ -318,6 +318,8 @@ float distributionFunction(float x) {
                                
   NSLog(@"TotalVersionString: %@", [NSString stringWithFormat:@"%@-%@ (%@)", versionShort, version, apiVersionShort]);
 
+  [UIApplication sharedApplication].idleTimerDisabled = YES;
+  
   NSLog(@"END of applicationDidFinishLaunching, took %.6f", CFAbsoluteTimeGetCurrent() - startTime);
 #pragma unused(startTime)
 }
