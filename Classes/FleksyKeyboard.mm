@@ -773,7 +773,7 @@ static FleksyKeyboard* instance = nil;
     
   }
   
-  if (recognizer.state == UIGestureRecognizerStateEnded) {
+  if (recognizer.state == UIGestureRecognizerStateEnded || recognizer.state == UIGestureRecognizerStateCancelled) {
     
     if ([FLKeyboardView sharedFLKeyboardView].activeView.tag != recognizer.myTag) {
       NSLog(@"Long tap release on different keyboard than it started. Ignoring");
@@ -798,9 +798,7 @@ static FleksyKeyboard* instance = nil;
       
       //[self restoreKeyboardSize];
     }
-  }
   
-  if (recognizer.state == UIGestureRecognizerStateEnded || recognizer.state == UIGestureRecognizerStateCancelled) {
     [[FLKeyboardView sharedFLKeyboardView] disableQWERTYextraKeys];
     [actionRecognizer2Up clearTouches];
     [actionRecognizer2Down clearTouches];
