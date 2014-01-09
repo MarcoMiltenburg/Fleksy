@@ -220,14 +220,10 @@ float distributionFunction(float x) {
                           @NO, TFOptionLogToSTDERR, nil]];
   
 #ifdef FL_BUILD_FOR_APP_STORE
-  [TestFlight takeOff:@"91f69c10-d1a3-4e7a-905d-dea51af78a82"];
+  [TestFlight takeOff:@"02996727-f44e-4d01-8e28-770a1b6b5347"];
 #else
   printf("Fleksy TESTFLIGHT ONLY\n");
 //http://blog.goosoftware.co.uk/2012/04/18/unique-identifier-no-warnings/
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-  [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
-#pragma clang diagnostic pop
   [TestFlight takeOff:@"c71a4345-0f62-4435-bf92-fb68f1c20d3a"]; 
 #endif
 #endif
