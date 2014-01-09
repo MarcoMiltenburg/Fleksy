@@ -32,7 +32,6 @@
 		2E6965AF16C1E7F50018ACA9 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E6965AE16C1E7F50018ACA9 /* Accounts.framework */; };
 		2E7404FF165D9CCD00C8B2C9 /* FleksyClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E7404FE165D9CCD00C8B2C9 /* FleksyClient.cpp */; };
 		2E7C8FBD14F7253300E457AB /* SwipeFeedbackView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2E7C8FBC14F7253300E457AB /* SwipeFeedbackView.mm */; };
-		2E7CAA691594FD1E00F192BE /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E7CAA681594FD1E00F192BE /* StoreKit.framework */; };
 		2E7EBFDD1676BDB500DAB9BB /* Settings.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2E7EBFDA1676BDB500DAB9BB /* Settings.mm */; };
 		2E7EBFE01676BEF400DAB9BB /* VariousUtilities.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2E7EBFDF1676BEF400DAB9BB /* VariousUtilities.mm */; };
 		2E7EBFE51676BF2800DAB9BB /* FileManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2E7EBFE21676BF2800DAB9BB /* FileManager.mm */; };
@@ -196,7 +195,6 @@
 		2E7404FE165D9CCD00C8B2C9 /* FleksyClient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FleksyClient.cpp; sourceTree = "<group>"; };
 		2E7C8FBB14F7253300E457AB /* SwipeFeedbackView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwipeFeedbackView.h; sourceTree = "<group>"; };
 		2E7C8FBC14F7253300E457AB /* SwipeFeedbackView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SwipeFeedbackView.mm; sourceTree = "<group>"; };
-		2E7CAA681594FD1E00F192BE /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		2E7EBFB41676BBA900DAB9BB /* iFleksyInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = iFleksyInfo.plist; sourceTree = "<group>"; };
 		2E7EBFDA1676BDB500DAB9BB /* Settings.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Settings.mm; sourceTree = "<group>"; };
 		2E7EBFDB1676BDB500DAB9BB /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
@@ -416,7 +414,6 @@
 				2ECA1F48162362B30070F437 /* Twitter.framework in Frameworks */,
 				2EE39C2E161279E600B88B2E /* Social.framework in Frameworks */,
 				2E63D07015F670A900837586 /* CoreText.framework in Frameworks */,
-				2E7CAA691594FD1E00F192BE /* StoreKit.framework in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				28FD15080DC6FC5B0079059D /* QuartzCore.framework in Frameworks */,
@@ -524,7 +521,6 @@
 				2EC8F8E916372EC80088B5F8 /* CFNetwork.framework */,
 				2E63D06F15F670A900837586 /* CoreText.framework */,
 				2EE39C2D161279E600B88B2E /* Social.framework */,
-				2E7CAA681594FD1E00F192BE /* StoreKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				2E146A9B1559EE7F00B4A734 /* AudioToolbox.framework */,
