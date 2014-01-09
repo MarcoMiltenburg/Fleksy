@@ -15,7 +15,6 @@
 #import "UIGestureUtilities.h"
 #import "UITapGestureRecognizer2.h"
 #import "UITouchManager.h"
-#import "FLTouchEventInterceptor.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import "VariousUtilities.h"
 #import <QuartzCore/QuartzCore.h>

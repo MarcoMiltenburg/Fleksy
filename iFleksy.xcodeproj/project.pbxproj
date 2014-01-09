@@ -238,8 +238,6 @@
 		2EC4E837166D3314009D3E39 /* FLSwipeStatisticalAnalyzer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = FLSwipeStatisticalAnalyzer.mm; path = Classes/GestureTestbed/GestureTest/Classes/FLSwipeStatisticalAnalyzer.mm; sourceTree = SOURCE_ROOT; };
 		2EC4E838166D3314009D3E39 /* FLTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FLTouch.h; path = Classes/GestureTestbed/GestureTest/Classes/FLTouch.h; sourceTree = SOURCE_ROOT; };
 		2EC4E839166D3314009D3E39 /* FLTouch.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = FLTouch.mm; path = Classes/GestureTestbed/GestureTest/Classes/FLTouch.mm; sourceTree = SOURCE_ROOT; };
-		2EC4E83A166D3314009D3E39 /* FLTouchEventInterceptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FLTouchEventInterceptor.h; path = Classes/GestureTestbed/GestureTest/Classes/FLTouchEventInterceptor.h; sourceTree = SOURCE_ROOT; };
-		2EC4E83B166D3314009D3E39 /* FLTouchEventInterceptor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = FLTouchEventInterceptor.mm; path = Classes/GestureTestbed/GestureTest/Classes/FLTouchEventInterceptor.mm; sourceTree = SOURCE_ROOT; };
 		2EC4E83C166D3314009D3E39 /* MySwipeGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MySwipeGestureRecognizer.h; path = Classes/GestureTestbed/GestureTest/Classes/MySwipeGestureRecognizer.h; sourceTree = SOURCE_ROOT; };
 		2EC4E83D166D3314009D3E39 /* MySwipeGestureRecognizer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MySwipeGestureRecognizer.mm; path = Classes/GestureTestbed/GestureTest/Classes/MySwipeGestureRecognizer.mm; sourceTree = SOURCE_ROOT; };
 		2EC4E83E166D3314009D3E39 /* ScrollWheelGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScrollWheelGestureRecognizer.h; path = Classes/GestureTestbed/GestureTest/Classes/ScrollWheelGestureRecognizer.h; sourceTree = SOURCE_ROOT; };
@@ -542,8 +540,6 @@
 				2EC4E837166D3314009D3E39 /* FLSwipeStatisticalAnalyzer.mm */,
 				2EC4E838166D3314009D3E39 /* FLTouch.h */,
 				2EC4E839166D3314009D3E39 /* FLTouch.mm */,
-				2EC4E83A166D3314009D3E39 /* FLTouchEventInterceptor.h */,
-				2EC4E83B166D3314009D3E39 /* FLTouchEventInterceptor.mm */,
 				2EC4E83C166D3314009D3E39 /* MySwipeGestureRecognizer.h */,
 				2EC4E83D166D3314009D3E39 /* MySwipeGestureRecognizer.mm */,
 				2EC4E83E166D3314009D3E39 /* ScrollWheelGestureRecognizer.h */,

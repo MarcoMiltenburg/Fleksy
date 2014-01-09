@@ -25,11 +25,6 @@
 #define ALLOW_KB_FLICKUP_CHANGE 0
 #define SPACEBAR_HEIGHT (FLEKSY_APP_SETTING_SPACE_BUTTON ? (deviceIsPad() ? 75 : 50) : 0)
 
-#define USE_TOUCH_INTERCEPTOR 0
-#if USE_TOUCH_INTERCEPTOR
-#import "FLTouchEventInterceptor.h"
-#endif
-
 static FleksyKeyboard* instance = nil;
 
 @interface FleksyKeyboard (Private)
@@ -230,12 +225,7 @@ static FleksyKeyboard* instance = nil;
     feedbackRecognizer = [[FeedbackRecognizer alloc] initWithTarget:self action:@selector(handleFeedback:)];
     //feedbackRecognizer.delegate = keyboardContainerView;
     feedbackRecognizer.returnKeyLabel = @"\n";
-#if USE_TOUCH_INTERCEPTOR
-    [[FLTouchEventInterceptor sharedFLTouchEventInterceptor] addListener:feedbackRecognizer];
-    [self addGestureRecognizer:[FLTouchEventInterceptor sharedFLTouchEventInterceptor]];
-#else
     [self addGestureRecognizer:feedbackRecognizer];
-#endif
     
     //also keep a reference here
     keyboardContainerView.feedbackRecognizer = feedbackRecognizer;
@@ -256,12 +246,7 @@ static FleksyKeyboard* instance = nil;
     } else {
       debugRecognizer = [[DebugGestureRecognizer alloc] initWithTarget:self action:@selector(nop:)];
       keyboardContainerView->debugRecognizer = debugRecognizer;
-#if USE_TOUCH_INTERCEPTOR
-      [[FLTouchEventInterceptor sharedFLTouchEventInterceptor] addListener:debugRecognizer];
-      [self addGestureRecognizer:[FLTouchEventInterceptor sharedFLTouchEventInterceptor]];
-#else
       [self addGestureRecognizer:debugRecognizer];
-#endif
     }
     
     //    UIRotorRecognizer* rotor = [[UIRotorRecognizer alloc] initWithTarget:self action:@selector(rotorDetected:)];
