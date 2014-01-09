@@ -48,8 +48,6 @@ enum {
 
 
 extern BOOL deviceIsPad();
-extern BOOL isRingerMuted();
-
 
 extern UInt32 _sounds[kNumSounds];
 

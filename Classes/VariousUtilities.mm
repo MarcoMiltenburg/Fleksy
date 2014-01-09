@@ -74,12 +74,6 @@ BOOL deviceIsPad() {
   return [UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad;
 }
 
-BOOL isRingerMuted() {
-  id isRingerMuted = [[NSClassFromString(@"SBMediaController") performSelector:@selector(sharedInstance)] performSelector:@selector(isRingerMuted)];
-  return isRingerMuted != nil;
-}
-
-
 @implementation VariousUtilities
 
 // Load the framework resource bundle.

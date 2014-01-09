@@ -1279,6 +1279,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEPLOYMENT_POSTPROCESSING = NO;
+				FL_BUILDINFO_BUILD_NUMBER = "";
 				FL_VERSION_EXTRA = "-${FL_GIT_SHORTHASH}-${INSTALL_OWNER}";
 				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)\"";
 				GCC_PREFIX_HEADER = iFleksy_Prefix.pch;
@@ -1343,7 +1344,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Syntellia, Inc (3Q962663R2)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Syntellia, Inc (3Q962663R2)";
 				DEPLOYMENT_POSTPROCESSING = YES;
-				FL_BUILDINFO_BUILD_NUMBER = 455;
+				FL_BUILDINFO_BUILD_NUMBER = 459;
 				FL_VERSION_EXTRA = "";
 				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)\"";
 				GCC_PREFIX_HEADER = iFleksy_Prefix.pch;
