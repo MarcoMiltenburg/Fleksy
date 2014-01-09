@@ -14,7 +14,6 @@
 #import <Twitter/Twitter.h>
 #import <Accounts/Accounts.h>
 #import "FleksyTextView.h"
-#import "FLPurchaseManager.h"
 #import "FLFavoritesTableViewController.h"
 #import "AppDelegate.h"
 #import "FLSignatureViewController.h"
@@ -22,7 +21,7 @@
 #define FLEKSY_DIRECT_TOUCH 1
 
 @interface FleksyAppMainViewController : UIViewController<UIActionSheetDelegate, MFMessageComposeViewControllerDelegate, MFMailComposeViewControllerDelegate,
-                                                          FLPurchaseListener, UIWebViewDelegate, FleksyTextViewDelegate, FLFavoritesTVCDelegateProtocol,
+                                                          UIWebViewDelegate, FleksyTextViewDelegate, FLFavoritesTVCDelegateProtocol,
                                                           FLSignatureVCDelegate> {
 
   FleksyTextView* textView;
@@ -41,8 +40,6 @@
   UIAlertView* fleksyInOtherApps;
   
   NSString* replyTo;
-  
-  FLPurchaseManager* purchaseManager;
   
   //
   UIViewController* instructionsController;
@@ -71,7 +68,6 @@
 - (void) copyText;
 - (NSString *)saveText;
 - (void) unSaveText;
-
-@property (readonly) FLPurchaseManager* purchaseManager;
+- (void) incrementRuns;
 
 @end

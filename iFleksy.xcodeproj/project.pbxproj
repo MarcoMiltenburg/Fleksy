@@ -67,7 +67,6 @@
 		2EDB2DC311CBE7A200489CA8 /* FLKeyboardContainerView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2EDB2DC211CBE7A200489CA8 /* FLKeyboardContainerView.mm */; };
 		2EDB469011DA95B40057E60D /* FLTypingController_iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2EDB468F11DA95B40057E60D /* FLTypingController_iOS.mm */; };
 		2EE39C2E161279E600B88B2E /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EE39C2D161279E600B88B2E /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		2EE7C89015BDE30700307235 /* FLPurchaseManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2EE7C88F15BDE30700307235 /* FLPurchaseManager.mm */; };
 		2EED2F0B187D050B0070C68D /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EED2EF6187D050B0070C68D /* Icon-72.png */; };
 		2EED2F0C187D050B0070C68D /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EED2EF7187D050B0070C68D /* Icon-72@2x.png */; };
 		2EED2F0D187D050B0070C68D /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EED2EF8187D050B0070C68D /* Icon-Small-50.png */; };
@@ -270,8 +269,6 @@
 		2EDB468E11DA95B40057E60D /* FLTypingController_iOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLTypingController_iOS.h; sourceTree = "<group>"; };
 		2EDB468F11DA95B40057E60D /* FLTypingController_iOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FLTypingController_iOS.mm; sourceTree = "<group>"; };
 		2EE39C2D161279E600B88B2E /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
-		2EE7C88E15BDE30700307235 /* FLPurchaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPurchaseManager.h; sourceTree = "<group>"; };
-		2EE7C88F15BDE30700307235 /* FLPurchaseManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FLPurchaseManager.mm; sourceTree = "<group>"; };
 		2EEA161A15BE124900C04187 /* Fleksy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Fleksy.entitlements; sourceTree = "<group>"; };
 		2EED2EF6187D050B0070C68D /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
 		2EED2EF7187D050B0070C68D /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72@2x.png"; sourceTree = "<group>"; };
@@ -681,8 +678,6 @@
 			children = (
 				1D3623240D0F684500981E51 /* AppDelegate.h */,
 				1D3623250D0F684500981E51 /* AppDelegate.mm */,
-				2EE7C88E15BDE30700307235 /* FLPurchaseManager.h */,
-				2EE7C88F15BDE30700307235 /* FLPurchaseManager.mm */,
 				2E804A4814AE69C900E0EC59 /* FleksyAppMainViewController.h */,
 				2E804A4914AE69C900E0EC59 /* FleksyAppMainViewController.mm */,
 				61EF789E17D7E3BB008FBCDA /* FLNavigationController.h */,
@@ -1143,7 +1138,6 @@
 				2E4727AF14F8A78E00416BF4 /* CustomSegmentedControl.mm in Sources */,
 				2E85008A1588363E00FF6A4B /* DiagnosticsManager.mm in Sources */,
 				2E076672159AFF5400FC4E01 /* FleksyClient_NOIPC.mm in Sources */,
-				2EE7C89015BDE30700307235 /* FLPurchaseManager.mm in Sources */,
 				2EA0B72B15C1CB6E0000E724 /* FleksyTextView.mm in Sources */,
 				2E1E745415C871BB0029E761 /* MyTextView.m in Sources */,
 				2E63D06815F56CAD00837586 /* CircleUIView.mm in Sources */,

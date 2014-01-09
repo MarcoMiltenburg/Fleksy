@@ -36,9 +36,6 @@
 #define ACTION_MENU_TITLE @""
 //@"Triple click home to resume typing, or swipe right for more options"
 
-#define UPGRADE_FULL_VERSION_TITLE @"Upgrade to full version"
-#define RESTORE_FULL_VERSION_TITLE @"Restore purchased version"
-
 #define INSTRUCTIONS_BUTTON_HEIGHT 42
 
 #define TAG_RESHOW_AFTER_ROTATION 1
@@ -561,11 +558,6 @@
 
   //NSLog(@"postToSocialService: %@", serviceType);
   
-  if (!purchaseManager.fullVersion) {
-    NSLog(@"%@ unavailable in trial version", serviceType);
-    return;
-  }
-  
   // serviceType string will be nil if the Social framework is not found and will be used to indicate Twitter
   if (!serviceType || [serviceType isEqualToString:SLServiceTypeTwitter] || [serviceType isEqualToString:SLServiceTypeSinaWeibo]) {
     if (text.length > 140) {
@@ -640,11 +632,6 @@
     return;
   }
   
-  if (!purchaseManager.fullVersion) {
-    NSLog(@"Cannot send SMS in trial version");
-    return;
-  }
-  
   //if we dont do this there is a bug (<6.0?), where the status bar WILL be displayed, and overlap with the top navigation bar of the controller
   //this only happens with MFMessageComposeViewController and not MFMailComposeViewController for some reason.
   //after dismissal we want to hide the status bar again
@@ -703,11 +690,6 @@
     [self showKeyboard];
     [[[UIAlertView alloc] initWithTitle:@"Email Error" message:@"Enable a Mail account before using this action."
                                delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-    return;
-  }
-  
-  if (!purchaseManager.fullVersion) {
-    NSLog(@"Cannot send mail in trial version");
     return;
   }
   
@@ -1011,14 +993,8 @@
   [[NSUserDefaults standardUserDefaults] synchronize];
   [[NSUbiquitousKeyValueStore defaultStore] synchronize];
   
-  purchaseManager.fullVersion = NO;
-  // this will actually switch to whatever state purchase.fullVersion is
-  [self switchToFullVersion];
-  
-  [purchaseManager resetRuns];
-    
-    // Clear the inApp setting view so it will agree with defaults
-    self.appSettingsViewController = nil;
+  // Clear the inApp setting view so it will agree with defaults
+  self.appSettingsViewController = nil;
 }
 
 - (void) askClearDefaults {
@@ -1168,13 +1144,6 @@
 
 ///////////////////////////////////////////////////
 
-
-- (void) switchToFullVersion {
-  [self recreatePlainMenus];
-  [self reloadFavorites];
-}
-
-
 // Called when a button is clicked. The view will be automatically dismissed after this call returns
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
   
@@ -1260,23 +1229,18 @@
 - (void) sendFeedback {
   [TestFlight submitFeedback:textView.text];
   
-  if (purchaseManager.fullVersion) {
+  BOOL voiceover = UIAccessibilityIsVoiceOverRunning();
     
-    BOOL voiceover = UIAccessibilityIsVoiceOverRunning();
+  NSMutableString *subjectPrefixString = [@"Feedback" mutableCopy];
     
-    NSMutableString *subjectPrefixString = [@"Feedback" mutableCopy];
-    
-    if (voiceover) {
-      [subjectPrefixString appendString:@": "];
-    }
-    else {
-      [subjectPrefixString appendString:@":: "];
-    }
-    
-    [self sendInAppMailTo:@"feedbackVI@fleksy.com" useText:textView.text subjectPrefix:subjectPrefixString];
-  } else {
-    [VariousUtilities performAudioFeedbackFromString:@"Thank you. Your feedback has been submitted"];
+  if (voiceover) {
+    [subjectPrefixString appendString:@": "];
   }
+  else {
+    [subjectPrefixString appendString:@":: "];
+  }
+    
+  [self sendInAppMailTo:@"feedbackVI@fleksy.com" useText:textView.text subjectPrefix:subjectPrefixString];
 }
 
 //////////////////////////////////////////////////
@@ -1307,12 +1271,6 @@
     
     } else if (buttonIndex == 200) {
       //dismiss for orientation event, will show again right away
-      
-    } else if ([buttonTitle isEqualToString:UPGRADE_FULL_VERSION_TITLE]) {
-      [purchaseManager askUpgradeToFullVersion];
-    } else if ([buttonTitle isEqualToString:RESTORE_FULL_VERSION_TITLE]) {
-      [purchaseManager checkRestoreToFullVersion];
-
       
     } else if ([buttonTitle isEqualToString:@"Email"]) {
       [actionButton removeFromSuperview];
@@ -1441,11 +1399,6 @@
     } else if (buttonIndex == 200) {
       //dismiss for recreate, will show again right away
     
-    } else if ([buttonTitle isEqualToString:UPGRADE_FULL_VERSION_TITLE]) {
-      [purchaseManager askUpgradeToFullVersion];
-    } else if ([buttonTitle isEqualToString:RESTORE_FULL_VERSION_TITLE]) {
-      [purchaseManager checkRestoreToFullVersion];
-    
     } else if ([buttonTitle isEqualToString:@"Instructions"]) {
       [actionButton removeFromSuperview];
       [self showDetailedInstructions:NO];
@@ -1496,8 +1449,6 @@
   
   [TestFlight passCheckpoint:@"showMenu"];
              
-  //if (purchaseManager.previousRuns > 50 || UIAccessibilityIsVoiceOverRunning()) { [FLColdWar yay]; }
-  
   if (FLEKSY_APP_SETTING_SAVE_TEXT_BUFFER) {
     [self saveText];
   }
@@ -1535,7 +1486,7 @@
   
   [FLKeyboardContainerView sharedFLKeyboardContainerView].typingController.fleksyClient.fleksyAPI->setBlindMode(voiceover);
   
-  //NSLog(@"voiceOverStatusChanged: %d", voiceover);
+  NSLog(@"voiceOverStatusChanged: %d", voiceover);
   
   actionButton.hidden = voiceover;
   //actionButton.userInteractionEnabled = !voiceover;
@@ -1561,7 +1512,7 @@
   //[self.view addSubview:actionButton];
   [self voiceOverStatusChanged:nil];
   
-  //NSLog(@"previousRuns: %d", purchaseManager.previousRuns);
+  //NSLog(@"previousRuns: %d", [self previousRuns]);
 }
 
 
@@ -1616,31 +1567,27 @@
 
 - (void) recreatePlainActionMenuWithTitle:(NSString*) title {
   actionMainMenuPlain  = [[UIActionSheet alloc] initWithTitle:title  delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
-  if (!purchaseManager.fullVersion) {
-    [actionMainMenuPlain addButtonWithTitle:UPGRADE_FULL_VERSION_TITLE];
-    [actionMainMenuPlain addButtonWithTitle:RESTORE_FULL_VERSION_TITLE];
-  } else {
+  
+  [actionMainMenuPlain addButtonWithTitle:@"Copy & Clear"];
+  [actionMainMenuPlain addButtonWithTitle:@"Email"];
+  [actionMainMenuPlain addButtonWithTitle:@"Message"];
     
-    [actionMainMenuPlain addButtonWithTitle:@"Copy & Clear"];
-    [actionMainMenuPlain addButtonWithTitle:@"Email"];
-    [actionMainMenuPlain addButtonWithTitle:@"Message"];
-    
-    if (NSClassFromString(@"SLComposeViewController")) {
-      //if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter]) {
-      [actionMainMenuPlain addButtonWithTitle:BUTTON_TITLE_POST_TO_TWITTER];
-      //}
-      //if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
-      [actionMainMenuPlain addButtonWithTitle:BUTTON_TITLE_POST_TO_FACEBOOK];
-      //}
-      if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeSinaWeibo]) {
-        [actionMainMenuPlain addButtonWithTitle:BUTTON_TITLE_POST_TO_WEIBO];
-      }
-    } else if (NSClassFromString(@"TWTweetComposeViewController")) {
-      [actionMainMenuPlain addButtonWithTitle:BUTTON_TITLE_POST_TO_TWITTER];
-    } else {
-      NSLog(@"No SLComposeViewController or TWTweetComposeViewController framework detected");
+  if (NSClassFromString(@"SLComposeViewController")) {
+    //if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter]) {
+    [actionMainMenuPlain addButtonWithTitle:BUTTON_TITLE_POST_TO_TWITTER];
+    //}
+    //if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
+    [actionMainMenuPlain addButtonWithTitle:BUTTON_TITLE_POST_TO_FACEBOOK];
+    //}
+    if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeSinaWeibo]) {
+      [actionMainMenuPlain addButtonWithTitle:BUTTON_TITLE_POST_TO_WEIBO];
     }
+  } else if (NSClassFromString(@"TWTweetComposeViewController")) {
+    [actionMainMenuPlain addButtonWithTitle:BUTTON_TITLE_POST_TO_TWITTER];
+  } else {
+    NSLog(@"No SLComposeViewController or TWTweetComposeViewController framework detected");
   }
+
   [actionMainMenuPlain addButtonWithTitle:@"Instructions"];
   [actionMainMenuPlain addButtonWithTitle:@"Settings"];
 //  [actionMainMenuPlain addButtonWithTitle:@"Vote for Syntellia!"];
@@ -1648,9 +1595,7 @@
   [actionMainMenuPlain addButtonWithTitle:@"We love feedback!"];
   [actionMainMenuPlain addButtonWithTitle:@"Follow @fleksy"];
   [actionMainMenuPlain addButtonWithTitle:@"Visit fleksy.com"];
-  if (purchaseManager.fullVersion) {
-    [actionMainMenuPlain addButtonWithTitle:@"Export dictionary"];
-  }
+  [actionMainMenuPlain addButtonWithTitle:@"Export dictionary"];
   
   //http://stackoverflow.com/questions/5262428/uiactionsheet-buttonindex-values-faulty-when-using-more-than-6-custom-buttons
   actionMainMenuPlain.cancelButtonIndex = [actionMainMenuPlain addButtonWithTitle:@"Resume typing"];
@@ -1661,10 +1606,6 @@
 - (void) recreatePlainMenus {
   
   initialMainMenu = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
-  if (!purchaseManager.fullVersion) {
-    [initialMainMenu addButtonWithTitle:UPGRADE_FULL_VERSION_TITLE];
-    [initialMainMenu addButtonWithTitle:RESTORE_FULL_VERSION_TITLE];
-  }
   [initialMainMenu addButtonWithTitle:@"Instructions"];
   [initialMainMenu addButtonWithTitle:@"Settings"];
 //  [initialMainMenu addButtonWithTitle:@"Vote For Syntellia!"];
@@ -1694,12 +1635,12 @@
 
 - (void) showAlerts {
   
-  if (purchaseManager.previousRuns < 2) {
+  if ([self previousRuns] < 2) {
     [self showBasicInstructions];
   }
   
 #if !TARGET_IPHONE_SIMULATOR
-  if (purchaseManager.previousRuns < 1 && !UIAccessibilityIsVoiceOverRunning()) {
+  if ([self previousRuns] < 1 && !UIAccessibilityIsVoiceOverRunning()) {
     blindAppAlert = [[UIAlertView alloc] initWithTitle:@"Warning!"
                                                message:@"\nThis version of Fleksy is intended for VoiceOver users. If you are not visually impaired you should download the non-VoiceOver version"
                                               delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:@"Download", nil];
@@ -1768,7 +1709,7 @@
   [textView.inputView.window addSubview:actionButton];
   [self startButtonAnimation];
   
-  if (!shownTutorial && purchaseManager.previousRuns < 1 && !self->textView.text.length && !UIAccessibilityIsVoiceOverRunning()) {
+  if (!shownTutorial && [self previousRuns] < 1 && !self->textView.text.length && !UIAccessibilityIsVoiceOverRunning()) {
     shownTutorial = YES;
     self->textView.text = @"Welcome to Fleksy: You no longer need to be accurate! \n\nSpace: flick right → \nDelete: flick left ← \nChange word: flick down ↓ \nPunctuation: → after Space \n\nHappy Typing! ";
   }
@@ -1851,9 +1792,7 @@
   
   if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
     
-    purchaseManager = [[FLPurchaseManager alloc] initWithListener:self];
-    
-    NSString* log = [NSString stringWithFormat:@"Full version: %d, previousRuns/10: %d", purchaseManager.fullVersion, purchaseManager.previousRuns / 10];
+    NSString* log = [NSString stringWithFormat:@"previousRuns/10: %d", [self previousRuns] / 10];
     [TestFlight passCheckpoint:log];
     [TestFlight passCheckpoint:[NSString stringWithFormat:@"VoiceOver: %d", UIAccessibilityIsVoiceOverRunning()]];
     
@@ -2186,6 +2125,16 @@
 
 }
 
-@synthesize purchaseManager;
+#define FLEKSY_PREVIOUS_RUNS @"FLEKSY_PREVIOUS_RUNS"
+
+- (void) incrementRuns {
+  NSInteger runs = [self previousRuns];
+  [[NSUserDefaults standardUserDefaults] setInteger:runs+1 forKey:FLEKSY_PREVIOUS_RUNS];
+  [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (NSInteger) previousRuns {
+  return [[NSUserDefaults standardUserDefaults] integerForKey:FLEKSY_PREVIOUS_RUNS];
+}
 
 @end

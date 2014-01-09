@@ -97,12 +97,9 @@ float distributionFunction(float x) {
     NSString* string = [[url resourceSpecifier] stringByReplacingOccurrencesOfString:@"//" withString:@""];
     NSLog(@"send to: %@", string);
     //NSLog(@"host: %@", [url host]);
-    if (fleksyAppViewController.purchaseManager.fullVersion) {
-      [fleksyAppViewController setReplyTo:string];
-    }
+    [fleksyAppViewController setReplyTo:string];
     [fleksyAppViewController resetState];
-      
-      return YES;
+    return YES;
     
   } else if ([url.scheme hasPrefix:@"fleksy"]) {
     
@@ -166,25 +163,6 @@ float distributionFunction(float x) {
 - (void) buttonPressed {
   NSLog(@"buttonPressed");
 }
-
-//- (BOOL) checkVersionOKToRun {
-//  
-//#ifdef APP_STORE
-//  return YES;
-//#endif
-//
-//  NSString* currentVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
-//  NSString* previousVersion = [[NSUserDefaults standardUserDefaults] stringForKey:LAST_VERSION_KEY];
-//  [[NSUserDefaults standardUserDefaults] setObject:currentVersion forKey:LAST_VERSION_KEY];
-//  
-//  int previousRuns = fleksyAppViewController.purchaseManager.previousRuns;
-//  
-//  NSLog(@"previousVersion: %@, currentVersion: %@, previousRuns: %d", previousVersion, currentVersion, previousRuns);
-//
-//  BOOL ok = previousRuns && (!previousVersion || [previousVersion isEqualToString:currentVersion]);
-//  
-//  return ok;
-//}
 
 - (void) applicationDidFinishLaunching:(UIApplication *) application loadServer:(BOOL) loadServer {
   
@@ -272,7 +250,7 @@ float distributionFunction(float x) {
   fleksyAppViewController = [[FleksyAppMainViewController alloc] initWithNibName:nil bundle:nil];
   
 //  if ([self checkVersionOKToRun]) {
-    [fleksyAppViewController.purchaseManager incrementRuns];
+    [fleksyAppViewController incrementRuns];
 //  } else {
 //    [[[UIAlertView alloc] initWithTitle:@"Cannot run this version of Fleksy"
 //                               message:@"Please follow these four steps:\n1. Delete Fleksy\n2. Download the latest Fleksy from the App Store.\n3. You must run the App Store version at least once.\n4. Try updating with this version again" delegate:nil cancelButtonTitle:nil otherButtonTitles:nil] show];
@@ -375,8 +353,6 @@ float distributionFunction(float x) {
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(proximityChanged:) name:UIDeviceProximityStateDidChangeNotification object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(voiceOverStatusChanged:) name:UIAccessibilityVoiceOverStatusChanged object:nil];
   
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textCopiedToClipboard:) name:UIPasteboardChangedNotification object:nil];
-  
   [self voiceOverStatusChanged:nil];
   
   [self startLoadingProgressTimer];
@@ -394,19 +370,6 @@ float distributionFunction(float x) {
 //  IMP orgIMP = [[HookingUtilities sharedHookingUtilities] originalMethodNamed:@"_slideSheetOut:" inClass:[self class]];
 //  orgIMP(self, nil, c);
 //}
-
-
-- (void) textCopiedToClipboard:(NSNotification*) notification {
-  UIPasteboard* pasteboard = [UIPasteboard generalPasteboard];
-  NSLog(@"textCopiedToClipboard1: %@", pasteboard.string);
-  [[NSNotificationCenter defaultCenter] removeObserver:self name:UIPasteboardChangedNotification object:nil];
-  if (!fleksyAppViewController.purchaseManager.fullVersion) {
-    [pasteboard setString:@"Please purchase the full version of Fleksy to copy and paste"];
-  }
-  NSLog(@"textCopiedToClipboard2: %@", pasteboard.string);
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textCopiedToClipboard:) name:UIPasteboardChangedNotification object:nil];
-}
-
 
 - (void) voiceOverStatusChanged:(NSNotification*) notification {
   NSLog(@"AppDelegate voiceOverStatusChanged: %d", UIAccessibilityIsVoiceOverRunning());
