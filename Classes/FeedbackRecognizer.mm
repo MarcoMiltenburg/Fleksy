@@ -390,8 +390,8 @@
     }
   
     [currentTouches removeObject:touch];
-    [touch updateInTouchManager];
     NSLog(@"touchesEnded, distance since start: %.3f", [touch distanceSinceStartInView:self.view]);
+    [touch updateInTouchManager];
   }
 }
 
