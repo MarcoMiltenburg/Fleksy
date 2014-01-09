@@ -237,7 +237,7 @@
   
   self.state = UIGestureRecognizerStateBegan;
   
-  printf("  touchesBegan.TOUCHES = %s", touches.description.UTF8String);
+  //printf("  touchesBegan.TOUCHES = %s", touches.description.UTF8String);
   
   //can choose if we want a small delay to eliminate some popups on quick swipes
   for (UITouch* touch in touches) {
@@ -388,19 +388,18 @@
     } else {
       lastTouchUpTime = CFAbsoluteTimeGetCurrent(); //touch.timestamp;
     }
+  
+    [currentTouches removeObject:touch];
+    [touch updateInTouchManager];
+    NSLog(@"touchesEnded, distance since start: %.3f", [touch distanceSinceStartInView:self.view]);
   }
 }
 
 - (void) touchesEnded:(NSSet *) touches withEvent:(UIEvent *) event {
   //NSLog(@"touches ended FeedbackRecognizer! %d", [touches count]);
   
-  for (UITouch* touch in touches) {
-    [currentTouches removeObject:touch];
-    NSLog(@"touchesEnded, distance since start: %.3f", [touch distanceSinceStartInView:self.view]);
-  }
   [self touchesEnded:touches];
   
-  for (UITouch* touch : touches) { [touch updateInTouchManager]; }
   //self.state = UIGestureRecognizerStateEnded;
 }
 
@@ -418,7 +417,6 @@
   }
   
   [self touchesEnded:touches];
-  for (UITouch* touch : touches) { [touch updateInTouchManager]; }
   //[self.nextResponder touchesCancelled:touches withEvent:event];
 }
 
