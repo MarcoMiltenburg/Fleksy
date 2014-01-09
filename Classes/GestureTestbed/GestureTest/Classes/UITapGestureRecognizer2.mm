@@ -14,11 +14,6 @@
 //only for cancelling spelling requests on touchdown, we wanna do that before touch up
 //#import "FLKeyboardContainerView.h"
 
-@interface UITapGestureRecognizer (Private)
-@property(readonly) NSArray * touches;
-@end
-
-
 @implementation UITapGestureRecognizer2
 
 - (id)initWithTarget:(id)target action:(SEL)action { // default initializer
@@ -29,9 +24,20 @@
   return self;
 }
 
+- (NSArray*) getTouches {
+  NSArray* touches;
+  SEL selector = NSSelectorFromString(@"touches");
+  NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[[self class] instanceMethodSignatureForSelector:selector]];
+  [invocation setSelector:selector];
+  [invocation setTarget:self];
+  [invocation invoke];
+  [invocation getReturnValue:&touches];
+  return touches;
+}
+
 - (NSArray*) orderedTouches {
   
-  NSMutableArray* sortedTouches = [NSMutableArray arrayWithArray:self.touches];
+  NSMutableArray* sortedTouches = [NSMutableArray arrayWithArray:[self getTouches]];
   [sortedTouches sortUsingComparator: ^NSComparisonResult(UITouch* t1, UITouch* t2) {
 
     double time1 = t1.initialTimestamp;
@@ -58,8 +64,8 @@
   }  
   
   if (self.numberOfTouches == 2) {
-    UITouch* touch1 = [self.touches objectAtIndex:0];
-    UITouch* touch2 = [self.touches objectAtIndex:1];
+    UITouch* touch1 = [[self getTouches] objectAtIndex:0];
+    UITouch* touch2 = [[self getTouches] objectAtIndex:1];
     BOOL orderOK = touch1.initialTimestamp <= touch2.initialTimestamp;
     if (!orderOK) {
       //NSLog(@"order is reversed!");
