@@ -244,8 +244,6 @@
 		2EC4E83F166D3314009D3E39 /* ScrollWheelGestureRecognizer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ScrollWheelGestureRecognizer.mm; path = Classes/GestureTestbed/GestureTest/Classes/ScrollWheelGestureRecognizer.mm; sourceTree = SOURCE_ROOT; };
 		2EC4E840166D3314009D3E39 /* TouchAnalyzer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TouchAnalyzer.h; path = Classes/GestureTestbed/GestureTest/Classes/TouchAnalyzer.h; sourceTree = SOURCE_ROOT; };
 		2EC4E841166D3314009D3E39 /* TouchAnalyzer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TouchAnalyzer.mm; path = Classes/GestureTestbed/GestureTest/Classes/TouchAnalyzer.mm; sourceTree = SOURCE_ROOT; };
-		2EC4E842166D3314009D3E39 /* TouchSynthesis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TouchSynthesis.h; path = Classes/GestureTestbed/GestureTest/Classes/TouchSynthesis.h; sourceTree = SOURCE_ROOT; };
-		2EC4E843166D3314009D3E39 /* TouchSynthesis.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TouchSynthesis.m; path = Classes/GestureTestbed/GestureTest/Classes/TouchSynthesis.m; sourceTree = SOURCE_ROOT; };
 		2EC4E844166D3314009D3E39 /* UIGestureUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIGestureUtilities.h; path = Classes/GestureTestbed/GestureTest/Classes/UIGestureUtilities.h; sourceTree = SOURCE_ROOT; };
 		2EC4E845166D3314009D3E39 /* UIGestureUtilities.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = UIGestureUtilities.mm; path = Classes/GestureTestbed/GestureTest/Classes/UIGestureUtilities.mm; sourceTree = SOURCE_ROOT; };
 		2EC4E846166D3314009D3E39 /* UIRotorRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIRotorRecognizer.h; path = Classes/GestureTestbed/GestureTest/Classes/UIRotorRecognizer.h; sourceTree = SOURCE_ROOT; };
@@ -546,8 +544,6 @@
 				2EC4E83F166D3314009D3E39 /* ScrollWheelGestureRecognizer.mm */,
 				2EC4E840166D3314009D3E39 /* TouchAnalyzer.h */,
 				2EC4E841166D3314009D3E39 /* TouchAnalyzer.mm */,
-				2EC4E842166D3314009D3E39 /* TouchSynthesis.h */,
-				2EC4E843166D3314009D3E39 /* TouchSynthesis.m */,
 				2EC4E844166D3314009D3E39 /* UIGestureUtilities.h */,
 				2EC4E845166D3314009D3E39 /* UIGestureUtilities.mm */,
 				2EC4E846166D3314009D3E39 /* UIRotorRecognizer.h */,
