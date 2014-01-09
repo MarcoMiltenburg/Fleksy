@@ -4,13 +4,13 @@
 <dict>
 	<key>com.apple.developer.ubiquity-container-identifiers</key>
 	<array>
-		<string>$(TeamIdentifierPrefix)com.syntellia.FleksyVI</string>
+		<string>$(TeamIdentifierPrefix)com.syntellia.Fleksy</string>
 	</array>
 	<key>com.apple.developer.ubiquity-kvstore-identifier</key>
 	<string>$(TeamIdentifierPrefix)com.syntellia.FleksyVI</string>
 	<key>keychain-access-groups</key>
 	<array>
-		<string>$(AppIdentifierPrefix)com.syntellia.FleksyVI</string>
+		<string>$(AppIdentifierPrefix)com.syntellia.Fleksy</string>
 	</array>
 </dict>
 </plist>
