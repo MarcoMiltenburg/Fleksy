@@ -1709,7 +1709,7 @@
   [textView.inputView.window addSubview:actionButton];
   [self startButtonAnimation];
   
-  if (!shownTutorial && [self previousRuns] < 1 && !self->textView.text.length && !UIAccessibilityIsVoiceOverRunning()) {
+  if (!shownTutorial && [self previousRuns] < 2 && !self->textView.text.length && !UIAccessibilityIsVoiceOverRunning()) {
     shownTutorial = YES;
     self->textView.text = @"Welcome to Fleksy: You no longer need to be accurate! \n\nSpace: flick right → \nDelete: flick left ← \nChange word: flick down ↓ \nPunctuation: → after Space \n\nHappy Typing! ";
   }
