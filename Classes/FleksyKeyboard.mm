@@ -903,6 +903,8 @@ static FleksyKeyboard* instance = nil;
   NSNumber* progress = notification.object;
   if (progress.floatValue == 1) {
     self->hasFinishedLoading = YES;
+    AppDelegate* appDelegate = (AppDelegate*) [UIApplication sharedApplication].delegate;
+    [appDelegate.fleksyAppViewController incrementRuns];
   }
   if ([self.listener respondsToSelector:@selector(loadingProgress:)]) {
     NSLog(@"Passing Notification Handling to listener %@ NOW", self.listener);

@@ -248,15 +248,7 @@ float distributionFunction(float x) {
   assert(ok);
 #pragma unused(ok)
   fleksyAppViewController = [[FleksyAppMainViewController alloc] initWithNibName:nil bundle:nil];
-  
-//  if ([self checkVersionOKToRun]) {
-    [fleksyAppViewController incrementRuns];
-//  } else {
-//    [[[UIAlertView alloc] initWithTitle:@"Cannot run this version of Fleksy"
-//                               message:@"Please follow these four steps:\n1. Delete Fleksy\n2. Download the latest Fleksy from the App Store.\n3. You must run the App Store version at least once.\n4. Try updating with this version again" delegate:nil cancelButtonTitle:nil otherButtonTitles:nil] show];
-//    return;
-//  }
-  
+
   RANDOM_SEED();
   
   // now create the custom keyboard view
