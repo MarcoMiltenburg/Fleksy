@@ -248,7 +248,8 @@ static float distanceOfPoints(CGPoint p1, CGPoint p2) {
 - (BOOL) didFeedback {
   NSNumber* number = [[UITouchManager sharedUITouchManager].touchDidFeedbacks objectForKey:[NSValue valueWithPointer:(const void*)self]];
   if (!number) {
-    [NSException raise:@"UITouch.didFeedback" format:@"not found, touch: %@", self];
+//TODO: didFeedback causes intermittent exception on 2SR and 2SL operations for Fleksy VO v1.9.2
+    //[NSException raise:@"UITouch.didFeedback" format:@"not found, touch: %@", self];
   }
   return [number boolValue];
 }
