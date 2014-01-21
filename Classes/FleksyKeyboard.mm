@@ -48,6 +48,8 @@ static FleksyKeyboard* instance = nil;
   
   MySwipeGestureRecognizer* actionRecognizer2Up;
   MySwipeGestureRecognizer* actionRecognizer2Down;
+  MySwipeGestureRecognizer* actionRecognizer2Left;
+  MySwipeGestureRecognizer* actionRecognizer2Right;
   UILongPressGestureRecognizer* oldActionRecognizer;
   
   int focusedCount;
@@ -263,8 +265,18 @@ static FleksyKeyboard* instance = nil;
       actionRecognizer2Down.numberOfTouchesRequired = 2;
       actionRecognizer2Down.direction = UISwipeGestureRecognizerDirectionDown;
       
+      actionRecognizer2Left = [[MySwipeGestureRecognizer alloc] initWithTarget:self action:@selector(twoFingerSwipeLeft:)];
+      actionRecognizer2Left.numberOfTouchesRequired = 2;
+      actionRecognizer2Left.direction = UISwipeGestureRecognizerDirectionLeft;
+      
+      actionRecognizer2Right = [[MySwipeGestureRecognizer alloc] initWithTarget:self action:@selector(twoFingerSwipeRight:)];
+      actionRecognizer2Right.numberOfTouchesRequired = 2;
+      actionRecognizer2Right.direction = UISwipeGestureRecognizerDirectionRight;
+      
       [self addGestureRecognizer:actionRecognizer2Up];
       [self addGestureRecognizer:actionRecognizer2Down];
+      [self addGestureRecognizer:actionRecognizer2Left];
+      [self addGestureRecognizer:actionRecognizer2Right];
       
       //[feedbackRecognizer requireGestureRecognizerToFail:actionRecognizer2Up];
       //[feedbackRecognizer requireGestureRecognizerToFail:actionRecognizer2Down];
@@ -471,6 +483,52 @@ static FleksyKeyboard* instance = nil;
   }
 }
 
+- (void) twoFingerSwipeLeft:(MySwipeGestureRecognizer*) gestureRecognizer {
+  NSLog(@"twoFingerSwipeLeft! %d, numberOfTouches: %d, location1: %@", gestureRecognizer.state, gestureRecognizer.numberOfTouches, NSStringFromCGPoint([gestureRecognizer locationInView:self]));
+  if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+    
+    FLKeyboardView *kbv = [FLKeyboardView sharedFLKeyboardView];
+
+    if ([kbv activeView] == kbv->imageViewABC) {
+      [kbv resetWithActiveView:kbv->imageViewSymbolsB];
+    }
+    else if ([kbv activeView] == kbv->imageViewSymbolsB) {
+      [kbv resetWithActiveView:kbv->imageViewSymbolsA];
+    }
+    else if ([kbv activeView] == kbv->imageViewSymbolsA) {
+      [kbv resetWithActiveView:kbv->imageViewABC];
+    }
+    
+    for (UITouch* touch in gestureRecognizer.activeTouches) {
+      touch.tag = UITouchTypeProcessedSwipe;
+    }
+    [feedbackRecognizer removePendingTouches];
+  }
+}
+
+- (void) twoFingerSwipeRight:(MySwipeGestureRecognizer*) gestureRecognizer {
+  NSLog(@"twoFingerSwipeLeft! %d, numberOfTouches: %d, location1: %@", gestureRecognizer.state, gestureRecognizer.numberOfTouches, NSStringFromCGPoint([gestureRecognizer locationInView:self]));
+  if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+    
+    FLKeyboardView *kbv = [FLKeyboardView sharedFLKeyboardView];
+    
+    if ([kbv activeView] == kbv->imageViewABC) {
+      [kbv resetWithActiveView:kbv->imageViewSymbolsA];
+    }
+    else if ([kbv activeView] == kbv->imageViewSymbolsA) {
+      [kbv resetWithActiveView:kbv->imageViewSymbolsB];
+    }
+    else if ([kbv activeView] == kbv->imageViewSymbolsB) {
+      [kbv resetWithActiveView:kbv->imageViewABC];
+    }
+    
+    for (UITouch* touch in gestureRecognizer.activeTouches) {
+      touch.tag = UITouchTypeProcessedSwipe;
+    }
+    [feedbackRecognizer removePendingTouches];
+  }
+}
+
 
 // old way for backwards compatibility
 - (void) longTapAboveKeyboard:(UILongPressGestureRecognizer*) gestureRecognizer {
@@ -485,6 +543,8 @@ static FleksyKeyboard* instance = nil;
   if (gestureRecognizer.state == UIGestureRecognizerStateEnded || gestureRecognizer.state == UIGestureRecognizerStateCancelled) {
     [actionRecognizer2Up clearTouches];
     [actionRecognizer2Down clearTouches];
+    [actionRecognizer2Left clearTouches];
+    [actionRecognizer2Right clearTouches];
   }
 }
 
@@ -787,6 +847,8 @@ static FleksyKeyboard* instance = nil;
     [[FLKeyboardView sharedFLKeyboardView] disableQWERTYextraKeys];
     [actionRecognizer2Up clearTouches];
     [actionRecognizer2Down clearTouches];
+    [actionRecognizer2Left clearTouches];
+    [actionRecognizer2Right clearTouches];
   }
   
 }
