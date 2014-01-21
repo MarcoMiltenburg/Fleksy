@@ -61,7 +61,7 @@
 #endif
 
 #ifdef FL_BUILD_FOR_APP_STORE
-#define FLEKSY_PRODUCT_NAME @"FleksyVI"
+#define FLEKSY_PRODUCT_NAME @"Fleksy VO"
 #endif
 
 ////////////////////// BETA TESTING //////////////////////
