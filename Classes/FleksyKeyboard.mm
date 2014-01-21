@@ -490,12 +490,15 @@ static FleksyKeyboard* instance = nil;
     FLKeyboardView *kbv = [FLKeyboardView sharedFLKeyboardView];
 
     if ([kbv activeView] == kbv->imageViewABC) {
+      [VariousUtilities performAudioFeedbackFromString:@"Symbols"];
       [kbv resetWithActiveView:kbv->imageViewSymbolsB];
     }
     else if ([kbv activeView] == kbv->imageViewSymbolsB) {
+      [VariousUtilities performAudioFeedbackFromString:@"Numbers"];
       [kbv resetWithActiveView:kbv->imageViewSymbolsA];
     }
     else if ([kbv activeView] == kbv->imageViewSymbolsA) {
+      [VariousUtilities performAudioFeedbackFromString:@"Letters"];
       [kbv resetWithActiveView:kbv->imageViewABC];
     }
     
@@ -513,12 +516,15 @@ static FleksyKeyboard* instance = nil;
     FLKeyboardView *kbv = [FLKeyboardView sharedFLKeyboardView];
     
     if ([kbv activeView] == kbv->imageViewABC) {
+      [VariousUtilities performAudioFeedbackFromString:@"Numbers"];
       [kbv resetWithActiveView:kbv->imageViewSymbolsA];
     }
     else if ([kbv activeView] == kbv->imageViewSymbolsA) {
+      [VariousUtilities performAudioFeedbackFromString:@"Symbols"];
       [kbv resetWithActiveView:kbv->imageViewSymbolsB];
     }
     else if ([kbv activeView] == kbv->imageViewSymbolsB) {
+      [VariousUtilities performAudioFeedbackFromString:@"Letters"];
       [kbv resetWithActiveView:kbv->imageViewABC];
     }
     
