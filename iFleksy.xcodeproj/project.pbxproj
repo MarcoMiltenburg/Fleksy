@@ -1344,7 +1344,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Syntellia, Inc (3Q962663R2)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Syntellia, Inc (3Q962663R2)";
 				DEPLOYMENT_POSTPROCESSING = YES;
-				FL_BUILDINFO_BUILD_NUMBER = 463;
+				FL_BUILDINFO_BUILD_NUMBER = 471;
 				FL_VERSION_EXTRA = "";
 				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)\"";
 				GCC_PREFIX_HEADER = iFleksy_Prefix.pch;
