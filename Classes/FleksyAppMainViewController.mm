@@ -395,7 +395,7 @@
 }
 
 - (NSString*) fleksyAppLink {
-  return [NSString stringWithFormat:@"<a href=\"%@\">Fleksy</a>", @"http://fleksy.com/appVI"];
+  return [NSString stringWithFormat:@"<a href=\"%@\">Fleksy</a>", @"http://fleksy.com/appVO"];
 }
 
 - (NSString*) makeFleksyLinksForText:(NSString*) text evenLowercase:(BOOL) evenLowercase {
