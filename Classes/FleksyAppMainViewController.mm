@@ -80,8 +80,6 @@
   BOOL isExecutedWithFavorites;
   FleksyUserQuestionaire *handleQuestionaireLink;
   BOOL _userHasVisitedQuestionaireLink;
-  
-  BOOL appIdleTimerSetting;
 }
 
 @property (nonatomic, retain) IASKAppSettingsViewController *appSettingsViewController;
@@ -1506,12 +1504,6 @@
       [blindAppAlert dismissWithClickedButtonIndex:-1 animated:YES];
       blindAppAlert = nil;
     }
-    
-    [UIApplication sharedApplication].idleTimerDisabled = YES;
-  }
-  else {
-    [UIApplication sharedApplication].idleTimerDisabled = appIdleTimerSetting;
-
   }
 
 }
@@ -1848,8 +1840,6 @@
     //self.wantsFullScreenLayout = YES;
     
     shownTutorial = NO;
-    
-    appIdleTimerSetting = [UIApplication sharedApplication].idleTimerDisabled;
     
     NSLog(@"self.disablesAutomaticKeyboardDismissal: %d", self.disablesAutomaticKeyboardDismissal);
     
