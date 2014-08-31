@@ -92,6 +92,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardContainerView);
   return self;
 }
 
+- (CGFloat) keyboardHeight {
+  CGFloat result = keyboard.frame.size.height;
+  // Check if 4th row is enabled
+  if ([keyboard areExtraKeysEnabled]) { result *= 4.0/3.0; }
+  return result;
+}
+
 #pragma mark - FLTheme Notification Handlers
 
 - (void)handleThemeDidChange:(NSNotification *)aNote {

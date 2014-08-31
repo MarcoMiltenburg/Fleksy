@@ -101,7 +101,9 @@ static FleksyKeyboard* instance = nil;
                        (id)[[UIColor colorWithWhite:0.0 alpha:1.0] CGColor], nil];
   }
   
-  float y = keyboardContainerView.bounds.size.height / self.window.bounds.size.height;
+  float y = 1.0 - [keyboardContainerView keyboardHeight] / self.window.bounds.size.height;
+  
+  //NSLog(@"y: %.3f, %.0f, %.0f (%.0f)", y, keyboardContainerView.bounds.size.height, self.window.bounds.size.height, self.activeHeight);
   
   gradient.locations = [NSArray arrayWithObjects:@(0.0), @(y), @(y), @(1.0), nil];
   self.window.layer.mask = gradient;
@@ -881,6 +883,8 @@ static FleksyKeyboard* instance = nil;
     [actionRecognizer2Right clearTouches];
   }
   
+  // make sure to update the alpha mask of the window here
+  [self setInvisible:FLEKSY_APP_SETTING_INVISIBLE_KEYBOARD];
 }
 
 - (void) showEnabled:(BOOL) enabled {

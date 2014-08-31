@@ -34,7 +34,7 @@
 
 - (void) disableQWERTYextraKeys;
 - (void) enableQWERTYextraKeys;
-
+- (BOOL) areExtraKeysEnabled;
 
 
 @end

@@ -171,6 +171,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardView);
   }
 }
 
+- (BOOL) areExtraKeysEnabled { return !extraKeysBgView.hidden; }
+
 //if the pan gesture recognizer doesnt accept a touch, it will fall back
 //to our view here, where we dont want to handle it at all
 - (void) touchesBegan:(NSSet *) touches withEvent:(UIEvent *) event {

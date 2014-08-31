@@ -80,6 +80,7 @@
 - (void) handleSwipeDirection:(UISwipeGestureRecognizerDirection) direction fromTouch:(UITouch*) touch caller:(NSString*) caller;
 - (void) processTouchPoint:(CGPoint) point precise:(BOOL) precise character:(unichar) c;
 - (void) reset;
+- (CGFloat) keyboardHeight;
 
 @property (readonly) FLTypingController_iOS* typingController;
 @property (readonly) FLSuggestionsView* suggestionsView;
