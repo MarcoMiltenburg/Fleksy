@@ -84,10 +84,6 @@ static FleksyKeyboard* instance = nil;
   
 }
 
-- (void) didMoveToWindow {
-  [self setInvisible:FLEKSY_APP_SETTING_INVISIBLE_KEYBOARD];
-}
-
 - (void) setInvisible:(BOOL) invisible {
   CAGradientLayer *gradient = [CAGradientLayer layer];
   gradient.frame = self.window.bounds;
@@ -644,6 +640,8 @@ static FleksyKeyboard* instance = nil;
     [spacebarSeperator1 removeFromSuperview];
     [spacebarSeperator2 removeFromSuperview];
   }
+  
+  [self setInvisible:FLEKSY_APP_SETTING_INVISIBLE_KEYBOARD];
   
   //NSLog(@"FleksyKeyboard layoutSubviews DONE");
   //NSLog(@"FLKeyboardContainerView.frame: %@", NSStringFromCGRect(keyboardContainerView.frame));
