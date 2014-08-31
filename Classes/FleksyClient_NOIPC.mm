@@ -39,17 +39,24 @@ NSString* getAbsolutePath(NSString* filepath, NSString* languagePack);
   if (!settings) {
     return;
   }
+
+//  self.systemsIntegrator->setSettingPlusMinus1([[VariousUtilities getSettingNamed:@"FLEKSY_CORE_SETTING_SEARCH_MINUS_EXTRA" fromSettings:settings] boolValue]);
+//  
+//  
+//  self.systemsIntegrator->setSettingShapeLayerWeight(    [[VariousUtilities getSettingNamed:@"SHAPE_LAYER_WEIGHT"     fromSettings:settings] floatValue]);
+//  self.systemsIntegrator->setSettingTransformLayerWeight([[VariousUtilities getSettingNamed:@"TRANSFORM_LAYER_WEIGHT" fromSettings:settings] floatValue]);
+//  self.systemsIntegrator->setSettingContextLayerWeight(  [[VariousUtilities getSettingNamed:@"CONTEXT_LAYER_WEIGHT"   fromSettings:settings] floatValue]);
+//  self.systemsIntegrator->setSettingPlatformLayerWeight( [[VariousUtilities getSettingNamed:@"PLATFORM_LAYER_WEIGHT"  fromSettings:settings] floatValue]);
+
   
-  self.systemsIntegrator->setSettingPlusMinus1([[VariousUtilities getSettingNamed:@"FLEKSY_CORE_SETTING_SEARCH_MINUS_EXTRA" fromSettings:settings] boolValue]);
+  self.systemsIntegrator->setSettingPlusMinus1(NO);
+  self.systemsIntegrator->setSettingShapeLayerWeight(1.0);
+  self.systemsIntegrator->setSettingTransformLayerWeight(1.0);
+  self.systemsIntegrator->setSettingContextLayerWeight(1.0);
+  self.systemsIntegrator->setSettingPlatformLayerWeight(0.0);
+
   
-  
-  self.systemsIntegrator->setSettingShapeLayerWeight(    [[VariousUtilities getSettingNamed:@"SHAPE_LAYER_WEIGHT"     fromSettings:settings] floatValue]);
-  self.systemsIntegrator->setSettingTransformLayerWeight([[VariousUtilities getSettingNamed:@"TRANSFORM_LAYER_WEIGHT" fromSettings:settings] floatValue]);
-  self.systemsIntegrator->setSettingContextLayerWeight(  [[VariousUtilities getSettingNamed:@"CONTEXT_LAYER_WEIGHT"   fromSettings:settings] floatValue]);
-  self.systemsIntegrator->setSettingPlatformLayerWeight( [[VariousUtilities getSettingNamed:@"PLATFORM_LAYER_WEIGHT"  fromSettings:settings] floatValue]);
-  
-  
-  NSLog(@"FleksyClient_NOIPC handleSettingsChanged: %@", settings);
+  //NSLog(@"FleksyClient_NOIPC handleSettingsChanged: %@", settings);
 }
 
 

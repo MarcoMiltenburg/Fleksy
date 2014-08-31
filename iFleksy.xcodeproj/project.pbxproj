@@ -42,7 +42,6 @@
 		2E8A6C3E168131850007B0D0 /* sounds in Resources */ = {isa = PBXBuildFile; fileRef = 2E8A6C39168131850007B0D0 /* sounds */; };
 		2E9138C114A543B200186EB6 /* CustomScrollView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2E9138C014A543B200186EB6 /* CustomScrollView.mm */; };
 		2E92321D171778E70047AB76 /* UIView+Extensions.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2E92321C171778E70047AB76 /* UIView+Extensions.mm */; };
-		2E961B20154E24C80061C37D /* Settings_HIDDEN.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2E961B1F154E24C80061C37D /* Settings_HIDDEN.bundle */; };
 		2E9A140A16DC36F200E9726B /* MyTextChecker.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2E9A140916DC36F200E9726B /* MyTextChecker.mm */; };
 		2EA0B72B15C1CB6E0000E724 /* FleksyTextView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2EA0B72A15C1CB6E0000E724 /* FleksyTextView.mm */; };
 		2EA3E84616964AA200BC54A4 /* MultipartSpeechSynthesizer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2EA3E84516964AA200BC54A4 /* MultipartSpeechSynthesizer.mm */; };
@@ -216,7 +215,6 @@
 		2E9138C014A543B200186EB6 /* CustomScrollView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CustomScrollView.mm; sourceTree = "<group>"; };
 		2E92321B171778E70047AB76 /* UIView+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extensions.h"; sourceTree = "<group>"; };
 		2E92321C171778E70047AB76 /* UIView+Extensions.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "UIView+Extensions.mm"; sourceTree = "<group>"; };
-		2E961B1F154E24C80061C37D /* Settings_HIDDEN.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings_HIDDEN.bundle; sourceTree = "<group>"; };
 		2E9A140816DC36F200E9726B /* MyTextChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTextChecker.h; sourceTree = "<group>"; };
 		2E9A140916DC36F200E9726B /* MyTextChecker.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MyTextChecker.mm; sourceTree = "<group>"; };
 		2EA0B72915C1CB6E0000E724 /* FleksyTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FleksyTextView.h; sourceTree = "<group>"; };
@@ -880,7 +878,6 @@
 				61703A75178BA00F00571628 /* InAppSettings.bundle */,
 				2E7EBFDB1676BDB500DAB9BB /* Settings.h */,
 				2E7EBFDA1676BDB500DAB9BB /* Settings.mm */,
-				2E961B1F154E24C80061C37D /* Settings_HIDDEN.bundle */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -1040,7 +1037,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2E961B20154E24C80061C37D /* Settings_HIDDEN.bundle in Resources */,
 				2EED2F12187D050B0070C68D /* Icon@2x.png in Resources */,
 				2EED2F1A187D050B0070C68D /* AppIcon60x60@2x.png in Resources */,
 				2EED2F17187D050B0070C68D /* AppIcon40x40.png in Resources */,

@@ -259,39 +259,39 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FileManager);
 
 + (NSDictionary*) settings {
   
-  NSMutableDictionary* result = [[NSMutableDictionary alloc] init];
+  return [NSUserDefaults standardUserDefaults].dictionaryRepresentation;
   
-  //first fetch all the previous values from old Settings file
-  
-  if ([[FileManager sharedFileManager] fileExists:@"Settings.bundle/Root.plist"]) {
-    [FileManager addSettingsFromFile:@"Settings.bundle/Root.plist" toDictionary:result];
-    
-    NSLog(@" result from old Settings = %@", result);
-    
-    // Now delete it forever
-    
-    [[FileManager sharedFileManager] deleteFile:@"Settings.bundle/Root.plist"];
-  }
-  
-  //first fetch all the default values
-  [FileManager addSettingsFromFile:@"InAppSettings.bundle/Root.inApp.plist" toDictionary:result];
-  
-  //now the hidden preferences
-  [FileManager addSettingsFromFile:@"Settings_HIDDEN.bundle/Root.plist" toDictionary:result];
-    
-  //now overwrite with changed values (if any)
-  NSData* contents = [[FileManager sharedFileManager] contentsOfFile:[NSString stringWithFormat:@"../Library/Preferences/%@.plist", [[NSBundle mainBundle] bundleIdentifier]]];
-  if (contents) {
-    NSDictionary* changedPreferences = [NSPropertyListSerialization propertyListWithData:contents options:NSPropertyListImmutable format:nil error:nil];
-    //NSLog(@"defaults had %d entries, adding another %d changed preferences", [result count], [changedPreferences count]);
-    [result addEntriesFromDictionary:changedPreferences];
-  } else {
-    NSLog(@"Could not get changed preferences, will just use defaults from Settings.bundle/Root.plist");
-  }
-  
-  NSLog(@"settings(%d):\n%@", [result count], result);
-  
-  return result;
+//  //first fetch all the previous values from old Settings file
+//  
+//  if ([[FileManager sharedFileManager] fileExists:@"Settings.bundle/Root.plist"]) {
+//    [FileManager addSettingsFromFile:@"Settings.bundle/Root.plist" toDictionary:result];
+//    
+//    NSLog(@" result from old Settings = %@", result);
+//    
+//    // Now delete it forever
+//    
+//    [[FileManager sharedFileManager] deleteFile:@"Settings.bundle/Root.plist"];
+//  }
+//  
+//  //first fetch all the default values
+//  [FileManager addSettingsFromFile:@"InAppSettings.bundle/Root.inApp.plist" toDictionary:result];
+//  
+//  //now the hidden preferences
+//  [FileManager addSettingsFromFile:@"Settings_HIDDEN.bundle/Root.plist" toDictionary:result];
+//    
+//  //now overwrite with changed values (if any)
+//  NSData* contents = [[FileManager sharedFileManager] contentsOfFile:[NSString stringWithFormat:@"../Library/Preferences/%@.plist", [[NSBundle mainBundle] bundleIdentifier]]];
+//  if (contents) {
+//    NSDictionary* changedPreferences = [NSPropertyListSerialization propertyListWithData:contents options:NSPropertyListImmutable format:nil error:nil];
+//    //NSLog(@"defaults had %d entries, adding another %d changed preferences", [result count], [changedPreferences count]);
+//    [result addEntriesFromDictionary:changedPreferences];
+//  } else {
+//    NSLog(@"Could not get changed preferences, will just use defaults from Settings.bundle/Root.plist");
+//  }
+//  
+//  NSLog(@"settings(%d):\n%@", [result count], result);
+//  
+//  return result;
 }
                              
 + (BOOL) deviceIsJailbroken {

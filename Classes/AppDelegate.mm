@@ -230,6 +230,8 @@ float distributionFunction(float x) {
   
   self.themeManager = [FLThemeManager sharedManager];
   
+  [self registerIASKFileSettings];
+  
   NSDictionary* settings = [FileManager settings];
   if (!settings) {
     NSLog(@"no settings!");
@@ -288,6 +290,28 @@ float distributionFunction(float x) {
   
   NSLog(@"END of applicationDidFinishLaunching, took %.6f", CFAbsoluteTimeGetCurrent() - startTime);
 #pragma unused(startTime)
+}
+
+- (void) registerIASKFileSettings {
+  
+  NSMutableDictionary* fileDefaults = [[NSMutableDictionary alloc] init];
+  [FileManager addSettingsFromFile:@"InAppSettings.bundle/Root.inApp.plist" toDictionary:fileDefaults];
+  NSLog(@"fileDefaults: %@", fileDefaults);
+  [[NSUserDefaults standardUserDefaults] registerDefaults:fileDefaults];
+  
+  if (![[NSUserDefaults standardUserDefaults].dictionaryRepresentation.allKeys containsObject:@"FLEKSY_APP_SETTING_SMS_REPLY_TO"]) {
+    [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"FLEKSY_APP_SETTING_SMS_REPLY_TO"];
+  }
+  if (![[NSUserDefaults standardUserDefaults].dictionaryRepresentation.allKeys containsObject:@"FLEKSY_APP_SETTING_EMAIL_REPLY_TO"]) {
+    [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"FLEKSY_APP_SETTING_EMAIL_REPLY_TO"];
+  }
+  if (![[NSUserDefaults standardUserDefaults].dictionaryRepresentation.allKeys containsObject:@"FLEKSY_APP_SETTING_EMAIL_SIGNATURE"]) {
+    [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"FLEKSY_APP_SETTING_EMAIL_SIGNATURE"];
+  }
+  if (![[NSUserDefaults standardUserDefaults].dictionaryRepresentation.allKeys containsObject:@"FLEKSY_APP_SETTING_SPEED_DIAL_1"]) {
+    [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"FLEKSY_APP_SETTING_SPEED_DIAL_1"];
+  }
+  
 }
 
 #pragma mark - FLTheme Notification Handlers

@@ -281,7 +281,7 @@
 //  } else
   
   if (selectedIndexNew != selectedIndexOld) {
-    id control = customSegmentedControl;
+    CustomSegmentedControl* control = customSegmentedControl;
     NSString* selectedTextOld = selectedIndexOld == UISegmentedControlNoSegment ? nil : [control titleForSegmentAtIndex:selectedIndexOld];
     NSString* selectedTextNew = [control titleForSegmentAtIndex:selectedIndexNew];
     
@@ -543,7 +543,7 @@
     int offset = selectedIndexNew - selectedIndexOld;
     NSLog(@"selectedIndexNew: %d, selectedIndexOld: %d, offset: %d", selectedIndexNew, selectedIndexOld, offset);
     if (selectedIndexNew >= 0) {
-      [self selectSuggestionWithOffset:offset replaceText:nil scroll:YES notifyListener:NO];
+      [self selectSuggestionWithOffset:offset replaceText:NO scroll:YES notifyListener:NO];
     } else {
       //TODO: might be some character or symbol from another keyboard...
       [self hide];

@@ -114,7 +114,7 @@ static NSTimeInterval const kAFNetworkActivityIndicatorInvisibilityDelay = 0.25;
     bool success;
     do {
         int32_t currentCount = _activityCount;
-        success = OSAtomicCompareAndSwap32(currentCount, MIN(currentCount - 1, currentCount), &_activityCount);
+        success = OSAtomicCompareAndSwap32(currentCount, MIN(currentCount - 1, currentCount), (int32_t*)&_activityCount);
     } while(!success);
     [self didChangeValueForKey:@"activityCount"];
     [self updateNetworkActivityIndicatorVisibilityDelayed];

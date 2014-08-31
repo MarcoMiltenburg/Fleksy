@@ -25,5 +25,6 @@
 + (NSData*) contentsOfFile:(NSString*) file;
 - (BOOL) deleteFile:(NSString *) file;
 - (BOOL) fileExists:(NSString *) file;
++ (void) addSettingsFromFile:(NSString*) filename toDictionary:(NSMutableDictionary*) result;
 
 @end
