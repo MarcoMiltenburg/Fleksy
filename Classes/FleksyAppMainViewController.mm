@@ -1324,7 +1324,7 @@
       isExecutedWithFavorites = YES;
       
       NSLog(@"Favorites BEFORE = %@", favorites);
-      [self reloadFavorites];
+      [self reloadFavorites:NO];
       NSLog(@"Favorites AFTER = %@", favorites);
       
       FLFavoritesTableViewController *favTVC = [[FLFavoritesTableViewController alloc] initWithStyle:UITableViewStylePlain withMode:FL_FavoritesTVC_Mode_Operate withFavorites:favorites];
@@ -1670,8 +1670,10 @@
   //[self showMenu];
 }
 
+- (void) reloadFavorites { [self reloadFavorites:YES]; }
 
-- (void) reloadFavorites {
+- (void) reloadFavorites:(BOOL) recreateMenu {
+  
   [favorites removeAllObjects];
   if (FLEKSY_APP_SETTING_SPEED_DIAL_1 && FLEKSY_APP_SETTING_SPEED_DIAL_1.length) {
     NSArray* components = [FLEKSY_APP_SETTING_SPEED_DIAL_1 componentsSeparatedByString:@","];
@@ -1682,7 +1684,7 @@
       }
     }
   }
-  [self recreateActionMenu];
+  if (recreateMenu) { [self recreateActionMenu]; }
 }
 
 - (void) setReplyTo:(NSString*) _replyTo {
