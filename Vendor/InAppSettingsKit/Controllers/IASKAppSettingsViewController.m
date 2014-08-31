@@ -574,8 +574,9 @@ CGRect IASKCGRectSwap(CGRect rect);
 		cell.textLabel.text = specifier.title;
 		cell.detailTextLabel.text = [specifier.defaultValue description];
 	} else if ([specifier.type isEqualToString:kIASKButtonSpecifier]) {
+    // Kosta: We don't want the title of the button to be a settings value...
 		NSString *value = [self.settingsStore objectForKey:specifier.key];
-		cell.textLabel.text = [value isKindOfClass:[NSString class]] ? [self.settingsReader titleForStringId:value] : specifier.title;
+    cell.textLabel.text = /*[value isKindOfClass:[NSString class]] ? [self.settingsReader titleForStringId:value] :*/ specifier.title;
 		cell.accessoryType = (specifier.textAlignment == NSTextAlignmentLeft) ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
 	} else {
 		cell.textLabel.text = specifier.title;
