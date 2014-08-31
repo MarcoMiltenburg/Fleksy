@@ -84,6 +84,33 @@ static FleksyKeyboard* instance = nil;
   
 }
 
+- (void) didMoveToWindow {
+  [self setInvisible:FLEKSY_APP_SETTING_INVISIBLE_KEYBOARD];
+}
+
+- (void) setInvisible:(BOOL) invisible {
+  CAGradientLayer *gradient = [CAGradientLayer layer];
+  gradient.frame = self.window.bounds;
+  if (invisible) {
+    gradient.colors = [NSArray arrayWithObjects:
+                       (id)[[UIColor colorWithWhite:0.0 alpha:0.0] CGColor],
+                       (id)[[UIColor colorWithWhite:0.0 alpha:0.0] CGColor],
+                       (id)[[UIColor colorWithWhite:0.0 alpha:0.0] CGColor],
+                       (id)[[UIColor colorWithWhite:0.0 alpha:0.0] CGColor], nil];
+  } else {
+    gradient.colors = [NSArray arrayWithObjects:
+                       (id)[[UIColor colorWithWhite:0.0 alpha:0.0] CGColor],
+                       (id)[[UIColor colorWithWhite:0.0 alpha:0.0] CGColor],
+                       (id)[[UIColor colorWithWhite:0.0 alpha:0.8] CGColor],
+                       (id)[[UIColor colorWithWhite:0.0 alpha:1.0] CGColor], nil];
+  }
+  
+  float y = keyboardContainerView.bounds.size.height / self.window.bounds.size.height;
+  
+  gradient.locations = [NSArray arrayWithObjects:@(0.0), @(y), @(y), @(1.0), nil];
+  self.window.layer.mask = gradient;
+}
+
 - (void) handleSettingsChanged:(NSNotification*) notification {
 
   if([NSThread isMainThread] == NO) {
@@ -147,7 +174,6 @@ static FleksyKeyboard* instance = nil;
   
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //now apply individual settings as necessary
-  keyboardContainerView.alpha = FLEKSY_APP_SETTING_INVISIBLE_KEYBOARD ? INVISIBLE_ALPHA : 1;
   
   
   // DIRECT TOUCH
