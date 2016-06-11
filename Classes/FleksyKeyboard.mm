@@ -490,7 +490,7 @@ static FleksyKeyboard* instance = nil;
   if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
     [[NSNotificationCenter defaultCenter] postNotificationName:FLEKSY_MENU_INVOKED_NOTIFICATION object:nil];
     for (UITouch* touch in gestureRecognizer.activeTouches) {
-      touch.tag = UITouchTypeProcessedSwipe;
+      touch.tag = FLTouchTypeProcessedSwipe;
     }
     [feedbackRecognizer removePendingTouches];
   }
@@ -501,7 +501,7 @@ static FleksyKeyboard* instance = nil;
   if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
     [keyboardContainerView performNewLine];
     for (UITouch* touch in gestureRecognizer.activeTouches) {
-      touch.tag = UITouchTypeProcessedSwipe;
+      touch.tag = FLTouchTypeProcessedSwipe;
     }
     [feedbackRecognizer removePendingTouches];
   }
@@ -527,7 +527,7 @@ static FleksyKeyboard* instance = nil;
     }
     
     for (UITouch* touch in gestureRecognizer.activeTouches) {
-      touch.tag = UITouchTypeProcessedSwipe;
+      touch.tag = FLTouchTypeProcessedSwipe;
     }
     [feedbackRecognizer removePendingTouches];
   }
@@ -553,7 +553,7 @@ static FleksyKeyboard* instance = nil;
     }
     
     for (UITouch* touch in gestureRecognizer.activeTouches) {
-      touch.tag = UITouchTypeProcessedSwipe;
+      touch.tag = FLTouchTypeProcessedSwipe;
     }
     [feedbackRecognizer removePendingTouches];
   }

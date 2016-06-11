@@ -12,14 +12,14 @@
 #define UITOUCH_STORE_PATH 1
 
 typedef enum {
-  UITouchTypePending = 0,
-  UITouchTypeProcessedTap,
-  UITouchTypeProcessedSwipe,
-  UITouchTypeProcessedLongTap,
-  UITouchTypeIgnore
-} UITouchType;
+  FLTouchTypePending = 0,
+  FLTouchTypeProcessedTap,
+  FLTouchTypeProcessedSwipe,
+  FLTouchTypeProcessedLongTap,
+  FLTouchTypeIgnore
+} FLTouchType;
 
-#define UITouchTypeIsProcessed(touchType) ((touchType) == UITouchTypeProcessedTap || (touchType) == UITouchTypeProcessedSwipe)
+#define FLTouchTypeIsProcessed(touchType) ((touchType) == FLTouchTypeProcessedTap || (touchType) == FLTouchTypeProcessedSwipe)
 
 @interface PathPoint : NSObject {
   CGPoint location;
@@ -41,7 +41,7 @@ typedef enum {
 
 @interface UITouch (Extensions)
 
-@property (readwrite) UITouchType tag;
+@property (readwrite) FLTouchType tag;
 @property (readwrite) BOOL didFeedback;
 @property (readonly) NSTimeInterval initialTimestamp;
 @property (readonly) NSTimeInterval timeSinceTouchdown;

@@ -291,11 +291,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardContainerView);
   assert(touch);
   
   // we might process a swipe multiple times if it's held down
-  if (touch.tag != UITouchTypePending && touch.tag != UITouchTypeProcessedSwipe) {
+  if (touch.tag != FLTouchTypePending && touch.tag != FLTouchTypeProcessedSwipe) {
     [NSException raise:@"handleSwipeDirection already processed touch" format:@"touch: %@, tag: %d", touch, touch.tag];
   }
   
-  touch.tag = UITouchTypeProcessedSwipe;
+  touch.tag = FLTouchTypeProcessedSwipe;
   [self.feedbackRecognizer stopTrackingTouch:touch];
   
   if (direction == UISwipeGestureRecognizerDirectionRight) {
@@ -387,7 +387,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardContainerView);
     
     if (direction == UISwipeGestureRecognizerDirectionUp) {
       [activeSuggestions selectSuggestionNearestScreenX:beganX];
-      touch.tag = UITouchTypeIgnore;
+      touch.tag = FLTouchTypeIgnore;
       [self.feedbackRecognizer stopTrackingTouch:touch];
       return;
     }
@@ -406,7 +406,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardContainerView);
         //
       } else {
         NSLog(@"ignoring swipe");
-        touch.tag = UITouchTypeIgnore;
+        touch.tag = FLTouchTypeIgnore;
         [self.feedbackRecognizer stopTrackingTouch:touch];
         return;
       }
@@ -539,11 +539,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FLKeyboardContainerView);
 - (BOOL) handleTouch:(UITouch*) touch {
   //NSLog(@"handleTouch %p: %d. Dt:%.6f", touch, touch.tag, touch.timeSinceTouchdown);
   
-  if (touch.tag != UITouchTypePending) {
+  if (touch.tag != FLTouchTypePending) {
     [NSException raise:@"handleTouch:" format:@"should not process touch %p again, tag = %d", touch, touch.tag];
   }
   
-  touch.tag = UITouchTypeProcessedTap;
+  touch.tag = FLTouchTypeProcessedTap;
   
   CGPoint parentLocation = [touch locationInView:self.superview];
   CGPoint initialLocation = [touch initialLocationInView:keyboard];

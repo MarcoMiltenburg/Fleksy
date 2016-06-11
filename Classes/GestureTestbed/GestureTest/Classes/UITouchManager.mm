@@ -82,7 +82,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UITouchManager)
 + (void) initTouch:(UITouch*) touch {
   //NSNumber* number = [NSNumber numberWithDouble:t];
   //[[UITouchManager sharedUITouchManager].touchTimestamps setObject:number forKey:[NSValue valueWithPointer:(const void*)self]];
-  touch.tag = UITouchTypePending;
+  touch.tag = FLTouchTypePending;
   touch.didFeedback = NO;
   //NSLog(@"new touch @ %.8f", t);
 }
@@ -224,20 +224,20 @@ static float distanceOfPoints(CGPoint p1, CGPoint p2) {
 }
 #endif
 
-- (void) setTag:(UITouchType) value {
+- (void) setTag:(FLTouchType) value {
   //NSLog(@"%p setTag: %d", self, value);
   NSNumber* number = [NSNumber numberWithInt:value];
   [[UITouchManager sharedUITouchManager].touchTags setObject:number forKey:[NSValue valueWithPointer:(const void*)self]];
 }
 
-- (UITouchType) tag {
+- (FLTouchType) tag {
   NSNumber* number = [[UITouchManager sharedUITouchManager].touchTags objectForKey:[NSValue valueWithPointer:(const void*)self]];
   if (!number) {
     //[NSException raise:@"UITouch.tag" format:@"not found, touch: %@", self];
     //TODO: Re-visit TouchManagager tag == nil
     NSLog(@" Would throw NSException raise: UITouch.tag format: not found, touch: %@", self);
   }
-  return (UITouchType) [number intValue];
+  return (FLTouchType) [number intValue];
 }
 
 - (void) setDidFeedback:(BOOL) didFeedback {

@@ -31,7 +31,7 @@
 
 
 - (void) touchEndedWithSwipe:(UITouch*) touch {
-//  if (touch.tag != UITouchTypeProcessedSwipe) {
+//  if (touch.tag != FLTouchTypeProcessedSwipe) {
 //    NSLog(@"not a swipe!");
 //    return;
 //  }

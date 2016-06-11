@@ -218,7 +218,7 @@
   [NSObject cancelPreviousPerformRequestsWithTarget:[self keyboardImageView] selector:@selector(doPopupForTouch:) object:touch];
   [NSObject cancelPreviousPerformRequestsWithTarget:[FLKeyboardContainerView sharedFLKeyboardContainerView] selector:@selector(handleTouch:) object:touch];
 
-  if (touch.tag == UITouchTypePending) {
+  if (touch.tag == FLTouchTypePending) {
     if (!touch.didFeedback) {
       [[self keyboardImageView] doPopupForTouch:touch];
     }
@@ -275,7 +275,7 @@
   UISwipeGestureRecognizerDirection direction = [self getDirectionForTouch:touch];
   FLSwipeStatisticalAnalyzer* swipeAnalyzer = [swipeAnalyzers objectForKey:[NSNumber numberWithInteger:direction]];
   
-  if (distance > swipeAnalyzer.effectiveThreshold && touch.tag == UITouchTypePending) {
+  if (distance > swipeAnalyzer.effectiveThreshold && touch.tag == FLTouchTypePending) {
     double dt = touch.timeSinceTouchdown;
     double velocity = distance / dt;
     NSLog(@"could be swipe, distance:%.3f, dt:%.3f, v:%.3f", distance, dt, velocity);
@@ -298,7 +298,7 @@
       }
     } else {
       NSLog(@"ignoring touch %p", touch);
-      //touch.tag = UITouchTypeIgnore;
+      //touch.tag = FLTouchTypeIgnore;
     }
   }
 }
@@ -319,10 +319,10 @@
   //  NSLog(@"delta: %.3f", delta);
   
   for (UITouch* touch in touches) {
-    if (UITouchTypeIsProcessed(touch.tag)) {
+    if (FLTouchTypeIsProcessed(touch.tag)) {
       //NSLog(@"skipping touch %p in move, has been processed (%d)", touch, touch.tag);
       continue;
-    } else if (touch.tag == UITouchTypeIgnore) {
+    } else if (touch.tag == FLTouchTypeIgnore) {
       //NSLog(@"found ignored touch %p", touch);
       continue;
     } else {
@@ -366,7 +366,7 @@
     // we have to force other touches THAT LANDED BEFORE WE LANDED
     [self forceTouchesBeforeTouch:touch];
     
-    if (touch.tag == UITouchTypePending) {
+    if (touch.tag == FLTouchTypePending) {
       [self checkTouchForSwipe:touch];
       [self stopTrackingTouch:touch];
     }
@@ -377,13 +377,13 @@
     // we want to notify the swipeAnalyzer that a swipe was finished, and we do it now rather
     // than at the point it is fired (in touchesMoved) so that we can have the final distance etc,
     // not the distance that it had when fired since that would always be near effectiveThreshold
-    if (touch.tag == UITouchTypeProcessedSwipe) {
+    if (touch.tag == FLTouchTypeProcessedSwipe) {
       UISwipeGestureRecognizerDirection direction = [self getDirectionForTouch:touch];
       FLSwipeStatisticalAnalyzer* swipeAnalyzer = [swipeAnalyzers objectForKey:[NSNumber numberWithInteger:direction]];
       [swipeAnalyzer touchEndedWithSwipe:touch];
 //    }
 //    
-//    if (touch.tag == UITouchTypeProcessedSwipe) {
+//    if (touch.tag == FLTouchTypeProcessedSwipe) {
       lastTouchUpTime = 0;
     } else {
       lastTouchUpTime = CFAbsoluteTimeGetCurrent(); //touch.timestamp;
@@ -410,7 +410,7 @@
   //some gesture recognizer (eg. the scrollview pan) might catch the touch so 
   //we need to stop handling it NOW
   for (UITouch* touch in touches) {
-    touch.tag = UITouchTypeIgnore;
+    touch.tag = FLTouchTypeIgnore;
     //NSLog(@"touchesCancelled, distance since start: %.3f", [touch distanceSinceStartInView:self.view]);
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(playTockForTouch:) object:touch];
     [self stopTrackingTouch:touch];
@@ -432,7 +432,7 @@
   hoverMode = YES;
   lastChar = 0;
   pendingChar = 0;
-  lastTouchDown.tag = UITouchTypeProcessedLongTap;
+  lastTouchDown.tag = FLTouchTypeProcessedLongTap;
   [self updateHoverChar:lastTouchDown];
 }
 
