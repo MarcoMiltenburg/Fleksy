@@ -9,6 +9,8 @@
 // Main Base Class - Normal, otherwise known as DarkSide
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
 
 typedef enum {
   FLThemeTypeNormal,

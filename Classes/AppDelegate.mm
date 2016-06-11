@@ -15,7 +15,6 @@
 
 #import "UIRotorRecognizer.h"
 #import <QuartzCore/QuartzCore.h>
-#include "Crashlytics/Crashlytics.h"
 
 #include <string>
 
@@ -204,13 +203,6 @@ float distributionFunction(float x) {
 //http://blog.goosoftware.co.uk/2012/04/18/unique-identifier-no-warnings/
   [TestFlight takeOff:@"c71a4345-0f62-4435-bf92-fb68f1c20d3a"]; 
 #endif
-#endif
-
-#if CRASHLYTICS
-#ifndef FL_BUILD_FOR_APP_STORE
-    printf("Fleksy CRASHLYTICS\n");
-#endif
-    [Crashlytics startWithAPIKey:@"8437e63c5dcbeca15784fa67dd5fab1275a867a5"];
 #endif
 
 #ifdef DEBUG
@@ -592,7 +584,6 @@ float distributionFunction(float x) {
 
 - (void) applicationDidReceiveMemoryWarning:(UIApplication *) application {
   TestFlightLog(@"%@", @"applicationDidReceiveMemoryWarning");
-  [TestFlight passCheckpoint:@"applicationDidReceiveMemoryWarning"];
 }
 
 - (void) applicationWillTerminate:(UIApplication *) application {

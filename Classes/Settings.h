@@ -8,6 +8,8 @@
 #ifndef SETTINGS_H
 #define SETTINGS_H
 
+#import <Foundation/Foundation.h>
+
 ////////////////////// MASTER SWITCHES //////////////////////
 
 #ifdef FL_BUILD_FOR_DEVELOPMENT
@@ -37,9 +39,6 @@
 #endif
 
 #define DEBUG_NO_WORDS 0
-
-//Installing Crashlytics = 1
-#define CRASHLYTICS 1
 
 #define FLEKSY_FAVORITES_ALL_TOGETHER 1
 
@@ -81,7 +80,7 @@
 #ifdef FL_BUILD_FOR_APP_STORE
 #define TestFlightLog(fmt,...)
 #else
-#define TestFlightLog(fmt,...) TFLog(fmt,##__VA_ARGS__)
+#define TestFlightLog(fmt,...)
 #endif
 
 #define FLEKSY_POP_QUESTIONAIRE 0

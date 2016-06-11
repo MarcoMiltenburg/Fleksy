@@ -9,6 +9,8 @@
 #define BOTTOM_GRAB_HEIGHT 18
 #define BOTTOM_GRAB_WIDTH 70
 
+#import <UIKit/UIKit.h>
+
 @interface CustomScrollView : UIScrollView<UIScrollViewDelegate> {
 @private
   UIView* view1;

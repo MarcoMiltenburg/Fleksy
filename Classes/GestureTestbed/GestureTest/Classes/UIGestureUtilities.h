@@ -7,7 +7,7 @@
 //
 
 //#import <Foundation/Foundation.h>
-#import <UIKit/UIGestureRecognizer.h>
+#import <UIKit/UIKit.h>
 
 #define UISwipeGestureRecognizerDirectionNone 9999
 

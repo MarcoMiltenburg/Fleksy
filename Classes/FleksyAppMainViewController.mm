@@ -117,14 +117,10 @@
   
   if ([specifierKey isEqualToString:@"FLEKSY_APP_SETTING_SPEED_DIAL_1"]) {
     
-    [TestFlight passCheckpoint:@"setupFavorites"];
-
     [self handleFavoritesForSettingsViewController:sender];
   }
   else if ([specifierKey isEqualToString:@"FLEKSY_APP_SETTING_EMAIL_SIGNATURE"]) {
     
-    [TestFlight passCheckpoint:@"editSignature"];
-
     [self handleSignatureForSettingsViewController:sender];
   }
 }
@@ -217,7 +213,6 @@
   }
   
   if (goDirect) {
-    [TestFlight passCheckpoint:@"showQuestionaireDirectly"];
     printf("Sending user to QuestionaireSite directly.\n\n");
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:FLEKSY_QUESTIONAIRE_LINK]];
   }
@@ -242,8 +237,6 @@
 
 - (void) showSettings {
   
-    [TestFlight passCheckpoint:@"showSettings"];
-
 #if FLEKSY_POP_QUESTIONAIRE
   if (!_userHasVisitedQuestionaireLink) {
     [self showVoting:NO];
@@ -552,8 +545,6 @@
 }
 
 - (void) postToSocialService:(NSString*) serviceType text:(NSString*) text {
-
-  [TestFlight passCheckpoint:[NSString stringWithFormat:@"ACTION_%@", serviceType]];
   //[[FLKeyboardContainerView sharedFLKeyboardContainerView].typingController.diagnostics sendWithComment:];
 
   //NSLog(@"postToSocialService: %@", serviceType);
@@ -614,8 +605,6 @@
 }
 
 -(void) sendInAppSMS:(NSString*) recipient text:(NSString*) text {
-  
-  [TestFlight passCheckpoint:@"sendInAppSMS"];
   
   //[[FLKeyboardContainerView sharedFLKeyboardContainerView].typingController.diagnostics sendWithComment:@"ACTION_SMS"];
   
@@ -679,7 +668,6 @@
 
 - (void) sendInAppMailTo:(NSArray*) recipients cc:(NSArray*) cc text:(NSString*) text subject:(NSString*) subject signature:(BOOL) signature {
   
-  [TestFlight passCheckpoint:@"sendInAppMail"];
   //[[FLKeyboardContainerView sharedFLKeyboardContainerView].typingController.diagnostics sendWithComment:@"ACTION_MAIL"];
   
 	if (![MFMailComposeViewController canSendMail]) {
@@ -897,8 +885,6 @@
 
 - (void) showDetailedInstructions:(BOOL) fromAlert {
   
-  [TestFlight passCheckpoint:[NSString stringWithFormat:@"showDetailedInstructions.%@", UIAccessibilityIsVoiceOverRunning() ? @"VO" : @"non-VO"]];
-
   // create the close button
   int padding = 3;
   int width = 70;
@@ -1195,16 +1181,10 @@
 }
 
 - (void) readMoreAboutLimitations {
-  
-  [TestFlight passCheckpoint:@"readMoreAboutLimitations"];
-  
   [[UIApplication sharedApplication] openURL:[NSURL URLWithString:IOS_LIMITATIONS_LINK]];
 }
 
 - (void) writeAppStoreReview {
-  
-  [TestFlight passCheckpoint:@"writeAppStoreReview"];
-  
   [[UIApplication sharedApplication] openURL:[NSURL URLWithString:IOS_DEVICE_REVIEW_LINK]];
 }
 
@@ -1217,9 +1197,6 @@
 }
 
 - (void) showFleksyInOtherApps {
-  
-  [TestFlight passCheckpoint:@"showFleksyInOtherApps"];
-  
   fleksyInOtherApps = [[UIAlertView alloc] initWithTitle:@"Revolutionary keyboard!"
                                                  message:@"Unfortunately, due to iOS limitations, it's not possible to replace the standard keyboard.\n\nHere's how you can support us:" delegate:self cancelButtonTitle:@"Later, I promise!"
                                        otherButtonTitles:@"App Store review", @"Read more...", nil];
@@ -1227,8 +1204,6 @@
 }
 
 - (void) sendFeedback {
-  [TestFlight submitFeedback:textView.text];
-  
   BOOL voiceover = UIAccessibilityIsVoiceOverRunning();
     
   NSMutableString *subjectPrefixString = [@"Feedback" mutableCopy];
@@ -1371,8 +1346,6 @@
       
       } else {
         [actionButton removeFromSuperview];
-
-        [TestFlight passCheckpoint:@"ExportDictionary"];
         
         NSString* contents2 = [[contents stringByReplacingOccurrencesOfString:@"\n" withString:@":"] stringByReplacingOccurrencesOfString:@"\t" withString:@"_"];
         NSString* link = [NSString stringWithFormat:@"<a href=\"fleksy://_ADD_WORDS:%@\">Link</a>", [contents2 substringToIndex:contents2.length-1]];
@@ -1447,8 +1420,6 @@
 
 - (void) showMenu {
   
-  [TestFlight passCheckpoint:@"showMenu"];
-             
   if (FLEKSY_APP_SETTING_SAVE_TEXT_BUFFER) {
     [self saveText];
   }
@@ -1639,24 +1610,6 @@
     [self showBasicInstructions];
   }
   
-#if !TARGET_IPHONE_SIMULATOR
-  if ([self previousRuns] < 1 && !UIAccessibilityIsVoiceOverRunning()) {
-    blindAppAlert = [[UIAlertView alloc] initWithTitle:@"Warning!"
-                                               message:@"\nThis version of Fleksy is intended for VoiceOver users. If you are not visually impaired you should download the non-VoiceOver version"
-                                              delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:@"Download", nil];
-  
-  NSLog(@"%s BEFORE blindAppAlert",__PRETTY_FUNCTION__);
-  
-#ifdef FL_BUILD_FOR_BETA
-  [blindAppAlert performSelector:@selector(show) withObject:nil afterDelay:3.0];
-#else
-  [blindAppAlert show];  
-#endif
-  NSLog(@"%s AFTER blindAppAlert",__PRETTY_FUNCTION__);
-
-  
-  }
-#endif
 }
 
 - (BOOL) disablesAutomaticKeyboardDismissal {
@@ -1795,9 +1748,7 @@
   if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
     
     NSString* log = [NSString stringWithFormat:@"previousRuns/10: %d", [self previousRuns] / 10];
-    [TestFlight passCheckpoint:log];
-    [TestFlight passCheckpoint:[NSString stringWithFormat:@"VoiceOver: %d", UIAccessibilityIsVoiceOverRunning()]];
-    
+
     //    UITapGestureRecognizer* singleTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTap:)];
     //    singleTapRecognizer.delaysTouchesBegan = YES;
     //    [singleTapRecognizer requireGestureRecognizerToFail:tripleTapRecognizer];

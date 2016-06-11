@@ -8,6 +8,7 @@
 
 #import "MultipartSpeechSynthesizer.h"
 #import "VariousUtilities.h"
+#import <UIKit/UIKit.h>
 
 @implementation MultipartSpeechSynthesizer
 
